@@ -82,7 +82,7 @@ public class MainView extends VerticalLayout {
 
     private Image sendAndReceive(ActuationDto actuationDto) throws IOException {
         RestTemplate restTemplate = new RestTemplate();
-        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/joystick/actuate").build().encode().toUri();
+        URI url = UriComponentsBuilder.fromHttpUrl("https://backtest2131431.herokuapp.com/joystick/actuate").build().encode().toUri();
         SceneDto sceneDto = restTemplate.postForObject(url, actuationDto, SceneDto.class);
 
         return drawer.getStream(sceneDto);
