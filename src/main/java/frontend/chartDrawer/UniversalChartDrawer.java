@@ -1,4 +1,4 @@
-package testApp.imageDrawer;
+package frontend.chartDrawer;
 
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.server.StreamResource;
@@ -10,7 +10,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-public class Drawer  {
+public class UniversalChartDrawer {
     ByteArrayOutputStream imagebuffer = null;
     int reloads = 0;
 

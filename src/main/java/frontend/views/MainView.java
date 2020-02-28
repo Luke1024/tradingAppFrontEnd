@@ -1,33 +1,38 @@
-package testApp.views;
+package frontend.views;
 
-import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
-import testApp.dto.ActuationDto;
-import testApp.imageDrawer.Drawer;
-import testApp.imageDrawer.SceneDto;
+import frontend.client.BackEndClient;
+import frontend.chartDrawer.UniversalChartDrawer;
+import frontend.client.dto.OverviewDtoPack;
 import java.io.IOException;
-import java.net.URI;
 
 @Route
 public class MainView extends VerticalLayout {
-
-    private Button left = new Button("Left");
-    private Button right = new Button("Right");
-    private Button up = new Button("Up");
-    private Button down = new Button("Down");
-    private Drawer drawer = new Drawer();
+    private Button logIn = new Button("Log In");
+    private Button signIn = new Button("Sign In");
+    private UniversalChartDrawer universalChartDrawer = new UniversalChartDrawer();
+    private BackEndClient backEndClient = new BackEndClient();
 
     public MainView() throws IOException {
-        HorizontalLayout toolbar = new HorizontalLayout(left, right, up, down);
+        HorizontalLayout toolbar = new HorizontalLayout(logIn, signIn);
+        Text text = new Text("EUR/USD 1.09");
         HorizontalLayout imageHolder = new HorizontalLayout();
+        HorizontalLayout horizontalLayout = new HorizontalLayout(text, imageHolder);
 
-        Image image = drawer.getBlank();
+        OverviewDtoPack overviewDtoPack = backEndClient.getCurrenciesOverview();
+        Image image = universalChartDrawer.drawBasicChart(overviewDtoPack.getOverviews().get(0));
+
+        imageHolder.add(overwievDtoList.get(0));
+
+        /*
+        HorizontalLayout eurUsd = new HorizontalLayout(logIn, signIn);
+
+        Image image = universalChartDrawer.getBlank();
         imageHolder.add(image);
         add(imageHolder,toolbar);
         left.addClickListener(event -> {
@@ -85,6 +90,8 @@ public class MainView extends VerticalLayout {
         URI url = UriComponentsBuilder.fromHttpUrl("https://backtest2131431.herokuapp.com/joystick/actuate").build().encode().toUri();
         SceneDto sceneDto = restTemplate.postForObject(url, actuationDto, SceneDto.class);
 
-        return drawer.getStream(sceneDto);
+        return universalChartDrawer.getStream(sceneDto);
+
+    */
     }
 }

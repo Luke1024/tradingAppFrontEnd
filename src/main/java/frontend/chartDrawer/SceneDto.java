@@ -1,4 +1,4 @@
-package testApp.imageDrawer;
+package frontend.chartDrawer;
 
 public class SceneDto {
     int sceneWidth = 0;
