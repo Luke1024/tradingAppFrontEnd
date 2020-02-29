@@ -6,9 +6,9 @@ import java.util.List;
 public class CurrencyOverviewDto {
     private String currencyName;
     private LocalDateTime lastRetrieved;
-    private List<Double> dataPoints;
+    private List<DataPointDto> dataPoints;
 
-    public CurrencyOverviewDto(String currencyName, LocalDateTime lastRetrieved, List<Double> dataPoints) {
+    public CurrencyOverviewDto(String currencyName, LocalDateTime lastRetrieved, List<DataPointDto> dataPoints) {
         this.currencyName = currencyName;
         this.lastRetrieved = lastRetrieved;
         this.dataPoints = dataPoints;
@@ -22,7 +22,7 @@ public class CurrencyOverviewDto {
         return lastRetrieved;
     }
 
-    public List<Double> getDataPoints() {
+    public List<DataPointDto> getDataPoints() {
         return dataPoints;
     }
 }
