@@ -5,7 +5,7 @@ import com.vaadin.flow.server.StreamResource;
 import frontend.chartDrawer.utilities.drawer.ChartDrawer;
 import frontend.chartDrawer.utilities.processor.ChartProcessor;
 import frontend.chartDrawer.utilities.dataObjects.ChartControlData;
-import frontend.chartDrawer.utilities.processor.utilities.ChartLayout;
+import frontend.chartDrawer.utilities.processor.utilities.utilities.ChartLayout;
 import frontend.client.dto.OverviewDtoPack;
 
 import javax.imageio.ImageIO;
@@ -24,13 +24,13 @@ public class ChartGenerator {
 
     public Image drawBasicChart(ChartControlData chartControlData, OverviewDtoPack overviewDtoPack) {
         ChartLayout chartLayout = chartProcessor.processChart(chartControlData, overviewDtoPack);
-        Image image = chartDrawer.drawChart(chartLayout);
+        //Image image = chartDrawer.drawChart(chartLayout);
 
-        BufferedImage image = new BufferedImage (chartControlData.getWidth(),
+        BufferedImage image = new BufferedImage(chartControlData.getWidth(),
                 chartControlData.getHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics2D drawable = image.createGraphics();
 
-
+        /*
         drawable.setColor(Color.green);
         drawable.fill(new Rectangle(
                 sceneDto.getBoxLeftUpperCornerX(),
@@ -49,5 +49,9 @@ public class ChartGenerator {
 
     public Image getBlank(){
         return getStream(new SceneDto(400,400,0,0,0,0));
+    }
+
+*/
+        return new Image();
     }
 }

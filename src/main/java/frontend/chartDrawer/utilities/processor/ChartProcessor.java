@@ -1,8 +1,9 @@
 package frontend.chartDrawer.utilities.processor;
 
 import frontend.chartDrawer.utilities.dataObjects.ChartControlData;
-import frontend.chartDrawer.utilities.drawer.utilities.LineAndBackGroundDrawer;
-import frontend.chartDrawer.utilities.processor.utilities.ChartLayout;
+import frontend.chartDrawer.utilities.processor.utilities.TextProcessor;
+import frontend.chartDrawer.utilities.processor.utilities.GeometricProcessor;
+import frontend.chartDrawer.utilities.processor.utilities.utilities.ChartLayout;
 import frontend.client.dto.OverviewDtoPack;
 
 public class ChartProcessor {
@@ -10,15 +11,15 @@ public class ChartProcessor {
     private static final double fontSizeHeightMarginMultiplier = 2;
     private static final double fontSizeWidthMarginMultiplier = 3;
 
-    private LineAndBackGroundDrawer lineDrawer = new LineAndBackGroundDrawer();
-    private DescriptionDrawer descriptionDrawer = new DescriptionDrawer();
+    private GeometricProcessor geometricProcessor = new GeometricProcessor();
+    private TextProcessor textProcessor = new TextProcessor();
 
     public ChartLayout processChart(ChartControlData chartControlData, OverviewDtoPack overviewDtoPack) {
         ChartBoxSize chartBoxSize = computeChartBoxSize(chartControlData);
 
         ChartLayout chartLayout = new ChartLayout();
-        lineDrawer.draw(chartLayout);
-        descriptionDrawer.draw(chartLayout);
+        geometricProcessor.draw(chartLayout, chartBoxSize.width, chartBoxSize.height);
+        //textProcessor.draw(chartLayout, chartBoxSize.width, chartBoxSize.height);
         return chartLayout;
     }
 

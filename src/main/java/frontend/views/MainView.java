@@ -34,17 +34,17 @@ public class MainView extends VerticalLayout {
 
     public MainView() throws IOException {
         ScalingData scalingData = new ScalingData(defaultZoomLevel, timeFrameAxisDistanceInPixels, geometricScallingMultiplier);
-        ChartControlData chartControlData = new ChartControlData(chartWidth, chartHeight, maxMinHeightRangePercentage, scalingData);
+        //ChartControlData chartControlData = new ChartControlData(chartWidth, chartHeight, maxMinHeightRangePercentage, scalingData);
 
-        HorizontalLayout toolbar = new HorizontalLayout(logIn, signIn);
-        Text text = new Text("EUR/USD 1.09");
+        //HorizontalLayout toolbar = new HorizontalLayout(logIn, signIn);
+        //Text text = new Text("EUR/USD 1.09");
 
-        HorizontalLayout imageHolder = new HorizontalLayout();
-        HorizontalLayout horizontalLayout = new HorizontalLayout(text, imageHolder);
+        //HorizontalLayout imageHolder = new HorizontalLayout();
+        //HorizontalLayout horizontalLayout = new HorizontalLayout(text, imageHolder);
 
-        OverviewDtoPack overviewDtoPack = backEndClient.getCurrenciesOverview();
-        Image image = chartGenerator.drawBasicChart(chartControlData ,overviewDtoPack.getOverviews().get(0));
-        imageHolder.add(image);
+        //OverviewDtoPack overviewDtoPack = backEndClient.getCurrenciesOverview();
+        //Image image = chartGenerator.drawBasicChart(chartControlData ,overviewDtoPack.getOverviews().get(0));
+        //imageHolder.add(image);
 
         /*
         HorizontalLayout eurUsd = new HorizontalLayout(logIn, signIn);
