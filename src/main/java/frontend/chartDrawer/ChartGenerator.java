@@ -26,7 +26,6 @@ public class ChartGenerator {
         ChartLayout chartLayout = chartProcessor.processChart(chartControlData, overviewDtoPack);
         Image image = chartDrawer.drawChart(chartLayout);
 
-
         BufferedImage image = new BufferedImage (chartControlData.getWidth(),
                 chartControlData.getHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics2D drawable = image.createGraphics();
