@@ -2,7 +2,6 @@ package frontend.chartDrawer.utilities.processor.utilities.utilities;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class Color {
     private int red;
