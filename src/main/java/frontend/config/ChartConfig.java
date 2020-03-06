@@ -56,6 +56,12 @@ public class ChartConfig {
     @Value("${chart.drawer.lineColorRGB}")
     private String lineColorRGB;
 
+    //chart background color
+    @Value("${chart.drawer.backgroundColor}")
+    private String backGroundColor;
+    @Value("${chart.drawer.chartBackGroundColor}")
+    private String chartBackGroundColor;
+
     public int getFontSize() {
         return fontSize;
     }
@@ -122,5 +128,13 @@ public class ChartConfig {
 
     public String getLineColorRGB() {
         return lineColorRGB;
+    }
+
+    public String getBackGroundColor() {
+        return backGroundColor;
+    }
+
+    public String getChartBackGroundColor() {
+        return chartBackGroundColor;
     }
 }

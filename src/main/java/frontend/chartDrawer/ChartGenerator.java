@@ -22,8 +22,8 @@ public class ChartGenerator {
 
     int reloads = 0;
 
-    public Image drawBasicChart(int zoom, OverviewDtoPack overviewDtoPack) {
-        ChartLayout chartLayout = chartProcessor.processChart(zoom, overviewDtoPack);
+    public Image drawBasicChart(OverviewDtoPack overviewDtoPack) {
+        ChartLayout chartLayout = chartProcessor.processChart(overviewDtoPack);
         //Image image = chartDrawer.drawChart(chartLayout);
 
         BufferedImage image = new BufferedImage(chartConfig.getChartWidth(),
