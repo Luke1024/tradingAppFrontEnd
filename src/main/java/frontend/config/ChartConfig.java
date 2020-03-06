@@ -6,6 +6,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class ChartConfig {
 
+    //chart size
+    @Value("${chart.drawer.chartWidth}")
+    private int chartWidth;
+    @Value("${chart.drawer.chartHeight}")
+    private int chartHeight;
+    @Value("${chart.drawer.maxMinHeightRangePercentage}")
+    private int maxMinHeightRangePercentage;
+
     //chart scalling
     @Value("${chart.drawer.timeFrameAxisDistanceInPixels}")
     private int timeFrameAxisDistanceInPixels;
@@ -43,6 +51,18 @@ public class ChartConfig {
     private int lineThicknessInPix;
     @Value("${chart.drawer.lineColorRGB}")
     private String lineColorRGB;
+
+    public int getChartWidth() {
+        return chartWidth;
+    }
+
+    public int getChartHeight() {
+        return chartHeight;
+    }
+
+    public int getMaxMinHeightRangePercentage() {
+        return maxMinHeightRangePercentage;
+    }
 
     public int getTimeFrameAxisDistanceInPixels() {
         return timeFrameAxisDistanceInPixels;
