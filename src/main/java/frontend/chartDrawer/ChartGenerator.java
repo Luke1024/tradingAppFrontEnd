@@ -1,33 +1,33 @@
 package frontend.chartDrawer;
 
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.server.StreamResource;
 import frontend.chartDrawer.utilities.drawer.ChartDrawer;
 import frontend.chartDrawer.utilities.processor.ChartProcessor;
-import frontend.chartDrawer.utilities.dataObjects.ChartControlData;
 import frontend.chartDrawer.utilities.processor.utilities.utilities.ChartLayout;
 import frontend.client.dto.OverviewDtoPack;
+import frontend.config.ChartConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 public class ChartGenerator {
     private ByteArrayOutputStream imagebuffer = null;
     private ChartProcessor chartProcessor;
     private ChartDrawer chartDrawer;
 
+    @Autowired
+    private ChartConfig chartConfig;
+
     int reloads = 0;
 
-    public Image drawBasicChart(ChartControlData chartControlData, OverviewDtoPack overviewDtoPack) {
-        ChartLayout chartLayout = chartProcessor.processChart(chartControlData, overviewDtoPack);
+    public Image drawBasicChart(int zoom, OverviewDtoPack overviewDtoPack) {
+        ChartLayout chartLayout = chartProcessor.processChart(zoom, overviewDtoPack);
         //Image image = chartDrawer.drawChart(chartLayout);
 
-        BufferedImage image = new BufferedImage(chartControlData.getWidth(),
-                chartControlData.getHeight(), BufferedImage.TYPE_INT_RGB);
+        BufferedImage image = new BufferedImage(chartConfig.getChartWidth(),
+                chartConfig.getChartHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics2D drawable = image.createGraphics();
 
         /*

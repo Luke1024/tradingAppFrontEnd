@@ -6,6 +6,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ChartConfig {
 
+    //chart font
+    @Value("${chart.drawer.fontsize}")
+    private int fontSize;
+
     //chart size
     @Value("${chart.drawer.chartWidth}")
     private int chartWidth;
@@ -24,9 +28,9 @@ public class ChartConfig {
 
     //font size margin multiplier
     @Value("${chart.drawer.fontSizeBottomMarginMultiplier}")
-    private int fontSizeBottomMarginMultiplier;
+    private double fontSizeBottomMarginMultiplier;
     @Value("${chart.drawer.fontSizeRightMarginMultiplier}")
-    private int fontSizeRightMarginMultiplier;
+    private double fontSizeRightMarginMultiplier;
 
     //frame margin left and top
     @Value("${chart.drawer.frameLeftMarginPix}")
@@ -52,6 +56,10 @@ public class ChartConfig {
     @Value("${chart.drawer.lineColorRGB}")
     private String lineColorRGB;
 
+    public int getFontSize() {
+        return fontSize;
+    }
+
     public int getChartWidth() {
         return chartWidth;
     }
@@ -76,11 +84,11 @@ public class ChartConfig {
         return defaultZoomLevel;
     }
 
-    public int getFontSizeBottomMarginMultiplier() {
+    public double getFontSizeBottomMarginMultiplier() {
         return fontSizeBottomMarginMultiplier;
     }
 
-    public int getFontSizeRightMarginMultiplier() {
+    public double getFontSizeRightMarginMultiplier() {
         return fontSizeRightMarginMultiplier;
     }
 

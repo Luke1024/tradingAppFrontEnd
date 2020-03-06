@@ -6,11 +6,8 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import frontend.chartDrawer.utilities.dataObjects.ChartControlData;
-import frontend.chartDrawer.utilities.dataObjects.ScalingData;
 import frontend.client.BackEndClient;
 import frontend.chartDrawer.ChartGenerator;
-import frontend.client.dto.OverviewDtoPack;
 import java.io.IOException;
 
 @Route
@@ -19,36 +16,23 @@ public class MainView extends VerticalLayout {
     private Button signIn = new Button("Sign In");
     private ChartGenerator chartGenerator = new ChartGenerator();
     private BackEndClient backEndClient = new BackEndClient();
-    //chart control settings
-    //basic settings
-    private int chartWidth = 1000;
-    private int chartHeight = 200;
-    private int maxMinHeightRangePercentage = 80;
-    //scalling settings
-    private int timeFrameAxisDistanceInPixels = 20;
-    private double geometricScallingMultiplier = 1.2;
-    private int defaultZoomLevel = 0;
-
-
-
+    private int zoom = 0;
 
     public MainView() throws IOException {
-        ScalingData scalingData = new ScalingData(defaultZoomLevel, timeFrameAxisDistanceInPixels, geometricScallingMultiplier);
-        //ChartControlData chartControlData = new ChartControlData(chartWidth, chartHeight, maxMinHeightRangePercentage, scalingData);
-
-        //HorizontalLayout toolbar = new HorizontalLayout(logIn, signIn);
-        //Text text = new Text("EUR/USD 1.09");
+        HorizontalLayout toolbar = new HorizontalLayout(logIn, signIn);
+        Text text = new Text("EUR/USD 1.09");
 
         //HorizontalLayout imageHolder = new HorizontalLayout();
         //HorizontalLayout horizontalLayout = new HorizontalLayout(text, imageHolder);
 
         //OverviewDtoPack overviewDtoPack = backEndClient.getCurrenciesOverview();
-        //Image image = chartGenerator.drawBasicChart(chartControlData ,overviewDtoPack.getOverviews().get(0));
+        //Image image = chartGenerator.drawBasicChart(zoom ,overviewDtoPack.getOverviews().get(0));
         //imageHolder.add(image);
 
-        /*
-        HorizontalLayout eurUsd = new HorizontalLayout(logIn, signIn);
+        HorizontalLayout buttons = new HorizontalLayout(logIn, signIn);
+        add(buttons);
 
+        /*
         Image image = universalChartDrawer.getBlank();
         imageHolder.add(image);
         add(imageHolder,toolbar);
