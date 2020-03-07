@@ -1,6 +1,5 @@
 package frontend.client;
 
-import frontend.client.dto.OverviewDtoPack;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 

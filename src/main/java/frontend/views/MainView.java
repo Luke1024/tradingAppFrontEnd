@@ -2,12 +2,13 @@ package frontend.views;
 
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import frontend.client.BackEndClient;
 import frontend.chartDrawer.ChartGenerator;
+import frontend.client.dto.CurrencyOverviewDto;
+
 import java.io.IOException;
 
 @Route
@@ -22,10 +23,14 @@ public class MainView extends VerticalLayout {
         HorizontalLayout toolbar = new HorizontalLayout(logIn, signIn);
         Text text = new Text("EUR/USD 1.09");
 
-        //HorizontalLayout imageHolder = new HorizontalLayout();
+        HorizontalLayout imageHolder = new HorizontalLayout();
         //HorizontalLayout horizontalLayout = new HorizontalLayout(text, imageHolder);
 
-        //OverviewDtoPack overviewDtoPack = backEndClient.getCurrenciesOverview();
+
+        //solve requesting currencyPair one by one with CurrencyOverviewDto, control zoom with number of dataPoints
+        //for(CurrencyOverviewDto currencyOverviewDto : overviewDtoPack.getOverviews()){
+          //  backEndClient.getCurrenciesOverview();
+        //}
         //Image image = chartGenerator.drawBasicChart(zoom ,overviewDtoPack.getOverviews().get(0));
         //imageHolder.add(image);
 

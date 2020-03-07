@@ -7,7 +7,7 @@ import frontend.chartDrawer.utilities.processor.utilities.utilities.Line;
 import frontend.chartDrawer.utilities.processor.utilities.utilities.Rectangle;
 import frontend.chartDrawer.utilities.processor.utilities.utilities.utilities.LineProcessor;
 import frontend.chartDrawer.utilities.processor.utilities.utilities.utilities.RectangleProcessor;
-import frontend.client.dto.OverviewDtoPack;
+import frontend.client.dto.CurrencyOverviewDto;
 import frontend.config.ChartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,10 +21,10 @@ public class ChartProcessor {
     private LineProcessor lineProcessor = new LineProcessor();
     private TextProcessor textProcessor = new TextProcessor();
 
-    public ChartLayout processChart(OverviewDtoPack overviewDtoPack) {
+    public ChartLayout processChart(CurrencyOverviewDto currencyOverviewDto) {
         List<Rectangle> rectangleList = rectangleProcessor.process();
-        List<Line> lineList = lineProcessor.process(overviewDtoPack);
-        List<Text> textList = textProcessor.process(overviewDtoPack);
+        List<Line> lineList = lineProcessor.process(currencyOverviewDto);
+        List<Text> textList = textProcessor.process(currencyOverviewDto);
 
         return chartLayout;
     }
