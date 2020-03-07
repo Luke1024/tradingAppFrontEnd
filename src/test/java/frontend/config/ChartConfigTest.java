@@ -1,6 +1,6 @@
 package frontend.config;
 
-import frontend.chartDrawer.utilities.processor.utilities.utilities.Color;
+import frontend.chartDrawer.utilities.processor.utilities.Color;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,7 +1,7 @@
-package frontend.chartDrawer.utilities.processor.utilities.utilities.utilities;
+package frontend.chartDrawer.utilities.processor.utilities.rectangleprocessor;
 
-import frontend.chartDrawer.utilities.processor.utilities.utilities.Color;
-import frontend.chartDrawer.utilities.processor.utilities.utilities.Rectangle;
+import frontend.chartDrawer.utilities.processor.utilities.Rectangle;
+import frontend.chartDrawer.utilities.processor.utilities.Color;
 import frontend.config.ChartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 

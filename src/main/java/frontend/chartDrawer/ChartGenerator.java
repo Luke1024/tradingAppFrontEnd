@@ -3,7 +3,7 @@ package frontend.chartDrawer;
 import com.vaadin.flow.component.html.Image;
 import frontend.chartDrawer.utilities.drawer.ChartDrawer;
 import frontend.chartDrawer.utilities.processor.ChartProcessor;
-import frontend.chartDrawer.utilities.processor.utilities.utilities.ChartLayout;
+import frontend.chartDrawer.utilities.processor.utilities.ChartLayout;
 import frontend.client.dto.CurrencyOverviewDto;
 import frontend.config.ChartConfig;
 import org.springframework.beans.factory.annotation.Autowired;

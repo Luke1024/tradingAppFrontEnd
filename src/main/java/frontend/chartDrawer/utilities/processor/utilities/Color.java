@@ -1,4 +1,4 @@
-package frontend.chartDrawer.utilities.processor.utilities.utilities;
+package frontend.chartDrawer.utilities.processor.utilities;
 
 import java.util.Arrays;
 import java.util.List;

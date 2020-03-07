@@ -1,4 +1,4 @@
-package frontend.chartDrawer.utilities.processor.utilities.utilities;
+package frontend.chartDrawer.utilities.processor.utilities;
 
 public class Text {
     private Color color;

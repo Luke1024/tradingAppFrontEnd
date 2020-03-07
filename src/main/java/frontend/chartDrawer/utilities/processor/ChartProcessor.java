@@ -1,12 +1,12 @@
 package frontend.chartDrawer.utilities.processor;
 
 import com.vaadin.flow.component.Text;
-import frontend.chartDrawer.utilities.processor.utilities.TextProcessor;
-import frontend.chartDrawer.utilities.processor.utilities.utilities.ChartLayout;
-import frontend.chartDrawer.utilities.processor.utilities.utilities.Line;
-import frontend.chartDrawer.utilities.processor.utilities.utilities.Rectangle;
-import frontend.chartDrawer.utilities.processor.utilities.utilities.utilities.LineProcessor;
-import frontend.chartDrawer.utilities.processor.utilities.utilities.utilities.RectangleProcessor;
+import frontend.chartDrawer.utilities.processor.utilities.ChartLayout;
+import frontend.chartDrawer.utilities.processor.utilities.Line;
+import frontend.chartDrawer.utilities.processor.utilities.Rectangle;
+import frontend.chartDrawer.utilities.processor.utilities.lineprocessor.LineProcessor;
+import frontend.chartDrawer.utilities.processor.utilities.rectangleprocessor.RectangleProcessor;
+import frontend.chartDrawer.utilities.processor.utilities.textprocessor.TextProcessor;
 import frontend.client.dto.CurrencyOverviewDto;
 import frontend.config.ChartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
