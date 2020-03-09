@@ -112,7 +112,7 @@ public class ChartConfig {
         return frameThicknessInPix;
     }
 
-    public String getFrameColorRGB() {
+    public String getBorderColorRGB() {
         return frameColorRGB;
     }
 

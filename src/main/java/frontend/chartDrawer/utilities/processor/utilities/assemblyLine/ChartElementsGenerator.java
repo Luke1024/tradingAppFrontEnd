@@ -1,6 +1,6 @@
 package frontend.chartDrawer.utilities.processor.utilities.assemblyLine;
 
-import frontend.chartDrawer.utilities.processor.utilities.Container;
+import frontend.chartDrawer.utilities.processor.utilities.Processor;
 import frontend.chartDrawer.utilities.processor.utilities.containerParts.Color;
 import frontend.chartDrawer.utilities.processor.utilities.containerParts.Rectangle;
 import frontend.config.ChartConfig;
@@ -13,21 +13,21 @@ public class ChartElementsGenerator {
 
 
 
-    public Container generate(Container container){
-        drawBackground(container);
+    public Processor generate(Processor processor){
+        drawBackground(processor);
 
 
 
-        return container;
+        return processor;
     }
 
-    private Container drawBackground(Container container){
+    private Processor drawBackground(Processor processor){
         Color color = new Color(chartConfig.getBackGroundColor());
 
         Rectangle backGround = new Rectangle(color, color, true,0,0,chartConfig.getChartWidth(),
                 chartConfig.getChartHeight());
-        container.getBluePrint().add(backGround);
-        return container;
+        processor.getBluePrint().add(backGround);
+        return processor;
     }
 
     private class ChartBox {

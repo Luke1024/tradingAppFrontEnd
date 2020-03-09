@@ -2,7 +2,7 @@ package frontend.chartDrawer.utilities.processor;
 
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.html.Image;
-import frontend.chartDrawer.utilities.processor.utilities.Container;
+import frontend.chartDrawer.utilities.processor.utilities.Processor;
 import frontend.chartDrawer.utilities.processor.utilities.assemblyLine.ChartElementsDrawer;
 import frontend.chartDrawer.utilities.processor.utilities.assemblyLine.ChartElementsGenerator;
 import frontend.chartDrawer.utilities.processor.utilities.containerParts.Line;
@@ -21,14 +21,14 @@ public class ChartProcessor {
     private ChartElementsDrawer chartElementsDrawer = new ChartElementsDrawer();
 
     public Image generateChartImage(CurrencyOverviewDto currencyOverviewDto) {
-        Container container = new Container();
+        Processor processor = new Processor();
 
-        container.setCurrencyOverviewDto(currencyOverviewDto);
+        processor.setCurrencyOverviewDto(currencyOverviewDto);
 
-        chartElementsGenerator.generate(container);
-        chartElementsDrawer.draw(container);
+        chartElementsGenerator.generate(processor);
+        chartElementsDrawer.draw(processor);
 
-        return container.getImage();
+        return processor.getImage();
 
 
 

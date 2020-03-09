@@ -38,7 +38,7 @@ public class ChartConfigTest {
 
     @Test
     public void getFrameColorRGB() {
-        Assert.assertEquals(new Color(0,0,0), (new Color(chartConfig.getFrameColorRGB())));
+        Assert.assertEquals(new Color(0,0,0), (new Color(chartConfig.getBorderColorRGB())));
     }
 
     @Test
