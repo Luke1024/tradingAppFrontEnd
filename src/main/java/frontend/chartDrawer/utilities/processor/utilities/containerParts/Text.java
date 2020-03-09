@@ -1,6 +1,6 @@
-package frontend.chartDrawer.utilities.processor.utilities;
+package frontend.chartDrawer.utilities.processor.utilities.containerParts;
 
-public class Text {
+public class Text extends Element {
     private Color color;
     private int x;
     private int y;

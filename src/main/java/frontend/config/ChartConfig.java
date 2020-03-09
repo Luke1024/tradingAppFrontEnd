@@ -45,6 +45,8 @@ public class ChartConfig {
     private String frameColorRGB;
 
     //grid settings
+    @Value("{chart.drawer.minimalDistanceBetweenGridLines}")
+    private int minimalDistanceBetweenGridLines;
     @Value("${chart.drawer.gridThicknessInPix}")
     private int gridThicknessInPix;
     @Value("${chart.drawer.gridColorRGB}")
@@ -112,6 +114,10 @@ public class ChartConfig {
 
     public String getFrameColorRGB() {
         return frameColorRGB;
+    }
+
+    public int getMinimalDistanceBetweenGridLines() {
+        return minimalDistanceBetweenGridLines;
     }
 
     public int getGridThicknessInPix() {

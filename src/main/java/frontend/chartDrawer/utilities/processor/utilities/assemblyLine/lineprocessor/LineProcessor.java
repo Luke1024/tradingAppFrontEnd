@@ -1,7 +1,7 @@
-package frontend.chartDrawer.utilities.processor.utilities.lineprocessor;
+package frontend.chartDrawer.utilities.processor.utilities.assemblyLine.lineprocessor;
 
-import frontend.chartDrawer.utilities.processor.utilities.Line;
-import frontend.chartDrawer.utilities.processor.utilities.Color;
+import frontend.chartDrawer.utilities.processor.utilities.containerParts.Line;
+import frontend.chartDrawer.utilities.processor.utilities.containerParts.Color;
 import frontend.client.dto.CurrencyOverviewDto;
 import frontend.config.ChartConfig;
 import org.springframework.beans.factory.annotation.Autowired;

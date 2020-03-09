@@ -6,8 +6,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import frontend.client.BackEndClient;
-import frontend.chartDrawer.ChartGenerator;
-import frontend.client.dto.CurrencyOverviewDto;
+import frontend.chartDrawer.ChartPipeline;
 
 import java.io.IOException;
 
@@ -15,7 +14,7 @@ import java.io.IOException;
 public class MainView extends VerticalLayout {
     private Button logIn = new Button("Log In");
     private Button signIn = new Button("Sign In");
-    private ChartGenerator chartGenerator = new ChartGenerator();
+    private ChartPipeline chartPipeline = new ChartPipeline();
     private BackEndClient backEndClient = new BackEndClient();
     private int zoom = 0;
 

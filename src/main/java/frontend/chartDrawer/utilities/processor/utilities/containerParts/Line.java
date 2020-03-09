@@ -1,6 +1,6 @@
-package frontend.chartDrawer.utilities.processor.utilities;
+package frontend.chartDrawer.utilities.processor.utilities.containerParts;
 
-public class Line {
+public class Line extends Element {
     private Color color;
     private int x1;
     private int y1;

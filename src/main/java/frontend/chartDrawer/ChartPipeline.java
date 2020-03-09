@@ -3,7 +3,6 @@ package frontend.chartDrawer;
 import com.vaadin.flow.component.html.Image;
 import frontend.chartDrawer.utilities.drawer.ChartDrawer;
 import frontend.chartDrawer.utilities.processor.ChartProcessor;
-import frontend.chartDrawer.utilities.processor.utilities.ChartLayout;
 import frontend.client.dto.CurrencyOverviewDto;
 import frontend.config.ChartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 
-public class ChartGenerator {
+public class ChartPipeline {
     private ByteArrayOutputStream imagebuffer = null;
     private ChartProcessor chartProcessor;
     private ChartDrawer chartDrawer;
@@ -22,9 +21,8 @@ public class ChartGenerator {
 
     int reloads = 0;
 
-    public Image drawBasicChart(CurrencyOverviewDto currencyOverviewDto) {
-        ChartLayout chartLayout = chartProcessor.processChart(currencyOverviewDto);
-        //Image image = chartDrawer.drawChart(chartLayout);
+    public Image drawChart(CurrencyOverviewDto currencyOverviewDto) {
+        Image chartImage = chartProcessor.generateChartImage(currencyOverviewDto);
 
         BufferedImage image = new BufferedImage(chartConfig.getChartWidth(),
                 chartConfig.getChartHeight(), BufferedImage.TYPE_INT_RGB);
