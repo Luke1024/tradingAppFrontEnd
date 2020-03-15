@@ -1,6 +1,5 @@
 package frontend.chartDrawer.utilities.processor.utilities.test2.chartGeneratorUtilities;
 
-import frontend.chartDrawer.utilities.processor.utilities.test.chartParts.ChartPart;
 import frontend.chartDrawer.utilities.processor.utilities.test.chartParts.Color;
 import frontend.chartDrawer.utilities.processor.utilities.test.chartParts.Line;
 import frontend.chartDrawer.utilities.processor.utilities.test.chartParts.Rectangle;
@@ -19,31 +18,48 @@ public class ChartLineGenerator {
     @Autowired
     private ChartConfig chartConfig;
 
-    public List<ChartPart> generate(CurrencyOverviewDto currencyOverviewDto, Rectangle chartBox) {
-        int chartLineRangeInPercentage = getChartLineRangeInPercentage(chartConfig.getMaxMinHeightRangePercentage());
+    public List<Line> generate(CurrencyOverviewDto currencyOverviewDto, Rectangle chartBox) {
 
-        int topAndBottomMargin = (chartBox.getHeight() * (100-chartLineRangeInPercentage))/2;
+        Parameters chartLineParameters = computeChartLineGenerationParameters(currencyOverviewDto,chartBox);
 
-        int startingPositionX = chartBox.getX();
-        int highestPositionY1 = chartBox.getY();
-        int lowestPositionY2 = chartBox.getY() + chartBox.getHeight();
-        int chartHeight = chartBox.getHeight();
+        List<Double> scaledValuesInDataPoints = minMaxScalling(currencyOverviewDto);
+        List<Integer> valuesScaledToPixels = minMaxScallingToPixelValues(scaledValuesInDataPoints, chartLineParameters);
+        List<Line> chartLineLines = drawLinesBetweenPoints(valuesScaledToPixels, chartLineParameters);
 
+        return chartLineLines;
+    }
+
+    private Parameters computeChartLineGenerationParameters(CurrencyOverviewDto currencyOverviewDto, Rectangle chartBox) {
+
+        int chartLineHeightRangeInPercentage = getChartLineRangeInPercentage(chartConfig.getMaxMinHeightRangePercentage());
+        int topAndBottomMarginInPix = (chartBox.getHeight() * (100-chartLineHeightRangeInPercentage))/2;
+
+        int heightRange = chartBox.getHeight()-topAndBottomMarginInPix*2;
         int stepInPixels = chartBox.getWidth()/currencyOverviewDto.getDataPoints().size();
 
-        double highestValuePoint = getHighestValueInDataPoints(currencyOverviewDto);
-        double lowestValuePoint = getLowestValueInDataPoints(currencyOverviewDto);
-
-        List<Double> scaledValuesInDataPoints = minMaxScalling(lowestValuePoint, highestValuePoint, currencyOverviewDto);
-        List<Integer> valuesScaledToPixels = minMaxScallingToPixelValues(scaledValuesInDataPoints, chartHeight, topAndBottomMargin);
-        List<Line> chartLineLines = drawLinesBetweenPoints(valuesScaledToPixels, stepInPixels);
-        List<Line> chartLineLinesPositioned = moveChartLineToRequiredPosition(chartLineLines, startingPositionX, lowestPositionY2);
+        return new Parameters(0, topAndBottomMarginInPix, heightRange, stepInPixels);
     }
 
     private int getChartLineRangeInPercentage(int chartRangeInPercentage){
         if(chartRangeInPercentage > 100){
             return 100;
         } else return chartRangeInPercentage;
+    }
+
+
+
+    private List<Double> minMaxScalling(CurrencyOverviewDto currencyOverviewDto) {
+        double max = getHighestValueInDataPoints(currencyOverviewDto);
+        double min = getLowestValueInDataPoints(currencyOverviewDto);
+
+        List<Double> scaledValues = new ArrayList<>();
+        List<DataPointDto> dataPointDtoList = currencyOverviewDto.getDataPoints();
+        for(DataPointDto dataPointDto : dataPointDtoList) {
+            double value = dataPointDto.getValue();
+            double valueScaled = (value - min)/(max - min);
+            scaledValues.add(valueScaled);
+        }
+        return scaledValues;
     }
 
     private double getHighestValueInDataPoints(CurrencyOverviewDto currencyOverviewDto){
@@ -56,45 +72,43 @@ public class ChartLineGenerator {
         return dataPoints.stream().min(Comparator.comparing(DataPointDto::getValue)).map(d -> d.getValue()).orElseThrow(NoSuchElementException::new);
     }
 
-    private List<Double> minMaxScalling(double min, double max, CurrencyOverviewDto currencyOverviewDto) {
-        List<Double> scaledValues = new ArrayList<>();
-        List<DataPointDto> dataPointDtoList = currencyOverviewDto.getDataPoints();
-        for(DataPointDto dataPointDto : dataPointDtoList) {
-            double value = dataPointDto.getValue();
-            double valueScaled = (value - min)/(max - min);
-            scaledValues.add(valueScaled);
-        }
-        return scaledValues;
-    }
 
-    private List<Integer> minMaxScallingToPixelValues(List<Double> scaledValuesInDataPoints, int chartHeight, int topAndBottomMargin) {
-        int chartRangeInPixels = chartHeight - topAndBottomMargin;
+
+    private List<Integer> minMaxScallingToPixelValues(List<Double> scaledValuesInDataPoints, Parameters chartLineParameters) {
 
         List<Integer> pixelHeightValues = new ArrayList<>();
 
         for(Double scaledValue : scaledValuesInDataPoints){
-            pixelHeightValues.add((int) (scaledValue*chartRangeInPixels));
+            pixelHeightValues.add((int) (scaledValue*chartLineParameters.heightRange));
         }
         return pixelHeightValues;
     }
 
-    private List<Line> drawLinesBetweenPoints(List<Integer> valuesScaledToPixels, int stepInPixels) {
-        int positionIndex = 0;
+
+
+    private List<Line> drawLinesBetweenPoints(List<Integer> valuesScaledToPixels, Parameters chartLineParameters) {
+        int step = chartLineParameters.stepInPix;
+
         Color color = new Color(chartConfig.getLineColorRGB());
         List<Line> lines = new ArrayList<>();
 
         for(int i=0; i<valuesScaledToPixels.size()-1; i++){
-            lines.add(new Line(color, positionIndex*i, valuesScaledToPixels.get(i), positionIndex*(i+1), valuesScaledToPixels.get(i+1)));
+            lines.add(new Line(color,step*i, valuesScaledToPixels.get(i), step*(i+1), valuesScaledToPixels.get(i+1)));
         }
         return lines;
     }
 
-    private List<Line> moveChartLineToRequiredPosition(List<Line> lines, int startingPositionX, int lowestPositionY2) {
-        List<Line> positionedLines = new ArrayList<>();
+    private class Parameters {
+        int x;
+        int y;
+        int heightRange;
+        int stepInPix;
 
-        for(Line line : lines){
-            int x = line.getX1() + startingPositionX;
-            positionedLines.add(new Line(line.getColor(), x, ));
+        public Parameters(int x, int y, int heightRange, int stepInPix) {
+            this.x = x;
+            this.y = y;
+            this.heightRange = heightRange;
+            this.stepInPix = stepInPix;
         }
     }
 }
