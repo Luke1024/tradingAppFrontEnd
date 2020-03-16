@@ -1,8 +1,8 @@
-package frontend.chartDrawer.utilities.processor.utilities.test2.chartGeneratorUtilities;
+package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities;
 
-import frontend.chartDrawer.utilities.processor.utilities.test.chartParts.Color;
-import frontend.chartDrawer.utilities.processor.utilities.test.chartParts.Line;
-import frontend.chartDrawer.utilities.processor.utilities.test.chartParts.Rectangle;
+import frontend.chartDrawer.chartGenerator.chartParts.Color;
+import frontend.chartDrawer.chartGenerator.chartParts.Line;
+import frontend.chartDrawer.chartGenerator.chartParts.Rectangle;
 import frontend.client.dto.CurrencyOverviewDto;
 import frontend.client.dto.DataPointDto;
 import frontend.config.ChartConfig;

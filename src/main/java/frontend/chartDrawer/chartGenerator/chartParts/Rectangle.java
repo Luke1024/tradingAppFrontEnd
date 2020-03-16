@@ -1,6 +1,6 @@
-package frontend.chartDrawer.utilities.processor.utilities.containerParts;
+package frontend.chartDrawer.chartGenerator.chartParts;
 
-public class Rectangle extends Element {
+public class Rectangle extends ChartPart {
     private Color color;
     private Color fillColor;
     private boolean fill;

@@ -1,4 +1,4 @@
-package frontend.chartDrawer.utilities.processor.utilities.test.chartParts;
+package frontend.chartDrawer.chartGenerator.chartParts;
 
 public class Text extends ChartPart {
     private Color color;

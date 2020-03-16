@@ -1,4 +1,4 @@
-package frontend.chartDrawer.utilities.dataObjects;
+package frontend.chartDrawer.dataObjects;
 
 public class TpSlLineData {
     private double tpLineHeight = 0;

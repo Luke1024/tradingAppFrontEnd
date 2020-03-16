@@ -6,7 +6,6 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import frontend.client.BackEndClient;
-import frontend.chartDrawer.ChartPipeline;
 
 import java.io.IOException;
 

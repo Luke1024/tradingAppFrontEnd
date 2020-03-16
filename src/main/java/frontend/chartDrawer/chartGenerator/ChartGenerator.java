@@ -1,12 +1,12 @@
-package frontend.chartDrawer.utilities.processor.utilities.test2;
+package frontend.chartDrawer.chartGenerator;
 
 import com.vaadin.flow.component.html.Image;
-import frontend.chartDrawer.utilities.processor.utilities.test.chartParts.ChartPart;
-import frontend.chartDrawer.utilities.processor.utilities.test.chartParts.Color;
-import frontend.chartDrawer.utilities.processor.utilities.test.chartParts.Rectangle;
-import frontend.chartDrawer.utilities.processor.utilities.test2.chartGeneratorUtilities.ChartGridAndDescriptionGenerator;
-import frontend.chartDrawer.utilities.processor.utilities.test2.chartGeneratorUtilities.ChartLineGenerator;
-import frontend.chartDrawer.utilities.processor.utilities.test2.chartGeneratorUtilities.ChartPartsDrawer;
+import frontend.chartDrawer.chartGenerator.chartParts.ChartPart;
+import frontend.chartDrawer.chartGenerator.chartParts.Color;
+import frontend.chartDrawer.chartGenerator.chartParts.Rectangle;
+import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartGridAndDescriptionGenerator;
+import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartLineGenerator;
+import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartPartsDrawer;
 import frontend.client.dto.CurrencyOverviewDto;
 import frontend.config.ChartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
