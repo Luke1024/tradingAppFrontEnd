@@ -40,7 +40,7 @@ public class ChartLineGenerator {
         return new Parameters(0, topAndBottomMarginInPix, heightRange, stepInPixels);
     }
 
-    private int getChartLineRangeInPercentage(int chartRangeInPercentage){
+    private int getChartLineRangeInPercentage(int chartRangeInPercentage) {
         if(chartRangeInPercentage > 100){
             return 100;
         } else return chartRangeInPercentage;

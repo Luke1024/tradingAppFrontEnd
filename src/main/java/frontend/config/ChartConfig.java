@@ -9,6 +9,8 @@ public class ChartConfig {
     //chart font
     @Value("${chart.drawer.fontsize}")
     private int fontSize;
+    @Value("${chart.drawer.textcolor}")
+    private String textColorRGB;
 
     //chart size
     @Value("${chart.drawer.chartWidth}")
@@ -68,6 +70,10 @@ public class ChartConfig {
         return fontSize;
     }
 
+    public String getTextColorRGB() {
+        return textColorRGB;
+    }
+
     public int getChartWidth() {
         return chartWidth;
     }
@@ -110,6 +116,10 @@ public class ChartConfig {
 
     public int getFrameThicknessInPix() {
         return frameThicknessInPix;
+    }
+
+    public String getFrameColorRGB() {
+        return frameColorRGB;
     }
 
     public String getBorderColorRGB() {
