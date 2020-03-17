@@ -35,7 +35,7 @@ public class ChartLineGenerator {
         int topAndBottomMarginInPix = (chartBox.getHeight() * (100-chartLineHeightRangeInPercentage))/2;
 
         int heightRange = chartBox.getHeight()-topAndBottomMarginInPix*2;
-        int stepInPixels = chartBox.getWidth()/currencyOverviewDto.getDataPoints().size();
+        double stepInPixels = ((double) chartBox.getWidth())/currencyOverviewDto.getDataPoints().size();
 
         return new Parameters(0, topAndBottomMarginInPix, heightRange, stepInPixels);
     }
@@ -87,13 +87,14 @@ public class ChartLineGenerator {
 
 
     private List<Line> drawLinesBetweenPoints(List<Integer> valuesScaledToPixels, Parameters chartLineParameters) {
-        int step = chartLineParameters.stepInPix;
+        double step = chartLineParameters.stepInPix;
 
         Color color = new Color(chartConfig.getLineColorRGB());
         List<Line> lines = new ArrayList<>();
 
         for(int i=0; i<valuesScaledToPixels.size()-1; i++){
-            lines.add(new Line(color,step*i, valuesScaledToPixels.get(i), step*(i+1), valuesScaledToPixels.get(i+1)));
+            lines.add(new Line(color,(int) step*i, valuesScaledToPixels.get(i), (int) step*(i+1),
+                    valuesScaledToPixels.get(i+1)));
         }
         return lines;
     }
@@ -102,9 +103,9 @@ public class ChartLineGenerator {
         int x;
         int y;
         int heightRange;
-        int stepInPix;
+        double stepInPix;
 
-        public Parameters(int x, int y, int heightRange, int stepInPix) {
+        public Parameters(int x, int y, int heightRange, double stepInPix) {
             this.x = x;
             this.y = y;
             this.heightRange = heightRange;
