@@ -7,16 +7,11 @@ import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartGridAndD
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartLineGenerator;
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartPartsDrawer;
 import frontend.client.dto.CurrencyOverviewDto;
-import frontend.config.ChartConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
 public class ChartGenerator {
 
-    @Autowired
-    private ChartConfig chartConfig;
-    private Rectangle chartBox;
     private ChartParameters chartParameters;
     private ChartGridAndDescriptionGenerator gridAndDescriptionGenerator = new ChartGridAndDescriptionGenerator();
     private ChartLineGenerator chartLineGenerator = new ChartLineGenerator();
@@ -31,12 +26,15 @@ public class ChartGenerator {
         //all parts are positioned based on typical coordinate system, y coordinates need to reverse when drawing in awt
         chartParts.add(generateBackGround());
         chartParts.add(generateChartBorder());
-        chartParts.addAll(chartLineGenerator.generate(currencyOverviewDto, chartBox));
-        chartParts.addAll(gridAndDescriptionGenerator.generate(currencyOverviewDto, chartBox, viewTimeFrame));
+        chartParts.addAll(chartLineGenerator.generate(chartParameters));
+        chartParts.addAll(gridAndDescriptionGenerator.generate(chartParameters));
         chartParts.addAll(addRetrievedTimestamp());
 
         //reverse y coordinates
 
+        List<ChartPart> partsWithReversedCoordinates = reverseCoordinates(chartParts);
+
+        return chartPartsDrawer.draw(partsWithReversedCoordinates);
     }
 
     private Rectangle generateBackGround(){

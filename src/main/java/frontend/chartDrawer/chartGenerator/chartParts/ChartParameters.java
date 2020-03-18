@@ -7,27 +7,64 @@ import java.util.List;
 
 public class ChartParameters {
 
-    private List<ParametersDto> parametersDtoList = new ArrayList<>();
+    private Universal universal;
+    private BackGround backGround;
+    private ChartBox chartBox;
+    private Line line;
+    private VerticalGrid verticalGrid;
+    private HorizontalGrid horizontalGrid;
+    private Text text;
 
-    public ChartParameters(List<ParametersDto> parametersDtoList) {
-        this.parametersDtoList = parametersDtoList;
+    public ChartParameters(Universal universal, BackGround backGround, ChartBox chartBox,
+                           Line line, VerticalGrid verticalGrid, HorizontalGrid horizontalGrid, Text text) {
+        this.universal = universal;
+        this.backGround = backGround;
+        this.chartBox = chartBox;
+        this.line = line;
+        this.verticalGrid = verticalGrid;
+        this.horizontalGrid = horizontalGrid;
+        this.text = text;
     }
 
-    public List<ParametersDto> getParameters() {
-        return parametersDtoList;
+    public Universal getUniversal() {
+        return universal;
     }
 
-    public interface ParametersDto {}
+    public BackGround getBackGround() {
+        return backGround;
+    }
 
-    public static class Universal implements ParametersDto {
+    public ChartBox getChartBox() {
+        return chartBox;
+    }
+
+    public Line getLine() {
+        return line;
+    }
+
+    public VerticalGrid getVerticalGrid() {
+        return verticalGrid;
+    }
+
+    public HorizontalGrid getHorizontalGrid() {
+        return horizontalGrid;
+    }
+
+    public Text getText() {
+        return text;
+    }
+
+    public static class Universal  {
         private CurrencyOverviewDto currencyOverviewDto;
         private int width;
         private int height;
+        private ViewTimeFrame viewTimeFrame;
 
-        public Universal(CurrencyOverviewDto currencyOverviewDto, int width, int height) {
+        public Universal(CurrencyOverviewDto currencyOverviewDto, int width, int height, ViewTimeFrame viewTimeFrame) {
             this.currencyOverviewDto = currencyOverviewDto;
             this.width = width;
             this.height = height;
+            this.viewTimeFrame = viewTimeFrame;
         }
 
         public CurrencyOverviewDto getCurrencyOverviewDto() {
@@ -41,9 +78,13 @@ public class ChartParameters {
         public int getHeight() {
             return height;
         }
+
+        public ViewTimeFrame getViewTimeFrame() {
+            return viewTimeFrame;
+        }
     }
 
-    public static class BackGround implements ParametersDto {
+    public static class BackGround {
         private Color color;
 
         public BackGround(Color color) {
@@ -55,7 +96,7 @@ public class ChartParameters {
         }
     }
 
-    public static class ChartBox implements ParametersDto {
+    public static class ChartBox {
         private int x;
         private int y;
         private int width;
@@ -103,13 +144,15 @@ public class ChartParameters {
         }
     }
 
-    public static class Line implements ParametersDto {
+    public static class Line {
         private Color color;
         private int thickness;
+        private int verticalRangePercent;
 
-        public Line(Color color, int thickness) {
+        public Line(Color color, int thickness, int verticalRangePercent) {
             this.color = color;
             this.thickness = thickness;
+            this.verticalRangePercent = verticalRangePercent;
         }
 
         public Color getColor() {
@@ -119,9 +162,13 @@ public class ChartParameters {
         public int getThickness() {
             return thickness;
         }
+
+        public int getVerticalRangePercent() {
+            return verticalRangePercent;
+        }
     }
 
-    public static class VerticalGrid implements ParametersDto {
+    public static class VerticalGrid {
         private Color color;
         private int thickness;
 
@@ -139,7 +186,7 @@ public class ChartParameters {
         }
     }
 
-    public static class HorizontalGrid implements ParametersDto {
+    public static class HorizontalGrid {
         private Color color;
         private int thickness;
 
@@ -157,7 +204,7 @@ public class ChartParameters {
         }
     }
 
-    public static class Text implements ParametersDto {
+    public static class Text {
         private Color color;
         private int fontSize;
 

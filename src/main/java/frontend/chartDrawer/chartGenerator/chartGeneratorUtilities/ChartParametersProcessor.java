@@ -2,8 +2,8 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities;
 
 import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;
+import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
 import frontend.client.dto.CurrencyOverviewDto;
-import frontend.client.dto.TimeFrame;
 import frontend.config.ChartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,29 +14,31 @@ public class ChartParametersProcessor {
     @Autowired
     private ChartConfig chartConfig;
 
-    public ChartParameters process(CurrencyOverviewDto currencyOverviewDto, TimeFrame timeFrame) {
-        return new ChartParameters(Arrays.asList(
-                processUniversalParameters(currencyOverviewDto),
+    public ChartParameters process(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame timeFrame) {
+        return new ChartParameters(
+                processUniversalParameters(currencyOverviewDto, timeFrame),
                 processBackgroundParameters(),
                 processChartBoxParameters(currencyOverviewDto),
                 processLineParameters(),
                 processVerticalGridParameters(),
                 processHorizontalGridParameters(),
-                processTextParameters()));
+                processTextParameters());
     }
 
-    private ChartParameters.ParametersDto processUniversalParameters(CurrencyOverviewDto currencyOverviewDto) {
+    private ChartParameters.Universal processUniversalParameters(
+            CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame timeFrame) {
+
         int chartWidth = chartConfig.getChartWidth();
         int chartHeight = chartConfig.getChartHeight();
 
-        return new ChartParameters.Universal(currencyOverviewDto, chartWidth, chartHeight);
+        return new ChartParameters.Universal(currencyOverviewDto, chartWidth, chartHeight, timeFrame);
     }
 
-    private ChartParameters.ParametersDto processBackgroundParameters() {
+    private ChartParameters.BackGround processBackgroundParameters() {
         return new ChartParameters.BackGround(new Color(chartConfig.getBackGroundColor()));
     }
 
-    private ChartParameters.ParametersDto processChartBoxParameters(CurrencyOverviewDto currencyOverviewDto) {
+    private ChartParameters.ChartBox processChartBoxParameters(CurrencyOverviewDto currencyOverviewDto) {
         int fontSize = chartConfig.getFontSize();
         int marginRight = (int) (fontSize * chartConfig.getFontSizeRightMarginMultiplier());
         int marginBottom = (int) (fontSize * chartConfig.getFontSizeBottomMarginMultiplier());
@@ -54,19 +56,20 @@ public class ChartParametersProcessor {
         return new ChartParameters.ChartBox(x,y,width,height,step,color,thickness);
     }
 
-    private ChartParameters.ParametersDto processLineParameters() {
-        return new ChartParameters.Line(new Color(chartConfig.getLineColorRGB()), chartConfig.getLineThicknessInPix());
+    private ChartParameters.Line processLineParameters() {
+        return new ChartParameters.Line(new Color(chartConfig.getLineColorRGB()), chartConfig.getLineThicknessInPix(),
+                chartConfig.getMaxMinHeightRangePercentage());
     }
 
-    private ChartParameters.ParametersDto processVerticalGridParameters() {
+    private ChartParameters.VerticalGrid processVerticalGridParameters() {
         return new ChartParameters.VerticalGrid(new Color(chartConfig.getLineColorRGB()), chartConfig.getGridThicknessInPix());
     }
 
-    private ChartParameters.ParametersDto processHorizontalGridParameters() {
+    private ChartParameters.HorizontalGrid processHorizontalGridParameters() {
         return new ChartParameters.HorizontalGrid(new Color(chartConfig.getLineColorRGB()), chartConfig.getGridThicknessInPix());
     }
 
-    private ChartParameters.ParametersDto processTextParameters() {
+    private ChartParameters.Text processTextParameters() {
         return new ChartParameters.Text(new Color(chartConfig.getTextColorRGB()), chartConfig.getFontSize());
     }
 }
