@@ -1,9 +1,6 @@
 package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities;
 
-import frontend.chartDrawer.chartGenerator.chartParts.ChartPart;
-import frontend.chartDrawer.chartGenerator.chartParts.Line;
-import frontend.chartDrawer.chartGenerator.chartParts.Rectangle;
-import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
+import frontend.chartDrawer.chartGenerator.chartParts.*;
 import frontend.client.dto.CurrencyOverviewDto;
 import frontend.config.ChartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +13,20 @@ public class ChartGridAndDescriptionGenerator {
     @Autowired
     private ChartConfig chartConfig;
 
-    private List<ChartPart> chartParts = new ArrayList<>();
+    private ChartAnnotationRuleEngine chartAnnotationRuleEngine;
 
-    public List<Line> generate(CurrencyOverviewDto currencyOverviewDto, Rectangle chartBox, ViewTimeFrame viewTimeFrame) {
-        chartParts.addAll(generateVerticalLinesWithTextDescription(currencyOverviewDto, chartBox,viewTimeFrame));
+    public List<ChartPart> generate(ChartParameters chartParameters) {
+        List<ChartPart> chartParts = new ArrayList<>();
+        chartParts.addAll(generateVerticalLinesWithTextDescription(chartParameters));
         return chartParts;
     }
 
-    private List<ChartPart> generateVerticalLinesWithTextDescription(CurrencyOverviewDto currencyOverviewDto,
-                                                                     Rectangle chartBox, ViewTimeFrame viewTimeFrame) {
-
+    private List<ChartPart> generateVerticalLinesWithTextDescription(ChartParameters chartParameters) {
+        CurrencyOverviewDto currencyOverviewDto = chartParameters.getUniversal().getCurrencyOverviewDto();
+        int chartBoxWidth = chartParameters.getChartBox().getWidth();
         int numberOfDataPoints = currencyOverviewDto.getDataPoints().size();
-        double distanceBetweenLines = ((double) chartBox.getWidth()) / numberOfDataPoints;
 
-
+        List<Integer> dataPointsIndexes = chartAnnotationRuleEngine.process(chartParameters);
     }
 /*
     private List<Line> generateVerticalLinesBasedOnDistance(int distanceBetweenLines, Rectangle chartBox) {

@@ -2,9 +2,6 @@ package frontend.chartDrawer.chartGenerator.chartParts;
 
 import frontend.client.dto.CurrencyOverviewDto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ChartParameters {
 
     private Universal universal;
