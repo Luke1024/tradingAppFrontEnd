@@ -5,6 +5,7 @@ import frontend.client.dto.CurrencyOverviewDto;
 import frontend.config.ChartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,8 @@ public class ChartGridAndDescriptionGenerator {
     @Autowired
     private ChartConfig chartConfig;
 
-    private ChartAnnotationRuleEngine chartAnnotationRuleEngine;
+    private ChartTimeStampsDistancerProcessor timeStampsDistancerProcessor;
+    private ChartTimeStampDescriptionPositioner timeStampsDescriptionPositioner;
 
     public List<ChartPart> generate(ChartParameters chartParameters) {
         List<ChartPart> chartParts = new ArrayList<>();
@@ -26,7 +28,33 @@ public class ChartGridAndDescriptionGenerator {
         int chartBoxWidth = chartParameters.getChartBox().getWidth();
         int numberOfDataPoints = currencyOverviewDto.getDataPoints().size();
 
-        List<Integer> dataPointsIndexes = chartAnnotationRuleEngine.process(chartParameters);
+        List<TimeStampCoord> timeStampCoords = timeStampsDistancerProcessor.process(chartParameters);
+        List<Text> timeStampDescriptionsPositioned =
+                timeStampsDescriptionPositioner.process(chartParameters, timeStampCoords);
+    }
+
+    public static class TimeStampCoord {
+        private int x;
+        private LocalDateTime timeStamp;
+        private int index;
+
+        public TimeStampCoord(int x, LocalDateTime timeStamp, int index) {
+            this.x = x;
+            this.timeStamp = timeStamp;
+            this.index = index;
+        }
+
+        public int getX() {
+            return x;
+        }
+
+        public LocalDateTime getTimeStamp() {
+            return timeStamp;
+        }
+
+        public int getIndex() {
+            return index;
+        }
     }
 /*
     private List<Line> generateVerticalLinesBasedOnDistance(int distanceBetweenLines, Rectangle chartBox) {

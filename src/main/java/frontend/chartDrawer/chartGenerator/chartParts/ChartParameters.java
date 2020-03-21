@@ -204,10 +204,14 @@ public class ChartParameters {
     public static class Text {
         private Color color;
         private int fontSize;
+        private int horizontalMarginFromCenter;
+        private int verticalMarginFromCenter;
 
-        public Text(Color color, int fontSize) {
+        public Text(Color color, int fontSize, int horizontalMarginFromCenter, int verticalMarginFromCenter) {
             this.color = color;
             this.fontSize = fontSize;
+            this.horizontalMarginFromCenter = horizontalMarginFromCenter;
+            this.verticalMarginFromCenter = verticalMarginFromCenter;
         }
 
         public Color getColor() {
@@ -216,6 +220,14 @@ public class ChartParameters {
 
         public int getFontSize() {
             return fontSize;
+        }
+
+        public int getHorizontalMarginFromCenter() {
+            return horizontalMarginFromCenter;
+        }
+
+        public int getVerticalMarginFromCenter() {
+            return verticalMarginFromCenter;
         }
     }
 }

@@ -7,8 +7,6 @@ import frontend.client.dto.CurrencyOverviewDto;
 import frontend.config.ChartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Arrays;
-
 public class ChartParametersProcessor {
 
     @Autowired
@@ -70,6 +68,10 @@ public class ChartParametersProcessor {
     }
 
     private ChartParameters.Text processTextParameters() {
-        return new ChartParameters.Text(new Color(chartConfig.getTextColorRGB()), chartConfig.getFontSize());
+        int horizontalMarginFromCenter = chartConfig.getFrameLeftMarginPix()/2;
+        int verticalMarginFromCenter = chartConfig.getFrameTopMarginPix()/2;
+
+        return new ChartParameters.Text(new Color(chartConfig.getTextColorRGB()),
+                chartConfig.getFontSize(), horizontalMarginFromCenter, verticalMarginFromCenter);
     }
 }
