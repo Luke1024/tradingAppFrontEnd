@@ -1,7 +1,10 @@
 package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities;
 
+import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescriptionGeneratorUtilities.TimeStampDescriptionGenerator;
+import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescriptionGeneratorUtilities.TimeStampDescriptionPositioner;
+import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescriptionGeneratorUtilities.VisibleTimeStampsFilter;
+import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescriptionGeneratorUtilities.VerticalLinesGenerator;
 import frontend.chartDrawer.chartGenerator.chartParts.*;
-import frontend.client.dto.CurrencyOverviewDto;
 import frontend.config.ChartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,8 +17,10 @@ public class ChartGridAndDescriptionGenerator {
     @Autowired
     private ChartConfig chartConfig;
 
-    private ChartTimeStampsDistancerProcessor timeStampsDistancerProcessor;
-    private ChartTimeStampDescriptionPositioner timeStampsDescriptionPositioner;
+    private VisibleTimeStampsFilter visibleTimeStampsFilter;
+    private TimeStampDescriptionPositioner timeStampsDescriptionPositioner;
+    private VerticalLinesGenerator verticalLinesGenerator;
+    private TimeStampDescriptionGenerator timeStampDescriptionGenerator;
 
     public List<ChartPart> generate(ChartParameters chartParameters) {
         List<ChartPart> chartParts = new ArrayList<>();
@@ -24,14 +29,20 @@ public class ChartGridAndDescriptionGenerator {
     }
 
     private List<ChartPart> generateVerticalLinesWithTextDescription(ChartParameters chartParameters) {
-        CurrencyOverviewDto currencyOverviewDto = chartParameters.getUniversal().getCurrencyOverviewDto();
-        int chartBoxWidth = chartParameters.getChartBox().getWidth();
-        int numberOfDataPoints = currencyOverviewDto.getDataPoints().size();
 
-        List<TimeStampCoord> timeStampCoords = timeStampsDistancerProcessor.process(chartParameters);
-        List<Text> timeStampDescriptionsPositioned =
-                timeStampsDescriptionPositioner.process(chartParameters, timeStampCoords);
+        List<ChartPart> chartParts = new ArrayList<>();
+
+
+        List<TimeStampCoord> timeStampCoords = visibleTimeStampsFilter.process(chartParameters);
+
+
+        chartParts.addAll(timeStampDescriptionGenerator.process(chartParameters, timeStampCoords));
+
+        List<Line> verticalLines = verticalLinesGenerator.process(chartParameters, timeStampCoords);
+
+        return chartParts;
     }
+
 
     public static class TimeStampCoord {
         private int x;

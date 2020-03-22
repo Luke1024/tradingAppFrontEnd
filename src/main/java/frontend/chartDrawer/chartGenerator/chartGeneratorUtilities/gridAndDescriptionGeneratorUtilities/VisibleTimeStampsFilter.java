@@ -1,5 +1,6 @@
-package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities;
+package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescriptionGeneratorUtilities;
 
+import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartGridAndDescriptionGenerator;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
 import frontend.client.dto.DataPointDto;
 import frontend.config.ChartConfig;
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChartTimeStampsDistancerProcessor {
+public class VisibleTimeStampsFilter {
 
     @Autowired
     private ChartConfig chartConfig;

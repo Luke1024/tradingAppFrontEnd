@@ -2,13 +2,15 @@ package frontend.chartDrawer.chartGenerator.chartParts;
 
 public class Line extends ChartPart {
     private Color color;
+    private int thickness;
     private int x1;
     private int y1;
     private int x2;
     private int y2;
 
-    public Line(Color color, int x1, int y1, int x2, int y2) {
+    public Line(Color color, int thickness, int x1, int y1, int x2, int y2) {
         this.color = color;
+        this.thickness = thickness;
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;
@@ -17,6 +19,10 @@ public class Line extends ChartPart {
 
     public Color getColor() {
         return color;
+    }
+
+    public int getThickness() {
+        return thickness;
     }
 
     public int getX1() {
