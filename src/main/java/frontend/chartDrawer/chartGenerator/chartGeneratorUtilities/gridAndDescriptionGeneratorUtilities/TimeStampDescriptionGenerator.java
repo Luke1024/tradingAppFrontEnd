@@ -9,11 +9,13 @@ import java.util.List;
 public class TimeStampDescriptionGenerator {
 
     private TimeStampDescriptionPositioner timeStampDescriptionPositioner;
+    private TimeStampTextEditorEngine timeStampTextEditorEngine;
 
     public List<Text> process(ChartParameters chartParameters, List<ChartGridAndDescriptionGenerator.TimeStampCoord> timeStampCoords) {
 
         List<Text> timeStampDescriptionsPositioned = timeStampDescriptionPositioner.process(chartParameters, timeStampCoords);
+        List<Text> completeTimeStampsObjects = timeStampTextEditorEngine.process(timeStampDescriptionsPositioned, chartParameters, timeStampCoords);
 
-        return timeStampDescriptionsPositioned;
+        return completeTimeStampsObjects;
     }
 }
