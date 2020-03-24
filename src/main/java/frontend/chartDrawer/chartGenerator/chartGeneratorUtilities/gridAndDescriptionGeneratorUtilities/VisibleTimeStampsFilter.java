@@ -15,17 +15,9 @@ public class VisibleTimeStampsFilter {
     @Autowired
     private ChartConfig chartConfig;
 
-    private final static int numberOfValuesShow = 5;
-
     public List<ChartGridAndDescriptionGenerator.TimeStampCoord> process(ChartParameters chartParameters) {
-        List<ChartGridAndDescriptionGenerator.TimeStampCoord> availableTimeStamps = plotAvailableTimeStamps(chartParameters);
-        return availableTimeStamps;
-    }
 
-    private List<ChartGridAndDescriptionGenerator.TimeStampCoord> plotAvailableTimeStamps(ChartParameters chartParameters) {
-        int verticalMarginFromCenter = chartParameters.getText().getVerticalMarginFromCenter();
-        int textElementSize = verticalMarginFromCenter*2;
-
+        int textElementWidth = getTextElementWidth(chartParameters);
         int width = chartParameters.getChartBox().getWidth();
 
         List<DataPointDto> dataPointDtoList = chartParameters.getUniversal().getCurrencyOverviewDto().getDataPoints();
@@ -33,20 +25,25 @@ public class VisibleTimeStampsFilter {
         double step = ((double) dataPointDtoList.size()) / width;
 
         int cursor = 0;
-        List<ChartGridAndDescriptionGenerator.TimeStampCoord> chartGridAndDescriptionGenerators = new ArrayList<>();
+        List<ChartGridAndDescriptionGenerator.TimeStampCoord> availableTimeStamps = new ArrayList<>();
         for(int i=0; i<dataPointDtoList.size(); i++) {
             int x = (int) (i * step);
-            int availablePosition = cursor + textElementSize;
-            if (x > availablePosition && checkIfSpaceAvailable(x,width,textElementSize)) {
+            int availablePosition = cursor + textElementWidth;
+            if (x > availablePosition && checkIfSpaceAvailable(x,width,textElementWidth)) {
                 cursor = availablePosition;
                 LocalDateTime timeStamp = dataPointDtoList.get(i).getTimeStamp();
-                chartGridAndDescriptionGenerators.add(new ChartGridAndDescriptionGenerator.TimeStampCoord(x, timeStamp, i));
+                availableTimeStamps.add(new ChartGridAndDescriptionGenerator.TimeStampCoord(x, timeStamp, i));
             }
         }
-        return chartGridAndDescriptionGenerators;
+        return availableTimeStamps;
     }
 
-    private boolean checkIfSpaceAvailable(int x, int width, int textElementsSize) {
-        return x - textElementsSize - width > 0;
+    private int getTextElementWidth(ChartParameters chartParameters){
+        int horizontalMarginFromCenter = chartParameters.getText().getHorizontalMarginFromCenter();
+        return horizontalMarginFromCenter*2;
+    }
+
+    private boolean checkIfSpaceAvailable(int x, int width, int textElementsWidth) {
+        return x - textElementsWidth - width > 0;
     }
 }

@@ -1,4 +1,4 @@
-package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescriptionGeneratorUtilities;
+package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescriptionGeneratorUtilities.timeStampDescriptionGeneratorUtilities;
 
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartGridAndDescriptionGenerator;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
@@ -25,13 +25,16 @@ public class TimeStampTextEditorEngine {
 
     private List<String> filterContentBasedOnViewTimeFrameRules(List<ChartGridAndDescriptionGenerator.TimeStampCoord> timeStampCoord,
                                                                 ViewTimeFrame viewTimeFrame) {
+        List<String> contentFiltered = new ArrayList<>();
+
         switch(viewTimeFrame){
-            case D1: return hoursOnly(timeStampCoord);
+            case D1: contentFiltered = hoursOnly(timeStampCoord);
             case W1:
-            case M1: return monthAndDayNumber(timeStampCoord);
-            case Y1: return yearNumberAndMonth(timeStampCoord);
-            case MAX: return year(timeStampCoord);
+            case M1: contentFiltered = monthAndDayNumber(timeStampCoord);
+            case Y1: contentFiltered = yearNumberAndMonth(timeStampCoord);
+            case MAX: contentFiltered = year(timeStampCoord);
         }
+        return contentFiltered;
     }
 
     private List<String> hoursOnly(List<ChartGridAndDescriptionGenerator.TimeStampCoord> timeStampCoords) {
@@ -71,13 +74,11 @@ public class TimeStampTextEditorEngine {
         return content;
     }
 
-    private List<Text> addContentAndParametersToText(List<Text> timeStampDescriptionPositioned, ChartParameters chartParameters,
-                                                     List<String> content) {
+    private List<Text> addContentAndParametersToText(List<Text> timeStampDescriptionPositioned, List<String> content,
+                                                     ChartParameters chartParameters) {
 
         Color color = chartParameters.getText().getColor();
         int fontSize = chartParameters.getText().getFontSize();
-
-
 
         List<Text> finishedTextObjects = new ArrayList<>();
         for(int i=0;i<content.size();i++){

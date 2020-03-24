@@ -1,4 +1,4 @@
-package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescriptionGeneratorUtilities;
+package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescriptionGeneratorUtilities.timeStampDescriptionGeneratorUtilities;
 
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartGridAndDescriptionGenerator;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;

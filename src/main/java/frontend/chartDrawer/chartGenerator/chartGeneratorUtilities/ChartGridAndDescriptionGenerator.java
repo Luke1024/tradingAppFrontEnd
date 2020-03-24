@@ -1,7 +1,6 @@
 package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities;
 
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescriptionGeneratorUtilities.TimeStampDescriptionGenerator;
-import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescriptionGeneratorUtilities.TimeStampDescriptionPositioner;
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescriptionGeneratorUtilities.VisibleTimeStampsFilter;
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescriptionGeneratorUtilities.VerticalLinesGenerator;
 import frontend.chartDrawer.chartGenerator.chartParts.*;
@@ -18,31 +17,31 @@ public class ChartGridAndDescriptionGenerator {
     private ChartConfig chartConfig;
 
     private VisibleTimeStampsFilter visibleTimeStampsFilter;
-    private TimeStampDescriptionPositioner timeStampsDescriptionPositioner;
-    private VerticalLinesGenerator verticalLinesGenerator;
     private TimeStampDescriptionGenerator timeStampDescriptionGenerator;
+    private VerticalLinesGenerator verticalLinesGenerator;
+
 
     public List<ChartPart> generate(ChartParameters chartParameters) {
         List<ChartPart> chartParts = new ArrayList<>();
         chartParts.addAll(generateVerticalLinesWithTextDescription(chartParameters));
+        chartParts.addAll(generateHorizontalLinesWithTextDescription(chartParameters));
         return chartParts;
     }
 
     private List<ChartPart> generateVerticalLinesWithTextDescription(ChartParameters chartParameters) {
 
         List<ChartPart> chartParts = new ArrayList<>();
-
-
         List<TimeStampCoord> timeStampCoords = visibleTimeStampsFilter.process(chartParameters);
-
-
         chartParts.addAll(timeStampDescriptionGenerator.process(chartParameters, timeStampCoords));
-
-        List<Line> verticalLines = verticalLinesGenerator.process(chartParameters, timeStampCoords);
+        chartParts.addAll(verticalLinesGenerator.process(chartParameters, timeStampCoords));
 
         return chartParts;
     }
 
+    private List<ChartPart> generateHorizontalLinesWithTextDescription(ChartParameters chartParameters) {
+        List<ChartPart> chartParts = new ArrayList<>();
+        List<TimeStampCoord> priceCoords = visiblePriceFilter.process(chartParameters);
+    }
 
     public static class TimeStampCoord {
         private int x;
@@ -67,39 +66,4 @@ public class ChartGridAndDescriptionGenerator {
             return index;
         }
     }
-/*
-    private List<Line> generateVerticalLinesBasedOnDistance(int distanceBetweenLines, Rectangle chartBox) {
-        int startingPositionX = chartBox.getX();
-        int y1 = chartBox.getY();
-        int y2 = chartBox.getY() + chartBox.getHeight();
-
-        Color lineColor = new Color(chartConfig.getGridColorRGB());
-
-        List<Line> lines = new ArrayList<>();
-
-        for(int i=0; i<distanceBetweenLines; i++) {
-            int x = startingPositionX + (i + 1)* distanceBetweenLines;
-            lines.add(new Line(lineColor,x,y1,x,y2));
-        }
-        return lines;
-    }
-
-    private List<Integer> requestAlternativeLinePlacing(CurrencyOverviewDto currencyOverviewDto, Rectangle chartBox) {
-
-    }
-
-    private List<Line> generateVerticalLinesBasedOnListOfPositions(List<Integer> xPositions, Rectangle chartBox) {
-        int y1 = chartBox.getY();
-        int y2 = chartBox.getY() + chartBox.getHeight();
-
-        Color lineColor = new Color(chartConfig.getGridColorRGB());
-
-        List<Line> lines = new ArrayList<>();
-
-        for(Integer position : xPositions) {
-            lines.add(new Line(lineColor,position,y1,position,y2));
-        }
-        return lines;
-    }
-    */
 }
