@@ -27,13 +27,13 @@ public class ChartGenerator {
         chartParts.add(generateChartBorder(chartParameters));
         chartParts.addAll(chartLineGenerator.generate(chartParameters));
         chartParts.addAll(gridAndDescriptionGenerator.generate(chartParameters));
-        chartParts.addAll(addRetrievedTimestamp());
+        //chartParts.addAll(addRetrievedTimestamp());
 
         //reverse y coordinates
 
         List<ChartPart> partsWithReversedCoordinates = reverseCoordinates(chartParts);
 
-        return chartPartsDrawer.draw(partsWithReversedCoordinates);
+        return chartPartsDrawer.draw(partsWithReversedCoordinates, chartParameters);
     }
 
     private Rectangle generateBackGround(ChartParameters chartParameters) {

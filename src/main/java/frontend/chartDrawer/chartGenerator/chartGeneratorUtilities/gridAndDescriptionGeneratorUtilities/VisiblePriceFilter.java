@@ -1,11 +1,7 @@
 package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescriptionGeneratorUtilities;
 
-import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartGridAndDescriptionGenerator;
-import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
 import frontend.config.ChartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 public class VisiblePriceFilter {
 
@@ -14,7 +10,7 @@ public class VisiblePriceFilter {
 
     private static final int minimalNumberOfPricePoints = 3;
     private static final double legendHeightRange = 0.6; //0.6 means 60%
-
+/*
     public List<ChartGridAndDescriptionGenerator.TimeStampCoord> process(ChartParameters chartParameters) {
 
         int textElementHeight = getTextElementHeight(chartParameters);
@@ -52,4 +48,5 @@ public class VisiblePriceFilter {
         int chartBoxHeight = chartParameters.getChartBox().getHeight();
         int textFieldHeight
     }
+    */
 }

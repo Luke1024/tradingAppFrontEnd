@@ -77,10 +77,11 @@ public class ChartLineGenerator {
         double step = chartParameters.getChartBox().getStepPix();
 
         Color color = new Color(chartConfig.getLineColorRGB());
+        int thickness = chartParameters.getLine().getThickness();
         List<Line> lines = new ArrayList<>();
 
         for(int i=0; i<valuesScaledToPixels.size()-1; i++){
-            lines.add(new Line(color,(int) step*i, valuesScaledToPixels.get(i), (int) step*(i+1),
+            lines.add(new Line(color,thickness,(int) step*i, valuesScaledToPixels.get(i), (int) step*(i+1),
                     valuesScaledToPixels.get(i+1)));
         }
         return lines;

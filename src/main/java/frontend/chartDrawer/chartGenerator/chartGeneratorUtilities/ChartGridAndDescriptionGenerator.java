@@ -20,7 +20,6 @@ public class ChartGridAndDescriptionGenerator {
     private TimeStampDescriptionGenerator timeStampDescriptionGenerator;
     private VerticalLinesGenerator verticalLinesGenerator;
 
-
     public List<ChartPart> generate(ChartParameters chartParameters) {
         List<ChartPart> chartParts = new ArrayList<>();
         chartParts.addAll(generateVerticalLinesWithTextDescription(chartParameters));
@@ -40,7 +39,8 @@ public class ChartGridAndDescriptionGenerator {
 
     private List<ChartPart> generateHorizontalLinesWithTextDescription(ChartParameters chartParameters) {
         List<ChartPart> chartParts = new ArrayList<>();
-        List<TimeStampCoord> priceCoords = visiblePriceFilter.process(chartParameters);
+        //List<TimeStampCoord> priceCoords = visiblePriceFilter.process(chartParameters);
+        return chartParts;
     }
 
     public static class TimeStampCoord {
