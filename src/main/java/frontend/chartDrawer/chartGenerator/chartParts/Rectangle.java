@@ -2,6 +2,7 @@ package frontend.chartDrawer.chartGenerator.chartParts;
 
 public class Rectangle extends ChartPart {
     private Color color;
+    private double thickness;
     private Color fillColor;
     private boolean fill;
     private int x;
@@ -9,8 +10,10 @@ public class Rectangle extends ChartPart {
     private int width;
     private int height;
 
-    public Rectangle(Color color, Color fillColor, boolean fill, int x, int y, int width, int height) {
+    public Rectangle(Color color, double thickness, Color fillColor,
+                     boolean fill, int x, int y, int width, int height) {
         this.color = color;
+        this.thickness = thickness;
         this.fillColor = fillColor;
         this.fill = fill;
         this.x = x;
@@ -21,6 +24,10 @@ public class Rectangle extends ChartPart {
 
     public Color getColor() {
         return color;
+    }
+
+    public double getThickness() {
+        return thickness;
     }
 
     public Color getFillColor() {

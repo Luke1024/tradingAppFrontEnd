@@ -6,9 +6,12 @@ import frontend.chartDrawer.chartGenerator.chartParts.*;
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartGridAndDescriptionGenerator;
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartLineGenerator;
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartPartsDrawer;
+import frontend.chartDrawer.chartGenerator.chartParts.Color;
+import frontend.chartDrawer.chartGenerator.chartParts.Rectangle;
 import frontend.client.dto.CurrencyOverviewDto;
 
 import java.util.*;
+import java.util.List;
 
 public class ChartGenerator {
 
@@ -39,7 +42,7 @@ public class ChartGenerator {
     private Rectangle generateBackGround(ChartParameters chartParameters) {
         Color backGroundColor = chartParameters.getBackGround().getColor();
 
-        Rectangle rectangle = new Rectangle(backGroundColor, backGroundColor, true,
+        Rectangle rectangle = new Rectangle(backGroundColor,2,backGroundColor, true,
                 0,0, chartParameters.getUniversal().getWidth(), chartParameters.getUniversal().getWidth());
         return rectangle;
     }
@@ -51,7 +54,8 @@ public class ChartGenerator {
         int height = chartParameters.getChartBox().getHeight();
 
         Color borderColor = chartParameters.getChartBox().getColor();
+        int thickness = chartParameters.getChartBox().getThickness();
 
-        return new Rectangle(borderColor, borderColor, false, x,y,width,height);
+        return new Rectangle(borderColor,thickness,borderColor,false, x,y,width,height);
     }
 }

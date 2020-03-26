@@ -32,13 +32,13 @@ public class ChartPartsDrawer {
         BufferedImage image = new BufferedImage (imageWidth, imageHeight,
                 BufferedImage.TYPE_INT_RGB);
         Graphics2D scene = image.createGraphics();
+        scene.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         scene.setColor(imageBackGroundColor);
 
         for(ChartPart chartPart : chartPartsToDraw) {
-            scene.draw(objectMapperToAwt(chartPart));
+            drawerExecutor(chartPart,scene);
         }
-
         try{
             imagebuffer = new ByteArrayOutputStream();
             ImageIO.write(image, "png", imagebuffer);
@@ -49,26 +49,69 @@ public class ChartPartsDrawer {
         return  new Image(resource, "scene");
     }
 
-    private Shape objectMapperToAwt(ChartPart chartPart) {
+    private Graphics2D drawerExecutor(ChartPart chartPart, Graphics2D scene) {
 
-        Shape emptyShape = new Rectangle();
+        if(chartPart instanceof Line) drawLine(chartPart,scene);
+        if(chartPart instanceof frontend.chartDrawer.chartGenerator.chartParts.Rectangle) drawRectangle(chartPart,scene);
+        if(chartPart instanceof Text) drawText(chartPart,scene);
 
-        if(chartPart instanceof Line) emptyShape = convertLineToAwt(chartPart);
-        if(chartPart instanceof frontend.chartDrawer.chartGenerator.chartParts.Rectangle) emptyShape = convertRectangleToAwt(chartPart);
-        if(chartPart instanceof Text) emptyShape = convertTextToAwt(chartPart);
-
-        return emptyShape;
+        return scene;
     }
 
-    private Shape convertLineToAwt(ChartPart chartPart) {
+    private Graphics2D drawLine(ChartPart chartPart, Graphics2D scene) {
         Line line = (Line) chartPart;
         double x1 = line.getX1();
         double y1 = line.getY1();
         double x2 = line.getX2();
         double y2 = line.getY2();
+        Color color = colorMapper.mapToAwtColor(line.getColor());
+        float thickness = line.getThickness();
 
-        Line2D convertedLine = new Line2D.Double(x1,y1,x2,y2);
-        convertedLine.
-        return new ;
+        scene.setPaint(color);
+        scene.setStroke(new BasicStroke(thickness));
+        scene.draw(new Line2D.Double(x1,y1,x2,y2));
+        return scene;
+    }
+
+    private Graphics2D drawRectangle(ChartPart chartPart, Graphics2D scene) {
+        frontend.chartDrawer.chartGenerator.chartParts.Rectangle rectangle =
+                (frontend.chartDrawer.chartGenerator.chartParts.Rectangle) chartPart;
+
+        int x = rectangle.getX();
+        int y = rectangle.getY();
+        int width = rectangle.getWidth();
+        int height = rectangle.getHeight();
+        Color color = colorMapper.mapToAwtColor(rectangle.getColor());
+        float thickness = (float) rectangle.getThickness();
+        boolean fill = rectangle.isFill();
+        Color fillColor = colorMapper.mapToAwtColor(rectangle.getFillColor());
+
+
+        scene.setPaint(color);
+        scene.setStroke(new BasicStroke(thickness));
+        scene.draw(new Rectangle(x,y,width,height));
+
+        if(fill){
+            scene.setPaint(fillColor);
+            scene.fill(new Rectangle.Double(x - (thickness / 2),y-thickness/2,
+                    width-thickness,height-thickness));
+        }
+        return scene;
+    }
+
+    private Graphics2D drawText(ChartPart chartPart, Graphics2D scene){
+        Text text = (Text) chartPart;
+
+        Color textColor = colorMapper.mapToAwtColor(text.getColor());
+        int x = text.getX();
+        int y = text.getY();
+        int fontSize = text.getFontSize();
+        String content = text.getContent();
+
+        scene.setPaint(textColor);
+        scene.setFont(new Font("",Font.PLAIN, fontSize));
+        scene.drawString(content,x,y);
+
+        return scene;
     }
 }
