@@ -1,11 +1,8 @@
 package frontend.chartDrawer.chartGenerator;
 
 import com.vaadin.flow.component.html.Image;
-import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartParametersProcessor;
+import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.*;
 import frontend.chartDrawer.chartGenerator.chartParts.*;
-import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartGridAndDescriptionGenerator;
-import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartLineGenerator;
-import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartPartsDrawer;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;
 import frontend.chartDrawer.chartGenerator.chartParts.Rectangle;
 import frontend.client.dto.CurrencyOverviewDto;
@@ -19,6 +16,7 @@ public class ChartGenerator {
     private ChartLineGenerator chartLineGenerator = new ChartLineGenerator();
     private ChartParametersProcessor chartParametersProcessor = new ChartParametersProcessor();
     private ChartPartsDrawer chartPartsDrawer = new ChartPartsDrawer();
+    private CoordinateReverser coordinateReverser = new CoordinateReverser();
 
     public Image generateChart(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame) {
         List<ChartPart> chartParts = new ArrayList<>();
@@ -34,7 +32,7 @@ public class ChartGenerator {
 
         //reverse y coordinates
 
-        List<ChartPart> partsWithReversedCoordinates = reverseCoordinates(chartParts);
+        List<ChartPart> partsWithReversedCoordinates = coordinateReverser.reverse(chartParts, chartParameters);
 
         return chartPartsDrawer.draw(partsWithReversedCoordinates, chartParameters);
     }
