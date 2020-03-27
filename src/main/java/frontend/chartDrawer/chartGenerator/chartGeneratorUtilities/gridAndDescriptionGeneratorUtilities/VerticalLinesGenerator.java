@@ -4,10 +4,12 @@ import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartGridAndD
 import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;
 import frontend.chartDrawer.chartGenerator.chartParts.Line;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class VerticalLinesGenerator {
     private int chartBoxX;
     private int chartBoxY;

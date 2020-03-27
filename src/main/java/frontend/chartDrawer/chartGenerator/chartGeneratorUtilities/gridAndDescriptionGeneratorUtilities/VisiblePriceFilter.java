@@ -2,7 +2,9 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescr
 
 import frontend.config.ChartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class VisiblePriceFilter {
 
     @Autowired

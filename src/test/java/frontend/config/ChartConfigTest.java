@@ -1,6 +1,5 @@
 package frontend.config;
 
-import frontend.chartDrawer.utilities.processor.utilities.containerParts.Color;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,7 +37,6 @@ public class ChartConfigTest {
 
     @Test
     public void getFrameColorRGB() {
-        Assert.assertEquals(new Color(0,0,0), (new Color(chartConfig.getBorderColorRGB())));
     }
 
     @Test

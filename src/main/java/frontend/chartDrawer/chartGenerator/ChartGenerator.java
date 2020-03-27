@@ -6,17 +6,25 @@ import frontend.chartDrawer.chartGenerator.chartParts.*;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;
 import frontend.chartDrawer.chartGenerator.chartParts.Rectangle;
 import frontend.client.dto.CurrencyOverviewDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.List;
 
+@Service
 public class ChartGenerator {
 
-    private ChartGridAndDescriptionGenerator gridAndDescriptionGenerator = new ChartGridAndDescriptionGenerator();
-    private ChartLineGenerator chartLineGenerator = new ChartLineGenerator();
-    private ChartParametersProcessor chartParametersProcessor = new ChartParametersProcessor();
-    private ChartPartsDrawer chartPartsDrawer = new ChartPartsDrawer();
-    private CoordinateReverser coordinateReverser = new CoordinateReverser();
+    @Autowired
+    private ChartGridAndDescriptionGenerator gridAndDescriptionGenerator;
+    @Autowired
+    private ChartLineGenerator chartLineGenerator;
+    @Autowired
+    private ChartParametersProcessor chartParametersProcessor;
+    @Autowired
+    private ChartPartsDrawer chartPartsDrawer;
+    @Autowired
+    private CoordinateReverser coordinateReverser;
 
     public Image generateChart(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame) {
         List<ChartPart> chartParts = new ArrayList<>();

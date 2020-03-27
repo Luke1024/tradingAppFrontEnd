@@ -13,7 +13,6 @@ import java.io.IOException;
 public class MainView extends VerticalLayout {
     private Button logIn = new Button("Log In");
     private Button signIn = new Button("Sign In");
-    private ChartPipeline chartPipeline = new ChartPipeline();
     private BackEndClient backEndClient = new BackEndClient();
     private int zoom = 0;
 

@@ -5,9 +5,10 @@ import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescri
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescriptionGeneratorUtilities.timeStampDescriptionGeneratorUtilities.TimeStampTextEditorEngine;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
 import frontend.chartDrawer.chartGenerator.chartParts.Text;
-
+import org.springframework.stereotype.Service;
 import java.util.List;
 
+@Service
 public class TimeStampDescriptionGenerator {
 
     private TimeStampDescriptionPositioner timeStampDescriptionPositioner;

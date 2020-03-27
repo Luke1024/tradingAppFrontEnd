@@ -41,7 +41,6 @@ public class Text extends ChartPart {
         this.content = content;
     }
 
-
     public Color getColor() {
         return color;
     }

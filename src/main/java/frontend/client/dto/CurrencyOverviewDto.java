@@ -8,6 +8,9 @@ public class CurrencyOverviewDto {
     private LocalDateTime lastRetrieved;
     private List<DataPointDto> dataPoints;
 
+    public CurrencyOverviewDto() {
+    }
+
     public CurrencyOverviewDto(String currencyName, LocalDateTime lastRetrieved, List<DataPointDto> dataPoints) {
         this.currencyName = currencyName;
         this.lastRetrieved = lastRetrieved;

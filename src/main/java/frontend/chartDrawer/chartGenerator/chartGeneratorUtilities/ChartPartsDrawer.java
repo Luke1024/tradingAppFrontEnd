@@ -7,6 +7,8 @@ import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartPart;
 import frontend.chartDrawer.chartGenerator.chartParts.Line;
 import frontend.chartDrawer.chartGenerator.chartParts.Text;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -17,10 +19,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+@Service
 public class ChartPartsDrawer {
     ByteArrayOutputStream imagebuffer = null;
 
-    private ColorMapper colorMapper = new ColorMapper();
+    @Autowired
+    private ColorMapper colorMapper;
 
     public Image draw (List<ChartPart> chartPartsToDraw, ChartParameters chartParameters) {
         int imageWidth = chartParameters.getUniversal().getWidth();

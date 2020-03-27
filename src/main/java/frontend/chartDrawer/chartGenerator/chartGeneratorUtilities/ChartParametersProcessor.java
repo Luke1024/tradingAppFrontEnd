@@ -6,7 +6,9 @@ import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
 import frontend.client.dto.CurrencyOverviewDto;
 import frontend.config.ChartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ChartParametersProcessor {
 
     @Autowired
@@ -25,7 +27,6 @@ public class ChartParametersProcessor {
 
     private ChartParameters.Universal processUniversalParameters(
             CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame timeFrame) {
-
         int chartWidth = chartConfig.getChartWidth();
         int chartHeight = chartConfig.getChartHeight();
 
@@ -33,6 +34,7 @@ public class ChartParametersProcessor {
     }
 
     private ChartParameters.BackGround processBackgroundParameters() {
+        System.out.println(chartConfig.getBackGroundColor());
         return new ChartParameters.BackGround(new Color(chartConfig.getBackGroundColor()));
     }
 
