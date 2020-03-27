@@ -34,26 +34,29 @@ public class ChartParametersProcessor {
     }
 
     private ChartParameters.BackGround processBackgroundParameters() {
-        System.out.println(chartConfig.getBackGroundColor());
         return new ChartParameters.BackGround(new Color(chartConfig.getBackGroundColor()));
     }
 
     private ChartParameters.ChartBox processChartBoxParameters(CurrencyOverviewDto currencyOverviewDto) {
-        int fontSize = chartConfig.getFontSize();
-        int marginRight = (int) (fontSize * chartConfig.getFontSizeRightMarginMultiplier());
-        int marginBottom = (int) (fontSize * chartConfig.getFontSizeBottomMarginMultiplier());
-        int marginLeft = chartConfig.getFrameLeftMarginPix();
-        int marginTop = chartConfig.getFrameTopMarginPix();
+        if(currencyOverviewDto.getDataPoints() != null) {
+            int fontSize = chartConfig.getFontSize();
+            int marginRight = (int) (fontSize * chartConfig.getFontSizeRightMarginMultiplier());
+            int marginBottom = (int) (fontSize * chartConfig.getFontSizeBottomMarginMultiplier());
+            int marginLeft = chartConfig.getFrameLeftMarginPix();
+            int marginTop = chartConfig.getFrameTopMarginPix();
 
-        int x = marginLeft;
-        int y = marginTop;
-        int width = chartConfig.getChartWidth() - marginLeft - marginRight;
-        int height = chartConfig.getChartHeight() - marginTop - marginBottom;
-        Color color = new Color(chartConfig.getBorderColorRGB());
-        int thickness = chartConfig.getFrameThicknessInPix();
-        double step = ((double) (width))/currencyOverviewDto.getDataPoints().size();
-
-        return new ChartParameters.ChartBox(x,y,width,height,step,color,thickness);
+            int x = marginLeft;
+            int y = marginTop;
+            int width = chartConfig.getChartWidth() - marginLeft - marginRight;
+            int height = chartConfig.getChartHeight() - marginTop - marginBottom;
+            Color color = new Color(chartConfig.getBorderColorRGB());
+            int thickness = chartConfig.getFrameThicknessInPix();
+            double step = ((double) (width))/currencyOverviewDto.getDataPoints().size();
+            return new ChartParameters.ChartBox(x,y,width,height,step,color,thickness);
+        } else {
+            return new ChartParameters.ChartBox(0,0,0,0,
+                    0,new Color(0,0,0),0);
+        }
     }
 
     private ChartParameters.Line processLineParameters() {

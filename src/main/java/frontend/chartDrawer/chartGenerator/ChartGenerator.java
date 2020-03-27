@@ -16,6 +16,8 @@ import java.util.List;
 public class ChartGenerator {
 
     @Autowired
+    private IncomingObjectTester incomingObjectTester;
+    @Autowired
     private ChartGridAndDescriptionGenerator gridAndDescriptionGenerator;
     @Autowired
     private ChartLineGenerator chartLineGenerator;
@@ -27,9 +29,19 @@ public class ChartGenerator {
     private CoordinateReverser coordinateReverser;
 
     public Image generateChart(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame) {
-        List<ChartPart> chartParts = new ArrayList<>();
+
+        if (incomingObjectTester.test(currencyOverviewDto, viewTimeFrame)) {
+            return executeChartGeneration(currencyOverviewDto, viewTimeFrame);
+        } else {
+            return new Image();
+        }
+    }
+
+    private Image executeChartGeneration(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame) {
 
         ChartParameters chartParameters = chartParametersProcessor.process(currencyOverviewDto, viewTimeFrame);
+
+        List<ChartPart> chartParts = new ArrayList<>();
 
         //all parts are positioned based on typical coordinate system, y coordinates need to reverse when drawing in awt
         chartParts.add(generateBackGround(chartParameters));

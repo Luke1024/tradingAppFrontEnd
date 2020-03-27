@@ -17,7 +17,7 @@ public class ChartGeneratorTest {
     private ChartGenerator chartGenerator;
 
     @Test
-    public void generateChart() {
+    public void textChartGeneratorWhenCurrencyOverviewDtoNull() {
         CurrencyOverviewDto currencyOverviewDto = new CurrencyOverviewDto();
 
         Image image = chartGenerator.generateChart(currencyOverviewDto, ViewTimeFrame.D1);
