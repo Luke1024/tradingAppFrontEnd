@@ -4,10 +4,12 @@ import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartGridAndD
 import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;
 import frontend.chartDrawer.chartGenerator.chartParts.Text;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class TimeStampDescriptionPositioner {
     private int chartBoxX;
     private int chartBoxY;

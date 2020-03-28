@@ -21,6 +21,8 @@ public class IncomingObjectTesterTest {
     @Autowired
     private IncomingObjectTester incomingObjectTester;
 
+
+
     private DataPointDto dataPointDtoCorrect = new DataPointDto(LocalDateTime.now(), 0.23);
     private DataPointDto dataPointDtoMissingFirstValue = new DataPointDto(null, 0.1253);
 

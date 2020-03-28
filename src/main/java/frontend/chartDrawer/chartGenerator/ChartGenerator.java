@@ -11,9 +11,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 public class ChartGenerator {
+
+    private Logger logger = Logger.getLogger(ChartGenerator.class.getName());
 
     @Autowired
     private IncomingObjectTester incomingObjectTester;
@@ -33,6 +37,7 @@ public class ChartGenerator {
         if (incomingObjectTester.isObjectsCorrect(currencyOverviewDto, viewTimeFrame)) {
             return executeChartGeneration(currencyOverviewDto, viewTimeFrame);
         } else {
+            logger.log(Level.WARNING, "Objects are not properly initialized.");
             return new Image();
         }
     }

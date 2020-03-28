@@ -21,12 +21,14 @@ import java.util.List;
 
 @Service
 public class ChartPartsDrawer {
-    ByteArrayOutputStream imagebuffer = null;
+    private ByteArrayOutputStream imagebuffer = null;
+    int reloads = 0;
 
     @Autowired
     private ColorMapper colorMapper;
 
     public Image draw (List<ChartPart> chartPartsToDraw, ChartParameters chartParameters) {
+
         int imageWidth = chartParameters.getUniversal().getWidth();
         int imageHeight = chartParameters.getUniversal().getHeight();
         frontend.chartDrawer.chartGenerator.chartParts.Color backgroudColor = chartParameters.getBackGround().getColor();
@@ -36,7 +38,7 @@ public class ChartPartsDrawer {
         BufferedImage image = new BufferedImage (imageWidth, imageHeight,
                 BufferedImage.TYPE_INT_RGB);
         Graphics2D scene = image.createGraphics();
-        scene.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        //scene.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         scene.setColor(imageBackGroundColor);
 
@@ -49,13 +51,16 @@ public class ChartPartsDrawer {
         } catch (IOException e) {
             return null;
         }
+
         StreamResource resource = new StreamResource("image",() -> new ByteArrayInputStream(imagebuffer.toByteArray()));
-        return  new Image(resource, "scene");
+        Image retrievedImage = new Image(resource,"chart");
+
+        return retrievedImage;
     }
 
     private Graphics2D drawerExecutor(ChartPart chartPart, Graphics2D scene) {
 
-        if(chartPart instanceof Line) drawLine(chartPart,scene);
+        if(chartPart instanceof Line) drawLine(chartPart, scene);
         if(chartPart instanceof frontend.chartDrawer.chartGenerator.chartParts.Rectangle) drawRectangle(chartPart,scene);
         if(chartPart instanceof Text) drawText(chartPart,scene);
 

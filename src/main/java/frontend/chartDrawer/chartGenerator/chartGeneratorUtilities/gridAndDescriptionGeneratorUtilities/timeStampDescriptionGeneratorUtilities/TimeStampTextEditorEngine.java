@@ -5,10 +5,12 @@ import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;
 import frontend.chartDrawer.chartGenerator.chartParts.Text;
 import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class TimeStampTextEditorEngine {
     private final static double charWidthInPixFontSizeMultiplier = 1;
     private final static double charHeightInPixFontSizeMultiplier = 1.5;
