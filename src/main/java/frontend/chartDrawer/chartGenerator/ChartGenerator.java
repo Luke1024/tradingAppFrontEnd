@@ -43,11 +43,15 @@ public class ChartGenerator {
     }
 
     private Image executeChartGeneration(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame) {
-
         ChartParameters chartParameters = chartParametersProcessor.process(currencyOverviewDto, viewTimeFrame);
 
-        List<ChartPart> chartParts = new ArrayList<>();
+        List<ChartPart> parts = generateParts(chartParameters);
+        return drawParts(parts, chartParameters);
+    }
 
+    private List<ChartPart> generateParts(ChartParameters chartParameters) {
+
+        List<ChartPart> chartParts = new ArrayList<>();
         //all parts are positioned based on typical coordinate system, y coordinates need to reverse when drawing in awt
         chartParts.add(generateBackGround(chartParameters));
         chartParts.add(generateChartBorder(chartParameters));
@@ -56,10 +60,11 @@ public class ChartGenerator {
         //chartParts.addAll(addRetrievedTimestamp());
 
         //reverse y coordinates
+        return coordinateReverser.reverse(chartParts, chartParameters);
+    }
 
-        List<ChartPart> partsWithReversedCoordinates = coordinateReverser.reverse(chartParts, chartParameters);
-
-        return chartPartsDrawer.draw(partsWithReversedCoordinates, chartParameters);
+    private Image drawParts(List<ChartPart> parts, ChartParameters chartParameters) {
+        return chartPartsDrawer.draw(parts, chartParameters);
     }
 
     private Rectangle generateBackGround(ChartParameters chartParameters) {

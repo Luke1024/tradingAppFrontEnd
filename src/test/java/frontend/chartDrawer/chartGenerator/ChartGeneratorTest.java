@@ -1,6 +1,7 @@
 package frontend.chartDrawer.chartGenerator;
 
 import com.vaadin.flow.component.html.Image;
+import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartVisualizer.Visualizer;
 import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
 import frontend.client.dto.CurrencyOverviewDto;
 import frontend.client.dto.DataPointDto;
@@ -13,10 +14,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ChartGeneratorTest {
+
+    @Autowired
+    private Visualizer visualizer;
 
     @Autowired
     private ChartGenerator chartGenerator;
@@ -33,5 +38,18 @@ public class ChartGeneratorTest {
         CurrencyOverviewDto currencyOverviewDto = new CurrencyOverviewDto();
 
         Image image = chartGenerator.generateChart(currencyOverviewDtoCorrect, ViewTimeFrame.D1);
+    }
+
+    @Test
+    public void generateChart() {
+
+        Random random = new Random();
+        random.nextDouble();
+
+
+
+
+
+        CurrencyOverviewDto currencyOverviewDto = new CurrencyOverviewDto();
     }
 }
