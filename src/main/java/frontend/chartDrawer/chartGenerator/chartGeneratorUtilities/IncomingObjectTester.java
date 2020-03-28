@@ -3,17 +3,20 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities;
 import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
 import frontend.client.dto.CurrencyOverviewDto;
 import frontend.client.dto.DataPointDto;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class IncomingObjectTester {
-    public boolean test(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame) {
+
+    public boolean isObjectsCorrect(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame) {
         boolean isAnyObjectNull = checkIfAnyObjectIsNull(currencyOverviewDto, viewTimeFrame);
         boolean completeObjectIsCorrect;
         if(isAnyObjectNull) {
-            return false;
+            completeObjectIsCorrect = false;
         } else {
-            completeObjectIsCorrect = isObjectCorrect(currencyOverviewDto, viewTimeFrame);
+            completeObjectIsCorrect = isObjectFullyInitialized(currencyOverviewDto, viewTimeFrame);
         }
         return completeObjectIsCorrect;
     }
@@ -23,23 +26,23 @@ public class IncomingObjectTester {
         else return false;
     }
 
-    private boolean isObjectCorrect(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame) {
-        boolean isOverviewFalse = isCurrencyOverviewDtoFalse(currencyOverviewDto);
-        boolean isViewFalse = isViewFalse(viewTimeFrame);
+    private boolean isObjectFullyInitialized(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame) {
+        boolean isCurrencyOverviewDtoMissingSomething = isCurrencyOverviewDtoMissingSomething(currencyOverviewDto);
+        boolean isViewNull = isViewFalse(viewTimeFrame);
 
-        if(isOverviewFalse || isViewFalse){
+        if(isCurrencyOverviewDtoMissingSomething || isViewNull){
             return false;
         } else {
             return true;
         }
     }
 
-    private boolean isCurrencyOverviewDtoFalse(CurrencyOverviewDto currencyOverviewDto) {
+    private boolean isCurrencyOverviewDtoMissingSomething(CurrencyOverviewDto currencyOverviewDto) {
         if(currencyOverviewDto.getCurrencyName() == null ||
         currencyOverviewDto.getLastRetrieved() == null ||
         currencyOverviewDto.getDataPoints() == null ||
         currencyOverviewDto.getDataPoints().isEmpty() ||
-        isAnyDataPointDtoFalse(currencyOverviewDto)) {
+        isAnyDataPointDtoMissingSomething(currencyOverviewDto)) {
             return true;
         } else return false;
     }
@@ -49,18 +52,24 @@ public class IncomingObjectTester {
         else return false;
     }
 
-    private boolean isAnyDataPointDtoFalse(CurrencyOverviewDto currencyOverviewDto) {
+    private boolean isAnyDataPointDtoMissingSomething(CurrencyOverviewDto currencyOverviewDto) {
         List<DataPointDto> dataPointDtoList = currencyOverviewDto.getDataPoints();
-        boolean isFalse = false;
+        boolean missing = false;
 
-        for(DataPointDto dataPointDto : dataPointDtoList) {
-            isFalse = isSingleDataPointDtoFalse(dataPointDto);
+        if(dataPointDtoList == null){
+            missing = true;
+        } else {
+            for (DataPointDto dataPointDto : dataPointDtoList) {
+                if (isDataPointMissingSomething(dataPointDto)) {
+                    missing = true;
+                }
+            }
         }
-        return isFalse;
+        return missing;
     }
 
-    private boolean isSingleDataPointDtoFalse(DataPointDto dataPointDto) {
-        if(dataPointDto.getTimeStamp() != null) return true;
+    private boolean isDataPointMissingSomething(DataPointDto dataPointDto) {
+        if(dataPointDto.getTimeStamp() == null) return true;
         else return false;
     }
 }

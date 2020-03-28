@@ -30,7 +30,7 @@ public class ChartGenerator {
 
     public Image generateChart(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame) {
 
-        if (incomingObjectTester.test(currencyOverviewDto, viewTimeFrame)) {
+        if (incomingObjectTester.isObjectsCorrect(currencyOverviewDto, viewTimeFrame)) {
             return executeChartGeneration(currencyOverviewDto, viewTimeFrame);
         } else {
             return new Image();
