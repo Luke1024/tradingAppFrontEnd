@@ -8,49 +8,58 @@ import java.util.List;
 
 public class IncomingObjectTester {
     public boolean test(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame) {
-        boolean objectsNull = isObjectsNull(currencyOverviewDto, viewTimeFrame);
-        boolean subobjectsIsNull;
-        if( ! objectsNull) {
-            subobjectsIsNull = isObjectCorrect(currencyOverviewDto, viewTimeFrame);
+        boolean isAnyObjectNull = checkIfAnyObjectIsNull(currencyOverviewDto, viewTimeFrame);
+        boolean completeObjectIsCorrect;
+        if(isAnyObjectNull) {
+            return false;
+        } else {
+            completeObjectIsCorrect = isObjectCorrect(currencyOverviewDto, viewTimeFrame);
         }
+        return completeObjectIsCorrect;
     }
 
-    private boolean isObjectsNull(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame) {
+    private boolean checkIfAnyObjectIsNull(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame) {
         if(currencyOverviewDto == null || viewTimeFrame == null) return true;
         else return false;
     }
 
     private boolean isObjectCorrect(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame) {
-        boolean currencySubObjNull = isDataPointDtosCorrect(currencyOverviewDto);
-        boolean viewNull = isViewCorrect(viewTimeFrame);
+        boolean isOverviewFalse = isCurrencyOverviewDtoFalse(currencyOverviewDto);
+        boolean isViewFalse = isViewFalse(viewTimeFrame);
+
+        if(isOverviewFalse || isViewFalse){
+            return false;
+        } else {
+            return true;
+        }
     }
 
-    private boolean isDataPointDtosCorrect(CurrencyOverviewDto currencyOverviewDto) {
+    private boolean isCurrencyOverviewDtoFalse(CurrencyOverviewDto currencyOverviewDto) {
         if(currencyOverviewDto.getCurrencyName() == null ||
         currencyOverviewDto.getLastRetrieved() == null ||
         currencyOverviewDto.getDataPoints() == null ||
         currencyOverviewDto.getDataPoints().isEmpty() ||
-        isDataPointDtosCorrect(currencyOverviewDto)) {
+        isAnyDataPointDtoFalse(currencyOverviewDto)) {
             return true;
         } else return false;
     }
 
-    private boolean isViewCorrect(ViewTimeFrame viewTimeFrame){
+    private boolean isViewFalse(ViewTimeFrame viewTimeFrame){
         if(viewTimeFrame == null) return true;
         else return false;
     }
 
-    private boolean isAnyDataPointDtoEmptyOrNull(CurrencyOverviewDto currencyOverviewDto) {
+    private boolean isAnyDataPointDtoFalse(CurrencyOverviewDto currencyOverviewDto) {
         List<DataPointDto> dataPointDtoList = currencyOverviewDto.getDataPoints();
-        boolean isCorrect = true;
+        boolean isFalse = false;
 
         for(DataPointDto dataPointDto : dataPointDtoList) {
-            isCorrect = isSingleDataPointDtoCorrect(dataPointDto);
+            isFalse = isSingleDataPointDtoFalse(dataPointDto);
         }
-        return isCorrect;
+        return isFalse;
     }
 
-    private boolean isSingleDataPointDtoCorrect(DataPointDto dataPointDto) {
+    private boolean isSingleDataPointDtoFalse(DataPointDto dataPointDto) {
         if(dataPointDto.getTimeStamp() != null) return true;
         else return false;
     }
