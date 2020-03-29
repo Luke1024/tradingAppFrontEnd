@@ -2,6 +2,7 @@ package frontend.chartDrawer.chartGenerator;
 
 import com.vaadin.flow.component.html.Image;
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.*;
+import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartVisualizer.Visualizer;
 import frontend.chartDrawer.chartGenerator.chartParts.*;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;
 import frontend.chartDrawer.chartGenerator.chartParts.Rectangle;
@@ -31,6 +32,7 @@ public class ChartGenerator {
     private ChartPartsDrawer chartPartsDrawer;
     @Autowired
     private CoordinateReverser coordinateReverser;
+    private Visualizer visualizer = new Visualizer();
 
     public Image generateChart(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame) {
 
@@ -39,6 +41,16 @@ public class ChartGenerator {
         } else {
             logger.log(Level.WARNING, "Objects are not properly initialized.");
             return new Image();
+        }
+    }
+
+    public void visualizeChart(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame){
+        if (incomingObjectTester.isObjectsCorrect(currencyOverviewDto, viewTimeFrame)) {
+            ChartParameters chartParameters = chartParametersProcessor.process(currencyOverviewDto, viewTimeFrame);
+            List<ChartPart> parts = generateParts(chartParameters);
+            visualizer.visualize(parts, chartParameters);
+        } else {
+            logger.log(Level.WARNING, "Objects are not properly initialized.");
         }
     }
 

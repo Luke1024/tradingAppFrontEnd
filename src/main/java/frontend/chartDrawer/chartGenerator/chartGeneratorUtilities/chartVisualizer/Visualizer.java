@@ -14,7 +14,6 @@ import java.awt.event.WindowEvent;
 import java.awt.geom.Line2D;
 import java.util.List;
 
-@Component
 public class Visualizer extends JApplet {
 
     @Autowired
