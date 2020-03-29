@@ -19,13 +19,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-@Service
 public class ChartPartsDrawer {
     private ByteArrayOutputStream imagebuffer = null;
     int reloads = 0;
 
-    @Autowired
-    private ColorMapper colorMapper;
+    private ColorMapper colorMapper = new ColorMapper();
 
     public Image draw (List<ChartPart> chartPartsToDraw, ChartParameters chartParameters) {
 

@@ -5,17 +5,12 @@ import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescri
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescriptionGeneratorUtilities.timeStampDescriptionGeneratorUtilities.TimeStampTextEditorEngine;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
 import frontend.chartDrawer.chartGenerator.chartParts.Text;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import java.util.List;
 
-@Service
 public class TimeStampDescriptionGenerator {
 
-    @Autowired
-    private TimeStampDescriptionPositioner timeStampDescriptionPositioner;
-    @Autowired
-    private TimeStampTextEditorEngine timeStampTextEditorEngine;
+    private TimeStampDescriptionPositioner timeStampDescriptionPositioner = new TimeStampDescriptionPositioner();
+    private TimeStampTextEditorEngine timeStampTextEditorEngine = new TimeStampTextEditorEngine();
 
     public List<Text> process(ChartParameters chartParameters, List<ChartGridAndDescriptionGenerator.TimeStampCoord> timeStampCoords) {
 

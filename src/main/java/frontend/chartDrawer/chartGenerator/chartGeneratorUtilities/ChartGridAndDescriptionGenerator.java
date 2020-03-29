@@ -5,24 +5,16 @@ import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescri
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.gridAndDescriptionGeneratorUtilities.VerticalLinesGenerator;
 import frontend.chartDrawer.chartGenerator.chartParts.*;
 import frontend.config.ChartConfig;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
 public class ChartGridAndDescriptionGenerator {
 
-    @Autowired
-    private ChartConfig chartConfig;
-    @Autowired
-    private VisibleTimeStampsFilter visibleTimeStampsFilter;
-    @Autowired
-    private TimeStampDescriptionGenerator timeStampDescriptionGenerator;
-    @Autowired
-    private VerticalLinesGenerator verticalLinesGenerator;
+    private ChartConfig chartConfig = new ChartConfig();
+    private VisibleTimeStampsFilter visibleTimeStampsFilter = new VisibleTimeStampsFilter();
+    private TimeStampDescriptionGenerator timeStampDescriptionGenerator = new TimeStampDescriptionGenerator();
+    private VerticalLinesGenerator verticalLinesGenerator = new VerticalLinesGenerator();
 
     public List<ChartPart> generate(ChartParameters chartParameters) {
         List<ChartPart> chartParts = new ArrayList<>();

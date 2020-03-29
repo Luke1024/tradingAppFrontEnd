@@ -14,11 +14,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-@Service
 public class ChartLineGenerator {
 
-    @Autowired
-    private ChartConfig chartConfig;
+    private ChartConfig chartConfig = new ChartConfig();
 
     public List<Line> generate(ChartParameters chartParameters) {
 

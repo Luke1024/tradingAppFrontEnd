@@ -4,18 +4,13 @@ import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartGridAndD
 import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
 import frontend.client.dto.DataPointDto;
 import frontend.config.ChartConfig;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
 public class VisibleTimeStampsFilter {
 
-    @Autowired
-    private ChartConfig chartConfig;
+    private ChartConfig chartConfig = new ChartConfig();
 
     public List<ChartGridAndDescriptionGenerator.TimeStampCoord> process(ChartParameters chartParameters) {
 

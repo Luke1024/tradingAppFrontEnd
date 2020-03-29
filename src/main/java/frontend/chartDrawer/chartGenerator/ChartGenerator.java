@@ -15,23 +15,15 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Service
 public class ChartGenerator {
-
     private Logger logger = Logger.getLogger(ChartGenerator.class.getName());
 
-    @Autowired
-    private IncomingObjectTester incomingObjectTester;
-    @Autowired
-    private ChartGridAndDescriptionGenerator gridAndDescriptionGenerator;
-    @Autowired
-    private ChartLineGenerator chartLineGenerator;
-    @Autowired
-    private ChartParametersProcessor chartParametersProcessor;
-    @Autowired
-    private ChartPartsDrawer chartPartsDrawer;
-    @Autowired
-    private CoordinateReverser coordinateReverser;
+    private IncomingObjectTester incomingObjectTester = new IncomingObjectTester();
+    private ChartGridAndDescriptionGenerator gridAndDescriptionGenerator = new ChartGridAndDescriptionGenerator();
+    private ChartLineGenerator chartLineGenerator = new ChartLineGenerator();
+    private ChartParametersProcessor chartParametersProcessor = new ChartParametersProcessor();
+    private ChartPartsDrawer chartPartsDrawer = new ChartPartsDrawer();
+    private CoordinateReverser coordinateReverser = new CoordinateReverser();
     private Visualizer visualizer = new Visualizer();
 
     public Image generateChart(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame) {

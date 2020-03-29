@@ -4,11 +4,9 @@ import frontend.config.ChartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
 public class VisiblePriceFilter {
 
-    @Autowired
-    private ChartConfig chartConfig;
+    private ChartConfig chartConfig = new ChartConfig();
 
     private static final int minimalNumberOfPricePoints = 3;
     private static final double legendHeightRange = 0.6; //0.6 means 60%

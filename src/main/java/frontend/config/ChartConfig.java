@@ -1,70 +1,46 @@
 package frontend.config;
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component
 public class ChartConfig {
 
     //chart font
-    @Value("${chart.drawer.fontsize}")
-    private int fontSize;
-    @Value("${chart.drawer.textcolor}")
-    private String textColorRGB;
+    private static int fontSize = 20;
+    private static String textColorRGB = "255,255,255";
 
     //chart size
-    @Value("${chart.drawer.chartWidth}")
-    private int chartWidth;
-    @Value("${chart.drawer.chartHeight}")
-    private int chartHeight;
-    @Value("${chart.drawer.maxMinHeightRangePercentage}")
-    private int maxMinHeightRangePercentage;
+    private static int chartWidth = 1000;
+    private static int chartHeight = 200;
+    private static int maxMinHeightRangePercentage = 80;
 
     //chart scalling
-    @Value("${chart.drawer.timeFrameAxisDistanceInPixels}")
-    private int timeFrameAxisDistanceInPixels;
-    @Value("${chart.drawer.zoomingMultiplier}")
-    private double zoomingMultiplier;
-    @Value("${chart.drawer.defaultZoomLevel}")
-    private int defaultZoomLevel;
+    private static int timeFrameAxisDistanceInPixels = 20;
+    private static double zoomingMultiplier = 1.2;
+    private static int defaultZoomLevel = 0;
 
     //font size margin multiplier
-    @Value("${chart.drawer.fontSizeBottomMarginMultiplier}")
-    private double fontSizeBottomMarginMultiplier;
-    @Value("${chart.drawer.fontSizeRightMarginMultiplier}")
-    private double fontSizeRightMarginMultiplier;
+    private static double fontSizeBottomMarginMultiplier = 2;
+    private static double fontSizeRightMarginMultiplier = 5;
 
     //frame margin left and top
-    @Value("${chart.drawer.frameLeftMarginPix}")
-    private int frameLeftMarginPix;
-    @Value("${chart.drawer.frameTopMarginPix}")
-    private int frameTopMarginPix;
+    private static int frameLeftMarginPix = 5;
+    private static int frameTopMarginPix = 5;
 
     //frame rectangle settings
-    @Value("${chart.drawer.frameThicknessInPix}")
-    private int frameThicknessInPix;
-    @Value("${chart.drawer.frameColorRGB}")
-    private String frameColorRGB;
+    private static int frameThicknessInPix = 2;
+    private static String frameColorRGB = "0,0,255";
 
     //grid settings
-    @Value("${chart.drawer.minimalDistanceBetweenGridLines}")
-    private int minimalDistanceBetweenGridLines;
-    @Value("${chart.drawer.gridThicknessInPix}")
-    private int gridThicknessInPix;
-    @Value("${chart.drawer.gridColorRGB}")
-    private String gridColorRGB;
+    private static int minimalDistanceBetweenGridLines = 3;
+    private static int gridThicknessInPix = 1;
+    private static String gridColorRGB = "0,255,0";
 
     //chart line settings
-    @Value("${chart.drawer.lineThicknessInPix}")
-    private int lineThicknessInPix;
-    @Value("${chart.drawer.lineColorRGB}")
-    private String lineColorRGB;
+    private static int lineThicknessInPix = 2;
+    private static String lineColorRGB = "255,0,0";
 
     //chart background color
-    @Value("${chart.drawer.backgroundColor}")
-    private String backGroundColor;
-    @Value("${chart.drawer.chartBackGroundColor}")
-    private String chartBackGroundColor;
+    private static String backGroundColor = "50,50,50";
+    private static String chartBackGroundColor = "10,10,10";
 
     public int getFontSize() {
         return fontSize;

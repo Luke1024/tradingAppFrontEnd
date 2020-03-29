@@ -17,12 +17,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
 public class ChartGeneratorTest {
 
-    @Autowired
-    private ChartGenerator chartGenerator;
+
+    private ChartGenerator chartGenerator = new ChartGenerator();
 
     private DataPointDto dataPointDtoCorrect = new DataPointDto(LocalDateTime.now(), 0.23);
 

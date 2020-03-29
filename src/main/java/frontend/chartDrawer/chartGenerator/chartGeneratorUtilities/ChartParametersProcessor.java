@@ -8,11 +8,9 @@ import frontend.config.ChartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
 public class ChartParametersProcessor {
 
-    @Autowired
-    private ChartConfig chartConfig;
+    private ChartConfig chartConfig = new ChartConfig();
 
     public ChartParameters process(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame timeFrame) {
         return new ChartParameters(
