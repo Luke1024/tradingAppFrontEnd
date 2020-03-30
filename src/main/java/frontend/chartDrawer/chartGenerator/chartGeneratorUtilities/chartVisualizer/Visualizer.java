@@ -30,8 +30,8 @@ public class Visualizer {
         parameters = chartParameters;
         chartParts = chartPartsList;
 
-        int imageWidth = chartParameters.getUniversal().getWidth();
-        int imageHeight = chartParameters.getUniversal().getHeight();
+        int imageWidth = 2000;//chartParameters.getUniversal().getWidth();
+        int imageHeight = 2000; //chartParameters.getUniversal().getHeight();
         frontend.chartDrawer.chartGenerator.chartParts.Color backGround = chartParameters.getBackGround().getColor();
 
         Color imageBackGroundColor = colorMapper.mapToAwtColor(backGround);
@@ -39,7 +39,7 @@ public class Visualizer {
         BufferedImage image = new BufferedImage (imageWidth, imageHeight,
                 BufferedImage.TYPE_INT_RGB);
         Graphics2D scene = image.createGraphics();
-        //scene.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        scene.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         scene.setColor(imageBackGroundColor);
 

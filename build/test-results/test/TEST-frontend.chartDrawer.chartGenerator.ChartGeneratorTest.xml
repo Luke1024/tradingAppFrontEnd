@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="frontend.chartDrawer.chartGenerator.ChartGeneratorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-03-29T17:33:21" hostname="luke-desktop" time="0.345">
+<testsuite name="frontend.chartDrawer.chartGenerator.ChartGeneratorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-03-30T13:14:53" hostname="luke-desktop" time="0.825">
   <properties/>
-  <testcase name="generateChart" classname="frontend.chartDrawer.chartGenerator.ChartGeneratorTest" time="0.345"/>
+  <testcase name="generateChart" classname="frontend.chartDrawer.chartGenerator.ChartGeneratorTest" time="0.825"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

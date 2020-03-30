@@ -2,13 +2,12 @@ package frontend.chartDrawer.chartGenerator;
 
 import com.vaadin.flow.component.html.Image;
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.*;
+import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.ChartGridAndDescriptionGenerator;
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartVisualizer.Visualizer;
 import frontend.chartDrawer.chartGenerator.chartParts.*;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;
 import frontend.chartDrawer.chartGenerator.chartParts.Rectangle;
 import frontend.client.dto.CurrencyOverviewDto;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.List;
