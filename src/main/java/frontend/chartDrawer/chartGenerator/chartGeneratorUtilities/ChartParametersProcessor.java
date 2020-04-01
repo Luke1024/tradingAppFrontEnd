@@ -4,13 +4,11 @@ import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;
 import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
 import frontend.client.dto.CurrencyOverviewDto;
-import frontend.config.ChartConfig;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import frontend.config.ChartConfigWithConfiguration;
 
 public class ChartParametersProcessor {
 
-    private ChartConfig chartConfig = new ChartConfig();
+    private ChartConfigWithConfiguration chartConfigWithConfiguration;
 
     public ChartParameters process(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame timeFrame) {
         return new ChartParameters(
@@ -25,30 +23,30 @@ public class ChartParametersProcessor {
 
     private ChartParameters.Universal processUniversalParameters(
             CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame timeFrame) {
-        int chartWidth = chartConfig.getChartWidth();
-        int chartHeight = chartConfig.getChartHeight();
+        int chartWidth = chartConfigWithConfiguration.getChartWidth();
+        int chartHeight = chartConfigWithConfiguration.getChartHeight();
 
         return new ChartParameters.Universal(currencyOverviewDto, chartWidth, chartHeight, timeFrame);
     }
 
     private ChartParameters.BackGround processBackgroundParameters() {
-        return new ChartParameters.BackGround(new Color(chartConfig.getBackGroundColor()));
+        return new ChartParameters.BackGround(new Color(chartConfigWithConfiguration.getBackGroundColor()));
     }
 
     private ChartParameters.ChartBox processChartBoxParameters(CurrencyOverviewDto currencyOverviewDto) {
         if(currencyOverviewDto.getDataPoints() != null) {
-            int fontSize = chartConfig.getFontSize();
-            int marginRight = (int) (fontSize * chartConfig.getFontSizeRightMarginMultiplier());
-            int marginBottom = (int) (fontSize * chartConfig.getFontSizeBottomMarginMultiplier());
-            int marginLeft = chartConfig.getFrameLeftMarginPix();
-            int marginTop = chartConfig.getFrameTopMarginPix();
+            int fontSize = chartConfigWithConfiguration.getFontSize();
+            int marginRight = (int) (fontSize * chartConfigWithConfiguration.getFontSizeRightMarginMultiplier());
+            int marginBottom = (int) (fontSize * chartConfigWithConfiguration.getFontSizeBottomMarginMultiplier());
+            int marginLeft = chartConfigWithConfiguration.getFrameLeftMarginPix();
+            int marginTop = chartConfigWithConfiguration.getFrameTopMarginPix();
 
             int x = marginLeft;
             int y = marginTop;
-            int width = chartConfig.getChartWidth() - marginLeft - marginRight;
-            int height = chartConfig.getChartHeight() - marginTop - marginBottom;
-            Color color = new Color(chartConfig.getBorderColorRGB());
-            int thickness = chartConfig.getFrameThicknessInPix();
+            int width = chartConfigWithConfiguration.getChartWidth() - marginLeft - marginRight;
+            int height = chartConfigWithConfiguration.getChartHeight() - marginTop - marginBottom;
+            Color color = new Color(chartConfigWithConfiguration.getBorderColorRGB());
+            int thickness = chartConfigWithConfiguration.getFrameThicknessInPix();
             double step = ((double) (width))/currencyOverviewDto.getDataPoints().size();
             return new ChartParameters.ChartBox(x,y,width,height,step,color,thickness);
         } else {
@@ -58,23 +56,23 @@ public class ChartParametersProcessor {
     }
 
     private ChartParameters.Line processLineParameters() {
-        return new ChartParameters.Line(new Color(chartConfig.getLineColorRGB()), chartConfig.getLineThicknessInPix(),
-                chartConfig.getMaxMinHeightRangePercentage());
+        return new ChartParameters.Line(new Color(chartConfigWithConfiguration.getLineColorRGB()), chartConfigWithConfiguration.getLineThicknessInPix(),
+                chartConfigWithConfiguration.getMaxMinHeightRangePercentage());
     }
 
     private ChartParameters.VerticalGrid processVerticalGridParameters() {
-        return new ChartParameters.VerticalGrid(new Color(chartConfig.getLineColorRGB()), chartConfig.getGridThicknessInPix());
+        return new ChartParameters.VerticalGrid(new Color(chartConfigWithConfiguration.getLineColorRGB()), chartConfigWithConfiguration.getGridThicknessInPix());
     }
 
     private ChartParameters.HorizontalGrid processHorizontalGridParameters() {
-        return new ChartParameters.HorizontalGrid(new Color(chartConfig.getLineColorRGB()), chartConfig.getGridThicknessInPix());
+        return new ChartParameters.HorizontalGrid(new Color(chartConfigWithConfiguration.getLineColorRGB()), chartConfigWithConfiguration.getGridThicknessInPix());
     }
 
     private ChartParameters.Text processTextParameters() {
-        int horizontalMarginFromCenter = chartConfig.getFrameLeftMarginPix()/2;
-        int verticalMarginFromCenter = chartConfig.getFrameTopMarginPix()/2;
+        int horizontalMarginFromCenter = chartConfigWithConfiguration.getFrameLeftMarginPix()/2;
+        int verticalMarginFromCenter = chartConfigWithConfiguration.getFrameTopMarginPix()/2;
 
-        return new ChartParameters.Text(new Color(chartConfig.getTextColorRGB()),
-                chartConfig.getFontSize(), horizontalMarginFromCenter, verticalMarginFromCenter);
+        return new ChartParameters.Text(new Color(chartConfigWithConfiguration.getTextColorRGB()),
+                chartConfigWithConfiguration.getFontSize(), horizontalMarginFromCenter, verticalMarginFromCenter);
     }
 }

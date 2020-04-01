@@ -5,9 +5,7 @@ import frontend.chartDrawer.chartGenerator.chartParts.Color;
 import frontend.chartDrawer.chartGenerator.chartParts.Line;
 import frontend.client.dto.CurrencyOverviewDto;
 import frontend.client.dto.DataPointDto;
-import frontend.config.ChartConfig;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import frontend.config.ChartConfigWithConfiguration;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -16,7 +14,7 @@ import java.util.NoSuchElementException;
 
 public class ChartLineGenerator {
 
-    private ChartConfig chartConfig = new ChartConfig();
+    private ChartConfigWithConfiguration chartConfigWithConfiguration = new ChartConfigWithConfiguration();
 
     public List<Line> generate(ChartParameters chartParameters) {
 
@@ -76,7 +74,7 @@ public class ChartLineGenerator {
     private List<Line> drawLinesBetweenPoints(List<Integer> valuesScaledToPixels, ChartParameters chartParameters) {
         double step = chartParameters.getChartBox().getStepPix();
 
-        Color color = new Color(chartConfig.getLineColorRGB());
+        Color color = new Color(chartConfigWithConfiguration.getLineColorRGB());
         int thickness = chartParameters.getLine().getThickness();
         List<Line> lines = new ArrayList<>();
 

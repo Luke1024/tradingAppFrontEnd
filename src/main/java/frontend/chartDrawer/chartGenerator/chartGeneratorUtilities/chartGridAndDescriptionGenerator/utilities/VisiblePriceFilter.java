@@ -1,10 +1,10 @@
 package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities;
 
-import frontend.config.ChartConfig;
+import frontend.config.ChartConfigWithConfiguration;
 
 public class VisiblePriceFilter {
 
-    private ChartConfig chartConfig = new ChartConfig();
+    private ChartConfigWithConfiguration chartConfigWithConfiguration = new ChartConfigWithConfiguration();
 
     private static final int minimalNumberOfPricePoints = 3;
     private static final double legendHeightRange = 0.6; //0.6 means 60%

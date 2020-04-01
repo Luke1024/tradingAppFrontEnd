@@ -1,49 +1,49 @@
 package frontend.config;
-import org.springframework.stereotype.Component;
 
 public class ChartConfig {
 
     //chart font
-    private static int fontSize = 20;
-    private static String textColorRGB = "255,255,255";
+    private int descriptionFontSize = 20;
+    private String textColorRGB = "255,255,255";
 
     //chart size
-    private static int chartWidth = 1000;
-    private static int chartHeight = 200;
-    private static int maxMinHeightRangePercentage = 80;
+    private int chartWidth = 1000;
+    private int chartHeight = 200;
+    private int maxMinHeightRangePercentage = 80;
 
     //chart scalling
-    private static int timeFrameAxisDistanceInPixels = 20;
-    private static double zoomingMultiplier = 1.2;
-    private static int defaultZoomLevel = 0;
+    private int timeFrameAxisDistanceInPixels = 20;
+    private double zoomingMultiplier = 1.2;
+    private int defaultZoomLevel = 0;
 
     //font size margin multiplier
-    private static double fontSizeBottomMarginMultiplier = 2;
-    private static double fontSizeRightMarginMultiplier = 5;
+    private double fontSizeBottomMarginMultiplier = 2;
+    private double fontSizeRightMarginMultiplier = 5;
 
     //frame margin left and top
-    private static int frameLeftMarginPix = 5;
-    private static int frameTopMarginPix = 5;
+    private int frameLeftMarginPix = 5;
+    private int frameTopMarginPix = 5;
 
     //frame rectangle settings
-    private static int frameThicknessInPix = 2;
-    private static String frameColorRGB = "0,0,255";
+    private int frameThicknessInPix = 2;
+    private String frameColorRGB = "0,0,255";
 
     //grid settings
-    private static int minimalDistanceBetweenGridLines = 3;
-    private static int gridThicknessInPix = 1;
-    private static String gridColorRGB = "0,255,0";
+    private int minimalDistanceBetweenGridLines = 3;
+    private int gridThicknessInPix = 1;
+    private String gridColorRGB = "0,255,0";
 
     //chart line settings
-    private static int lineThicknessInPix = 2;
-    private static String lineColorRGB = "255,0,0";
+    private int lineThicknessInPix = 2;
+    private String lineColorRGB = "255,0,0";
 
     //chart background color
-    private static String backGroundColor = "50,50,50";
-    private static String chartBackGroundColor = "10,10,10";
+    private String backGroundColor = "50,50,50";
+    private String chartBackGroundColor = "10,10,10";
 
-    public int getFontSize() {
-        return fontSize;
+
+    public int getDescriptionFontSize() {
+        return descriptionFontSize;
     }
 
     public String getTextColorRGB() {
@@ -98,10 +98,6 @@ public class ChartConfig {
         return frameColorRGB;
     }
 
-    public String getBorderColorRGB() {
-        return frameColorRGB;
-    }
-
     public int getMinimalDistanceBetweenGridLines() {
         return minimalDistanceBetweenGridLines;
     }
@@ -128,5 +124,117 @@ public class ChartConfig {
 
     public String getChartBackGroundColor() {
         return chartBackGroundColor;
+    }
+
+
+    public void setDescriptionFontSize(int descriptionFontSize) {
+        this.descriptionFontSize = descriptionFontSize;
+    }
+
+    public void setTextColorRGB(String textColorRGB) {
+        this.textColorRGB = textColorRGB;
+    }
+
+    public void setChartWidth(int chartWidth) {
+        this.chartWidth = chartWidth;
+    }
+
+    public void setChartHeight(int chartHeight) {
+        this.chartHeight = chartHeight;
+    }
+
+    public void setMaxMinHeightRangePercentage(int maxMinHeightRangePercentage) {
+        this.maxMinHeightRangePercentage = maxMinHeightRangePercentage;
+    }
+
+    public void setTimeFrameAxisDistanceInPixels(int timeFrameAxisDistanceInPixels) {
+        this.timeFrameAxisDistanceInPixels = timeFrameAxisDistanceInPixels;
+    }
+
+    public void setZoomingMultiplier(double zoomingMultiplier) {
+        this.zoomingMultiplier = zoomingMultiplier;
+    }
+
+    public void setDefaultZoomLevel(int defaultZoomLevel) {
+        this.defaultZoomLevel = defaultZoomLevel;
+    }
+
+    public void setFontSizeBottomMarginMultiplier(double fontSizeBottomMarginMultiplier) {
+        this.fontSizeBottomMarginMultiplier = fontSizeBottomMarginMultiplier;
+    }
+
+    public void setFontSizeRightMarginMultiplier(double fontSizeRightMarginMultiplier) {
+        this.fontSizeRightMarginMultiplier = fontSizeRightMarginMultiplier;
+    }
+
+    public void setFrameLeftMarginPix(int frameLeftMarginPix) {
+        this.frameLeftMarginPix = frameLeftMarginPix;
+    }
+
+    public void setFrameTopMarginPix(int frameTopMarginPix) {
+        this.frameTopMarginPix = frameTopMarginPix;
+    }
+
+    public void setFrameThicknessInPix(int frameThicknessInPix) {
+        this.frameThicknessInPix = frameThicknessInPix;
+    }
+
+    public void setFrameColorRGB(String frameColorRGB) {
+        this.frameColorRGB = frameColorRGB;
+    }
+
+    public void setMinimalDistanceBetweenGridLines(int minimalDistanceBetweenGridLines) {
+        this.minimalDistanceBetweenGridLines = minimalDistanceBetweenGridLines;
+    }
+
+    public void setGridThicknessInPix(int gridThicknessInPix) {
+        this.gridThicknessInPix = gridThicknessInPix;
+    }
+
+    public void setGridColorRGB(String gridColorRGB) {
+        this.gridColorRGB = gridColorRGB;
+    }
+
+    public void setLineThicknessInPix(int lineThicknessInPix) {
+        this.lineThicknessInPix = lineThicknessInPix;
+    }
+
+    public void setLineColorRGB(String lineColorRGB) {
+        this.lineColorRGB = lineColorRGB;
+    }
+
+    public void setBackGroundColor(String backGroundColor) {
+        this.backGroundColor = backGroundColor;
+    }
+
+    public void setChartBackGroundColor(String chartBackGroundColor) {
+        this.chartBackGroundColor = chartBackGroundColor;
+    }
+
+    @Override
+    public String toString() {
+        return "ChartConfig{" +
+                "descriptionFontSize=" + descriptionFontSize +
+                ", textColorRGB='" + textColorRGB + '\'' +
+                ", chartWidth=" + chartWidth +
+                ", chartHeight=" + chartHeight +
+                ", maxMinHeightRangePercentage=" + maxMinHeightRangePercentage +
+                ", timeFrameAxisDistanceInPixels=" + timeFrameAxisDistanceInPixels +
+                ", zoomingMultiplier=" + zoomingMultiplier +
+                ", defaultZoomLevel=" + defaultZoomLevel +
+                ", fontSizeBottomMarginMultiplier=" + fontSizeBottomMarginMultiplier +
+                ", fontSizeRightMarginMultiplier=" + fontSizeRightMarginMultiplier +
+                ", frameLeftMarginPix=" + frameLeftMarginPix +
+                ", frameTopMarginPix=" + frameTopMarginPix +
+                ", frameThicknessInPix=" + frameThicknessInPix +
+                ", frameColorRGB='" + frameColorRGB + '\'' +
+                ", minimalDistanceBetweenGridLines=" + minimalDistanceBetweenGridLines +
+                ", gridThicknessInPix=" + gridThicknessInPix +
+                ", gridColorRGB='" + gridColorRGB + '\'' +
+                ", lineThicknessInPix=" + lineThicknessInPix +
+                ", lineColorRGB='" + lineColorRGB + '\'' +
+                ", backGroundColor='" + backGroundColor + '\'' +
+                ", chartBackGroundColor='" + chartBackGroundColor + '\'' +
+                '}';
     }
 }

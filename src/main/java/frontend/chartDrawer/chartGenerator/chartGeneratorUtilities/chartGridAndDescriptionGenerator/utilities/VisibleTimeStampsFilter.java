@@ -2,14 +2,15 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAnd
 
 import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
 import frontend.client.dto.DataPointDto;
-import frontend.config.ChartConfig;
+import frontend.config.ChartConfigWithConfiguration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class VisibleTimeStampsFilter {
 
-    private ChartConfig chartConfig = new ChartConfig();
+    private ChartConfigWithConfiguration chartConfigWithConfiguration = new ChartConfigWithConfiguration();
+    private int cursor = 0;
 
     public List<TimeStampCoord> process(ChartParameters chartParameters) {
 
@@ -26,15 +27,19 @@ public class VisibleTimeStampsFilter {
             int x = (int) (i * step);
             int availablePosition = cursor + textElementWidth;
             if (x > availablePosition && checkIfSpaceAvailable(x,width,textElementWidth)) {
-                cursor = availablePosition;
-                LocalDateTime timeStamp = dataPointDtoList.get(i).getTimeStamp();
-                availableTimeStamps.add(new TimeStampCoord(x, timeStamp, i));
+                availableTimeStamps.add(returnAvailableTimeStamp(i,x,availablePosition, dataPointDtoList.get(i)));
             }
         }
         return availableTimeStamps;
     }
 
-    private int getTextElementWidth(ChartParameters chartParameters){
+    private TimeStampCoord returnAvailableTimeStamp(int i, int x, int availablePosition, DataPointDto dataPointDto) {
+        cursor = availablePosition;
+        LocalDateTime timeStamp = dataPointDto.getTimeStamp();
+        return new TimeStampCoord(x, timeStamp, i);
+    }
+
+    private int getTextElementWidth(ChartParameters chartParameters) {
         int horizontalMarginFromCenter = chartParameters.getText().getHorizontalMarginFromCenter();
         return horizontalMarginFromCenter*2;
     }
