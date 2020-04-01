@@ -3,43 +3,43 @@ package frontend.config;
 public class ChartConfig {
 
     //chart font
-    private int descriptionFontSize = 20;
-    private String textColorRGB = "255,255,255";
+    private int descriptionFontSize;
+    private String textColorRGB;
 
     //chart size
-    private int chartWidth = 1000;
-    private int chartHeight = 200;
-    private int maxMinHeightRangePercentage = 80;
+    private int chartWidth;
+    private int chartHeight;
+    private int maxMinHeightRangePercentage;
 
     //chart scalling
-    private int timeFrameAxisDistanceInPixels = 20;
-    private double zoomingMultiplier = 1.2;
-    private int defaultZoomLevel = 0;
+    private int timeFrameAxisDistanceInPixels;
+    private double zoomingMultiplier;
+    private int defaultZoomLevel;
 
     //font size margin multiplier
-    private double fontSizeBottomMarginMultiplier = 2;
-    private double fontSizeRightMarginMultiplier = 5;
+    private double fontSizeBottomMarginMultiplier;
+    private double fontSizeRightMarginMultiplier;
 
     //frame margin left and top
-    private int frameLeftMarginPix = 5;
-    private int frameTopMarginPix = 5;
+    private int frameLeftMarginPix;
+    private int frameTopMarginPix;
 
     //frame rectangle settings
-    private int frameThicknessInPix = 2;
-    private String frameColorRGB = "0,0,255";
+    private int frameThicknessInPix;
+    private String frameColorRGB;
 
     //grid settings
-    private int minimalDistanceBetweenGridLines = 3;
-    private int gridThicknessInPix = 1;
-    private String gridColorRGB = "0,255,0";
+    private int minimalDistanceBetweenGridLines;
+    private int gridThicknessInPix;
+    private String gridColorRGB;
 
     //chart line settings
-    private int lineThicknessInPix = 2;
-    private String lineColorRGB = "255,0,0";
+    private int lineThicknessInPix;
+    private String lineColorRGB;
 
     //chart background color
-    private String backGroundColor = "50,50,50";
-    private String chartBackGroundColor = "10,10,10";
+    private String backGroundColor;
+    private String chartBackGroundColor;
 
 
     public int getDescriptionFontSize() {
