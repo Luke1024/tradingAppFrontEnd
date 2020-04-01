@@ -50,86 +50,54 @@ public class ChartConfigReader {
         String fieldName = entry.getKey();
         String fieldType = entry.getValue();
 
-        FieldValueWrapper value = retrieveValue(fieldName, fieldType, properties);
-        return setValue(chartConfig, fieldName, value, fieldType);
+        return retrieveAndSetValue(fieldName, fieldType, properties, chartConfig);
     }
 
-    private FieldValueWrapper retrieveValue(String fieldName, String fieldType, Properties properties) {
+    private ChartConfig retrieveAndSetValue(String fieldName, String fieldType, Properties properties, ChartConfig chartConfig) {
         if(fieldType.contains("String")){
-            return new FieldValueWrapper(properties.getProperty(fieldName),0,0);
+            return setString(chartConfig, fieldName, properties.getProperty(fieldName));
         }
         if(fieldType.contains("int")){
-            return new FieldValueWrapper("",Integer.parseInt(properties.getProperty(fieldName)),0);
+            return setInt(chartConfig, fieldName, properties.getProperty(fieldName));
         }
         if(fieldType.contains("double")){
-            return new FieldValueWrapper("", 0, Double.parseDouble(properties.getProperty(fieldName)));
+            return setDouble(chartConfig, fieldName, properties.getProperty(fieldName));
         }
         LOGGER.log(Level.WARNING, "Chart configuration file missing fields. Missed field: " + fieldName);
-        return new FieldValueWrapper("",0,0);
-    }
-
-    private ChartConfig setValue(ChartConfig chartConfig, String fieldName, FieldValueWrapper valueWrapper, String fieldType){
-        if(fieldType.contains("String")) return setString(chartConfig, fieldName, valueWrapper);
-        if(fieldType.contains("int")) return setInt(chartConfig, fieldName, valueWrapper);
-        if(fieldType.contains("double")) return setDouble(chartConfig, fieldName, valueWrapper);
         return chartConfig;
     }
 
-    private ChartConfig setString(ChartConfig chartConfig, String fieldName, FieldValueWrapper valueWrapper) {
+
+    private ChartConfig setString(ChartConfig chartConfig, String fieldName, String fieldValue) {
         PropertyDescriptor pd;
         try{
             pd = new PropertyDescriptor(fieldName, chartConfig.getClass());
-            pd.getWriteMethod().invoke(chartConfig, valueWrapper.getStringValue());
+            pd.getWriteMethod().invoke(chartConfig, fieldValue);
         } catch (Exception e){
             e.printStackTrace();
         }
         return chartConfig;
     }
 
-    private ChartConfig setInt(ChartConfig chartConfig, String fieldName, FieldValueWrapper valueWrapper) {
+    private ChartConfig setInt(ChartConfig chartConfig, String fieldName, String fieldValue) {
         PropertyDescriptor pd;
         try{
             pd = new PropertyDescriptor(fieldName, chartConfig.getClass());
-            pd.getWriteMethod().invoke(chartConfig, valueWrapper.getIntValue());
+            pd.getWriteMethod().invoke(chartConfig, fieldValue);
         } catch (Exception e){
             e.printStackTrace();
         }
         return chartConfig;
     }
 
-    private ChartConfig setDouble(ChartConfig chartConfig, String fieldName, FieldValueWrapper valueWrapper) {
+    private ChartConfig setDouble(ChartConfig chartConfig, String fieldName, String fieldValue) {
         PropertyDescriptor pd;
         try{
             pd = new PropertyDescriptor(fieldName, chartConfig.getClass());
-            pd.getWriteMethod().invoke(chartConfig, valueWrapper.getDoubleValue());
+            pd.getWriteMethod().invoke(chartConfig, fieldValue);
         } catch (Exception e){
             e.printStackTrace();
         }
         return chartConfig;
-    }
-
-
-    private class FieldValueWrapper {
-        private String stringValue;
-        private int intValue;
-        private double doubleValue;
-
-        public FieldValueWrapper(String stringValue, int intValue, double doubleValue) {
-            this.stringValue = stringValue;
-            this.intValue = intValue;
-            this.doubleValue = doubleValue;
-        }
-
-        public String getStringValue() {
-            return stringValue;
-        }
-
-        public int getIntValue() {
-            return intValue;
-        }
-
-        public double getDoubleValue() {
-            return doubleValue;
-        }
     }
 }
