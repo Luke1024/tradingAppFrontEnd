@@ -54,50 +54,32 @@ public class ChartConfigReader {
     }
 
     private ChartConfig retrieveAndSetValue(String fieldName, String fieldType, Properties properties, ChartConfig chartConfig) {
-        if(fieldType.contains("String")){
-            return setString(chartConfig, fieldName, properties.getProperty(fieldName));
-        }
-        if(fieldType.contains("int")){
-            return setInt(chartConfig, fieldName, properties.getProperty(fieldName));
-        }
-        if(fieldType.contains("double")){
-            return setDouble(chartConfig, fieldName, properties.getProperty(fieldName));
+        String retrievedProperty = properties.getProperty(fieldName);
+        if(retrievedProperty != null) {
+            if (fieldType.contains("String") || fieldType.contains("int") || fieldType.contains("double")) {
+                return setValue(chartConfig, fieldName, retrievedProperty, fieldType);
+            }
         }
         LOGGER.log(Level.WARNING, "Chart configuration file missing fields. Missed field: " + fieldName);
         return chartConfig;
     }
 
+    private ChartConfig setValue(ChartConfig chartConfig, String fieldName, String fieldValue, String fieldType) {
 
-    private ChartConfig setString(ChartConfig chartConfig, String fieldName, String fieldValue) {
         PropertyDescriptor pd;
         try{
             pd = new PropertyDescriptor(fieldName, chartConfig.getClass());
-            pd.getWriteMethod().invoke(chartConfig, fieldValue);
+            pd.getWriteMethod().invoke(chartConfig, filterType(fieldValue, fieldType));
         } catch (Exception e){
             e.printStackTrace();
         }
         return chartConfig;
     }
 
-    private ChartConfig setInt(ChartConfig chartConfig, String fieldName, String fieldValue) {
-        PropertyDescriptor pd;
-        try{
-            pd = new PropertyDescriptor(fieldName, chartConfig.getClass());
-            pd.getWriteMethod().invoke(chartConfig, fieldValue);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        return chartConfig;
-    }
-
-    private ChartConfig setDouble(ChartConfig chartConfig, String fieldName, String fieldValue) {
-        PropertyDescriptor pd;
-        try{
-            pd = new PropertyDescriptor(fieldName, chartConfig.getClass());
-            pd.getWriteMethod().invoke(chartConfig, fieldValue);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        return chartConfig;
+    private Object filterType(String fieldValue, String fieldType) {
+        if(fieldType.contains("String")) return fieldValue;
+        if(fieldType.contains("int")) return Integer.parseInt(fieldValue);
+        if(fieldType.contains("double")) return Double.parseDouble(fieldValue);
+        return null;
     }
 }

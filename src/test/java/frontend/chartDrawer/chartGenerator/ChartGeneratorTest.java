@@ -19,7 +19,6 @@ import java.util.Random;
 
 public class ChartGeneratorTest {
 
-
     private ChartGenerator chartGenerator = new ChartGenerator();
 
     private DataPointDto dataPointDtoCorrect = new DataPointDto(LocalDateTime.now(), 0.23);

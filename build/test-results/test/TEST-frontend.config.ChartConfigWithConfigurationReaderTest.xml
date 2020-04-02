@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="frontend.config.ChartConfigWithConfigurationReaderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-04-01T18:51:24" hostname="luke-desktop" time="0.008">
-  <properties/>
-  <testcase name="readConfigFile" classname="frontend.config.ChartConfigWithConfigurationReaderTest" time="0.008"/>
-  <system-out><![CDATA[ChartConfig{descriptionFontSize=20, textColorRGB='255,255,255', chartWidth=1000, chartHeight=200, maxMinHeightRangePercentage=80, timeFrameAxisDistanceInPixels=20, zoomingMultiplier=1.2, defaultZoomLevel=0, fontSizeBottomMarginMultiplier=2.0, fontSizeRightMarginMultiplier=5.0, frameLeftMarginPix=5, frameTopMarginPix=5, frameThicknessInPix=2, frameColorRGB='0,0,255', minimalDistanceBetweenGridLines=3, gridThicknessInPix=1, gridColorRGB='0,255,0', lineThicknessInPix=2, lineColorRGB='255,0,0', backGroundColor='50,50,50', chartBackGroundColor='10,10,10'}
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
