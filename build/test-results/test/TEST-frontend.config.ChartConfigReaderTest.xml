@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="frontend.config.ChartConfigReaderTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2020-04-02T18:16:49" hostname="luke-desktop" time="0.02">
+<testsuite name="frontend.config.ChartConfigReaderTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2020-04-03T15:47:55" hostname="luke-desktop" time="0.015">
   <properties/>
   <testcase name="readConfigFileTest" classname="frontend.config.ChartConfigReaderTest" time="0.006"/>
-  <testcase name="readConfigFileTestWithoutSomeValues" classname="frontend.config.ChartConfigReaderTest" time="0.013"/>
+  <testcase name="readConfigFileTestWithoutSomeValues" classname="frontend.config.ChartConfigReaderTest" time="0.009"/>
   <system-out><![CDATA[ChartConfig{descriptionFontSize=20, textColorRGB='255,255,255', chartWidth=1000, chartHeight=200, maxMinHeightRangePercentage=80, timeFrameAxisDistanceInPixels=20, zoomingMultiplier=1.2, defaultZoomLevel=0, fontSizeBottomMarginMultiplier=2.0, fontSizeRightMarginMultiplier=5.0, frameLeftMarginPix=5, frameTopMarginPix=5, frameThicknessInPix=2, frameColorRGB='0,0,255', minimalDistanceBetweenGridLines=3, gridThicknessInPix=1, gridColorRGB='0,255,0', lineThicknessInPix=2, lineColorRGB='255,0,0', backGroundColor='50,50,50', chartBackGroundColor='10,10,10'}
 ChartConfig{descriptionFontSize=20, textColorRGB='255,255,255', chartWidth=1000, chartHeight=200, maxMinHeightRangePercentage=80, timeFrameAxisDistanceInPixels=20, zoomingMultiplier=1.2, defaultZoomLevel=0, fontSizeBottomMarginMultiplier=2.0, fontSizeRightMarginMultiplier=5.0, frameLeftMarginPix=5, frameTopMarginPix=5, frameThicknessInPix=2, frameColorRGB='0,0,255', minimalDistanceBetweenGridLines=3, gridThicknessInPix=1, gridColorRGB='0,255,0', lineThicknessInPix=2, lineColorRGB='255,0,0', backGroundColor='20,20,20', chartBackGroundColor='5,5,5'}
 ]]></system-out>
-  <system-err><![CDATA[kwi 02, 2020 8:16:49 PM frontend.config.ChartConfigReader retrieveAndSetValue
+  <system-err><![CDATA[kwi 03, 2020 5:47:55 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: frameColorRGB
-kwi 02, 2020 8:16:49 PM frontend.config.ChartConfigReader retrieveAndSetValue
+kwi 03, 2020 5:47:55 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: gridThicknessInPix
-kwi 02, 2020 8:16:49 PM frontend.config.ChartConfigReader retrieveAndSetValue
+kwi 03, 2020 5:47:55 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: lineThicknessInPix
-kwi 02, 2020 8:16:49 PM frontend.config.ChartConfigReader retrieveAndSetValue
+kwi 03, 2020 5:47:55 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: lineColorRGB
-kwi 02, 2020 8:16:49 PM frontend.config.ChartConfigReader retrieveAndSetValue
+kwi 03, 2020 5:47:55 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: frameThicknessInPix
-kwi 02, 2020 8:16:49 PM frontend.config.ChartConfigReader retrieveAndSetValue
+kwi 03, 2020 5:47:55 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: minimalDistanceBetweenGridLines
-kwi 02, 2020 8:16:49 PM frontend.config.ChartConfigReader retrieveAndSetValue
+kwi 03, 2020 5:47:55 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: gridColorRGB
 ]]></system-err>
 </testsuite>

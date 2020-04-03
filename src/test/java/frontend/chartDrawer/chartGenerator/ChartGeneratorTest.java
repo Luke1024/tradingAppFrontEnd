@@ -1,15 +1,11 @@
 package frontend.chartDrawer.chartGenerator;
 
 import com.vaadin.flow.component.html.Image;
-import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartVisualizer.Visualizer;
 import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
 import frontend.client.dto.CurrencyOverviewDto;
 import frontend.client.dto.DataPointDto;
+import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -28,7 +24,7 @@ public class ChartGeneratorTest {
     private CurrencyOverviewDto currencyOverviewDtoCorrect =
             new CurrencyOverviewDto("EURUSD", LocalDateTime.now(), dataPointDtoListCorrect);
 
-    @Test
+    //@Test
     public void textChartGeneratorWhenCurrencyOverviewDtoNull() {
         CurrencyOverviewDto currencyOverviewDto = new CurrencyOverviewDto();
 

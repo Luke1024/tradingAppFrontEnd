@@ -2,14 +2,15 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAnd
 
 import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
 import frontend.client.dto.DataPointDto;
-import frontend.config.ChartConfigWithConfiguration;
+import frontend.config.ChartConfig;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class VisibleTimeStampsFilter {
 
-    private ChartConfigWithConfiguration chartConfigWithConfiguration = new ChartConfigWithConfiguration();
+    private ChartConfig chartConfig = new ChartConfig();
     private int cursor = 0;
 
     public List<TimeStampCoord> process(ChartParameters chartParameters) {

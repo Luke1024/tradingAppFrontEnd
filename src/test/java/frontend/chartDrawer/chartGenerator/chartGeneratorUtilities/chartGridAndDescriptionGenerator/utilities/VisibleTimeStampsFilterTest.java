@@ -3,20 +3,31 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAnd
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.ChartParametersProcessor;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
 import org.junit.Test;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
+
 
 public class VisibleTimeStampsFilterTest {
 
-    private VisibleTimeStampsFilter visibleTimeStampsFilter = new VisibleTimeStampsFilter();
-    private ChartParametersProcessor chartParametersProcessor = new ChartParametersProcessor();
+    @MockBean
+    private ChartParameters chartParameters;
 
+    private VisibleTimeStampsFilter visibleTimeStampsFilter = new VisibleTimeStampsFilter();
 
     @Test
     public void process() {
-        //ChartParameters chartParameters = new ChartParameters()
+        /*
+        when(chartParameters.getText().getHorizontalMarginFromCenter()).thenReturn();
+        when(chartParameters.getChartBox().getWidth()).thenReturn();
+        when(chartParameters.getUniversal().getCurrencyOverviewDto().getDataPoints()).thenReturn();
+
+        List<TimeStampCoord> timeStampCoords = visibleTimeStampsFilter.process(chartParameters);
+
+*/
 
     }
 }

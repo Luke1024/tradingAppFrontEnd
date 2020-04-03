@@ -5,7 +5,7 @@ import frontend.chartDrawer.chartGenerator.chartParts.Color;
 import frontend.chartDrawer.chartGenerator.chartParts.Line;
 import frontend.client.dto.CurrencyOverviewDto;
 import frontend.client.dto.DataPointDto;
-import frontend.config.ChartConfigWithConfiguration;
+import frontend.config.ChartConfig;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 
 public class ChartLineGenerator {
 
-    private ChartConfigWithConfiguration chartConfigWithConfiguration = new ChartConfigWithConfiguration();
+    private ChartConfig chartConfigWithConfiguration = new ChartConfig();
 
     public List<Line> generate(ChartParameters chartParameters) {
 

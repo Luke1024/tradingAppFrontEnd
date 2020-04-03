@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="frontend.config.ChartConfigWithConfigurationTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2020-04-03T15:47:55" hostname="luke-desktop" time="0.002">
+  <properties/>
+  <testcase name="getLineThicknessInPix" classname="frontend.config.ChartConfigWithConfigurationTest" time="0.0"/>
+  <testcase name="getFontSizeRightMarginMultiplier" classname="frontend.config.ChartConfigWithConfigurationTest" time="0.0"/>
+  <testcase name="getGridColorRGB" classname="frontend.config.ChartConfigWithConfigurationTest" time="0.0"/>
+  <testcase name="getFontSizeBottomMarginMultiplier" classname="frontend.config.ChartConfigWithConfigurationTest" time="0.0"/>
+  <testcase name="getGridThicknessInPix" classname="frontend.config.ChartConfigWithConfigurationTest" time="0.0"/>
+  <testcase name="getFrameThicknessInPix" classname="frontend.config.ChartConfigWithConfigurationTest" time="0.0"/>
+  <testcase name="getFrameColorRGB" classname="frontend.config.ChartConfigWithConfigurationTest" time="0.0"/>
+  <testcase name="getLineColorRGB" classname="frontend.config.ChartConfigWithConfigurationTest" time="0.0"/>
+  <testcase name="getFrameLeftMarginPix" classname="frontend.config.ChartConfigWithConfigurationTest" time="0.0"/>
+  <testcase name="getFrameTopMarginPix" classname="frontend.config.ChartConfigWithConfigurationTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

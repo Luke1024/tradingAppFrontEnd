@@ -5,13 +5,14 @@ import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndD
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.VerticalLinesGenerator;
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.VisibleTimeStampsFilter;
 import frontend.chartDrawer.chartGenerator.chartParts.*;
-import frontend.config.ChartConfigWithConfiguration;
+import frontend.config.ChartConfig;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChartGridAndDescriptionGenerator {
 
-    private ChartConfigWithConfiguration chartConfigWithConfiguration = new ChartConfigWithConfiguration();
+    private ChartConfig chartConfig = new ChartConfig();
     private VisibleTimeStampsFilter visibleTimeStampsFilter = new VisibleTimeStampsFilter();
     private TimeStampDescriptionGenerator timeStampDescriptionGenerator = new TimeStampDescriptionGenerator();
     private VerticalLinesGenerator verticalLinesGenerator = new VerticalLinesGenerator();

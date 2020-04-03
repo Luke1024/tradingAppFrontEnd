@@ -6,11 +6,11 @@ import org.junit.Test;
 
 public class ChartConfigWithConfigurationTest {
 
-    private ChartConfigWithConfiguration chartConfigWithConfiguration = new ChartConfigWithConfiguration();
+    private ChartConfig chartConfig = new ChartConfig();
 
     @Test
     public void getFontSizeBottomMarginMultiplier() {
-        Assert.assertEquals(2, chartConfigWithConfiguration.getFontSizeBottomMarginMultiplier());
+        Assert.assertEquals(2, chartConfig.getFontSizeBottomMarginMultiplier(),0.1);
     }
 
     @Test
