@@ -1,7 +1,6 @@
 package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities;
 
-import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.ChartGridAndDescriptionGenerator;
-import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
+import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;
 import frontend.chartDrawer.chartGenerator.chartParts.Line;
 
@@ -15,12 +14,12 @@ public class VerticalLinesGenerator {
     private int lineThickness;
     private Color lineColor;
 
-    public List<Line> process(ChartParameters chartParameters, List<TimeStampCoord> timeStampCoords){
-        this.chartBoxX = chartParameters.getChartBox().getX();
-        this.chartBoxY = chartParameters.getChartBox().getY();
-        this.chartBoxHeight = chartParameters.getChartBox().getHeight();
-        this.lineThickness = chartParameters.getLine().getThickness();
-        this.lineColor = chartParameters.getLine().getColor();
+    public List<Line> process(ChartDataDto chartDataDto, List<TimeStampCoord> timeStampCoords){
+        this.chartBoxX = chartDataDto.getChartConfig().getChartBoxLeftBottomCornerX();
+        this.chartBoxY = chartDataDto.getChartConfig().getChartBoxLeftBottomCornerY();
+        this.chartBoxHeight = chartDataDto.getChartConfig().getChartBoxHeight();
+        this.lineThickness = chartDataDto.getChartConfig().getGridThicknessInPix();
+        this.lineColor = new Color(chartDataDto.getChartConfig().getGridColorRGB());
 
         List<Line> lines = new ArrayList<>();
         for(int i=0; i<timeStampCoords.size(); i++){

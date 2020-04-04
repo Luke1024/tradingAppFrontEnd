@@ -5,36 +5,34 @@ import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndD
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.VerticalLinesGenerator;
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.VisibleTimeStampsFilter;
 import frontend.chartDrawer.chartGenerator.chartParts.*;
-import frontend.config.ChartConfig;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChartGridAndDescriptionGenerator {
 
-    private ChartConfig chartConfig = new ChartConfig();
     private VisibleTimeStampsFilter visibleTimeStampsFilter = new VisibleTimeStampsFilter();
     private TimeStampDescriptionGenerator timeStampDescriptionGenerator = new TimeStampDescriptionGenerator();
     private VerticalLinesGenerator verticalLinesGenerator = new VerticalLinesGenerator();
 
-    public List<ChartPart> generate(ChartParameters chartParameters) {
+    public List<ChartPart> generate(ChartDataDto chartDataDto) {
         List<ChartPart> chartParts = new ArrayList<>();
-        chartParts.addAll(generateVerticalLinesWithTextDescription(chartParameters));
-        chartParts.addAll(generateHorizontalLinesWithTextDescription(chartParameters));
+        chartParts.addAll(generateVerticalLinesWithTextDescription(chartDataDto));
+        chartParts.addAll(generateHorizontalLinesWithTextDescription(chartDataDto));
         return chartParts;
     }
 
-    private List<ChartPart> generateVerticalLinesWithTextDescription(ChartParameters chartParameters) {
+    private List<ChartPart> generateVerticalLinesWithTextDescription(ChartDataDto chartDataDto) {
 
         List<ChartPart> chartParts = new ArrayList<>();
-        List<TimeStampCoord> timeStampCoords = visibleTimeStampsFilter.process(chartParameters);
-        chartParts.addAll(timeStampDescriptionGenerator.process(chartParameters, timeStampCoords));
-        chartParts.addAll(verticalLinesGenerator.process(chartParameters, timeStampCoords));
+        List<TimeStampCoord> timeStampCoords = visibleTimeStampsFilter.process(chartDataDto);
+        chartParts.addAll(timeStampDescriptionGenerator.process(chartDataDto, timeStampCoords));
+        chartParts.addAll(verticalLinesGenerator.process(chartDataDto, timeStampCoords));
 
         return chartParts;
     }
 
-    private List<ChartPart> generateHorizontalLinesWithTextDescription(ChartParameters chartParameters) {
+    private List<ChartPart> generateHorizontalLinesWithTextDescription(ChartDataDto chartDataDto) {
         List<ChartPart> chartParts = new ArrayList<>();
         //List<TimeStampCoord> priceCoords = visiblePriceFilter.process(chartParameters);
         return chartParts;

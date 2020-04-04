@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="frontend.config.ChartConfigWithConfigurationReaderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-04-03T15:47:55" hostname="luke-desktop" time="0.001">
+<testsuite name="frontend.config.ChartConfigWithConfigurationReaderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-04-04T18:09:25" hostname="luke-desktop" time="0.002">
   <properties/>
-  <testcase name="readConfigFile" classname="frontend.config.ChartConfigWithConfigurationReaderTest" time="0.001"/>
-  <system-out><![CDATA[ChartConfig{descriptionFontSize=20, textColorRGB='255,255,255', chartWidth=1000, chartHeight=200, maxMinHeightRangePercentage=80, timeFrameAxisDistanceInPixels=20, zoomingMultiplier=1.2, defaultZoomLevel=0, fontSizeBottomMarginMultiplier=2.0, fontSizeRightMarginMultiplier=5.0, frameLeftMarginPix=5, frameTopMarginPix=5, frameThicknessInPix=2, frameColorRGB='0,0,255', minimalDistanceBetweenGridLines=3, gridThicknessInPix=1, gridColorRGB='0,255,0', lineThicknessInPix=2, lineColorRGB='255,0,0', backGroundColor='50,50,50', chartBackGroundColor='10,10,10'}
+  <testcase name="readConfigFile" classname="frontend.config.ChartConfigWithConfigurationReaderTest" time="0.002"/>
+  <system-out><![CDATA[frontend.config.ChartConfig@41abdb50
 ]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <system-err><![CDATA[kwi 04, 2020 8:09:25 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: chartHeight
+kwi 04, 2020 8:09:25 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: chartWidth
+]]></system-err>
 </testsuite>

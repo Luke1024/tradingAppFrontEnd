@@ -1,8 +1,7 @@
 package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities;
 
-import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
+import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.client.dto.DataPointDto;
-import frontend.config.ChartConfig;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,15 +9,14 @@ import java.util.List;
 
 public class VisibleTimeStampsFilter {
 
-    private ChartConfig chartConfig = new ChartConfig();
     private int cursor = 0;
 
-    public List<TimeStampCoord> process(ChartParameters chartParameters) {
+    public List<TimeStampCoord> process(ChartDataDto chartDataDto) {
 
-        int textElementWidth = getTextElementWidth(chartParameters);
-        int width = chartParameters.getChartBox().getWidth();
+        int textElementWidth = getTextElementWidth(chartDataDto);
+        int width = chartDataDto.getChartConfig().getChartBoxWidth();
 
-        List<DataPointDto> dataPointDtoList = chartParameters.getUniversal().getCurrencyOverviewDto().getDataPoints();
+        List<DataPointDto> dataPointDtoList = chartDataDto.getCurrencyOverviewDto().getDataPoints();
 
         double step = ((double) dataPointDtoList.size()) / width;
 
@@ -40,12 +38,12 @@ public class VisibleTimeStampsFilter {
         return new TimeStampCoord(x, timeStamp, i);
     }
 
-    private int getTextElementWidth(ChartParameters chartParameters) {
-        int horizontalMarginFromCenter = chartParameters.getText().getHorizontalMarginFromCenter();
-        return horizontalMarginFromCenter*2;
+    private int getTextElementWidth(ChartDataDto chartDataDto) {
+        int textElementWidth = chartDataDto.getChartConfig().getTextElementWidth();
+        return textElementWidth*2;
     }
 
-    private boolean checkIfSpaceAvailable(int x, int width, int textElementsWidth) {
-        return x - textElementsWidth - width > 0;
+    private boolean checkIfSpaceAvailable(int x, int width, int textElementWidth) {
+        return x - textElementWidth - width > 0;
     }
 }

@@ -1,14 +1,12 @@
 package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities;
 
 import frontend.chartDrawer.chartGenerator.chartParts.*;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class CoordinateReverser {
-    public List<ChartPart> reverse(List<ChartPart> chartParts, ChartParameters chartParameters) {
-        int height = chartParameters.getUniversal().getHeight();
+    public List<ChartPart> reverse(List<ChartPart> chartParts, ChartDataDto chartDataDto) {
+        int height = chartDataDto.getChartConfig().getChartHeight();
 
         List<ChartPart> reverserdChartParts = new ArrayList<>();
         for(ChartPart chartPart : chartParts){

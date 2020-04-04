@@ -1,17 +1,12 @@
 package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartVisualizer;
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.mappers.ColorMapper;
-import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
+import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartPart;
 import frontend.chartDrawer.chartGenerator.chartParts.Line;
 import frontend.chartDrawer.chartGenerator.chartParts.Text;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -21,18 +16,17 @@ import java.util.List;
 
 public class Visualizer {
     private ColorMapper colorMapper = new ColorMapper();
-    private ChartParameters parameters = null;
     private List<ChartPart> chartParts = null;
 
     private ByteArrayOutputStream imageBuffer = null;
 
-    public void visualize(List<ChartPart> chartPartsList, ChartParameters chartParameters){
-        parameters = chartParameters;
+    public void visualize(List<ChartPart> chartPartsList, ChartDataDto chartDataDto) {
         chartParts = chartPartsList;
-
         int imageWidth = 2000;//chartParameters.getUniversal().getWidth();
         int imageHeight = 2000; //chartParameters.getUniversal().getHeight();
-        frontend.chartDrawer.chartGenerator.chartParts.Color backGround = chartParameters.getBackGround().getColor();
+        frontend.chartDrawer.chartGenerator.chartParts.Color backGround =
+                new frontend.chartDrawer.chartGenerator.chartParts.Color(
+                        chartDataDto.getChartConfig().getBackGroundColor());
 
         Color imageBackGroundColor = colorMapper.mapToAwtColor(backGround);
 

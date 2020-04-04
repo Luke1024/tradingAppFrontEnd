@@ -1,17 +1,18 @@
 package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities;
 
+import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
 import frontend.client.dto.CurrencyOverviewDto;
 import frontend.client.dto.DataPointDto;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 public class IncomingObjectTester {
 
-    public boolean isObjectsCorrect(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame) {
+    public boolean isObjectsCorrect(ChartDataDto chartDataDto) {
+        CurrencyOverviewDto currencyOverviewDto = chartDataDto.getCurrencyOverviewDto();
+        ViewTimeFrame viewTimeFrame = chartDataDto.getViewTimeFrame();
+
         boolean isAnyObjectNull = checkIfAnyObjectIsNull(currencyOverviewDto, viewTimeFrame);
         boolean completeObjectIsCorrect;
         if(isAnyObjectNull) {

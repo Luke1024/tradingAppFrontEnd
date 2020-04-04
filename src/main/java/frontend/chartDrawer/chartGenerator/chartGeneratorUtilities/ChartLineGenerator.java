@@ -1,6 +1,6 @@
 package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities;
 
-import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
+import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;
 import frontend.chartDrawer.chartGenerator.chartParts.Line;
 import frontend.client.dto.CurrencyOverviewDto;
@@ -14,13 +14,11 @@ import java.util.NoSuchElementException;
 
 public class ChartLineGenerator {
 
-    private ChartConfig chartConfigWithConfiguration = new ChartConfig();
+    public List<Line> generate(ChartDataDto chartDataDto) {
 
-    public List<Line> generate(ChartParameters chartParameters) {
-
-        List<Double> scaledValuesInDataPoints = minMaxScalling(chartParameters);
-        List<Integer> valuesScaledToPixels = minMaxScallingToPixelValues(scaledValuesInDataPoints, chartParameters);
-        List<Line> chartLineLines = drawLinesBetweenPoints(valuesScaledToPixels, chartParameters);
+        List<Double> scaledValuesInDataPoints = minMaxScalling(chartDataDto);
+        List<Integer> valuesScaledToPixels = minMaxScallingToPixelValues(scaledValuesInDataPoints, chartDataDto.getChartConfig());
+        List<Line> chartLineLines = drawLinesBetweenPoints(valuesScaledToPixels, chartDataDto);
 
         return chartLineLines;
     }
@@ -31,8 +29,8 @@ public class ChartLineGenerator {
         } else return chartRangeInPercentage;
     }
 
-    private List<Double> minMaxScalling(ChartParameters chartParameters) {
-        CurrencyOverviewDto currencyOverviewDto = chartParameters.getUniversal().getCurrencyOverviewDto();
+    private List<Double> minMaxScalling(ChartDataDto chartDataDto) {
+        CurrencyOverviewDto currencyOverviewDto = chartDataDto.getCurrencyOverviewDto();
 
         double max = getHighestValueInDataPoints(currencyOverviewDto);
         double min = getLowestValueInDataPoints(currencyOverviewDto);
@@ -57,9 +55,9 @@ public class ChartLineGenerator {
         return dataPoints.stream().min(Comparator.comparing(DataPointDto::getValue)).map(d -> d.getValue()).orElseThrow(NoSuchElementException::new);
     }
 
-    private List<Integer> minMaxScallingToPixelValues(List<Double> scaledValuesInDataPoints, ChartParameters chartParameters) {
-        int verticalRangePercent = chartParameters.getLine().getVerticalRangePercent();
-        int heightInPix = chartParameters.getChartBox().getHeight();
+    private List<Integer> minMaxScallingToPixelValues(List<Double> scaledValuesInDataPoints, ChartConfig chartConfig) {
+        int verticalRangePercent = chartConfig.getLineChartBoxHeightRangeInPercentage();
+        int heightInPix = chartConfig.getChartBoxHeight();
 
         int verticalRangePix =  verticalRangePercent * heightInPix;
 
@@ -71,11 +69,14 @@ public class ChartLineGenerator {
         return pixelHeightValues;
     }
 
-    private List<Line> drawLinesBetweenPoints(List<Integer> valuesScaledToPixels, ChartParameters chartParameters) {
-        double step = chartParameters.getChartBox().getStepPix();
+    private List<Line> drawLinesBetweenPoints(List<Integer> valuesScaledToPixels, ChartDataDto chartDataDto) {
+        int chartBoxWidth = chartDataDto.getChartConfig().getChartBoxWidth();
+        int dataPointsNumber = chartDataDto.getCurrencyOverviewDto().getDataPoints().size();
 
-        Color color = new Color(chartConfigWithConfiguration.getLineColorRGB());
-        int thickness = chartParameters.getLine().getThickness();
+        double step = (double) chartBoxWidth / dataPointsNumber;
+
+        Color color = new Color(chartDataDto.getChartConfig().getLineColorRGB());
+        int thickness = chartDataDto.getChartConfig().getLineThicknessInPix();
         List<Line> lines = new ArrayList<>();
 
         for(int i=0; i<valuesScaledToPixels.size()-1; i++){

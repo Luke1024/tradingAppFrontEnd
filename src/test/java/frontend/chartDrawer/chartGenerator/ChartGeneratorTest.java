@@ -1,9 +1,11 @@
 package frontend.chartDrawer.chartGenerator;
 
 import com.vaadin.flow.component.html.Image;
+import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
 import frontend.client.dto.CurrencyOverviewDto;
 import frontend.client.dto.DataPointDto;
+import frontend.config.ChartConfig;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -24,11 +26,10 @@ public class ChartGeneratorTest {
     private CurrencyOverviewDto currencyOverviewDtoCorrect =
             new CurrencyOverviewDto("EURUSD", LocalDateTime.now(), dataPointDtoListCorrect);
 
-    //@Test
-    public void textChartGeneratorWhenCurrencyOverviewDtoNull() {
-        CurrencyOverviewDto currencyOverviewDto = new CurrencyOverviewDto();
-
-        Image image = chartGenerator.generateChart(currencyOverviewDtoCorrect, ViewTimeFrame.D1);
+    @Test
+    public void testWhenChartDataDtoNull() {
+        ChartDataDto chartDataDto = null;
+        Image image = chartGenerator.generateChart(chartDataDto);
     }
 
     @Test
@@ -46,7 +47,11 @@ public class ChartGeneratorTest {
         }
         CurrencyOverviewDto currencyOverviewDto = new CurrencyOverviewDto("EURUSD", now.plusDays(120), pointValues);
 
-        chartGenerator.visualizeChart(currencyOverviewDto, ViewTimeFrame.D1);
+        ChartConfig chartConfig = new ChartConfig();
+
+        ChartDataDto chartDataDto = new ChartDataDto(currencyOverviewDto, ViewTimeFrame.D1, chartConfig);
+
+        chartGenerator.visualizeChart(chartDataDto);
     }
 
     private DataPointDto generateDataPoint(double min, double max, LocalDateTime now, int i) {

@@ -7,7 +7,7 @@ import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartVisualiz
 import frontend.chartDrawer.chartGenerator.chartParts.*;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;
 import frontend.chartDrawer.chartGenerator.chartParts.Rectangle;
-import frontend.client.dto.CurrencyOverviewDto;
+import frontend.config.ChartConfig;
 
 import java.util.*;
 import java.util.List;
@@ -20,72 +20,71 @@ public class ChartGenerator {
     private IncomingObjectTester incomingObjectTester = new IncomingObjectTester();
     private ChartGridAndDescriptionGenerator gridAndDescriptionGenerator = new ChartGridAndDescriptionGenerator();
     private ChartLineGenerator chartLineGenerator = new ChartLineGenerator();
-    private ChartParametersProcessor chartParametersProcessor = new ChartParametersProcessor();
     private ChartPartsDrawer chartPartsDrawer = new ChartPartsDrawer();
     private CoordinateReverser coordinateReverser = new CoordinateReverser();
     private Visualizer visualizer = new Visualizer();
 
-    public Image generateChart(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame) {
+    public Image generateChart(ChartDataDto chartDataDto) {
 
-        if (incomingObjectTester.isObjectsCorrect(currencyOverviewDto, viewTimeFrame)) {
-            return executeChartGeneration(currencyOverviewDto, viewTimeFrame);
+        if (incomingObjectTester.isObjectsCorrect(chartDataDto)) {
+            return executeChartGeneration(chartDataDto);
         } else {
             logger.log(Level.WARNING, "Objects are not properly initialized.");
             return new Image();
         }
     }
 
-    public void visualizeChart(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame){
-        if (incomingObjectTester.isObjectsCorrect(currencyOverviewDto, viewTimeFrame)) {
-            ChartParameters chartParameters = chartParametersProcessor.process(currencyOverviewDto, viewTimeFrame);
-            List<ChartPart> parts = generateParts(chartParameters);
-            visualizer.visualize(parts, chartParameters);
+    public void visualizeChart(ChartDataDto chartDataDto){
+
+        if (incomingObjectTester.isObjectsCorrect(chartDataDto)) {
+            List<ChartPart> parts = generateParts(chartDataDto);
+            visualizer.visualize(parts, chartDataDto);
         } else {
             logger.log(Level.WARNING, "Objects are not properly initialized.");
         }
     }
 
-    private Image executeChartGeneration(CurrencyOverviewDto currencyOverviewDto, ViewTimeFrame viewTimeFrame) {
-        ChartParameters chartParameters = chartParametersProcessor.process(currencyOverviewDto, viewTimeFrame);
+    private Image executeChartGeneration(ChartDataDto chartDataDto) {
 
-        List<ChartPart> parts = generateParts(chartParameters);
-        return drawParts(parts, chartParameters);
+        List<ChartPart> parts = generateParts(chartDataDto);
+        return drawParts(parts, chartDataDto);
     }
 
-    private List<ChartPart> generateParts(ChartParameters chartParameters) {
+    private List<ChartPart> generateParts(ChartDataDto chartDataDto) {
 
         List<ChartPart> chartParts = new ArrayList<>();
         //all parts are positioned based on typical coordinate system, y coordinates need to reverse when drawing in awt
-        chartParts.add(generateBackGround(chartParameters));
-        chartParts.add(generateChartBorder(chartParameters));
-        chartParts.addAll(chartLineGenerator.generate(chartParameters));
-        chartParts.addAll(gridAndDescriptionGenerator.generate(chartParameters));
+        chartParts.add(generateBackGround(chartDataDto.getChartConfig()));
+        chartParts.add(generateChartBoxBorder(chartDataDto.getChartConfig()));
+        chartParts.addAll(chartLineGenerator.generate(chartDataDto));
+        chartParts.addAll(gridAndDescriptionGenerator.generate(chartDataDto));
         //chartParts.addAll(addRetrievedTimestamp());
 
         //reverse y coordinates
-        return coordinateReverser.reverse(chartParts, chartParameters);
+        return coordinateReverser.reverse(chartParts, chartDataDto);
     }
 
-    private Image drawParts(List<ChartPart> parts, ChartParameters chartParameters) {
-        return chartPartsDrawer.draw(parts, chartParameters);
+    private Image drawParts(List<ChartPart> parts, ChartDataDto chartDataDto) {
+        return chartPartsDrawer.draw(parts, chartDataDto);
     }
 
-    private Rectangle generateBackGround(ChartParameters chartParameters) {
-        Color backGroundColor = chartParameters.getBackGround().getColor();
+    private Rectangle generateBackGround(ChartConfig chartConfig) {
+        Color backGroundColor = new Color(chartConfig.getBackGroundColor());
 
         Rectangle rectangle = new Rectangle(backGroundColor,2,backGroundColor, true,
-                0,0, chartParameters.getUniversal().getWidth(), chartParameters.getUniversal().getWidth());
+                0,0,chartConfig.getChartWidth(), chartConfig.getChartHeight());
         return rectangle;
     }
 
-    private Rectangle generateChartBorder(ChartParameters chartParameters) {
-        int x = chartParameters.getChartBox().getX();
-        int y = chartParameters.getChartBox().getY();
-        int width = chartParameters.getChartBox().getWidth();
-        int height = chartParameters.getChartBox().getHeight();
+    private Rectangle generateChartBoxBorder(ChartConfig chartConfig) {
+        int x = chartConfig.getChartBoxLeftBottomCornerX();
+        int y = chartConfig.getChartBoxLeftBottomCornerY();
 
-        Color borderColor = chartParameters.getChartBox().getColor();
-        int thickness = chartParameters.getChartBox().getThickness();
+        int width = chartConfig.getChartBoxWidth();
+        int height = chartConfig.getChartBoxHeight();
+
+        Color borderColor = new Color(chartConfig.getChartBoxLineColorRGB());
+        int thickness = chartConfig.getChartBoxLineThicknessInPix();
 
         return new Rectangle(borderColor,thickness,borderColor,false, x,y,width,height);
     }
