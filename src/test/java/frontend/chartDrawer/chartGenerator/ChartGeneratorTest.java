@@ -1,15 +1,13 @@
 package frontend.chartDrawer.chartGenerator;
 
 import com.vaadin.flow.component.html.Image;
-import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartVisualizer.Visualizer;
+import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
 import frontend.client.dto.CurrencyOverviewDto;
 import frontend.client.dto.DataPointDto;
+import frontend.config.ChartConfig;
+import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,12 +15,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
 public class ChartGeneratorTest {
 
-    @Autowired
-    private ChartGenerator chartGenerator;
+    private ChartGenerator chartGenerator = new ChartGenerator();
 
     private DataPointDto dataPointDtoCorrect = new DataPointDto(LocalDateTime.now(), 0.23);
 
@@ -32,10 +27,9 @@ public class ChartGeneratorTest {
             new CurrencyOverviewDto("EURUSD", LocalDateTime.now(), dataPointDtoListCorrect);
 
     @Test
-    public void textChartGeneratorWhenCurrencyOverviewDtoNull() {
-        CurrencyOverviewDto currencyOverviewDto = new CurrencyOverviewDto();
-
-        Image image = chartGenerator.generateChart(currencyOverviewDtoCorrect, ViewTimeFrame.D1);
+    public void testWhenChartDataDtoNull() {
+        ChartDataDto chartDataDto = null;
+        Image image = chartGenerator.generateChart(chartDataDto);
     }
 
     @Test
@@ -53,7 +47,11 @@ public class ChartGeneratorTest {
         }
         CurrencyOverviewDto currencyOverviewDto = new CurrencyOverviewDto("EURUSD", now.plusDays(120), pointValues);
 
-        chartGenerator.visualizeChart(currencyOverviewDto, ViewTimeFrame.D1);
+        ChartConfig chartConfig = new ChartConfig();
+
+        ChartDataDto chartDataDto = new ChartDataDto(currencyOverviewDto, ViewTimeFrame.D1, chartConfig);
+
+        chartGenerator.visualizeChart(chartDataDto);
     }
 
     private DataPointDto generateDataPoint(double min, double max, LocalDateTime now, int i) {

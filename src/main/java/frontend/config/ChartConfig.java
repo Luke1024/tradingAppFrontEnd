@@ -1,156 +1,195 @@
 package frontend.config;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
-@Component
 public class ChartConfig {
+    //initialize default values
 
     //chart font
-    @Value("${chart.drawer.fontsize}")
-    private int fontSize;
-    @Value("${chart.drawer.textcolor}")
-    private String textColorRGB;
+    private int descriptionFontSize = 18;
+    private String textColorRGB = "200,200,200";
 
-    //chart size
-    @Value("${chart.drawer.chartWidth}")
-    private int chartWidth;
-    @Value("${chart.drawer.chartHeight}")
-    private int chartHeight;
-    @Value("${chart.drawer.maxMinHeightRangePercentage}")
-    private int maxMinHeightRangePercentage;
+    //text settings
+    private int textElementWidth = 150;
+    private int textElementHeight = 40;
 
-    //chart scalling
-    @Value("${chart.drawer.timeFrameAxisDistanceInPixels}")
-    private int timeFrameAxisDistanceInPixels;
-    @Value("${chart.drawer.zoomingMultiplier}")
-    private double zoomingMultiplier;
-    @Value("${chart.drawer.defaultZoomLevel}")
-    private int defaultZoomLevel;
+    //image size
+    private int chartWidth = 1000;
+    private int chartHeight = 200;
 
-    //font size margin multiplier
-    @Value("${chart.drawer.fontSizeBottomMarginMultiplier}")
-    private double fontSizeBottomMarginMultiplier;
-    @Value("${chart.drawer.fontSizeRightMarginMultiplier}")
-    private double fontSizeRightMarginMultiplier;
+    //chartbox size
+    private int chartBoxWidth = 700;
+    private int chartBoxHeight = 150;
 
-    //frame margin left and top
-    @Value("${chart.drawer.frameLeftMarginPix}")
-    private int frameLeftMarginPix;
-    @Value("${chart.drawer.frameTopMarginPix}")
-    private int frameTopMarginPix;
+    //chartbox position
+    private int chartBoxLeftBottomCornerX = 10;
+    private int chartBoxLeftBottomCornerY = 40;
 
-    //frame rectangle settings
-    @Value("${chart.drawer.frameThicknessInPix}")
-    private int frameThicknessInPix;
-    @Value("${chart.drawer.frameColorRGB}")
-    private String frameColorRGB;
+    //chartbox line settings
+    private int chartBoxLineThicknessInPix = 2;
+    private String chartBoxLineColorRGB = "0,0,255";
 
     //grid settings
-    @Value("${chart.drawer.minimalDistanceBetweenGridLines}")
-    private int minimalDistanceBetweenGridLines;
-    @Value("${chart.drawer.gridThicknessInPix}")
-    private int gridThicknessInPix;
-    @Value("${chart.drawer.gridColorRGB}")
-    private String gridColorRGB;
+    private int gridThicknessInPix = 1;
+    private String gridColorRGB = "0,255,0";
 
     //chart line settings
-    @Value("${chart.drawer.lineThicknessInPix}")
-    private int lineThicknessInPix;
-    @Value("${chart.drawer.lineColorRGB}")
-    private String lineColorRGB;
+    private int lineThicknessInPix = 2;
+    private String lineColorRGB = "255,0,0";
+    private int lineChartBoxHeightRangeInPercentage = 80;
 
-    //chart background color
-    @Value("${chart.drawer.backgroundColor}")
-    private String backGroundColor;
-    @Value("${chart.drawer.chartBackGroundColor}")
-    private String chartBackGroundColor;
+    //background settings
+    private String backGroundColor = "50,50,50";
+    private String chartBoxBackGroundColor = "10,10,10";
 
-    public int getFontSize() {
-        return fontSize;
+
+    public int getDescriptionFontSize() {
+        return descriptionFontSize;
+    }
+
+    public void setDescriptionFontSize(int descriptionFontSize) {
+        this.descriptionFontSize = descriptionFontSize;
     }
 
     public String getTextColorRGB() {
         return textColorRGB;
     }
 
+    public void setTextColorRGB(String textColorRGB) {
+        this.textColorRGB = textColorRGB;
+    }
+
+    public int getTextElementWidth() {
+        return textElementWidth;
+    }
+
+    public void setTextElementWidth(int textElementWidth) {
+        this.textElementWidth = textElementWidth;
+    }
+
+    public int getTextElementHeight() {
+        return textElementHeight;
+    }
+
+    public void setTextElementHeight(int textElementHeight) {
+        this.textElementHeight = textElementHeight;
+    }
+
     public int getChartWidth() {
         return chartWidth;
+    }
+
+    public void setChartWidth(int chartWidth) {
+        this.chartWidth = chartWidth;
     }
 
     public int getChartHeight() {
         return chartHeight;
     }
 
-    public int getMaxMinHeightRangePercentage() {
-        return maxMinHeightRangePercentage;
+    public void setChartHeight(int chartHeight) {
+        this.chartHeight = chartHeight;
     }
 
-    public int getTimeFrameAxisDistanceInPixels() {
-        return timeFrameAxisDistanceInPixels;
+    public int getChartBoxWidth() {
+        return chartBoxWidth;
     }
 
-    public double getZoomingMultiplier() {
-        return zoomingMultiplier;
+    public void setChartBoxWidth(int chartBoxWidth) {
+        this.chartBoxWidth = chartBoxWidth;
     }
 
-    public int getDefaultZoomLevel() {
-        return defaultZoomLevel;
+    public int getChartBoxHeight() {
+        return chartBoxHeight;
     }
 
-    public double getFontSizeBottomMarginMultiplier() {
-        return fontSizeBottomMarginMultiplier;
+    public void setChartBoxHeight(int chartBoxHeight) {
+        this.chartBoxHeight = chartBoxHeight;
     }
 
-    public double getFontSizeRightMarginMultiplier() {
-        return fontSizeRightMarginMultiplier;
+    public int getChartBoxLeftBottomCornerX() {
+        return chartBoxLeftBottomCornerX;
     }
 
-    public int getFrameLeftMarginPix() {
-        return frameLeftMarginPix;
+    public void setChartBoxLeftBottomCornerX(int chartBoxLeftBottomCornerX) {
+        this.chartBoxLeftBottomCornerX = chartBoxLeftBottomCornerX;
     }
 
-    public int getFrameTopMarginPix() {
-        return frameTopMarginPix;
+    public int getChartBoxLeftBottomCornerY() {
+        return chartBoxLeftBottomCornerY;
     }
 
-    public int getFrameThicknessInPix() {
-        return frameThicknessInPix;
+    public void setChartBoxLeftBottomCornerY(int chartBoxLeftBottomCornerY) {
+        this.chartBoxLeftBottomCornerY = chartBoxLeftBottomCornerY;
     }
 
-    public String getFrameColorRGB() {
-        return frameColorRGB;
+    public int getChartBoxLineThicknessInPix() {
+        return chartBoxLineThicknessInPix;
     }
 
-    public String getBorderColorRGB() {
-        return frameColorRGB;
+    public void setChartBoxLineThicknessInPix(int chartBoxLineThicknessInPix) {
+        this.chartBoxLineThicknessInPix = chartBoxLineThicknessInPix;
     }
 
-    public int getMinimalDistanceBetweenGridLines() {
-        return minimalDistanceBetweenGridLines;
+    public String getChartBoxLineColorRGB() {
+        return chartBoxLineColorRGB;
+    }
+
+    public void setChartBoxLineColorRGB(String chartBoxLineColorRGB) {
+        this.chartBoxLineColorRGB = chartBoxLineColorRGB;
     }
 
     public int getGridThicknessInPix() {
         return gridThicknessInPix;
     }
 
+    public void setGridThicknessInPix(int gridThicknessInPix) {
+        this.gridThicknessInPix = gridThicknessInPix;
+    }
+
     public String getGridColorRGB() {
         return gridColorRGB;
+    }
+
+    public void setGridColorRGB(String gridColorRGB) {
+        this.gridColorRGB = gridColorRGB;
     }
 
     public int getLineThicknessInPix() {
         return lineThicknessInPix;
     }
 
+    public void setLineThicknessInPix(int lineThicknessInPix) {
+        this.lineThicknessInPix = lineThicknessInPix;
+    }
+
     public String getLineColorRGB() {
         return lineColorRGB;
+    }
+
+    public void setLineColorRGB(String lineColorRGB) {
+        this.lineColorRGB = lineColorRGB;
+    }
+
+    public int getLineChartBoxHeightRangeInPercentage() {
+        return lineChartBoxHeightRangeInPercentage;
+    }
+
+    public void setLineChartBoxHeightRangeInPercentage(int lineChartBoxHeightRangeInPercentage) {
+        this.lineChartBoxHeightRangeInPercentage = lineChartBoxHeightRangeInPercentage;
     }
 
     public String getBackGroundColor() {
         return backGroundColor;
     }
 
-    public String getChartBackGroundColor() {
-        return chartBackGroundColor;
+    public void setBackGroundColor(String backGroundColor) {
+        this.backGroundColor = backGroundColor;
+    }
+
+    public String getChartBoxBackGroundColor() {
+        return chartBoxBackGroundColor;
+    }
+
+    public void setChartBoxBackGroundColor(String chartBoxBackGroundColor) {
+        this.chartBoxBackGroundColor = chartBoxBackGroundColor;
     }
 }

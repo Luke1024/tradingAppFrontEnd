@@ -1,34 +1,64 @@
 package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartVisualizer;
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.mappers.ColorMapper;
-import frontend.chartDrawer.chartGenerator.chartParts.ChartParameters;
+import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartPart;
 import frontend.chartDrawer.chartGenerator.chartParts.Line;
 import frontend.chartDrawer.chartGenerator.chartParts.Text;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import javax.swing.*;
+import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.geom.Line2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
-public class Visualizer extends JApplet {
-
-    @Autowired
-    private ColorMapper colorMapper;
-
-    private ChartParameters parameters = null;
+public class Visualizer {
+    private ColorMapper colorMapper = new ColorMapper();
     private List<ChartPart> chartParts = null;
 
+    private ByteArrayOutputStream imageBuffer = null;
+
+    public void visualize(List<ChartPart> chartPartsList, ChartDataDto chartDataDto) {
+        chartParts = chartPartsList;
+        int imageWidth = 2000;//chartParameters.getUniversal().getWidth();
+        int imageHeight = 2000; //chartParameters.getUniversal().getHeight();
+        frontend.chartDrawer.chartGenerator.chartParts.Color backGround =
+                new frontend.chartDrawer.chartGenerator.chartParts.Color(
+                        chartDataDto.getChartConfig().getBackGroundColor());
+
+        Color imageBackGroundColor = colorMapper.mapToAwtColor(backGround);
+
+        BufferedImage image = new BufferedImage (imageWidth, imageHeight,
+                BufferedImage.TYPE_INT_RGB);
+        Graphics2D scene = image.createGraphics();
+        scene.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        scene.setColor(imageBackGroundColor);
+
+        for(ChartPart chartPart : chartParts) {
+            drawerExecutor(chartPart,scene);
+        }
+        try{
+            File outputFile = new File("image.jpg");
+            ImageIO.write(image, "png", outputFile);
+        } catch (IOException e) {
+        }
+
+    }
+
+    /*
     public void visualize(List<ChartPart> chartPartList, ChartParameters chartParameters) {
+        System.out.println("execution go so far");
+
         parameters = chartParameters;
         chartParts = chartPartList;
 
         JFrame f = new JFrame("Chart Visualizer");
         f.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {System.exit(0);}
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);}
         });
         JApplet applet = new Visualizer();
         f.getContentPane().add("Center", applet);
@@ -36,17 +66,17 @@ public class Visualizer extends JApplet {
         f.pack();
         f.setSize(new Dimension(parameters.getUniversal().getWidth(), parameters.getUniversal().getHeight()));
         f.setVisible(true);
-    }
 
-    public void paint(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
+        Graphics2D g2 = new Graphics2D() {
+        };
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setPaint(colorMapper.mapToAwtColor(parameters.getBackGround().getColor()));
 
-        for(ChartPart chartPart : chartParts){
-             drawerExecutor(chartPart,g2);
+        for(ChartPart chartPart : chartParts) {
+            drawerExecutor(chartPart, g2);
         }
     }
+    */
 
     private Graphics2D drawerExecutor(ChartPart chartPart, Graphics2D scene) {
 
@@ -108,7 +138,7 @@ public class Visualizer extends JApplet {
         String content = text.getContent();
 
         scene.setPaint(textColor);
-        scene.setFont(new Font("",Font.PLAIN, fontSize));
+        scene.setFont(new Font("", Font.PLAIN, fontSize));
         scene.drawString(content,x,y);
 
         return scene;
