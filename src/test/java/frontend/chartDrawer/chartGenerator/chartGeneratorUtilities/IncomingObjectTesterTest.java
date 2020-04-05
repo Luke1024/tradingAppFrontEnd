@@ -73,4 +73,10 @@ public class IncomingObjectTesterTest {
         ChartDataDto chartDataDto = new ChartDataDto(currencyOverviewDtoMissingParameterInDataPointDto, ViewTimeFrame.D1, chartConfig);
         Assert.assertEquals(false, incomingObjectTester.isObjectsCorrect(chartDataDto));
     }
+
+    @Test
+    public void testOnlyChartConfigIsNull() {
+        ChartDataDto chartDataDto = new ChartDataDto(currencyOverviewDtoCorrect, ViewTimeFrame.D1, null);
+        Assert.assertEquals(false, incomingObjectTester.isObjectsCorrect(chartDataDto));
+    }
 }
