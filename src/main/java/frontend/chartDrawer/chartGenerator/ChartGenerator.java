@@ -26,7 +26,7 @@ public class ChartGenerator {
 
     public Image generateChart(ChartDataDto chartDataDto) {
 
-        if (incomingObjectTester.isObjectsCorrect(chartDataDto)) {
+        if (incomingObjectTester.isObjectCorrect(chartDataDto)) {
             return executeChartGeneration(chartDataDto);
         } else {
             logger.log(Level.WARNING, "Objects are not properly initialized.");
@@ -36,7 +36,7 @@ public class ChartGenerator {
 
     public void visualizeChart(ChartDataDto chartDataDto){
 
-        if (incomingObjectTester.isObjectsCorrect(chartDataDto)) {
+        if (incomingObjectTester.isObjectCorrect(chartDataDto)) {
             List<ChartPart> parts = generateParts(chartDataDto);
             visualizer.visualize(parts, chartDataDto);
         } else {

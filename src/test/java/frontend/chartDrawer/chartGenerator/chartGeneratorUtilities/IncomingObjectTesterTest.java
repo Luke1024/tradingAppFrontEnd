@@ -35,48 +35,48 @@ public class IncomingObjectTesterTest {
     @Test
     public void testCompleteObjects() {
         ChartDataDto chartDataDto = new ChartDataDto(currencyOverviewDtoCorrect, ViewTimeFrame.D1, chartConfig);
-        Assert.assertEquals(true, incomingObjectTester.isObjectsCorrect(chartDataDto));
+        Assert.assertEquals(true, incomingObjectTester.isObjectCorrect(chartDataDto));
     }
 
     @Test
     public void testCurrencyOverviewIsNullViewTimeFrameIsNotNull() {
         ChartDataDto chartDataDto = new ChartDataDto(null, ViewTimeFrame.D1, chartConfig);
-        Assert.assertEquals(false, incomingObjectTester.isObjectsCorrect(chartDataDto));
+        Assert.assertEquals(false, incomingObjectTester.isObjectCorrect(chartDataDto));
     }
 
     @Test
     public void testCurrencyOverviewIsNotNullViewTimeFrameIsNull() {
         ChartDataDto chartDataDto = new ChartDataDto(currencyOverviewDtoCorrect, null, chartConfig);
-        Assert.assertEquals(false, incomingObjectTester.isObjectsCorrect(chartDataDto));
+        Assert.assertEquals(false, incomingObjectTester.isObjectCorrect(chartDataDto));
     }
 
     @Test
     public void testCurrencyOverviewMissingFirstField() {
         ChartDataDto chartDataDto = new ChartDataDto(currencyOverviewDtoMissingFirstField, ViewTimeFrame.D1, chartConfig);
-        Assert.assertEquals(false, incomingObjectTester.isObjectsCorrect(chartDataDto));
+        Assert.assertEquals(false, incomingObjectTester.isObjectCorrect(chartDataDto));
     }
 
     @Test
     public void testCurrencyOverviewMissingSecondField() {
         ChartDataDto chartDataDto = new ChartDataDto(currencyOverviewDtoMissingSecondField, ViewTimeFrame.D1, chartConfig);
-        Assert.assertEquals(false, incomingObjectTester.isObjectsCorrect(chartDataDto));
+        Assert.assertEquals(false, incomingObjectTester.isObjectCorrect(chartDataDto));
     }
 
     @Test
     public void testCurrencyOverviewMissingThirdField() {
         ChartDataDto chartDataDto = new ChartDataDto(currencyOverviewDtoMissingThirdField, ViewTimeFrame.D1, chartConfig);
-        Assert.assertEquals(false, incomingObjectTester.isObjectsCorrect(chartDataDto));
+        Assert.assertEquals(false, incomingObjectTester.isObjectCorrect(chartDataDto));
     }
 
     @Test
     public void testCurrencyOverviewMissingValueInDataPointDto() {
         ChartDataDto chartDataDto = new ChartDataDto(currencyOverviewDtoMissingParameterInDataPointDto, ViewTimeFrame.D1, chartConfig);
-        Assert.assertEquals(false, incomingObjectTester.isObjectsCorrect(chartDataDto));
+        Assert.assertEquals(false, incomingObjectTester.isObjectCorrect(chartDataDto));
     }
 
     @Test
     public void testOnlyChartConfigIsNull() {
         ChartDataDto chartDataDto = new ChartDataDto(currencyOverviewDtoCorrect, ViewTimeFrame.D1, null);
-        Assert.assertEquals(false, incomingObjectTester.isObjectsCorrect(chartDataDto));
+        Assert.assertEquals(false, incomingObjectTester.isObjectCorrect(chartDataDto));
     }
 }

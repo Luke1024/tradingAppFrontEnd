@@ -9,41 +9,41 @@ import java.util.List;
 
 public class VisibleTimeStampsFilter {
 
-    private int cursor = 0;
-
     public List<TimeStampCoord> process(ChartDataDto chartDataDto) {
 
-        int textElementWidth = getTextElementWidth(chartDataDto);
-        int width = chartDataDto.getChartConfig().getChartBoxWidth();
-
+        int textElementWidth = chartDataDto.getChartConfig().getTextElementWidth();
+        int chartBoxWidth = chartDataDto.getChartConfig().getChartBoxWidth();
         List<DataPointDto> dataPointDtoList = chartDataDto.getCurrencyOverviewDto().getDataPoints();
 
-        double step = ((double) dataPointDtoList.size()) / width;
+        double step = ((double) chartBoxWidth / dataPointDtoList.size());
 
         int cursor = 0;
         List<TimeStampCoord> availableTimeStamps = new ArrayList<>();
         for(int i=0; i<dataPointDtoList.size(); i++) {
             int x = (int) (i * step);
-            int availablePosition = cursor + textElementWidth;
-            if (x > availablePosition && checkIfSpaceAvailable(x,width,textElementWidth)) {
-                availableTimeStamps.add(returnAvailableTimeStamp(i,x,availablePosition, dataPointDtoList.get(i)));
+            if(isThereSpaceToPlaceElement(cursor, x, textElementWidth) &&
+                    isThereSpaceLeftInTheChartBox(x, textElementWidth, chartBoxWidth)) {
+                availableTimeStamps.add(returnAvailableTimeStamp(i,x,dataPointDtoList.get(i)));
+                cursor = moveCursor(x, textElementWidth);
             }
         }
         return availableTimeStamps;
     }
 
-    private TimeStampCoord returnAvailableTimeStamp(int i, int x, int availablePosition, DataPointDto dataPointDto) {
-        cursor = availablePosition;
+    private boolean isThereSpaceToPlaceElement(int cursor, int x, int textElementWidth) {
+        return cursor + textElementWidth/2 < x;
+    }
+
+    private boolean isThereSpaceLeftInTheChartBox(int x, int textElementWidth, int chartBoxWidth) {
+        return chartBoxWidth - textElementWidth/2 - x > 0;
+    }
+
+    private TimeStampCoord returnAvailableTimeStamp(int i, int x, DataPointDto dataPointDto) {
         LocalDateTime timeStamp = dataPointDto.getTimeStamp();
         return new TimeStampCoord(x, timeStamp, i);
     }
 
-    private int getTextElementWidth(ChartDataDto chartDataDto) {
-        int textElementWidth = chartDataDto.getChartConfig().getTextElementWidth();
-        return textElementWidth*2;
-    }
-
-    private boolean checkIfSpaceAvailable(int x, int width, int textElementWidth) {
-        return x - textElementWidth - width > 0;
+    private int moveCursor(int x, int textElementWidth) {
+        return x + textElementWidth/2;
     }
 }

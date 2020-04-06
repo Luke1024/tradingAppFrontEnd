@@ -12,15 +12,15 @@ import java.util.List;
 
 public class IncomingObjectTester {
 
-    private boolean nullNotFound = true;
-
-    public boolean isObjectsCorrect(ChartDataDto chartDataDto) {
-        boolean currencyCorrect = currencyOverviewDtoIsCorrect(chartDataDto.getCurrencyOverviewDto());
-        boolean viewCorrect = viewTimeFrameIsCorrect(chartDataDto.getViewTimeFrame());
-        boolean chartConfig = chartConfigCorrect(chartDataDto.getChartConfig());
-
-        if(currencyCorrect && viewCorrect && chartConfig) return true;
-        else return false;
+    public boolean isObjectCorrect(ChartDataDto chartDataDto) {
+        if(chartDataDto == null) return false;
+        else {
+            boolean currencyCorrect = currencyOverviewDtoIsCorrect(chartDataDto.getCurrencyOverviewDto());
+            boolean viewCorrect = viewTimeFrameIsCorrect(chartDataDto.getViewTimeFrame());
+            boolean chartConfig = chartConfigCorrect(chartDataDto.getChartConfig());
+            if (currencyCorrect && viewCorrect && chartConfig) return true;
+            else return false;
+        }
     }
 
     private boolean currencyOverviewDtoIsCorrect(CurrencyOverviewDto currencyOverviewDto) {
@@ -65,40 +65,4 @@ public class IncomingObjectTester {
         }
         return true;
     }
-    /*
-        List<Field> extractedFields = Arrays.asList(chartDataDto.getClass().getDeclaredFields());
-        extractAllFieldsFromObjectAndNestedObjects(extractedFields);
-        return nullNotFound;
-    }
-
-    //what type of object field returning ????
-
-    private void extractAllFieldsFromObjectAndNestedObjects(List<Field> fieldsToExtraction) {
-        List<Field> fields = new ArrayList<>();
-        for (Field field : fieldsToExtraction) {
-            fields.addAll(Arrays.asList(field.getType().getClass().getDeclaredFields()));
-            System.out.println(fields.toString());
-            if (fields.size() > 0) {
-                nullNotFound = checkIfAllInitialized(fields);
-                if(nullNotFound = false){
-                    return;
-                }
-                extractAllFieldsFromObjectAndNestedObjects(fields);
-            } else {
-                return;
-            }
-        }
-    }
-
-    private boolean checkIfAllInitialized(List<Field> objectsExtractedFromSingleField) {
-        boolean initialized = true;
-
-        for (Field object : objectsExtractedFromSingleField) {
-            if (object == null) {
-                initialized = false;
-            }
-        }
-        return initialized;
-    }
-    */
 }
