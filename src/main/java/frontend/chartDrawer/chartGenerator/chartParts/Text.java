@@ -60,4 +60,15 @@ public class Text extends ChartPart {
     public String getContent() {
         return content;
     }
+
+    @Override
+    public String toString() {
+        return "Text{" +
+                "color=" + color +
+                ", x=" + x +
+                ", y=" + y +
+                ", fontSize=" + fontSize +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }
