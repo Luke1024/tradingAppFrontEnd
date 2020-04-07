@@ -3,7 +3,7 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAnd
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.timeStampDescriptionGeneratorUtilities.TimeStampDescriptionPositioner;
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.timeStampDescriptionGeneratorUtilities.TimeStampTextEditorEngine;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
-import frontend.chartDrawer.chartGenerator.chartParts.Text;
+import frontend.chartDrawer.chartGenerator.chartParts.TextField;
 
 import java.util.List;
 
@@ -12,10 +12,10 @@ public class TimeStampDescriptionGenerator {
     private TimeStampDescriptionPositioner timeStampDescriptionPositioner = new TimeStampDescriptionPositioner();
     private TimeStampTextEditorEngine timeStampTextEditorEngine = new TimeStampTextEditorEngine();
 
-    public List<Text> process(ChartDataDto chartDataDto, List<TimeStampCoord> timeStampCoords) {
+    public List<TextField> process(ChartDataDto chartDataDto, List<TimeStampCoord> timeStampCoords) {
 
-        List<Text> timeStampDescriptionsPositioned = timeStampDescriptionPositioner.process(chartDataDto, timeStampCoords);
-        List<Text> completeTimeStampsObjects = timeStampTextEditorEngine.process(timeStampDescriptionsPositioned, timeStampCoords, chartDataDto);
+        List<TextField> timeStampDescriptionsPositioned = timeStampDescriptionPositioner.process(chartDataDto, timeStampCoords);
+        List<TextField> completeTimeStampsObjects = timeStampTextEditorEngine.process(timeStampDescriptionsPositioned, timeStampCoords, chartDataDto);
 
         return completeTimeStampsObjects;
     }

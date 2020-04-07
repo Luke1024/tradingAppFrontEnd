@@ -12,7 +12,7 @@ public class CoordinateReverser {
         for(ChartPart chartPart : chartParts){
             if(chartPart instanceof Line) reverserdChartParts.add(reverseLine(chartPart,height));
             if(chartPart instanceof Rectangle) reverserdChartParts.add(reverseRectangle(chartPart,height));
-            if(chartPart instanceof Text) reverserdChartParts.add(reverseText(chartPart,height));
+            if(chartPart instanceof TextField) reverserdChartParts.add(reverseText(chartPart,height));
         }
         return reverserdChartParts;
     }
@@ -46,14 +46,14 @@ public class CoordinateReverser {
     }
 
     private ChartPart reverseText(ChartPart chartPart, int height){
-        Text text = (Text) chartPart;
+        TextField textField = (TextField) chartPart;
 
-        Color color = text.getColor();
-        int x = text.getX();
-        int y = height - text.getY();
-        int fontSize = text.getFontSize();
-        String content = text.getContent();
+        Color color = textField.getColor();
+        int x = textField.getCenterX();
+        int y = height - textField.getCenterY();
+        int fontSize = textField.getFontSize();
+        String content = textField.getContent();
 
-        return new Text(color,x,y,fontSize,content);
+        return new TextField(color,x,y,fontSize,content);
     }
 }

@@ -3,7 +3,6 @@ import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.mappers.Color
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartPart;
 import frontend.chartDrawer.chartGenerator.chartParts.Line;
-import frontend.chartDrawer.chartGenerator.chartParts.Text;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -82,7 +81,7 @@ public class Visualizer {
 
         if(chartPart instanceof Line) drawLine(chartPart, scene);
         if(chartPart instanceof frontend.chartDrawer.chartGenerator.chartParts.Rectangle) drawRectangle(chartPart,scene);
-        if(chartPart instanceof Text) drawText(chartPart,scene);
+        if(chartPart instanceof frontend.chartDrawer.chartGenerator.chartParts.TextField) drawText(chartPart,scene);
 
         return scene;
     }
@@ -129,13 +128,13 @@ public class Visualizer {
     }
 
     private Graphics2D drawText(ChartPart chartPart, Graphics2D scene){
-        Text text = (Text) chartPart;
+        frontend.chartDrawer.chartGenerator.chartParts.TextField textField = (frontend.chartDrawer.chartGenerator.chartParts.TextField) chartPart;
 
-        Color textColor = colorMapper.mapToAwtColor(text.getColor());
-        int x = text.getX();
-        int y = text.getY();
-        int fontSize = text.getFontSize();
-        String content = text.getContent();
+        Color textColor = colorMapper.mapToAwtColor(textField.getColor());
+        int x = textField.getCenterX();
+        int y = textField.getCenterY();
+        int fontSize = textField.getFontSize();
+        String content = textField.getContent();
 
         scene.setPaint(textColor);
         scene.setFont(new Font("", Font.PLAIN, fontSize));

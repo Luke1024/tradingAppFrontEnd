@@ -2,39 +2,41 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAnd
 
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.TimeStampCoord;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
-import frontend.chartDrawer.chartGenerator.chartParts.Color;
-import frontend.chartDrawer.chartGenerator.chartParts.Text;
+import frontend.chartDrawer.chartGenerator.chartParts.TextField;
 import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
-import org.springframework.stereotype.Component;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-@Component
 public class TimeStampTextEditorEngine {
-    private final static double charWidthInPixFontSizeMultiplier = 1;
-    private final static double charHeightInPixFontSizeMultiplier = 1.5;
 
-    public List<Text> process(List<Text> timeStampDescriptionsPositioned, List<TimeStampCoord> timeStampCoords,
-                              ChartDataDto chartDataDto) {
+    public List<TextField> process(List<TextField> timeStampDescriptionsPositioned, List<TimeStampCoord> timeStampCoords,
+                                   ChartDataDto chartDataDto) {
 
         ViewTimeFrame viewTimeFrame = chartDataDto.getViewTimeFrame();
 
         List<String> content = filterContentBasedOnViewTimeFrameRules(timeStampCoords, viewTimeFrame);
 
-        return addContentAndParametersToText(timeStampDescriptionsPositioned, content, chartDataDto);
+        return addContentToTextField(timeStampDescriptionsPositioned, content);
     }
 
     private List<String> filterContentBasedOnViewTimeFrameRules(List<TimeStampCoord> timeStampCoord,
                                                                 ViewTimeFrame viewTimeFrame) {
         List<String> contentFiltered = new ArrayList<>();
 
-        switch(viewTimeFrame){
-            case D1: contentFiltered = hoursOnly(timeStampCoord);
-            case W1:
-            case M1: contentFiltered = monthAndDayNumber(timeStampCoord);
-            case Y1: contentFiltered = yearNumberAndMonth(timeStampCoord);
-            case MAX: contentFiltered = year(timeStampCoord);
+        if(viewTimeFrame == ViewTimeFrame.D1) {
+            contentFiltered = hoursOnly(timeStampCoord);
+        }
+        if(viewTimeFrame == ViewTimeFrame.W1) {
+            contentFiltered = monthAndDayNumber(timeStampCoord);
+        }
+        if(viewTimeFrame == ViewTimeFrame.M1) {
+            contentFiltered = yearNumberAndMonth(timeStampCoord);
+        }
+        if(viewTimeFrame == ViewTimeFrame.MAX) {
+            contentFiltered = year(timeStampCoord);
         }
         return contentFiltered;
     }
@@ -51,8 +53,10 @@ public class TimeStampTextEditorEngine {
     private List<String> monthAndDayNumber(List<TimeStampCoord> timeStampCoords) {
         List<String> content = new ArrayList<>();
 
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM d", Locale.ENGLISH);
+
         for(TimeStampCoord timeStamp : timeStampCoords) {
-            content.add(timeStamp.getTimeStamp().getMonth() + " " + timeStamp.getTimeStamp().getDayOfMonth());
+            content.add(timeStamp.getTimeStamp().format(dateTimeFormatter));
         }
         return content;
     }
@@ -60,8 +64,10 @@ public class TimeStampTextEditorEngine {
     private List<String> yearNumberAndMonth(List<TimeStampCoord> timeStampCoords) {
         List<String> content = new ArrayList<>();
 
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM yyyy", Locale.ENGLISH);
+
         for(TimeStampCoord timeStamp : timeStampCoords) {
-            content.add(timeStamp.getTimeStamp().getYear() + " " + timeStamp.getTimeStamp().getMonth());
+            content.add(timeStamp.getTimeStamp().format(dateTimeFormatter));
         }
         return content;
     }
@@ -76,31 +82,10 @@ public class TimeStampTextEditorEngine {
         return content;
     }
 
-    private List<Text> addContentAndParametersToText(List<Text> timeStampDescriptionPositioned, List<String> content,
-                                                     ChartDataDto chartDataDto) {
-
-        Color color = new Color(chartDataDto.getChartConfig().getTextColorRGB());
-        int fontSize = chartDataDto.getChartConfig().getDescriptionFontSize();
-
-        List<Text> finishedTextObjects = new ArrayList<>();
+    private List<TextField> addContentToTextField(List<TextField> timeStampDescriptionPositioned, List<String> content) {
         for(int i=0;i<content.size();i++){
-            Text timeStamp = timeStampDescriptionPositioned.get(i);
-            String timeStampContent = content.get(i);
-
-            int x = (int) computeXPosition(timeStamp, fontSize, timeStampContent);
-            int y = (int) computeYPosition(fontSize, timeStampContent);
-
-            finishedTextObjects.add(new Text(color,x,y,fontSize,timeStampContent));
+            timeStampDescriptionPositioned.get(i).setContent(content.get(i));
         }
-        return finishedTextObjects;
-    }
-
-    private double computeXPosition(Text timeStamp, int fontSize, String timeStampContent) {
-        int textLenght = timeStampContent.length();
-        return textLenght * fontSize * charWidthInPixFontSizeMultiplier;
-    }
-
-    private double computeYPosition(int fontSize, String timeStampContent) {
-        return fontSize * charHeightInPixFontSizeMultiplier;
+        return timeStampDescriptionPositioned;
     }
 }
