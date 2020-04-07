@@ -68,4 +68,13 @@ public class Color {
                 getGreen() == color.getGreen() &&
                 getBlue() == color.getBlue();
     }
+
+    @Override
+    public String toString() {
+        return "Color{" +
+                "red=" + red +
+                ", green=" + green +
+                ", blue=" + blue +
+                '}';
+    }
 }
