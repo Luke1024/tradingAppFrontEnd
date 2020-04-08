@@ -22,7 +22,6 @@ public class VerticalLinesGeneratorTest {
     public void generateLinesTest() {
         ChartDataDto chartDataDto = mock(ChartDataDto.class, Mockito.RETURNS_DEEP_STUBS);
 
-        //List<TimeStampCoord> timeStampCoords = mock(List.class, Mockito.RETURNS_DEEP_STUBS);
         List<TimeStampCoord> timeStampCoords = new ArrayList<>();
 
         TimeStampCoord timeStampCoord0 = new TimeStampCoord(0, LocalDateTime.now(),0);

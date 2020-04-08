@@ -3,6 +3,7 @@ package frontend.chartDrawer.chartGenerator;
 import com.vaadin.flow.component.html.Image;
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.*;
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.ChartGridAndDescriptionGenerator;
+import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartLineGenerator.ChartLineGenerator;
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartVisualizer.Visualizer;
 import frontend.chartDrawer.chartGenerator.chartParts.*;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;

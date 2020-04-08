@@ -8,6 +8,13 @@ public class Line extends ChartPart {
     private int x2;
     private int y2;
 
+    public Line(int x1, int y1, int x2, int y2) {
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
+    }
+
     public Line(Color color, int thickness, int x1, int y1, int x2, int y2) {
         this.color = color;
         this.thickness = thickness;
@@ -39,6 +46,14 @@ public class Line extends ChartPart {
 
     public int getY2() {
         return y2;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public void setThickness(int thickness) {
+        this.thickness = thickness;
     }
 
     @Override

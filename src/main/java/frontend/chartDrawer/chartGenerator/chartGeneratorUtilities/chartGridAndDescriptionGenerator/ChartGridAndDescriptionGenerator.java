@@ -14,6 +14,8 @@ public class ChartGridAndDescriptionGenerator {
     private VisibleTimeStampsFilter visibleTimeStampsFilter = new VisibleTimeStampsFilter();
     private TimeStampDescriptionGenerator timeStampDescriptionGenerator = new TimeStampDescriptionGenerator();
     private VerticalLinesGenerator verticalLinesGenerator = new VerticalLinesGenerator();
+    //private PriceDescriptionGenerator priceDescriptionGenerator = new PriceDescriptionGenerator();
+    //private HorizontalLinesGenerator horizontalLinesGenerator = new HorizontalLinesGenerator();
 
     public List<ChartPart> generate(ChartDataDto chartDataDto) {
         List<ChartPart> chartParts = new ArrayList<>();
