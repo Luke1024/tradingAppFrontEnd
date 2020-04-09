@@ -32,7 +32,7 @@ public class VerticalLinesGenerator {
     private Line positionLine(TimeStampCoord timeStampCoord){
         int x = chartBoxX + timeStampCoord.getX();
         int y1 = chartBoxY;
-        int y2 = chartBoxY - chartBoxHeight;
+        int y2 = chartBoxY + chartBoxHeight;
 
         return new Line(lineColor,lineThickness, x, y1, x, y2);
     }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="frontend.chartDrawer.chartGenerator.ChartGeneratorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-04-09T15:53:11" hostname="luke-desktop" time="0.225">
+  <properties/>
+  <testcase name="generateChart" classname="frontend.chartDrawer.chartGenerator.ChartGeneratorTest" time="0.225"/>
+  <system-out><![CDATA[frontend.config.ChartConfig@10df76e8
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -11,6 +11,18 @@ public class LineCoordinatesPositioner {
     public List<Line> process(List<Integer> valuesScaledToPixels, ChartDataDto chartDataDto) {
         double step = computeStepSize(chartDataDto, valuesScaledToPixels);
 
+        List<Line> connectPointsWithLines = connectLines(valuesScaledToPixels, step);
+        return moveLinesToMatchChartBoxPositioning(connectPointsWithLines, chartDataDto);
+    }
+
+    private double computeStepSize(ChartDataDto chartDataDto, List<Integer> valuesScaledToPixels){
+        int chartBoxWidth = chartDataDto.getChartConfig().getChartBoxWidth();
+        int dataPointsNumber = valuesScaledToPixels.size();
+
+        return ((double) chartBoxWidth) / dataPointsNumber;
+    }
+
+    private List<Line> connectLines(List<Integer> valuesScaledToPixels, double step){
         List<Line> lines = new ArrayList<>();
         for(int i=0; i<valuesScaledToPixels.size()-1; i++){
             int x1 = (int) step * i;
@@ -22,10 +34,19 @@ public class LineCoordinatesPositioner {
         return lines;
     }
 
-    private double computeStepSize(ChartDataDto chartDataDto, List<Integer> valuesScaledToPixels){
-        int chartBoxWidth = chartDataDto.getChartConfig().getChartBoxWidth();
-        int dataPointsNumber = valuesScaledToPixels.size();
+    private List<Line> moveLinesToMatchChartBoxPositioning(List<Line> lines, ChartDataDto chartDataDto){
+        int topChartBoxMargin = chartDataDto.getChartConfig().getChartBoxLeftBottomCornerY();
+        int leftChartBoxMargin = chartDataDto.getChartConfig().getChartBoxLeftBottomCornerX();
 
-        return ((double) chartBoxWidth) / dataPointsNumber;
+        List<Line> movedLines = new ArrayList<>();
+
+        for(Line line : lines){
+            int x1 = line.getX1() + leftChartBoxMargin;
+            int y1 = line.getY1() + topChartBoxMargin;
+            int x2 = line.getX2() + leftChartBoxMargin;
+            int y2 = line.getY2() + topChartBoxMargin;
+            movedLines.add(new Line(line.getColor(),line.getThickness(),x1,y1,x2,y2));
+        }
+        return movedLines;
     }
 }

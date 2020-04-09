@@ -38,7 +38,7 @@ public class CoordinateReverser {
         Color fillColor = rectangle.getFillColor();
         boolean isFill = rectangle.isFill();
         int x = rectangle.getX();
-        int y = imageHeight - rectangle.getY();
+        int y = imageHeight - rectangle.getY() - rectangle.getHeight();
         int width = rectangle.getWidth();
         int height = rectangle.getHeight();
 

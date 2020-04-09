@@ -33,7 +33,7 @@ public class ChartConfig {
 
     //chart line settings
     private int lineThicknessInPix = 2;
-    private String lineColorRGB = "255,0,0";
+    private String lineColorRGB = "0,0,0";
     private int lineChartBoxHeightRangeInPercentage = 80;
 
     //background settings

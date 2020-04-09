@@ -72,7 +72,7 @@ public class ChartGenerator {
     private Rectangle generateBackGround(ChartConfig chartConfig) {
         Color backGroundColor = new Color(chartConfig.getBackGroundColor());
 
-        Rectangle rectangle = new Rectangle(backGroundColor,2,backGroundColor, true,
+        Rectangle rectangle = new Rectangle(backGroundColor,2,backGroundColor, false,
                 0,0,chartConfig.getChartWidth(), chartConfig.getChartHeight());
         return rectangle;
     }

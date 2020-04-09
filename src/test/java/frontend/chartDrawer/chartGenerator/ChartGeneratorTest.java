@@ -6,8 +6,10 @@ import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
 import frontend.client.dto.CurrencyOverviewDto;
 import frontend.client.dto.DataPointDto;
 import frontend.config.ChartConfig;
+import frontend.config.ChartConfigReader;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +24,8 @@ public class ChartGeneratorTest {
 
     private List<DataPointDto> dataPointDtoListCorrect = Arrays.asList(dataPointDtoCorrect, dataPointDtoCorrect);
 
+    private ChartConfigReader chartConfigReader = new ChartConfigReader();
+
     private CurrencyOverviewDto currencyOverviewDtoCorrect =
             new CurrencyOverviewDto("EURUSD", LocalDateTime.now(), dataPointDtoListCorrect);
 
@@ -32,7 +36,7 @@ public class ChartGeneratorTest {
     }
 
     @Test
-    public void generateChart() {
+    public void generateChart() throws IOException {
         double min = 2.0;
         double max = 3.0;
         int pointRange = 120;
@@ -46,7 +50,7 @@ public class ChartGeneratorTest {
         }
         CurrencyOverviewDto currencyOverviewDto = new CurrencyOverviewDto("EURUSD", now.plusDays(120), pointValues);
 
-        ChartConfig chartConfig = new ChartConfig();
+        ChartConfig chartConfig = chartConfigReader.readConfigFile("/home/luke/test_vaadin_project/vaadin_experimenting/src/test/resources/chart_config.properties");
 
         ChartDataDto chartDataDto = new ChartDataDto(currencyOverviewDto, ViewTimeFrame.D1, chartConfig);
 

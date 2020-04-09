@@ -35,7 +35,7 @@ public class CoordinateReverserTest {
 
         reversedParts.addAll(Arrays.asList(
                 new Line(40,140,120,60),
-                new Rectangle(30,160,60,80),
+                new Rectangle(30,80,60,80),
                 new TextField(20,160)
         ));
 

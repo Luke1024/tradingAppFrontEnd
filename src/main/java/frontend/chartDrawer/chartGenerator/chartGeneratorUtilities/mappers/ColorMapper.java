@@ -6,6 +6,6 @@ import java.awt.*;
 
 public class ColorMapper {
     public Color mapToAwtColor(frontend.chartDrawer.chartGenerator.chartParts.Color color) {
-        return new Color(color.getRed(), color.getBlue(), color.getGreen());
+        return new Color(color.getRed(), color.getGreen(), color.getBlue());
     }
 }

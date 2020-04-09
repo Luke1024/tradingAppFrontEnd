@@ -21,8 +21,8 @@ public class Visualizer {
 
     public void visualize(List<ChartPart> chartPartsList, ChartDataDto chartDataDto) {
         chartParts = chartPartsList;
-        int imageWidth = 2000;//chartParameters.getUniversal().getWidth();
-        int imageHeight = 2000; //chartParameters.getUniversal().getHeight();
+        int imageWidth = chartDataDto.getChartConfig().getChartWidth();
+        int imageHeight = chartDataDto.getChartConfig().getChartHeight();
         frontend.chartDrawer.chartGenerator.chartParts.Color backGround =
                 new frontend.chartDrawer.chartGenerator.chartParts.Color(
                         chartDataDto.getChartConfig().getBackGroundColor());
@@ -40,42 +40,12 @@ public class Visualizer {
             drawerExecutor(chartPart,scene);
         }
         try{
-            File outputFile = new File("image.jpg");
+            File outputFile = new File("image.png");
             ImageIO.write(image, "png", outputFile);
         } catch (IOException e) {
         }
 
     }
-
-    /*
-    public void visualize(List<ChartPart> chartPartList, ChartParameters chartParameters) {
-        System.out.println("execution go so far");
-
-        parameters = chartParameters;
-        chartParts = chartPartList;
-
-        JFrame f = new JFrame("Chart Visualizer");
-        f.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);}
-        });
-        JApplet applet = new Visualizer();
-        f.getContentPane().add("Center", applet);
-        applet.init();
-        f.pack();
-        f.setSize(new Dimension(parameters.getUniversal().getWidth(), parameters.getUniversal().getHeight()));
-        f.setVisible(true);
-
-        Graphics2D g2 = new Graphics2D() {
-        };
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setPaint(colorMapper.mapToAwtColor(parameters.getBackGround().getColor()));
-
-        for(ChartPart chartPart : chartParts) {
-            drawerExecutor(chartPart, g2);
-        }
-    }
-    */
 
     private Graphics2D drawerExecutor(ChartPart chartPart, Graphics2D scene) {
 

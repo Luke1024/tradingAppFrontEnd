@@ -2,6 +2,7 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartLineGen
 
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.chartDrawer.chartGenerator.chartParts.Line;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -20,6 +21,8 @@ public class LineCoordinatesPositionerTest {
     public void testLineCoordinatesPositioning() {
         ChartDataDto chartDataDto = mock(ChartDataDto.class, Mockito.RETURNS_DEEP_STUBS);
         when(chartDataDto.getChartConfig().getChartBoxWidth()).thenReturn(100);
+        when(chartDataDto.getChartConfig().getChartBoxLeftBottomCornerX()).thenReturn(10);
+        when(chartDataDto.getChartConfig().getChartBoxLeftBottomCornerY()).thenReturn(20);
 
         List<Integer> valuesInPixelHeights = new ArrayList<>();
         valuesInPixelHeights.addAll(Arrays.asList(20,60,150));
@@ -27,11 +30,10 @@ public class LineCoordinatesPositionerTest {
         List<Line> positionedLines = new ArrayList<>();
 
         positionedLines.addAll(Arrays.asList(
-                new Line(0,20,33,60),
-                new Line(33,60,66,150)
+                new Line(10,40,43,80),
+                new Line(43,80,76,170)
         ));
 
-        positionedLines = lineCoordinatesPositioner.process(valuesInPixelHeights, chartDataDto);
+        Assert.assertEquals(positionedLines.toString(),lineCoordinatesPositioner.process(valuesInPixelHeights, chartDataDto).toString());
     }
-
 }

@@ -43,7 +43,7 @@ public class ChartLineGenerator {
     }
 
     private List<Line> setColorAndThickness(List<Line> chartLineLines, ChartDataDto chartDataDto){
-        Color lineColor = new Color(chartDataDto.getChartConfig().getChartBoxLineColorRGB());
+        Color lineColor = new Color(chartDataDto.getChartConfig().getLineColorRGB());
         int lineThickness = chartDataDto.getChartConfig().getLineThicknessInPix();
 
         for(Line line : chartLineLines) {
