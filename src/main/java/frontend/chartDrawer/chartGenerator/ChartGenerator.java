@@ -21,8 +21,8 @@ public class ChartGenerator {
     private IncomingObjectTester incomingObjectTester = new IncomingObjectTester();
     private ChartGridAndDescriptionGenerator gridAndDescriptionGenerator = new ChartGridAndDescriptionGenerator();
     private ChartLineGenerator chartLineGenerator = new ChartLineGenerator();
-    private ChartPartsDrawer chartPartsDrawer = new ChartPartsDrawer();
     private CoordinateReverser coordinateReverser = new CoordinateReverser();
+    private ChartPartsDrawer chartPartsDrawer = new ChartPartsDrawer();
     private Visualizer visualizer = new Visualizer();
 
     public Image generateChart(ChartDataDto chartDataDto) {

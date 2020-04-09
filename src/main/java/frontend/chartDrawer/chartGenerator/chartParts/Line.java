@@ -1,7 +1,7 @@
 package frontend.chartDrawer.chartGenerator.chartParts;
 
 public class Line extends ChartPart {
-    private Color color;
+    private Color color = new Color();
     private int thickness;
     private int x1;
     private int y1;

@@ -24,8 +24,8 @@ public class CoordinateReverser {
         int thickness = line.getThickness();
         int x1 = line.getX1();
         int y1 = height - line.getY1();
-        int x2 = height - line.getX2();
-        int y2 = line.getY2();
+        int x2 = line.getX2();
+        int y2 = height - line.getY2();
 
         return new Line(color,thickness,x1,y1,x2,y2);
     }

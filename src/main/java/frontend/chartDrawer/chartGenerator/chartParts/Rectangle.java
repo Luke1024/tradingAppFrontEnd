@@ -10,6 +10,13 @@ public class Rectangle extends ChartPart {
     private int width;
     private int height;
 
+    public Rectangle(int x, int y, int width, int height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+
     public Rectangle(Color color, double thickness, Color fillColor,
                      boolean fill, int x, int y, int width, int height) {
         this.color = color;
@@ -52,5 +59,19 @@ public class Rectangle extends ChartPart {
 
     public int getHeight() {
         return height;
+    }
+
+    @Override
+    public String toString() {
+        return "Rectangle{" +
+                "color=" + color +
+                ", thickness=" + thickness +
+                ", fillColor=" + fillColor +
+                ", fill=" + fill +
+                ", x=" + x +
+                ", y=" + y +
+                ", width=" + width +
+                ", height=" + height +
+                '}';
     }
 }

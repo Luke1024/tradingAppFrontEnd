@@ -1,7 +1,6 @@
 package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartLineGenerator.utilities;
 
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
-import frontend.chartDrawer.chartGenerator.chartParts.Color;
 import frontend.chartDrawer.chartGenerator.chartParts.Line;
 
 import java.util.ArrayList;
@@ -10,7 +9,7 @@ import java.util.List;
 public class LineCoordinatesPositioner {
 
     public List<Line> process(List<Integer> valuesScaledToPixels, ChartDataDto chartDataDto) {
-        double step = computeStepSize(chartDataDto);
+        double step = computeStepSize(chartDataDto, valuesScaledToPixels);
 
         List<Line> lines = new ArrayList<>();
         for(int i=0; i<valuesScaledToPixels.size()-1; i++){
@@ -23,9 +22,9 @@ public class LineCoordinatesPositioner {
         return lines;
     }
 
-    private double computeStepSize(ChartDataDto chartDataDto){
+    private double computeStepSize(ChartDataDto chartDataDto, List<Integer> valuesScaledToPixels){
         int chartBoxWidth = chartDataDto.getChartConfig().getChartBoxWidth();
-        int dataPointsNumber = chartDataDto.getCurrencyOverviewDto().getDataPoints().size();
+        int dataPointsNumber = valuesScaledToPixels.size();
 
         return ((double) chartBoxWidth) / dataPointsNumber;
     }

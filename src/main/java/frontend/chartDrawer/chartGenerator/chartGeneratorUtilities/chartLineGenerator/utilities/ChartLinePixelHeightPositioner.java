@@ -11,7 +11,7 @@ public class ChartLinePixelHeightPositioner {
                 .getLineChartBoxHeightRangeInPercentage());
 
         int chartLineRangeInPix = getChartLineRangeInPix(verticalRangePercent, chartDataDto);
-        int bottomMargin = getBottomMargin(verticalRangePercent, chartLineRangeInPix);
+        int bottomMargin = getBottomMargin(chartLineRangeInPix, chartDataDto);
 
         return computePixelHeight(scaledValuesInDataPoints,chartLineRangeInPix,bottomMargin);
     }
@@ -24,11 +24,12 @@ public class ChartLinePixelHeightPositioner {
 
     private int getChartLineRangeInPix(int verticalRangePercent, ChartDataDto chartDataDto) {
         int chartBoxHeight = chartDataDto.getChartConfig().getChartBoxHeight();
-        return (int) ((double) verticalRangePercent/100 * chartBoxHeight);
+        return (int) ((verticalRangePercent/100.0) * chartBoxHeight);
     }
 
-    private int getBottomMargin(int verticalRangePercent, int chartLineRangeInPix) {
-        int bottomAndTopMargin = (int) (((double) 100 - verticalRangePercent) * chartLineRangeInPix);
+    private int getBottomMargin(int chartLineRangeInPix, ChartDataDto chartDataDto) {
+        int chartBoxHeight = chartDataDto.getChartConfig().getChartBoxHeight();
+        int bottomAndTopMargin = chartBoxHeight - chartLineRangeInPix;
         return bottomAndTopMargin/2;
     }
 
