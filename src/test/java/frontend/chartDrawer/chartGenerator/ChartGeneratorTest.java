@@ -45,14 +45,14 @@ public class ChartGeneratorTest {
         Random random = new Random();
         List<DataPointDto> pointValues = new ArrayList<>();
 
-        for(int i=0; i<120; i++){
+        for(int i=0; i<189; i++){
             pointValues.add(generateDataPoint(min, max, now, i));
         }
         CurrencyOverviewDto currencyOverviewDto = new CurrencyOverviewDto("EURUSD", now.plusDays(120), pointValues);
 
         ChartConfig chartConfig = chartConfigReader.readConfigFile("/home/luke/test_vaadin_project/vaadin_experimenting/src/test/resources/chart_config.properties");
 
-        ChartDataDto chartDataDto = new ChartDataDto(currencyOverviewDto, ViewTimeFrame.D1, chartConfig);
+        ChartDataDto chartDataDto = new ChartDataDto(currencyOverviewDto, ViewTimeFrame.W1, chartConfig);
 
         chartGenerator.visualizeChart(chartDataDto);
     }

@@ -1,9 +1,6 @@
 package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator;
 
-import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.TimeStampCoord;
-import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.TimeStampDescriptionGenerator;
-import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.VerticalLinesGenerator;
-import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.VisibleTimeStampsFilter;
+import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.*;
 import frontend.chartDrawer.chartGenerator.chartParts.*;
 
 import java.util.ArrayList;
@@ -14,8 +11,9 @@ public class ChartGridAndDescriptionGenerator {
     private VisibleTimeStampsFilter visibleTimeStampsFilter = new VisibleTimeStampsFilter();
     private TimeStampDescriptionGenerator timeStampDescriptionGenerator = new TimeStampDescriptionGenerator();
     private VerticalLinesGenerator verticalLinesGenerator = new VerticalLinesGenerator();
-    //private PriceDescriptionGenerator priceDescriptionGenerator = new PriceDescriptionGenerator();
-    //private HorizontalLinesGenerator horizontalLinesGenerator = new HorizontalLinesGenerator();
+    private VisibleValueFilter visibleValueFilter = new VisibleValueFilter();
+    private ValueDescriptionGenerator priceDescriptionGenerator = new ValueDescriptionGenerator();
+    private HorizontalLinesGenerator horizontalLinesGenerator = new HorizontalLinesGenerator();
 
     public List<ChartPart> generate(ChartDataDto chartDataDto) {
         List<ChartPart> chartParts = new ArrayList<>();
@@ -36,7 +34,7 @@ public class ChartGridAndDescriptionGenerator {
 
     private List<ChartPart> generateHorizontalLinesWithTextDescription(ChartDataDto chartDataDto) {
         List<ChartPart> chartParts = new ArrayList<>();
-        //List<TimeStampCoord> priceCoords = visiblePriceFilter.process(chartParameters);
+        //List<TimeStampCoord> priceCoords = visibleValueFilter.process(chartDataDto);
         return chartParts;
     }
 }
