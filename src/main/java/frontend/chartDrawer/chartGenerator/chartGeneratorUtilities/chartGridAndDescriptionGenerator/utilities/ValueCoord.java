@@ -24,4 +24,12 @@ public class ValueCoord {
     public double getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        return "ValueCoord{" +
+                "y=" + y +
+                ", value=" + value +
+                '}';
+    }
 }

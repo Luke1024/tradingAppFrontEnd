@@ -47,12 +47,12 @@ public class RangeAnalyzerTest {
         ChartDataDto chartDataDto = mock(ChartDataDto.class, Mockito.RETURNS_DEEP_STUBS);
 
         when(chartDataDto.getChartConfig().getChartHeight()).thenReturn(200);
-        when(chartDataDto.getChartConfig().getTextElementHeight()).thenReturn(30);
+        when(chartDataDto.getChartConfig().getTextElementHeight()).thenReturn(20);
         when(chartDataDto.getChartConfig().getChartBoxHeight()).thenReturn(160);
         when(chartDataDto.getChartConfig().getLineChartBoxHeightRangeInPercentage()).thenReturn(100);
         when(chartDataDto.getChartConfig().getChartBoxLeftBottomCornerY()).thenReturn(30);
 
-        RangeAnalyzer.Range expectedRange = new RangeAnalyzer.Range(45, 175);
+        RangeAnalyzer.Range expectedRange = new RangeAnalyzer.Range(40, 180);
 
         Assert.assertEquals(expectedRange.toString(), rangeAnalyzer.minMaxTextFieldPosition(chartDataDto).toString());
     }
