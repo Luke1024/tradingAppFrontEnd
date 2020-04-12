@@ -13,16 +13,16 @@ public class ValueCoord {
         this.value = value;
     }
 
-    public void setY(int y) {
-        this.y = y;
-    }
-
     public int getY() {
         return y;
     }
 
     public double getValue() {
         return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
     }
 
     @Override

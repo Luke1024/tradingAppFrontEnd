@@ -34,7 +34,7 @@ public class ChartGridAndDescriptionGenerator {
 
     private List<ChartPart> generateHorizontalLinesWithTextDescription(ChartDataDto chartDataDto) {
         List<ChartPart> chartParts = new ArrayList<>();
-        //List<TimeStampCoord> priceCoords = visibleValueFilter.process(chartDataDto);
+        List<ValueCoord> priceCoords = visibleValueFilter.process(chartDataDto);
         return chartParts;
     }
 }
