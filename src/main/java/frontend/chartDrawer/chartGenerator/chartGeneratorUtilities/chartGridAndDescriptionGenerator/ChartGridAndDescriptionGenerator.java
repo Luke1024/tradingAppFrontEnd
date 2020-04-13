@@ -36,7 +36,7 @@ public class ChartGridAndDescriptionGenerator {
         List<ChartPart> chartParts = new ArrayList<>();
         List<ValueCoord> priceCoords = visibleValueFilter.process(chartDataDto);
         chartParts.addAll(valueDescriptionGenerator.process(priceCoords, chartDataDto));
-        //chartParts.addAll(horizontalLinesGenerator.process(priceCoords, chartDataDto));
+        chartParts.addAll(horizontalLinesGenerator.process(priceCoords, chartDataDto));
 
         return chartParts;
     }
