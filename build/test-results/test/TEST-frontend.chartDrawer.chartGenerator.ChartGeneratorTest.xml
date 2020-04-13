@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="frontend.chartDrawer.chartGenerator.ChartGeneratorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2020-04-13T15:49:38" hostname="luke-desktop" time="1.269">
+  <properties/>
+  <testcase name="generateChart" classname="frontend.chartDrawer.chartGenerator.ChartGeneratorTest" time="1.052"/>
+  <testcase name="testWhenChartDataDtoNull" classname="frontend.chartDrawer.chartGenerator.ChartGeneratorTest" time="0.216"/>
+  <system-out><![CDATA[frontend.config.ChartConfig@1196b229
+20
+]]></system-out>
+  <system-err><![CDATA[kwi 13, 2020 5:49:39 PM frontend.chartDrawer.chartGenerator.ChartGenerator generateChart
+WARNING: Objects are not properly initialized.
+]]></system-err>
+</testsuite>

@@ -2,6 +2,7 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities;
 
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.server.StreamResource;
+import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartPartDrawerUtilities.*;
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.mappers.ColorMapper;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartPart;
@@ -22,22 +23,19 @@ public class ChartPartsDrawer {
     int reloads = 0;
 
     private ColorMapper colorMapper = new ColorMapper();
+    private ScenePreparator scenePreparator = new ScenePreparator();
+    private ObjectSorter objectSorter = new ObjectSorter();
+    private RectangleDrawer rectangleDrawer = new RectangleDrawer();
+    private LineDrawer lineDrawer = new LineDrawer();
+    private TextDrawer textDrawer = new TextDrawer();
 
     public Image draw (List<ChartPart> chartPartsToDraw, ChartDataDto chartDataDto) {
 
-        int imageWidth = chartDataDto.getChartConfig().getChartWidth();
-        int imageHeight = chartDataDto.getChartConfig().getChartHeight();
-        frontend.chartDrawer.chartGenerator.chartParts.Color backgroudColor =
-                new frontend.chartDrawer.chartGenerator.chartParts.Color(chartDataDto.getChartConfig().getBackGroundColor());
+        ScenePreparator.Prepared prepared = scenePreparator.prepare(chartDataDto);
+        Graphics2D scene = prepared.getScene();
+        BufferedImage image = prepared.getImage();
 
-        Color imageBackGroundColor = colorMapper.mapToAwtColor(backgroudColor);
-
-        BufferedImage image = new BufferedImage (imageWidth, imageHeight,
-                BufferedImage.TYPE_INT_RGB);
-        Graphics2D scene = image.createGraphics();
-        scene.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        scene.setColor(imageBackGroundColor);
+        ObjectSorter.Parts parts = objectSorter.sort(chartPartsToDraw);
 
         for(ChartPart chartPart : chartPartsToDraw) {
             drawerExecutor(chartPart,scene);
