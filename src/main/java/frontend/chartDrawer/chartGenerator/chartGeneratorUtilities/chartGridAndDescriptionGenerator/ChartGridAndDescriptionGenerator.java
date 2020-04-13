@@ -12,7 +12,7 @@ public class ChartGridAndDescriptionGenerator {
     private TimeStampDescriptionGenerator timeStampDescriptionGenerator = new TimeStampDescriptionGenerator();
     private VerticalLinesGenerator verticalLinesGenerator = new VerticalLinesGenerator();
     private VisibleValueFilter visibleValueFilter = new VisibleValueFilter();
-    private ValueDescriptionGenerator priceDescriptionGenerator = new ValueDescriptionGenerator();
+    private ValueDescriptionGenerator valueDescriptionGenerator = new ValueDescriptionGenerator();
     private HorizontalLinesGenerator horizontalLinesGenerator = new HorizontalLinesGenerator();
 
     public List<ChartPart> generate(ChartDataDto chartDataDto) {
@@ -35,6 +35,9 @@ public class ChartGridAndDescriptionGenerator {
     private List<ChartPart> generateHorizontalLinesWithTextDescription(ChartDataDto chartDataDto) {
         List<ChartPart> chartParts = new ArrayList<>();
         List<ValueCoord> priceCoords = visibleValueFilter.process(chartDataDto);
+        chartParts.addAll(valueDescriptionGenerator.process(priceCoords, chartDataDto));
+        //chartParts.addAll(horizontalLinesGenerator.process(priceCoords, chartDataDto));
+
         return chartParts;
     }
 }
