@@ -43,7 +43,7 @@ public class PositionValueCalculator {
         int coordRange = ranges.maxCoord - ranges.minCoord;
         double valueRange = ranges.maxValue - ranges.minValue;
 
-        double heightCoefficient = (((double) valueCoord.getY()) - ranges.minCoord)/coordRange;
+        double heightCoefficient = ((double) (valueCoord.getY() - ranges.minCoord))/coordRange;
 
         return valueRange * heightCoefficient + ranges.minValue;
     }

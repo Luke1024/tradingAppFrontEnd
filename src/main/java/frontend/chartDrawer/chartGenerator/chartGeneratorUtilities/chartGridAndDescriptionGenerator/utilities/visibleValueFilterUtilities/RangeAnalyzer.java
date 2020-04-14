@@ -21,7 +21,6 @@ public class RangeAnalyzer {
         int chartLineHeightRangeInPercent = chartDataDto.getChartConfig().getLineChartBoxHeightRangeInPercentage();
         double heightCoefficient = ((double) chartLineHeightRangeInPercent)/100;
 
-        System.out.println((int) ((chartBoxHeight - chartBoxHeight * heightCoefficient)/2));
         return (int) ((chartBoxHeight - chartBoxHeight * heightCoefficient)/2);
     }
 

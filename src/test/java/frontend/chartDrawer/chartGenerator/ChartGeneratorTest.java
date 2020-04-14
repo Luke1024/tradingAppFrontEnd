@@ -39,13 +39,12 @@ public class ChartGeneratorTest {
     public void generateChart() throws IOException {
         double min = 2.0;
         double max = 3.0;
-        int pointRange = 120;
         LocalDateTime now = LocalDateTime.now();
 
         Random random = new Random();
         List<DataPointDto> pointValues = new ArrayList<>();
 
-        for(int i=0; i<189; i++){
+        for(int i=0; i<3; i++){
             pointValues.add(generateDataPoint(min, max, now, i));
         }
         CurrencyOverviewDto currencyOverviewDto = new CurrencyOverviewDto("EURUSD", now.plusDays(120), pointValues);

@@ -14,12 +14,13 @@ public class VisibleTimeStampsFilter {
         int textElementWidth = chartDataDto.getChartConfig().getTextElementWidth();
         int chartBoxWidth = chartDataDto.getChartConfig().getChartBoxWidth();
         List<DataPointDto> dataPointDtoList = chartDataDto.getCurrencyOverviewDto().getDataPoints();
+        int stepCount = dataPointDtoList.size()-1;
 
-        double step = ((double) chartBoxWidth / dataPointDtoList.size());
+        double step = chartBoxWidth / stepCount;
 
         int cursor = 0;
         List<TimeStampCoord> availableTimeStamps = new ArrayList<>();
-        for(int i=0; i<dataPointDtoList.size(); i++) {
+        for(int i=0; i<stepCount; i++) {
             int x = (int) (i * step);
             if(isThereSpaceToPlaceElement(cursor, x, textElementWidth) &&
                     isThereSpaceLeftInTheChartBox(x, textElementWidth, chartBoxWidth)) {
