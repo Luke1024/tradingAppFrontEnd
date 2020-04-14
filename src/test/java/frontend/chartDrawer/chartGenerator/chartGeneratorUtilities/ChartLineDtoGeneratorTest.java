@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-public class ChartLineGeneratorTest {
+public class ChartLineDtoGeneratorTest {
 
     private ChartLineGenerator chartLineGenerator = new ChartLineGenerator();
 

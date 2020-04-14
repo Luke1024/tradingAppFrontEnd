@@ -1,6 +1,6 @@
 package frontend.chartDrawer.chartGenerator.chartParts;
 
-public class Rectangle extends ChartPart {
+public class RectangleDto extends ChartPart {
     private Color color;
     private double thickness;
     private Color fillColor;
@@ -10,15 +10,15 @@ public class Rectangle extends ChartPart {
     private int width;
     private int height;
 
-    public Rectangle(int x, int y, int width, int height) {
+    public RectangleDto(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
     }
 
-    public Rectangle(Color color, double thickness, Color fillColor,
-                     boolean fill, int x, int y, int width, int height) {
+    public RectangleDto(Color color, double thickness, Color fillColor,
+                        boolean fill, int x, int y, int width, int height) {
         this.color = color;
         this.thickness = thickness;
         this.fillColor = fillColor;

@@ -2,7 +2,7 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAnd
 
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;
-import frontend.chartDrawer.chartGenerator.chartParts.Line;
+import frontend.chartDrawer.chartGenerator.chartParts.LineDto;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -38,12 +38,12 @@ public class VerticalLinesGeneratorTest {
         when(chartDataDto.getChartConfig().getGridThicknessInPix()).thenReturn(3);
         when(chartDataDto.getChartConfig().getGridColorRGB()).thenReturn("0,0,0");
 
-        Line line0 = new Line(new Color("0,0,0"),3,100,150,100,30);
-        Line line1 = new Line(new Color("0,0,0"),3,150,150,150,30);
-        Line line2 = new Line(new Color("0,0,0"),3,220,150,220,30);
+        LineDto lineDto0 = new LineDto(new Color("0,0,0"),3,100,150,100,30);
+        LineDto lineDto1 = new LineDto(new Color("0,0,0"),3,150,150,150,30);
+        LineDto lineDto2 = new LineDto(new Color("0,0,0"),3,220,150,220,30);
 
-        Assert.assertEquals(line0.toString(),verticalLinesGenerator.process(chartDataDto, timeStampCoords).get(0).toString());
-        Assert.assertEquals(line1.toString(),verticalLinesGenerator.process(chartDataDto, timeStampCoords).get(1).toString());
-        Assert.assertEquals(line2.toString(),verticalLinesGenerator.process(chartDataDto, timeStampCoords).get(2).toString());
+        Assert.assertEquals(lineDto0.toString(),verticalLinesGenerator.process(chartDataDto, timeStampCoords).get(0).toString());
+        Assert.assertEquals(lineDto1.toString(),verticalLinesGenerator.process(chartDataDto, timeStampCoords).get(1).toString());
+        Assert.assertEquals(lineDto2.toString(),verticalLinesGenerator.process(chartDataDto, timeStampCoords).get(2).toString());
     }
 }

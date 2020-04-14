@@ -2,7 +2,7 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAnd
 
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.TimeStampCoord;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
-import frontend.chartDrawer.chartGenerator.chartParts.TextField;
+import frontend.chartDrawer.chartGenerator.chartParts.TextFieldDto;
 import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
 
 import java.time.format.DateTimeFormatter;
@@ -12,8 +12,8 @@ import java.util.Locale;
 
 public class TimeStampTextEditorEngine {
 
-    public List<TextField> process(List<TextField> timeStampDescriptionsPositioned, List<TimeStampCoord> timeStampCoords,
-                                   ChartDataDto chartDataDto) {
+    public List<TextFieldDto> process(List<TextFieldDto> timeStampDescriptionsPositioned, List<TimeStampCoord> timeStampCoords,
+                                      ChartDataDto chartDataDto) {
 
         ViewTimeFrame viewTimeFrame = chartDataDto.getViewTimeFrame();
 
@@ -82,7 +82,7 @@ public class TimeStampTextEditorEngine {
         return content;
     }
 
-    private List<TextField> addContentToTextField(List<TextField> timeStampDescriptionPositioned, List<String> content) {
+    private List<TextFieldDto> addContentToTextField(List<TextFieldDto> timeStampDescriptionPositioned, List<String> content) {
         for(int i=0;i<content.size();i++){
             timeStampDescriptionPositioned.get(i).setContent(content.get(i));
         }

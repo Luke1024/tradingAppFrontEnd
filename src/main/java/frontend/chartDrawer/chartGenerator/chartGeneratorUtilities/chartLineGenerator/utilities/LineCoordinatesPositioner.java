@@ -1,18 +1,18 @@
 package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartLineGenerator.utilities;
 
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
-import frontend.chartDrawer.chartGenerator.chartParts.Line;
+import frontend.chartDrawer.chartGenerator.chartParts.LineDto;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LineCoordinatesPositioner {
 
-    public List<Line> process(List<Integer> valuesScaledToPixels, ChartDataDto chartDataDto) {
+    public List<LineDto> process(List<Integer> valuesScaledToPixels, ChartDataDto chartDataDto) {
         double step = computeStepSize(chartDataDto, valuesScaledToPixels);
 
-        List<Line> connectPointsWithLines = connectLines(valuesScaledToPixels, step);
-        return moveLinesToMatchChartBoxPositioning(connectPointsWithLines, chartDataDto);
+        List<LineDto> connectPointsWithLineDtos = connectLines(valuesScaledToPixels, step);
+        return moveLinesToMatchChartBoxPositioning(connectPointsWithLineDtos, chartDataDto);
     }
 
     private double computeStepSize(ChartDataDto chartDataDto, List<Integer> valuesScaledToPixels){
@@ -22,31 +22,31 @@ public class LineCoordinatesPositioner {
         return ((double) chartBoxWidth) / dataPointsNumber;
     }
 
-    private List<Line> connectLines(List<Integer> valuesScaledToPixels, double step){
-        List<Line> lines = new ArrayList<>();
+    private List<LineDto> connectLines(List<Integer> valuesScaledToPixels, double step){
+        List<LineDto> lineDtos = new ArrayList<>();
         for(int i=0; i<valuesScaledToPixels.size()-1; i++){
             int x1 = (int) step * i;
             int y1 = valuesScaledToPixels.get(i);
             int x2 = (int) step * (i + 1);
             int y2 = valuesScaledToPixels.get(i + 1);
-            lines.add(new Line(x1,y1,x2,y2));
+            lineDtos.add(new LineDto(x1,y1,x2,y2));
         }
-        return lines;
+        return lineDtos;
     }
 
-    private List<Line> moveLinesToMatchChartBoxPositioning(List<Line> lines, ChartDataDto chartDataDto){
+    private List<LineDto> moveLinesToMatchChartBoxPositioning(List<LineDto> lineDtos, ChartDataDto chartDataDto){
         int topChartBoxMargin = chartDataDto.getChartConfig().getChartBoxLeftBottomCornerY();
         int leftChartBoxMargin = chartDataDto.getChartConfig().getChartBoxLeftBottomCornerX();
 
-        List<Line> movedLines = new ArrayList<>();
+        List<LineDto> movedLineDtos = new ArrayList<>();
 
-        for(Line line : lines){
-            int x1 = line.getX1() + leftChartBoxMargin;
-            int y1 = line.getY1() + topChartBoxMargin;
-            int x2 = line.getX2() + leftChartBoxMargin;
-            int y2 = line.getY2() + topChartBoxMargin;
-            movedLines.add(new Line(line.getColor(),line.getThickness(),x1,y1,x2,y2));
+        for(LineDto lineDto : lineDtos){
+            int x1 = lineDto.getX1() + leftChartBoxMargin;
+            int y1 = lineDto.getY1() + topChartBoxMargin;
+            int x2 = lineDto.getX2() + leftChartBoxMargin;
+            int y2 = lineDto.getY2() + topChartBoxMargin;
+            movedLineDtos.add(new LineDto(lineDto.getColor(), lineDto.getThickness(),x1,y1,x2,y2));
         }
-        return movedLines;
+        return movedLineDtos;
     }
 }

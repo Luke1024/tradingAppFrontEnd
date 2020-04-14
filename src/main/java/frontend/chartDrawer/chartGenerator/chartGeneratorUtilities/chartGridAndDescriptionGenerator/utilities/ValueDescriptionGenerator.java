@@ -2,18 +2,17 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAnd
 
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;
-import frontend.chartDrawer.chartGenerator.chartParts.TextField;
+import frontend.chartDrawer.chartGenerator.chartParts.TextFieldDto;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ValueDescriptionGenerator {
-    public List<TextField> process(List<ValueCoord> valueCoords, ChartDataDto chartDataDto) {
+    public List<TextFieldDto> process(List<ValueCoord> valueCoords, ChartDataDto chartDataDto) {
         List<String> valueInStringRestrictedToPip = convertToStringRestrictedByPip(valueCoords);
-        List<TextField> textFields = positionTextFields(valueCoords, chartDataDto);
-        textFields = addContent(valueInStringRestrictedToPip, textFields);
-        return setColorAndFont(textFields, chartDataDto);
+        List<TextFieldDto> textFieldDtos = positionTextFields(valueCoords, chartDataDto);
+        textFieldDtos = addContent(valueInStringRestrictedToPip, textFieldDtos);
+        return setColorAndFont(textFieldDtos, chartDataDto);
     }
 
     private List<String> convertToStringRestrictedByPip(List<ValueCoord> valueCoords) {
@@ -30,14 +29,14 @@ public class ValueDescriptionGenerator {
 
 
 
-    private List<TextField> positionTextFields(List<ValueCoord> valueCoords, ChartDataDto chartDataDto) {
-        List<TextField> textFields = new ArrayList<>();
+    private List<TextFieldDto> positionTextFields(List<ValueCoord> valueCoords, ChartDataDto chartDataDto) {
+        List<TextFieldDto> textFieldDtos = new ArrayList<>();
         int x = computeXPosition(chartDataDto);
 
         for(ValueCoord valueCoord : valueCoords){
-            textFields.add(new TextField(x, valueCoord.getY()));
+            textFieldDtos.add(new TextFieldDto(x, valueCoord.getY()));
         }
-        return textFields;
+        return textFieldDtos;
     }
 
     private int computeXPosition(ChartDataDto chartDataDto) {
@@ -50,18 +49,18 @@ public class ValueDescriptionGenerator {
         return chartBoxRightEdgeX + textFieldHalfWidth;
     }
 
-    private List<TextField> addContent(List<String> valueInStringRestrictedToPip, List<TextField> textFields) {
-        for(int i=0; i<textFields.size(); i++) {
-            textFields.get(i).setContent(valueInStringRestrictedToPip.get(i));
+    private List<TextFieldDto> addContent(List<String> valueInStringRestrictedToPip, List<TextFieldDto> textFieldDtos) {
+        for(int i = 0; i< textFieldDtos.size(); i++) {
+            textFieldDtos.get(i).setContent(valueInStringRestrictedToPip.get(i));
         }
-        return textFields;
+        return textFieldDtos;
     }
 
-    private List<TextField> setColorAndFont(List<TextField> textFields, ChartDataDto chartDataDto) {
-        for(int i=0; i<textFields.size(); i++) {
-            textFields.get(i).setColor(new Color(chartDataDto.getChartConfig().getTextColorRGB()));
-            textFields.get(i).setFontSize(chartDataDto.getChartConfig().getDescriptionFontSize());
+    private List<TextFieldDto> setColorAndFont(List<TextFieldDto> textFieldDtos, ChartDataDto chartDataDto) {
+        for(int i = 0; i< textFieldDtos.size(); i++) {
+            textFieldDtos.get(i).setColor(new Color(chartDataDto.getChartConfig().getTextColorRGB()));
+            textFieldDtos.get(i).setFontSize(chartDataDto.getChartConfig().getDescriptionFontSize());
         }
-        return textFields;
+        return textFieldDtos;
     }
 }

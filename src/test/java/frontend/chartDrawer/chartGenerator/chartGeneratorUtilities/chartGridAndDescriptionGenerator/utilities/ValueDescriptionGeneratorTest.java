@@ -2,11 +2,10 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAnd
 
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;
-import frontend.chartDrawer.chartGenerator.chartParts.TextField;
+import frontend.chartDrawer.chartGenerator.chartParts.TextFieldDto;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
-import sun.awt.SunHints;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,14 +35,14 @@ public class ValueDescriptionGeneratorTest {
                 new ValueCoord(100, 21.1242352)
         ));
 
-        List<TextField> expectedTextFields = new ArrayList<>();
-        expectedTextFields.addAll(Arrays.asList(
-                new TextField(new Color("50,50,50"),230,50,20,"0,1232"),
-                new TextField(new Color("50,50,50"),230,75,20,"1,2134"),
-                new TextField(new Color("50,50,50"),230,100,20,"21,1242")
+        List<TextFieldDto> expectedTextFieldDtos = new ArrayList<>();
+        expectedTextFieldDtos.addAll(Arrays.asList(
+                new TextFieldDto(new Color("50,50,50"),230,50,20,"0,1232"),
+                new TextFieldDto(new Color("50,50,50"),230,75,20,"1,2134"),
+                new TextFieldDto(new Color("50,50,50"),230,100,20,"21,1242")
         ));
 
 
-        Assert.assertEquals(expectedTextFields.toString(), generator.process(valueCoords,chartDataDto).toString());
+        Assert.assertEquals(expectedTextFieldDtos.toString(), generator.process(valueCoords,chartDataDto).toString());
     }
 }

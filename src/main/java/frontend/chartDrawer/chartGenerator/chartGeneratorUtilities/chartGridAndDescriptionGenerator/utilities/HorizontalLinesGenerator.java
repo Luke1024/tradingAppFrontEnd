@@ -2,14 +2,14 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAnd
 
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;
-import frontend.chartDrawer.chartGenerator.chartParts.Line;
+import frontend.chartDrawer.chartGenerator.chartParts.LineDto;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HorizontalLinesGenerator {
 
-    public List<Line> process(List<ValueCoord> valueCoords, ChartDataDto chartDataDto) {
+    public List<LineDto> process(List<ValueCoord> valueCoords, ChartDataDto chartDataDto) {
         int chartBoxLeftEdge = chartDataDto.getChartConfig().getChartBoxLeftBottomCornerX();
         int chartBoxWidth = chartDataDto.getChartConfig().getChartBoxWidth();
 
@@ -19,12 +19,12 @@ public class HorizontalLinesGenerator {
         Color lineColor = new Color(chartDataDto.getChartConfig().getGridColorRGB());
         int thickness = chartDataDto.getChartConfig().getGridThicknessInPix();
 
-        List<Line> horizontalLines = new ArrayList<>();
+        List<LineDto> horizontalLineDtos = new ArrayList<>();
         for(ValueCoord valueCoord : valueCoords) {
             int y = valueCoord.getY();
-            horizontalLines.add(new Line(lineColor, thickness, xStart, y, xStop, y));
+            horizontalLineDtos.add(new LineDto(lineColor, thickness, xStart, y, xStop, y));
         }
-        return horizontalLines;
+        return horizontalLineDtos;
     }
 
 }

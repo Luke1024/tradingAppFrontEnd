@@ -25,18 +25,18 @@ public class CoordinateReverserTest {
         List<ChartPart> listOfParts = new ArrayList<>();
 
         listOfParts.addAll(Arrays.asList(
-                new Line(40,60,120,140),
-                new Rectangle(30,40,60,80),
-                new TextField(20,40)
+                new LineDto(40,60,120,140),
+                new RectangleDto(30,40,60,80),
+                new TextFieldDto(20,40)
         ));
 
 
         List<ChartPart> reversedParts = new ArrayList<>();
 
         reversedParts.addAll(Arrays.asList(
-                new Line(40,140,120,60),
-                new Rectangle(30,80,60,80),
-                new TextField(20,160)
+                new LineDto(40,140,120,60),
+                new RectangleDto(30,80,60,80),
+                new TextFieldDto(20,160)
         ));
 
         Assert.assertEquals(reversedParts.toString(), coordinateReverser.reverse(listOfParts, chartDataDto).toString());

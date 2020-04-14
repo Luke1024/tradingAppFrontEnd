@@ -2,7 +2,7 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAnd
 
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.TimeStampCoord;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
-import frontend.chartDrawer.chartGenerator.chartParts.TextField;
+import frontend.chartDrawer.chartGenerator.chartParts.TextFieldDto;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -36,12 +36,12 @@ public class TimeStampDescriptionPositionerTest {
         when(chartDataDto.getChartConfig().getChartBoxLeftBottomCornerY()).thenReturn(150);
         when(chartDataDto.getChartConfig().getTextElementHeight()).thenReturn(30);
 
-        TextField textField0 = new TextField(200, 135);
-        TextField textField1 = new TextField(300, 135);
-        TextField textField2 = new TextField(400, 135);
+        TextFieldDto textFieldDto0 = new TextFieldDto(200, 135);
+        TextFieldDto textFieldDto1 = new TextFieldDto(300, 135);
+        TextFieldDto textFieldDto2 = new TextFieldDto(400, 135);
 
-        Assert.assertEquals(textField0.toString(), timeStampDescriptionPositioner.process(chartDataDto, timeStampCoords).get(0).toString());
-        Assert.assertEquals(textField1.toString(), timeStampDescriptionPositioner.process(chartDataDto, timeStampCoords).get(1).toString());
-        Assert.assertEquals(textField2.toString(), timeStampDescriptionPositioner.process(chartDataDto, timeStampCoords).get(2).toString());
+        Assert.assertEquals(textFieldDto0.toString(), timeStampDescriptionPositioner.process(chartDataDto, timeStampCoords).get(0).toString());
+        Assert.assertEquals(textFieldDto1.toString(), timeStampDescriptionPositioner.process(chartDataDto, timeStampCoords).get(1).toString());
+        Assert.assertEquals(textFieldDto2.toString(), timeStampDescriptionPositioner.process(chartDataDto, timeStampCoords).get(2).toString());
     }
 }

@@ -1,18 +1,18 @@
 package frontend.chartDrawer.chartGenerator.chartParts;
 
-public class TextField extends ChartPart {
+public class TextFieldDto extends ChartPart {
     private Color color;
     private int centerX;
     private int centerY;
     private int fontSize;
     private String content;
 
-    public TextField(int centerX, int centerY) {
+    public TextFieldDto(int centerX, int centerY) {
         this.centerX = centerX;
         this.centerY = centerY;
     }
 
-    public TextField(Color color, int centerX, int centerY, int fontSize, String content) {
+    public TextFieldDto(Color color, int centerX, int centerY, int fontSize, String content) {
         this.color = color;
         this.centerX = centerX;
         this.centerY = centerY;

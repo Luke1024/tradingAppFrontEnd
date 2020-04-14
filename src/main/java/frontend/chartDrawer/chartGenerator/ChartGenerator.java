@@ -7,7 +7,7 @@ import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartLineGene
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartVisualizer.Visualizer;
 import frontend.chartDrawer.chartGenerator.chartParts.*;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;
-import frontend.chartDrawer.chartGenerator.chartParts.Rectangle;
+import frontend.chartDrawer.chartGenerator.chartParts.RectangleDto;
 import frontend.config.ChartConfig;
 
 import java.util.*;
@@ -69,15 +69,15 @@ public class ChartGenerator {
         return chartPartsDrawer.draw(parts, chartDataDto);
     }
 
-    private Rectangle generateBackGround(ChartConfig chartConfig) {
+    private RectangleDto generateBackGround(ChartConfig chartConfig) {
         Color backGroundColor = new Color(chartConfig.getBackGroundColor());
 
-        Rectangle rectangle = new Rectangle(backGroundColor,2,backGroundColor, false,
+        RectangleDto rectangleDto = new RectangleDto(backGroundColor,2,backGroundColor, false,
                 0,0,chartConfig.getChartWidth(), chartConfig.getChartHeight());
-        return rectangle;
+        return rectangleDto;
     }
 
-    private Rectangle generateChartBoxBorder(ChartConfig chartConfig) {
+    private RectangleDto generateChartBoxBorder(ChartConfig chartConfig) {
         int x = chartConfig.getChartBoxLeftBottomCornerX();
         int y = chartConfig.getChartBoxLeftBottomCornerY();
 
@@ -87,6 +87,6 @@ public class ChartGenerator {
         Color borderColor = new Color(chartConfig.getChartBoxLineColorRGB());
         int thickness = chartConfig.getChartBoxLineThicknessInPix();
 
-        return new Rectangle(borderColor,thickness,borderColor,false, x,y,width,height);
+        return new RectangleDto(borderColor,thickness,borderColor,false, x,y,width,height);
     }
 }

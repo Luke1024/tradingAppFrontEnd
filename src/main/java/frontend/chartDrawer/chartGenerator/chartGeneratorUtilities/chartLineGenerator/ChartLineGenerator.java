@@ -5,7 +5,7 @@ import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartLineGene
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartLineGenerator.utilities.ChartLinePixelHeightPositioner;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;
-import frontend.chartDrawer.chartGenerator.chartParts.Line;
+import frontend.chartDrawer.chartGenerator.chartParts.LineDto;
 import frontend.client.dto.DataPointDto;
 
 import java.util.List;
@@ -17,12 +17,12 @@ public class ChartLineGenerator {
     private ChartLinePixelHeightPositioner chartLinePixelHeightPositioner = new ChartLinePixelHeightPositioner();
     private LineCoordinatesPositioner lineCoordinatesPositioner = new LineCoordinatesPositioner();
 
-    public List<Line> generate(ChartDataDto chartDataDto) {
+    public List<LineDto> generate(ChartDataDto chartDataDto) {
 
         List<Double> scaledValuesInDataPoints = minMaxScalling(chartDataDto);
         List<Integer> pixelsHeights = processValuesToPixelHeight(scaledValuesInDataPoints, chartDataDto);
-        List<Line> chartLineLines = drawLinesBetweenPoints(pixelsHeights, chartDataDto);
-        return setColorAndThickness(chartLineLines, chartDataDto);
+        List<LineDto> chartLineLineDtos = drawLinesBetweenPoints(pixelsHeights, chartDataDto);
+        return setColorAndThickness(chartLineLineDtos, chartDataDto);
     }
 
     private List<Double> minMaxScalling(ChartDataDto chartDataDto) {
@@ -38,18 +38,18 @@ public class ChartLineGenerator {
         return chartLinePixelHeightPositioner.process(scaledValuesInDataPoints, chartDataDto);
     }
 
-    private List<Line> drawLinesBetweenPoints(List<Integer> valuesScaledToPixels, ChartDataDto chartDataDto) {
+    private List<LineDto> drawLinesBetweenPoints(List<Integer> valuesScaledToPixels, ChartDataDto chartDataDto) {
         return lineCoordinatesPositioner.process(valuesScaledToPixels, chartDataDto);
     }
 
-    private List<Line> setColorAndThickness(List<Line> chartLineLines, ChartDataDto chartDataDto){
+    private List<LineDto> setColorAndThickness(List<LineDto> chartLineLineDtos, ChartDataDto chartDataDto){
         Color lineColor = new Color(chartDataDto.getChartConfig().getLineColorRGB());
         int lineThickness = chartDataDto.getChartConfig().getLineThicknessInPix();
 
-        for(Line line : chartLineLines) {
-            line.setColor(lineColor);
-            line.setThickness(lineThickness);
+        for(LineDto lineDto : chartLineLineDtos) {
+            lineDto.setColor(lineColor);
+            lineDto.setThickness(lineThickness);
         }
-        return chartLineLines;
+        return chartLineLineDtos;
     }
 }

@@ -20,7 +20,7 @@ fontSizeRightMarginMultiplier = 5;
 frameLeftMarginPix = 5;
 frameTopMarginPix = 5;
 
-//frame rectangle settings
+//frame rectangleDto settings
 frameThicknessInPix = 2;
 frameColorRGB = "0,0,255";
 
@@ -29,7 +29,7 @@ minimalDistanceBetweenGridLines = 3;
 gridThicknessInPix = 1;
 gridColorRGB = "0,255,0";
 
-//chart line settings
+//chart lineDto settings
 lineThicknessInPix = 2;
 lineColorRGB = "255,0,0";
 

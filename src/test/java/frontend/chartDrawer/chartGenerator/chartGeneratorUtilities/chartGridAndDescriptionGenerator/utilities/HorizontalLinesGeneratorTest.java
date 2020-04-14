@@ -2,7 +2,7 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAnd
 
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.chartDrawer.chartGenerator.chartParts.Color;
-import frontend.chartDrawer.chartGenerator.chartParts.Line;
+import frontend.chartDrawer.chartGenerator.chartParts.LineDto;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -33,13 +33,13 @@ public class HorizontalLinesGeneratorTest {
                 new ValueCoord(110)
         ));
 
-        List<Line> expectedLines = new ArrayList<>();
-        expectedLines.addAll(Arrays.asList(
-                new Line(new Color("30,30,30"),2,10,50,200,50),
-                new Line(new Color("30,30,30"),2,10,80,200,80),
-                new Line(new Color("30,30,30"),2,10,110,200,110)
+        List<LineDto> expectedLineDtos = new ArrayList<>();
+        expectedLineDtos.addAll(Arrays.asList(
+                new LineDto(new Color("30,30,30"),2,10,50,200,50),
+                new LineDto(new Color("30,30,30"),2,10,80,200,80),
+                new LineDto(new Color("30,30,30"),2,10,110,200,110)
         ));
 
-        Assert.assertEquals(expectedLines.toString(), generator.process(valueCoords, chartDataDto).toString());
+        Assert.assertEquals(expectedLineDtos.toString(), generator.process(valueCoords, chartDataDto).toString());
     }
 }
