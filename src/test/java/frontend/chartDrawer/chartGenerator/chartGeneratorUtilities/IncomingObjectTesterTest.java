@@ -1,8 +1,8 @@
 package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities;
 
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
+import frontend.chartDrawer.chartGenerator.chartParts.CurrencyOverviewDto;
 import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
-import frontend.client.dto.CurrencyOverviewDto;
 import frontend.client.dto.DataPointDto;
 import frontend.config.ChartConfig;
 import org.junit.Assert;

@@ -2,9 +2,8 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities;
 
 import frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartLineGenerator.ChartLineGenerator;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
-import frontend.client.dto.CurrencyOverviewDto;
+import frontend.chartDrawer.chartGenerator.chartParts.CurrencyOverviewDto;
 import frontend.client.dto.DataPointDto;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDateTime;

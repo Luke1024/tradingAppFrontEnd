@@ -2,8 +2,8 @@ package frontend.chartDrawer.chartGenerator;
 
 import com.vaadin.flow.component.html.Image;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
+import frontend.chartDrawer.chartGenerator.chartParts.CurrencyOverviewDto;
 import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
-import frontend.client.dto.CurrencyOverviewDto;
 import frontend.client.dto.DataPointDto;
 import frontend.config.ChartConfig;
 import frontend.config.ChartConfigReader;

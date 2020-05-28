@@ -6,23 +6,41 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import frontend.client.BackEndClient;
+import frontend.views.utilities.CurrencyPairChartWindowGenerator;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Route
 public class MainView extends VerticalLayout {
+    private Logger logger = Logger.getLogger(MainView.class.getName());
     private Button logIn = new Button("Log In");
     private Button signIn = new Button("Sign In");
     private BackEndClient backEndClient = new BackEndClient();
     private int zoom = 0;
+    private CurrencyPairChartWindowGenerator currencyPairChartWindowGenerator =
+            new CurrencyPairChartWindowGenerator();
 
     public MainView() throws IOException {
         HorizontalLayout toolbar = new HorizontalLayout(logIn, signIn);
-        Text text = new Text("EUR/USD 1.09");
+
+        List<String> availableCurrencyPairs = new ArrayList<>();
+        try {
+            availableCurrencyPairs = backEndClient.getAvailableCurrencyPairs();
+            if(availableCurrencyPairs.size()==0){
+                logger.log(Level.WARNING, "There is no Currency Pairs available.");
+            }
+        } catch (Exception e){
+            logger.log(Level.WARNING, e.toString());
+        }
+
+        List<HorizontalLayout> currencyPairCharts = currencyPairChartWindowGenerator.generate(availableCurrencyPairs);
 
         HorizontalLayout imageHolder = new HorizontalLayout();
-        //HorizontalLayout horizontalLayout = new HorizontalLayout(text, imageHolder);
-
+        HorizontalLayout horizontalLayout = new HorizontalLayout(text, imageHolder);
 
         //solve requesting currencyPair one by one with CurrencyOverviewDto, control zoom with number of dataPoints
         //for(CurrencyOverviewDto currencyOverviewDto : overviewDtoPack.getOverviews()){

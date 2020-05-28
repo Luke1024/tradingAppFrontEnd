@@ -1,6 +1,5 @@
 package frontend.chartDrawer.chartGenerator.chartParts;
 
-import frontend.client.dto.CurrencyOverviewDto;
 import frontend.config.ChartConfig;
 
 public class ChartDataDto {

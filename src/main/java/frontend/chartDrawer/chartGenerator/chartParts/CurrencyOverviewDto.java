@@ -1,4 +1,6 @@
-package frontend.client.dto;
+package frontend.chartDrawer.chartGenerator.chartParts;
+
+import frontend.client.dto.DataPointDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
