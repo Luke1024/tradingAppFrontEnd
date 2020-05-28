@@ -9,8 +9,10 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,7 +27,7 @@ public class BackEndClient {
     private Gson gson = new Gson();
 
     public List<String> getAvailableCurrencyPairs(){
-        URI url = UriComponentsBuilder.fromHttpUrl(clientConfig.getGetAvailablePairs()).build().encode().toUri();
+        URI url = UriComponentsBuilder.fromHttpUrl(clientConfig.getServerAdress() + clientConfig.getGetAvailablePairs()).build().encode().toUri();
         String[] currencies = restTemplate.getForObject(url, String[].class);
         return Arrays.asList(currencies);
     }
@@ -38,7 +40,12 @@ public class BackEndClient {
         }
         URI url = UriComponentsBuilder.fromHttpUrl(clientConfig.getServerAdress() + clientConfig.getGetCurrencyPairDataPoints() +
                 serialize(pairDataRequest)).build().encode().toUri();
-        DataPointDto[] dataPointDtos = restTemplate.getForObject(url, DataPointDto[].class);
+        DataPointDto[] dataPointDtos = null;
+        try {
+            dataPointDtos = restTemplate.getForObject(url, DataPointDto[].class);
+        } catch (Exception e){
+            logger.log(Level.WARNING, (Supplier<String>) e);
+        }
         return Arrays.asList(dataPointDtos);
     }
 
@@ -48,11 +55,17 @@ public class BackEndClient {
 
     private PairDataRequestDto mapToPairDataRequestDto(PairDataRequest pairDataRequest){
         try {
+            String adoptedLastPoint = "";;
+            if(pairDataRequest.isFromLastPoint() == false ){
+                if(pairDataRequest.getAdoptedlastPoint() != null){
+                    adoptedLastPoint = pairDataRequest.getAdoptedlastPoint().toString();
+                }
+            }
             return new PairDataRequestDto(pairDataRequest.getCurrencyName(),
                     pairDataRequest.getNumberOfDataPoints(),
                     pairDataRequest.getPointTimeFrame().name(),
                     pairDataRequest.isFromLastPoint(),
-                    pairDataRequest.getAdoptedlastPoint().toString());
+                    adoptedLastPoint);
         } catch (Exception e){
             return null;
         }

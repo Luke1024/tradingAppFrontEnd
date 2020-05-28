@@ -1,5 +1,6 @@
 package frontend.views.utilities;
 
+import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
 import frontend.client.dto.PointTimeFrame;
 
 import java.util.ArrayList;
@@ -10,13 +11,14 @@ public class AvailableViews {
     private int defaultViewIndex = 0;
 
     private List<View> views = new ArrayList<>(Arrays.asList(
-            new View("Week",168, PointTimeFrame.H1),
-            new View("Month",144, PointTimeFrame.H5),
-            new View("Year", 365, PointTimeFrame.D1),
-            new View("All", 500, PointTimeFrame.M1)));
+            new View("Day",24,PointTimeFrame.H1, ViewTimeFrame.D1),
+            new View("Week",168, PointTimeFrame.H1, ViewTimeFrame.W1),
+            new View("Month",144, PointTimeFrame.H5, ViewTimeFrame.M1),
+            new View("Year", 365, PointTimeFrame.D1, ViewTimeFrame.Y1),
+            new View("All", 500, PointTimeFrame.M1, ViewTimeFrame.MAX)));
 
-    public int getDefaultViewIndex() {
-        return defaultViewIndex;
+    public View getDefaultView() {
+        return views.get(defaultViewIndex);
     }
 
     public List<View> getViews() {

@@ -26,6 +26,8 @@ public class MainView extends VerticalLayout {
 
     public MainView() throws IOException {
         HorizontalLayout toolbar = new HorizontalLayout(logIn, signIn);
+        HorizontalLayout chartsWindows = new HorizontalLayout();
+
 
         List<String> availableCurrencyPairs = new ArrayList<>();
         try {
@@ -37,10 +39,18 @@ public class MainView extends VerticalLayout {
             logger.log(Level.WARNING, e.toString());
         }
 
-        List<HorizontalLayout> currencyPairCharts = currencyPairChartWindowGenerator.generate(availableCurrencyPairs);
+        List<VerticalLayout> currencyPairCharts = currencyPairChartWindowGenerator.generate(availableCurrencyPairs);
+        for(VerticalLayout verticalLayout : currencyPairCharts){
+            if(verticalLayout != null) {
+                chartsWindows.add(verticalLayout);
+            }
+        }
 
-        HorizontalLayout imageHolder = new HorizontalLayout();
-        HorizontalLayout horizontalLayout = new HorizontalLayout(text, imageHolder);
+        add(toolbar);
+        add(chartsWindows);
+
+        //HorizontalLayout imageHolder = new HorizontalLayout();
+        //HorizontalLayout horizontalLayout = new HorizontalLayout(text, imageHolder);
 
         //solve requesting currencyPair one by one with CurrencyOverviewDto, control zoom with number of dataPoints
         //for(CurrencyOverviewDto currencyOverviewDto : overviewDtoPack.getOverviews()){
@@ -49,8 +59,8 @@ public class MainView extends VerticalLayout {
         //Image image = chartGenerator.drawBasicChart(zoom ,overviewDtoPack.getOverviews().get(0));
         //imageHolder.add(image);
 
-        HorizontalLayout buttons = new HorizontalLayout(logIn, signIn);
-        add(buttons);
+        //HorizontalLayout buttons = new HorizontalLayout(logIn, signIn);
+        //add(buttons);
 
         /*
         Image image = universalChartDrawer.getBlank();
