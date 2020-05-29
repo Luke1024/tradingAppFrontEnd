@@ -1,10 +1,12 @@
-package com.finance.domain.dto.currencyPair;
+package frontend.client.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DataPointDtoPack {
     private List<DataPointDto> dataPointDtoList;
+
+    public DataPointDtoPack() {
+    }
 
     public DataPointDtoPack(List<DataPointDto> dataPointDtoList) {
         this.dataPointDtoList = dataPointDtoList;

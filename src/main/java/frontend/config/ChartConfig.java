@@ -25,15 +25,15 @@ public class ChartConfig {
 
     //chartbox line settings
     private int chartBoxLineThicknessInPix = 2;
-    private String chartBoxLineColorRGB = "0,0,255";
+    private String chartBoxLineColorRGB = "0,150,0";
 
     //grid settings
     private int gridThicknessInPix = 1;
-    private String gridColorRGB = "0,255,0";
+    private String gridColorRGB = "0,100,0";
 
     //chart line settings
     private int lineThicknessInPix = 2;
-    private String lineColorRGB = "0,0,0";
+    private String lineColorRGB = "0,255,0";
     private int lineChartBoxHeightRangeInPercentage = 80;
 
     //background settings

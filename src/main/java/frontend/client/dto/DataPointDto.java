@@ -6,6 +6,9 @@ public class DataPointDto {
     private LocalDateTime timeStamp;
     private double value;
 
+    public DataPointDto() {
+    }
+
     public DataPointDto(LocalDateTime timeStamp, double value) {
         this.timeStamp = timeStamp;
         this.value = value;

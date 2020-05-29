@@ -2,6 +2,7 @@ package frontend.client;
 
 import com.google.gson.Gson;
 import frontend.client.dto.DataPointDto;
+import frontend.client.dto.DataPointDtoPack;
 import frontend.client.dto.PairDataRequest;
 import frontend.client.dto.PairDataRequestDto;
 import frontend.config.ClientConfig;
@@ -9,7 +10,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
@@ -38,19 +38,23 @@ public class BackEndClient {
             logger.log(Level.WARNING, "Problem with mapping PairDataRequest to Dto.");
             return null;
         }
-        URI url = UriComponentsBuilder.fromHttpUrl(clientConfig.getServerAdress() + clientConfig.getGetCurrencyPairDataPoints() +
-                serialize(pairDataRequest)).build().encode().toUri();
-        DataPointDto[] dataPointDtos = null;
+        URI url = UriComponentsBuilder.fromHttpUrl(clientConfig.getServerAdress() + clientConfig.getCurrencyPairDataPoints()).build().encode().toUri();
+        DataPointDtoPack dataPointDtoPack = null;
         try {
-            dataPointDtos = restTemplate.getForObject(url, DataPointDto[].class);
+            dataPointDtoPack = restTemplate.postForObject(url, pairDataRequest, DataPointDtoPack.class);
         } catch (Exception e){
             logger.log(Level.WARNING, (Supplier<String>) e);
         }
-        return Arrays.asList(dataPointDtos);
+        if(dataPointDtoPack.getDataPointDtoList() != null){
+            return dataPointDtoPack.getDataPointDtoList();
+        } else {
+            logger.log(Level.WARNING, "DataPointDto list is null.");
+            return null;
+        }
     }
 
     private String serialize(PairDataRequest pairDataRequest){
-         return gson.toJson(pairDataRequest);
+         return pairDataRequest.toString();
     }
 
     private PairDataRequestDto mapToPairDataRequestDto(PairDataRequest pairDataRequest){

@@ -46,4 +46,13 @@ public class PairDataRequest {
     public LocalDateTime getAdoptedlastPoint() {
         return adoptedlastPoint;
     }
+
+    @Override
+    public String toString() {
+        return "currencyName=" + currencyName +
+                "&numberOfDataPoints=" + numberOfDataPoints +
+                "&pointTimeFrame=" + pointTimeFrame +
+                "&fromLastPoint=" + fromLastPoint +
+                "&adoptedlastPoint=" + adoptedlastPoint;
+    }
 }
