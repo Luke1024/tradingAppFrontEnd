@@ -1,14 +1,23 @@
 package frontend.views;
 
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import frontend.chartDrawer.chartGenerator.ChartGenerator;
+import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
+import frontend.chartDrawer.chartGenerator.chartParts.CurrencyOverviewDto;
+import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
 import frontend.client.BackEndClient;
-import frontend.views.utilities.CurrencyPairChartWindowGenerator;
+import frontend.client.dto.DataPointDto;
+import frontend.client.dto.PairDataRequest;
+import frontend.config.ChartConfig;
+import frontend.views.utilities.*;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,37 +26,108 @@ import java.util.logging.Logger;
 @Route
 public class MainView extends VerticalLayout {
     private Logger logger = Logger.getLogger(MainView.class.getName());
-    private Button logIn = new Button("Log In");
-    private Button signIn = new Button("Sign In");
+    private AvailableViews availableViews = new AvailableViews();
+
     private BackEndClient backEndClient = new BackEndClient();
     private int zoom = 0;
-    private CurrencyPairChartWindowGenerator currencyPairChartWindowGenerator =
-            new CurrencyPairChartWindowGenerator();
+    private ViewTimeFrame defaultViewTimeFrame = ViewTimeFrame.D1;
+    private ChartConsoleGenerator chartConsoleGenerator = new ChartConsoleGenerator();
+    private ChartGenerator chartGenerator = new ChartGenerator();
+    private ChartImageController chartImageController = new ChartImageController();
+    private ChartStatusSaver chartStatusSaver = null;
 
     public MainView() throws IOException {
+        Button logIn = new Button("Log In");
+        Button signIn = new Button("Sign In");
+
         HorizontalLayout toolbar = new HorizontalLayout(logIn, signIn);
-        HorizontalLayout chartsWindows = new HorizontalLayout();
 
-
-        List<String> availableCurrencyPairs = new ArrayList<>();
-        try {
-            availableCurrencyPairs = backEndClient.getAvailableCurrencyPairs();
-            if(availableCurrencyPairs.size()==0){
-                logger.log(Level.WARNING, "There is no Currency Pairs available.");
-            }
-        } catch (Exception e){
-            logger.log(Level.WARNING, e.toString());
-        }
-
-        List<VerticalLayout> currencyPairCharts = currencyPairChartWindowGenerator.generate(availableCurrencyPairs);
-        for(VerticalLayout verticalLayout : currencyPairCharts){
-            if(verticalLayout != null) {
-                chartsWindows.add(verticalLayout);
-            }
-        }
+        List<String> availableCurrencyPairs = getAvailableCurrencyPairs();
+        HorizontalLayout chartConsole = chartConsoleGenerator.generateConsole(this,availableCurrencyPairs);
 
         add(toolbar);
-        add(chartsWindows);
+        add(chartConsole);
+        Image image = generateChartImage(zoom, defaultViewTimeFrame, availableCurrencyPairs.get(0));
+        add(image);
+    }
+
+    private List<String> getAvailableCurrencyPairs(){
+        List<String> availableCurrencyPairs = null;
+        try {
+            availableCurrencyPairs = backEndClient.getAvailableCurrencyPairs();
+            if (availableCurrencyPairs.size() == 0) {
+                logger.log(Level.WARNING, "There is no Currency Pairs available.");
+            }
+        } catch (Exception e) {
+            logger.log(Level.WARNING, e.toString());
+        }
+        return availableCurrencyPairs;
+    }
+
+    private Image generateChartImage(int zoom, ViewTimeFrame viewTimeFrame, String currencyPairName){
+        PairDataRequest pairDataRequest = generatePairDataRequest(currencyPairName);
+        List<DataPointDto> dataPointDtos = new ArrayList<>();
+        if(pairDataRequest != null){
+            dataPointDtos = backEndClient.getCurrencyPairDataPoints(pairDataRequest);
+        }
+        Image chartImage = null;
+        if(dataPointDtos != null){
+            chartImage = getChartImage(dataPointDtos, pairDataRequest);
+        }
+        if(chartImage == null){
+            return null;
+        } else return chartImage;
+    }
+
+    private PairDataRequest generatePairDataRequest(String currencyPair){
+        View defaultView = availableViews.getDefaultView();
+        if(defaultView != null){
+            return new PairDataRequest(currencyPair, defaultView.getRequiredPointNumber(),
+                    defaultView.getRequiredPointTimeFrame());
+        } else {
+            return null;
+        }
+    }
+
+    private Image getChartImage(List<DataPointDto> dataPointDtos, PairDataRequest pairDataRequest){
+        ChartDataDto chartDataDto = buildChartDataDto(dataPointDtos, pairDataRequest);
+        return chartGenerator.generateChart(chartDataDto);
+    }
+
+    private ChartDataDto buildChartDataDto(List<DataPointDto> dataPointDtos, PairDataRequest pairDataRequest){
+        View defaultView = availableViews.getDefaultView();
+
+        CurrencyOverviewDto currencyOverviewDto = null;
+        try {
+            currencyOverviewDto = new CurrencyOverviewDto(pairDataRequest.getCurrencyName(), LocalDateTime.now(), dataPointDtos);
+        } catch (Exception e){}
+        if(currencyOverviewDto != null){
+            try {
+                return new ChartDataDto(currencyOverviewDto, defaultView.getTimeFrameInfoForChartGenerator(), new ChartConfig());
+            } catch (Exception e){}
+        }
+        return null;
+    }
+
+    public void switchTimeFrame(View view){
+        System.out.println(view.getButtonName());
+    }
+
+    public void zoomPlus(){
+        System.out.println("+");
+    }
+
+    public void zoomMinus(){
+        System.out.println("-");
+    }
+
+    public void moveLeft(){
+        System.out.println("<-");
+    }
+
+    public void moveRight(){
+        System.out.println("->");
+    }
 
         //HorizontalLayout imageHolder = new HorizontalLayout();
         //HorizontalLayout horizontalLayout = new HorizontalLayout(text, imageHolder);
@@ -124,5 +204,4 @@ public class MainView extends VerticalLayout {
         return universalChartDrawer.getStream(sceneDto);
 
     */
-    }
 }

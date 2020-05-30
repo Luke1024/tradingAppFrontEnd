@@ -1,4 +1,8 @@
 package frontend.views.utilities;
 
-public class CurrencyPairChartView {
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+
+import java.util.logging.Logger;
+
+public class CurrencyPairChartView extends VerticalLayout {
 }

@@ -1,6 +1,7 @@
 package frontend.views.utilities;
 
 import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -30,7 +31,7 @@ public class CurrencyPairChartWindowGenerator {
     private View currentView;
 
     public CurrencyPairChartWindowGenerator(){
-        this.currentView = availableViews.getDefaultView();
+        this.currentView = availableViews.getViews().get(2);
         if(this.currentView == null){
             logger.log(Level.WARNING, "Default View not set.");
         }
@@ -98,9 +99,20 @@ public class CurrencyPairChartWindowGenerator {
         HorizontalLayout buttons = new HorizontalLayout();
 
         for(View view : availableViews.getViews()){
-            buttons.add(view.getButtonName());
-            buttons.addClickListener(event -> {this.currentView = view;});
+            Button button = new Button(view.getButtonName());
+            button.addClickListener(event -> {this.currentView = view;});
+            buttons.add(button);
         }
+        Button buttonZoomPlus = new Button("+");
+        Button buttonZoomMinus = new Button("-");
+        Button moveLeft = new Button("<-");
+        Button moveRight = new Button("->");
+
+        buttons.add(buttonZoomPlus);
+        buttons.add(buttonZoomMinus);
+        buttons.add(moveLeft);
+        buttons.add(moveRight);
+
         HorizontalLayout image = new HorizontalLayout();
         image.add(chartImage);
 
