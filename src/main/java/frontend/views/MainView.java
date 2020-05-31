@@ -1,24 +1,15 @@
 package frontend.views;
 
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import frontend.chartDrawer.chartGenerator.ChartGenerator;
-import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
-import frontend.chartDrawer.chartGenerator.chartParts.CurrencyOverviewDto;
-import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
 import frontend.client.BackEndClient;
-import frontend.client.dto.DataPointDto;
-import frontend.client.dto.PairDataRequest;
-import frontend.config.ChartConfig;
 import frontend.views.utilities.*;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,12 +20,10 @@ public class MainView extends VerticalLayout {
     private AvailableViews availableViews = new AvailableViews();
 
     private BackEndClient backEndClient = new BackEndClient();
-    private int zoom = 0;
-    private ViewTimeFrame defaultViewTimeFrame = ViewTimeFrame.D1;
     private ChartConsoleGenerator chartConsoleGenerator = new ChartConsoleGenerator();
     private ChartGenerator chartGenerator = new ChartGenerator();
-    private ChartImageController chartImageController = new ChartImageController();
-    private ChartStatusSaver chartStatusSaver = null;
+    private ChartImageController chartImageController =
+            new ChartImageController(chartGenerator, backEndClient, availableViews);
 
     public MainView() throws IOException {
         Button logIn = new Button("Log In");
@@ -47,7 +36,7 @@ public class MainView extends VerticalLayout {
 
         add(toolbar);
         add(chartConsole);
-        Image image = generateChartImage(zoom, defaultViewTimeFrame, availableCurrencyPairs.get(0));
+        Image image = chartImageController.setCurrencyPair(availableCurrencyPairs.get(0));
         add(image);
     }
 
@@ -64,69 +53,40 @@ public class MainView extends VerticalLayout {
         return availableCurrencyPairs;
     }
 
-    private Image generateChartImage(int zoom, ViewTimeFrame viewTimeFrame, String currencyPairName){
-        PairDataRequest pairDataRequest = generatePairDataRequest(currencyPairName);
-        List<DataPointDto> dataPointDtos = new ArrayList<>();
-        if(pairDataRequest != null){
-            dataPointDtos = backEndClient.getCurrencyPairDataPoints(pairDataRequest);
-        }
-        Image chartImage = null;
-        if(dataPointDtos != null){
-            chartImage = getChartImage(dataPointDtos, pairDataRequest);
-        }
-        if(chartImage == null){
-            return null;
-        } else return chartImage;
+    public Image switchCurrencyPair(String currencyPair){
+        return chartImageController.setCurrencyPair(currencyPair);
     }
 
-    private PairDataRequest generatePairDataRequest(String currencyPair){
-        View defaultView = availableViews.getDefaultView();
-        if(defaultView != null){
-            return new PairDataRequest(currencyPair, defaultView.getRequiredPointNumber(),
-                    defaultView.getRequiredPointTimeFrame());
-        } else {
-            return null;
-        }
+    public Image switchTimeFrame(View view){
+        return chartImageController.setTimeFrame(view);
     }
 
-    private Image getChartImage(List<DataPointDto> dataPointDtos, PairDataRequest pairDataRequest){
-        ChartDataDto chartDataDto = buildChartDataDto(dataPointDtos, pairDataRequest);
-        return chartGenerator.generateChart(chartDataDto);
+    public Image zoomPlus(){
+        return chartImageController.zoomPlus();
     }
 
-    private ChartDataDto buildChartDataDto(List<DataPointDto> dataPointDtos, PairDataRequest pairDataRequest){
-        View defaultView = availableViews.getDefaultView();
-
-        CurrencyOverviewDto currencyOverviewDto = null;
-        try {
-            currencyOverviewDto = new CurrencyOverviewDto(pairDataRequest.getCurrencyName(), LocalDateTime.now(), dataPointDtos);
-        } catch (Exception e){}
-        if(currencyOverviewDto != null){
-            try {
-                return new ChartDataDto(currencyOverviewDto, defaultView.getTimeFrameInfoForChartGenerator(), new ChartConfig());
-            } catch (Exception e){}
-        }
-        return null;
+    public Image zoomMinus(){
+        return chartImageController.zoomMinus();
     }
 
-    public void switchTimeFrame(View view){
-        System.out.println(view.getButtonName());
+    public Image moveLeft(){
+        return chartImageController.moveLeft();
     }
 
-    public void zoomPlus(){
-        System.out.println("+");
+    public Image moveRight(){
+        return chartImageController.moveRight();
     }
 
-    public void zoomMinus(){
-        System.out.println("-");
+    public Image moveMoreLeft(){
+        return chartImageController.moveMoreLeft();
     }
 
-    public void moveLeft(){
-        System.out.println("<-");
+    public Image moveMoreRight(){
+        return chartImageController.moveMoreRight();
     }
 
-    public void moveRight(){
-        System.out.println("->");
+    public Image resetView(){
+        return chartImageController.resetView();
     }
 
         //HorizontalLayout imageHolder = new HorizontalLayout();

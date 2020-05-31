@@ -23,7 +23,7 @@ public class ChartConsoleGenerator {
             currencyPairBox.setPlaceholder(currencyPairs.get(0));
         }
 
-        currencyPairBox.addValueChangeListener(e -> {System.out.println(e.getValue());});
+        currencyPairBox.addValueChangeListener(e -> {this.mainView.switchCurrencyPair(e.getValue());});
         chartConsole.add(currencyPairBox);
 
         List<Button> buttons = generateChartControlButtons();
@@ -48,6 +48,10 @@ public class ChartConsoleGenerator {
         Button buttonZoomMinus = new Button("-");
         Button moveLeft = new Button("<-");
         Button moveRight = new Button("->");
+        Button moveMoreLeft = new Button("<<");
+        Button moveMoreRight = new Button(">>");
+        Button resetView = new Button("RESET");
+
 
         buttonZoomPlus.addClickListener(e -> {
             this.mainView.zoomPlus();
@@ -61,11 +65,23 @@ public class ChartConsoleGenerator {
         moveRight.addClickListener(e -> {
             System.out.println("->");
         });
+        moveMoreLeft.addClickListener(e -> {
+            System.out.println("<<");
+        });
+        moveMoreRight.addClickListener(e -> {
+            System.out.println(">>");
+        });
+        resetView.addClickListener(e -> {
+            System.out.println("RESET");
+        });
 
         chartControlButtons.add(buttonZoomPlus);
         chartControlButtons.add(buttonZoomMinus);
         chartControlButtons.add(moveLeft);
         chartControlButtons.add(moveRight);
+        chartControlButtons.add(moveMoreLeft);
+        chartControlButtons.add(moveMoreRight);
+        chartControlButtons.add(resetView);
 
         return chartControlButtons;
     }
