@@ -23,7 +23,7 @@ public class ChartImageController {
     private BackEndClient backEndClient;
     private AvailableViews availableViews;
     private ChartScallingMovingSettings chartScallingMovingSettings = new ChartScallingMovingSettings();
-    private ChartPositionCalculator chartPositionCalculator;
+    private ChartPositionCalculator chartPositionCalculator = new ChartPositionCalculator(chartScallingMovingSettings);
     private ChartImageGetter chartImageGetter = new ChartImageGetter(chartGenerator, backEndClient);
 
     public ChartImageController(ChartGenerator chartGenerator, BackEndClient backEndClient,
@@ -56,31 +56,41 @@ public class ChartImageController {
         return chartImageGetter.getImage(this.chartStatusSaver);
     }
 
+    private Image updateImage(ChartStatusSaver chartStatusSaver){
+        if(chartStatusSaver != null) {
+            this.chartStatusSaver = chartStatusSaver;
+        }
+        return chartImageGetter.getImage(this.chartStatusSaver);
+    }
+
     public Image zoomPlus(){
-        System.out.println("+");
+        return updateImage(chartPositionCalculator.zoomPlus(this.chartStatusSaver));
     }
 
     public Image zoomMinus(){
-        System.out.println("-");
+        return updateImage(chartPositionCalculator.zoomMinus(this.chartStatusSaver));
     }
 
     public Image moveLeft(){
-        System.out.println("<-");
+        return updateImage(chartPositionCalculator.zoomLeft(this.chartStatusSaver));
     }
 
     public Image moveRight(){
-        System.out.println("->");
+        return updateImage(chartPositionCalculator.zoomRight(this.chartStatusSaver));
     }
 
     public Image moveMoreLeft(){
-        System.out.println("<<");
+        return updateImage(chartPositionCalculator.zoomMoreLeft(this.chartStatusSaver));
     }
 
     public Image moveMoreRight(){
-        System.out.println(">>");
+        return updateImage(chartPositionCalculator.zoomMoreRight(this.chartStatusSaver));
     }
 
     public Image resetView(){
-
+        View defaultView = getDefaultView();
+        this.chartStatusSaver.setView(defaultView);
+        this.chartStatusSaver.setViewIgnore(false);
+        return chartImageGetter.getImage(this.chartStatusSaver);
     }
 }
