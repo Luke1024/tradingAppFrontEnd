@@ -9,11 +9,10 @@ public class ChartStatusSaver {
     private int pointCount;
     private LocalDateTime stop;
 
-    public ChartStatusSaver(String currencyPair, View view, boolean viewIgnore, int pointCount) {
+    public ChartStatusSaver(String currencyPair, View view, boolean viewIgnore) {
         this.currencyPair = currencyPair;
         this.view = view;
         this.viewIgnore = viewIgnore;
-        this.pointCount = pointCount;
     }
 
     public ChartStatusSaver(String currencyPair, View view, boolean viewIgnore, int pointCount, LocalDateTime stop) {
