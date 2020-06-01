@@ -12,14 +12,18 @@ import frontend.config.ChartConfig;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ChartImageController {
 
+    private Logger logger = Logger.getLogger(ChartImageController.class.getName());
     private ChartStatusSaver chartStatusSaver = null;
     private ChartGenerator chartGenerator;
     private BackEndClient backEndClient;
     private AvailableViews availableViews;
     private ChartPositionCalculator chartPositionCalculator;
+    private ChartImageGetter chartImageGetter = new ChartImageGetter();
 
     public ChartImageController(ChartGenerator chartGenerator, BackEndClient backEndClient,
                                 AvailableViews availableViews) {
@@ -29,64 +33,48 @@ public class ChartImageController {
     }
 
     public Image setCurrencyPair(String currencyPair){
-        View defaultView = getDefaultView();
-        return getDataAndGenerateImage(currencyPair, defaultView);
+        View view = getDefaultView();
+        setCurrencyPair(currencyPair, view);
+        return getDataAndGenerateImage();
     }
+
+
+
+
+
+
 
     private Image getDataAndGenerateImage() {
-        PairDataRequest pairDataRequest = generatePairDataRequest(currencyPair, view);
+        chartImageGetter.getImage(this.chartStatusSaver);
 
-        List<DataPointDto> dataPointDtos = getDataPointDtos(pairDataRequest);
-        Image chartImage = getImage(view, pairDataRequest, dataPointDtos);
-        if(chartImage != null) {
-            setChartStatus(currencyPair, view, dataPointDtos);
-            return chartImage;
-        } else return null;
-    }
-
-    private Image getCustomDataAndGenerateImage(){
 
     }
 
-    private View getDefaultView() {
-        View defaultView = null;
-        if(this.availableViews != null) {
-            if (this.availableViews.getDefaultView() != null) {
-                defaultView = availableViews.getDefaultView();
+
+    private void setCurrencyPair(String currencyPair, View view){
+        if(currencyPair != null && view != null && view.getRequiredPointTimeFrame() != null) {
+            chartStatusSaver = new ChartStatusSaver(currencyPair, view, false, view.getRequiredPointNumber());
+        } else {
+            logger.log(Level.WARNING, "Problem with setting CurrencyPair.");
+        }
+    }
+
+    private View getDefaultView(){
+        if(this.availableViews != null){
+            if(this.availableViews.getDefaultView() != null){
+                return this.availableViews.getDefaultView();
             }
         }
-        return defaultView;
+        return null;
     }
 
-    private PairDataRequest generatePairDataRequest(String currencyPair, View view){
-        if(view.getRequiredPointTimeFrame() != null) {
-            return new PairDataRequest(currencyPair, view.getRequiredPointNumber(),
-                    view.getRequiredPointTimeFrame());
-        } else {
-            return null;
-        }
-    }
 
-    private List<DataPointDto> getDataPointDtos(PairDataRequest pairDataRequest) {
-        List<DataPointDto> dataPointDtos = new ArrayList<>();
-        if(pairDataRequest != null){
-            dataPointDtos = backEndClient.getCurrencyPairDataPoints(pairDataRequest);
-        }
-        return dataPointDtos;
-    }
 
-    private Image getImage(View defaultView, PairDataRequest pairDataRequest, List<DataPointDto> dataPointDtos) {
-        Image chartImage = null;
-        if(dataPointDtos != null){
-            chartImage = getChartImage(dataPointDtos, pairDataRequest, defaultView);
-        }
-        return chartImage;
-    }
 
-    private Image getChartImage(List<DataPointDto> dataPointDtos, PairDataRequest pairDataRequest, View view){
-        ChartDataDto chartDataDto = buildChartDataDto(dataPointDtos, pairDataRequest, view);
-        return chartGenerator.generateChart(chartDataDto);
-    }
+
+
+
+
 
 
 
