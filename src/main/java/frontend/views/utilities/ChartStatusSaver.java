@@ -1,24 +1,24 @@
 package frontend.views.utilities;
 
+import com.vaadin.flow.component.html.Image;
+import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
+import frontend.client.dto.PointTimeFrame;
+
 import java.time.LocalDateTime;
 
 public class ChartStatusSaver {
     private String currencyPair;
-    private View view;
-    private boolean viewIgnore;
+    private PointTimeFrame pointTimeFrame;
+    private ViewTimeFrame viewTimeFrame;
     private int pointCount;
     private LocalDateTime stop;
+    private Image image;
 
-    public ChartStatusSaver(String currencyPair, View view, boolean viewIgnore) {
+    public ChartStatusSaver(String currencyPair, PointTimeFrame pointTimeFrame, ViewTimeFrame viewTimeFrame,
+                            int pointCount, LocalDateTime stop) {
         this.currencyPair = currencyPair;
-        this.view = view;
-        this.viewIgnore = viewIgnore;
-    }
-
-    public ChartStatusSaver(String currencyPair, View view, boolean viewIgnore, int pointCount, LocalDateTime stop) {
-        this.currencyPair = currencyPair;
-        this.view = view;
-        this.viewIgnore = viewIgnore;
+        this.pointTimeFrame = pointTimeFrame;
+        this.viewTimeFrame = viewTimeFrame;
         this.pointCount = pointCount;
         this.stop = stop;
     }
@@ -31,20 +31,20 @@ public class ChartStatusSaver {
         this.currencyPair = currencyPair;
     }
 
-    public View getView() {
-        return view;
+    public PointTimeFrame getPointTimeFrame() {
+        return pointTimeFrame;
     }
 
-    public void setView(View view) {
-        this.view = view;
+    public void setPointTimeFrame(PointTimeFrame pointTimeFrame) {
+        this.pointTimeFrame = pointTimeFrame;
     }
 
-    public boolean isViewIgnore() {
-        return viewIgnore;
+    public ViewTimeFrame getViewTimeFrame() {
+        return viewTimeFrame;
     }
 
-    public void setViewIgnore(boolean viewIgnore) {
-        this.viewIgnore = viewIgnore;
+    public void setViewTimeFrame(ViewTimeFrame viewTimeFrame) {
+        this.viewTimeFrame = viewTimeFrame;
     }
 
     public int getPointCount() {
@@ -61,5 +61,13 @@ public class ChartStatusSaver {
 
     public void setStop(LocalDateTime stop) {
         this.stop = stop;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 }

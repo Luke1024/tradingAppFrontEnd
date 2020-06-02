@@ -26,8 +26,9 @@ public class ChartImageController {
 
     public Image setCurrencyPair(String currencyPair){
         View view = getDefaultView();
-        this.chartStatusSaver = new ChartStatusSaver(currencyPair, view,false);
-        return chartImageGetter.getImage(this.chartStatusSaver);
+        this.chartStatusSaver = new ChartStatusSaver(currencyPair, view.getRequiredPointTimeFrame(),
+                view.getTimeFrameInfoForChartGenerator(), view.getRequiredPointNumber(),null);
+        return updateImage(this.chartStatusSaver);
     }
 
     private View getDefaultView(){
@@ -39,14 +40,24 @@ public class ChartImageController {
         return null;
     }
 
-    public Image setTimeFrame(View view){
-        if(this.chartStatusSaver != null){
-            this.chartStatusSaver.setView(view);
-            this.chartStatusSaver.setViewIgnore(false);
+    public Image setTimeFrame(View view) {
+        if (this.chartStatusSaver != null) {
+            if (view != null) {
+                this.chartStatusSaver.setPointCount(view.getRequiredPointNumber());
+                this.chartStatusSaver.setStop(null);
+            }
+            return updateImage(this.chartStatusSaver);
+        } else {
+            return null;
         }
-        return chartImageGetter.getImage(this.chartStatusSaver);
     }
 
+    public Image resetView(){
+        View defaultView = getDefaultView();
+        this.chartStatusSaver.setPointCount(defaultView.getRequiredPointNumber());
+        this.chartStatusSaver.setStop(null);
+        return updateImage(this.chartStatusSaver);
+    }
 
 
     public Image zoomPlus(){
@@ -73,17 +84,15 @@ public class ChartImageController {
         return updateImage(chartPositionCalculator.zoomMoreRight(this.chartStatusSaver));
     }
 
-    public Image resetView(){
-        View defaultView = getDefaultView();
-        this.chartStatusSaver.setView(defaultView);
-        this.chartStatusSaver.setViewIgnore(false);
-        return chartImageGetter.getImage(this.chartStatusSaver);
-    }
-
     private Image updateImage(ChartStatusSaver chartStatusSaver){
         if(chartStatusSaver != null) {
             this.chartStatusSaver = chartStatusSaver;
         }
-        return chartImageGetter.getImage(this.chartStatusSaver);
+        ChartStatusSaver modifiedChartStatusSaver = chartImageGetter.getImage(this.chartStatusSaver);
+        if(modifiedChartStatusSaver != null){
+            if(modifiedChartStatusSaver.getImage() != null){
+                return modifiedChartStatusSaver.getImage();
+            } else return null;
+        } else return null;
     }
 }

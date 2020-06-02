@@ -4,7 +4,6 @@ import com.vaadin.flow.component.html.Image;
 import frontend.chartDrawer.chartGenerator.ChartGenerator;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.chartDrawer.chartGenerator.chartParts.CurrencyOverviewDto;
-import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
 import frontend.client.BackEndClient;
 import frontend.client.dto.DataPointDto;
 import frontend.client.dto.PairDataRequest;
@@ -12,7 +11,6 @@ import frontend.client.dto.PointTimeFrame;
 import frontend.config.ChartConfig;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ChartImageGetter {
@@ -25,7 +23,7 @@ public class ChartImageGetter {
         this.backEndClient = backEndClient;
     }
 
-    public Image getImage(ChartStatusSaver chartStatusSaver){
+    public ChartStatusSaver getImage(ChartStatusSaver chartStatusSaver){
 
         if(chartStatusSaver == null){
             return null;
@@ -38,8 +36,10 @@ public class ChartImageGetter {
             if(dataPointDtos == null) {
                 return null;
             }
-            return downloadImage(chartStatusSaver.getView(), pairDataRequest, dataPointDtos);
+            Image image = downloadImage(chartStatusSaver, pairDataRequest, dataPointDtos);
+            chartStatusSaver.setImage(image);
         }
+        return null;
     }
 
     private PairDataRequest generatePairDataRequest(ChartStatusSaver chartStatusSaver){
@@ -47,22 +47,16 @@ public class ChartImageGetter {
         if(chartStatusSaver.getCurrencyPair() == null) return null;
         String currencyPair = chartStatusSaver.getCurrencyPair();
 
-        if(chartStatusSaver.getView() == null) return null;
-        View view = chartStatusSaver.getView();
+        if(chartStatusSaver.getPointCount() == 0) return null;
+        int pointCount = chartStatusSaver.getPointCount();
 
-        if(view.getRequiredPointTimeFrame() == null) return null;
-        int pointCount = view.getRequiredPointNumber();
+        if(chartStatusSaver.getPointTimeFrame() == null) return null;
+        PointTimeFrame pointTimeFrame = chartStatusSaver.getPointTimeFrame();
 
-        if(view.getRequiredPointTimeFrame() == null) return null;
-        PointTimeFrame pointTimeFrame = view.getRequiredPointTimeFrame();
-
-        if(chartStatusSaver.isViewIgnore()) {
-            if(chartStatusSaver.getStop() == null) return null;
-            LocalDateTime lastPoint = chartStatusSaver.getStop();
-            return new PairDataRequest(currencyPair, pointCount, pointTimeFrame, lastPoint);
+        if(chartStatusSaver.getStop() == null){
+            return new PairDataRequest(currencyPair, pointCount, pointTimeFrame);
         } else {
-            return new PairDataRequest(currencyPair, pointCount,
-                    view.getRequiredPointTimeFrame());
+            return new PairDataRequest(currencyPair, pointCount, pointTimeFrame, chartStatusSaver.getStop());
         }
     }
 
@@ -74,20 +68,18 @@ public class ChartImageGetter {
         return dataPointDtos;
     }
 
-    private Image downloadImage(View defaultView, PairDataRequest pairDataRequest, List<DataPointDto> dataPointDtos) {
+    private Image downloadImage(ChartStatusSaver chartStatusSaver, PairDataRequest pairDataRequest,
+                                List<DataPointDto> dataPointDtos) {
         Image chartImage = null;
         if(dataPointDtos != null){
-            chartImage = getChartImage(dataPointDtos, pairDataRequest, defaultView);
+            ChartDataDto chartDataDto = buildChartDataDto(dataPointDtos, pairDataRequest, chartStatusSaver);
+            return chartGenerator.generateChart(chartDataDto);
         }
         return chartImage;
     }
 
-    private Image getChartImage(List<DataPointDto> dataPointDtos, PairDataRequest pairDataRequest, View view){
-        ChartDataDto chartDataDto = buildChartDataDto(dataPointDtos, pairDataRequest, view);
-        return chartGenerator.generateChart(chartDataDto);
-    }
-
-    private ChartDataDto buildChartDataDto(List<DataPointDto> dataPointDtos, PairDataRequest pairDataRequest, View view){
+    private ChartDataDto buildChartDataDto(List<DataPointDto> dataPointDtos, PairDataRequest pairDataRequest,
+                                           ChartStatusSaver chartStatusSaver){
 
         CurrencyOverviewDto currencyOverviewDto = null;
         try {
@@ -95,7 +87,7 @@ public class ChartImageGetter {
         } catch (Exception e){}
         if(currencyOverviewDto != null){
             try {
-                return new ChartDataDto(currencyOverviewDto, view.getTimeFrameInfoForChartGenerator(), new ChartConfig());
+                return new ChartDataDto(currencyOverviewDto, chartStatusSaver.getViewTimeFrame(), new ChartConfig());
             } catch (Exception e){}
         }
         return null;

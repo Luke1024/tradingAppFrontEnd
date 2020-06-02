@@ -1,5 +1,7 @@
 package frontend.views.utilities;
 
+import frontend.client.dto.PointTimeFrame;
+
 import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,29 +18,13 @@ public class ChartPositionCalculator {
     }
 
     public ChartStatusSaver zoomPlus(ChartStatusSaver chartStatusSaver) {
-        if (!settingsOk(chartStatusSaver)) return chartStatusSaver;
+        if( ! statusSaverCheck(chartStatusSaver)) return chartStatusSaver;
 
-        int numberOfDataPoints;
-        LocalDateTime lastPoint = null;
+        PointTimeFrame pointTimeFrame = chartStatusSaver.getPointTimeFrame();
+        int numberOfDataPoints = chartStatusSaver.getPointCount();
+        LocalDateTime lastPoint = chartStatusSaver.getStop();
 
-        if(chartStatusSaver.isViewIgnore()){
-            numberOfDataPoints = chartStatusSaver.getPointCount();
-            lastPoint = chartStatusSaver.getStop();
-        } else {
-            numberOfDataPoints = chartStatusSaver.getView().getRequiredPointNumber();
-        }
-        chartStatusSaver.setViewIgnore(true);
 
-        ChartStatusSaver modifiedSaver = computeZoomPlus(chartStatusSaver);
-        if (modifiedSaver == null) {
-            return chartStatusSaver;
-        } else {
-            return modifiedSaver;
-        }
-    }
-
-    private ChartStatusSaver computeZoomPlus(ChartStatusSaver chartStatusSaver){
-        this.chartScallingSettings.getMaxPoints();
     }
 
     private boolean settingsOk(ChartStatusSaver chartStatusSaver){
@@ -59,12 +45,9 @@ public class ChartPositionCalculator {
     private boolean statusSaverCheck(ChartStatusSaver chartStatusSaver){
         if(chartStatusSaver == null) return false;
         if(chartStatusSaver.getCurrencyPair() == null) return false;
-        if(chartStatusSaver.isViewIgnore()){
-            if(chartStatusSaver.getStop() == null) return false;
-            if(chartStatusSaver.getPointCount() == 0) return false;
-        } else {
-            if(chartStatusSaver.getView() == null) return false;
-        }
+        if(chartStatusSaver.getPointTimeFrame() == null) return false;
+        if(chartStatusSaver.getViewTimeFrame() == null) return false;
+        if(chartStatusSaver.getStop() == null) return false;
         return true;
     }
 }
