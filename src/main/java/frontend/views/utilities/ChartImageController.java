@@ -2,17 +2,8 @@ package frontend.views.utilities;
 
 import com.vaadin.flow.component.html.Image;
 import frontend.chartDrawer.chartGenerator.ChartGenerator;
-import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
-import frontend.chartDrawer.chartGenerator.chartParts.CurrencyOverviewDto;
 import frontend.client.BackEndClient;
-import frontend.client.dto.DataPointDto;
-import frontend.client.dto.PairDataRequest;
-import frontend.config.ChartConfig;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ChartImageController {
@@ -22,8 +13,8 @@ public class ChartImageController {
     private ChartGenerator chartGenerator;
     private BackEndClient backEndClient;
     private AvailableViews availableViews;
-    private ChartScallingMovingSettings chartScallingMovingSettings = new ChartScallingMovingSettings();
-    private ChartPositionCalculator chartPositionCalculator = new ChartPositionCalculator(chartScallingMovingSettings);
+    private ChartScallingSettings chartScallingSettings = new ChartScallingSettings();
+    private ChartPositionCalculator chartPositionCalculator = new ChartPositionCalculator(chartScallingSettings);
     private ChartImageGetter chartImageGetter = new ChartImageGetter(chartGenerator, backEndClient);
 
     public ChartImageController(ChartGenerator chartGenerator, BackEndClient backEndClient,
@@ -56,12 +47,7 @@ public class ChartImageController {
         return chartImageGetter.getImage(this.chartStatusSaver);
     }
 
-    private Image updateImage(ChartStatusSaver chartStatusSaver){
-        if(chartStatusSaver != null) {
-            this.chartStatusSaver = chartStatusSaver;
-        }
-        return chartImageGetter.getImage(this.chartStatusSaver);
-    }
+
 
     public Image zoomPlus(){
         return updateImage(chartPositionCalculator.zoomPlus(this.chartStatusSaver));
@@ -91,6 +77,13 @@ public class ChartImageController {
         View defaultView = getDefaultView();
         this.chartStatusSaver.setView(defaultView);
         this.chartStatusSaver.setViewIgnore(false);
+        return chartImageGetter.getImage(this.chartStatusSaver);
+    }
+
+    private Image updateImage(ChartStatusSaver chartStatusSaver){
+        if(chartStatusSaver != null) {
+            this.chartStatusSaver = chartStatusSaver;
+        }
         return chartImageGetter.getImage(this.chartStatusSaver);
     }
 }
