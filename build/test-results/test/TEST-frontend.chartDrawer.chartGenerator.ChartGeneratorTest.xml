@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="frontend.client.BackEndClientTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2020-05-25T16:27:28" hostname="DESKTOP-JP0A0PE" time="0.086">
+<testsuite name="frontend.chartDrawer.chartGenerator.ChartGeneratorTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2020-06-04T16:39:42" hostname="DESKTOP-JP0A0PE" time="0.046">
   <properties/>
-  <testcase name="testGenerateUriGetCurrencyPairDataPoints" classname="frontend.client.BackEndClientTest" time="0.086">
-    <failure message="org.springframework.web.client.HttpClientErrorException$NotFound: 404 null" type="org.springframework.web.client.HttpClientErrorException$NotFound">org.springframework.web.client.HttpClientErrorException$NotFound: 404 null
-	at org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:85)
-	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:122)
-	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:102)
-	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63)
-	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:778)
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:736)
-	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:710)
-	at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:329)
-	at frontend.client.BackEndClient.getCurrencyPairDataPoints(BackEndClient.java:30)
-	at frontend.client.BackEndClientTest.testGenerateUriGetCurrencyPairDataPoints(BackEndClientTest.java:21)
+  <testcase name="generateChartPartiallyNull" classname="frontend.chartDrawer.chartGenerator.ChartGeneratorTest" time="0.046">
+    <failure message="java.lang.NullPointerException" type="java.lang.NullPointerException">java.lang.NullPointerException
+	at frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.IncomingObjectTester.dataPointNotOk(IncomingObjectTester.java:46)
+	at frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.IncomingObjectTester.dataPointsIsOk(IncomingObjectTester.java:40)
+	at frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.IncomingObjectTester.currencyOverviewDtoIsCorrect(IncomingObjectTester.java:32)
+	at frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.IncomingObjectTester.isObjectCorrect(IncomingObjectTester.java:18)
+	at frontend.chartDrawer.chartGenerator.ChartGenerator.visualizeChart(ChartGenerator.java:40)
+	at frontend.chartDrawer.chartGenerator.ChartGeneratorTest.generateChartPartiallyNull(ChartGeneratorTest.java:80)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -62,9 +58,45 @@
 	at java.base/java.lang.Thread.run(Thread.java:832)
 </failure>
   </testcase>
-  <system-out><![CDATA[18:27:28.478 [Test worker] DEBUG org.springframework.web.client.RestTemplate - HTTP GET http://localhost:8080/financecurrency/pairs/data/%7B%22currencyName%22:%22EUR/USD%22,%22numberOfDataPoints%22:5,%22pointTimeFrame%22:%22H1%22,%22fromLastPoint%22:true%7D
-18:27:28.493 [Test worker] DEBUG org.springframework.web.client.RestTemplate - Accept=[application/json, application/*+json]
-18:27:28.512 [Test worker] DEBUG org.springframework.web.client.RestTemplate - Response 404 NOT_FOUND
+  <system-out><![CDATA[frontend.config.ChartConfig@1ae8c7d8
 ]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <system-err><![CDATA[Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: chartBoxLineThicknessInPix
+Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: chartBoxLeftBottomCornerY
+Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: chartBoxLeftBottomCornerX
+Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: textElementHeight
+Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: descriptionFontSize
+Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: chartBoxHeight
+Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: gridThicknessInPix
+Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: lineThicknessInPix
+Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: chartHeight
+Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: chartBoxWidth
+Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: textColorRGB
+Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: chartWidth
+Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: lineColorRGB
+Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: backGroundColor
+Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: lineChartBoxHeightRangeInPercentage
+Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: gridColorRGB
+Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: chartBoxLineColorRGB
+Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: chartBoxBackGroundColor
+Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+WARNING: Chart configuration file missing fields. Missed field: textElementWidth
+]]></system-err>
 </testsuite>

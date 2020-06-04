@@ -38,6 +38,7 @@ public class ChartImageGetter {
             }
             Image image = downloadImage(chartStatusSaver, pairDataRequest, dataPointDtos);
             chartStatusSaver.setImage(image);
+            chartStatusSaver.setStop(dataPointDtos.get(dataPointDtos.size()-1).getTimeStamp());
             return chartStatusSaver;
         }
     }

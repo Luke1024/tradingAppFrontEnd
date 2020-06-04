@@ -51,19 +51,19 @@ public class ChartConsoleGenerator {
         Button resetView = new Button("RESET");
 
         moveLeft.addClickListener(e -> {
-            System.out.println("<-");
+            this.mainView.moveLeft();
         });
         moveRight.addClickListener(e -> {
-            System.out.println("->");
+            this.mainView.moveRight();
         });
         moveMoreLeft.addClickListener(e -> {
-            System.out.println("<<");
+            this.mainView.moveMoreLeft();
         });
         moveMoreRight.addClickListener(e -> {
-            System.out.println(">>");
+            this.mainView.moveMoreRight();
         });
         resetView.addClickListener(e -> {
-            System.out.println("RESET");
+            this.mainView.resetView();
         });
 
         chartControlButtons.add(moveLeft);

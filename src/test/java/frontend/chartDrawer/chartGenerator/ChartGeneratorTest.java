@@ -44,7 +44,7 @@ public class ChartGeneratorTest {
         Random random = new Random();
         List<DataPointDto> pointValues = new ArrayList<>();
 
-        for(int i=0; i<3; i++){
+        for(int i=0; i<200; i++){
             pointValues.add(generateDataPoint(min, max, now, i));
         }
         CurrencyOverviewDto currencyOverviewDto = new CurrencyOverviewDto("EURUSD", now.plusDays(120), pointValues);
@@ -55,6 +55,31 @@ public class ChartGeneratorTest {
 
         chartGenerator.visualizeChart(chartDataDto);
     }
+
+    @Test
+    public void generateChartPartiallyNull() throws IOException {
+        double min = 2.0;
+        double max = 3.0;
+        LocalDateTime now = LocalDateTime.now();
+
+        Random random = new Random();
+        List<DataPointDto> pointValues = new ArrayList<>();
+
+        for(int i=0; i<50; i++){
+            pointValues.add(generateDataPoint(min, max, now, i));
+        }
+        for(int i=0; i<50; i++){
+            pointValues.add(null);
+        }
+        CurrencyOverviewDto currencyOverviewDto = new CurrencyOverviewDto("EURUSD", now.plusDays(120), pointValues);
+
+        ChartConfig chartConfig = chartConfigReader.readConfigFile("/home/luke/test_vaadin_project/vaadin_experimenting/src/test/resources/chart_config.properties");
+
+        ChartDataDto chartDataDto = new ChartDataDto(currencyOverviewDto, ViewTimeFrame.W1, chartConfig);
+
+        chartGenerator.visualizeChart(chartDataDto);
+    }
+
 
     private DataPointDto generateDataPoint(double min, double max, LocalDateTime now, int i) {
         LocalDateTime date = now.plusHours(i);
