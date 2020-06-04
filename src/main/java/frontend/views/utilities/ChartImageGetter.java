@@ -12,11 +12,14 @@ import frontend.config.ChartConfig;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ChartImageGetter {
 
     private ChartGenerator chartGenerator;
     private BackEndClient backEndClient;
+    private Logger logger = Logger.getLogger(ChartImageGetter.class.getName());
 
     public ChartImageGetter(ChartGenerator chartGenerator, BackEndClient backEndClient) {
         this.chartGenerator = chartGenerator;
@@ -26,14 +29,17 @@ public class ChartImageGetter {
     public ChartStatusSaver getImage(ChartStatusSaver chartStatusSaver){
 
         if(chartStatusSaver == null){
+            logger.log(Level.WARNING, "ChartStatusSaver is null.");
             return null;
         } else {
             PairDataRequest pairDataRequest = generatePairDataRequest(chartStatusSaver);
             if(pairDataRequest == null) {
+                logger.log(Level.WARNING, "PairDataRequest is null.");
                 return null;
             }
             List<DataPointDto> dataPointDtos = getDataPointDtos(pairDataRequest);
             if(dataPointDtos == null) {
+                logger.log(Level.WARNING, "List<DataPointDto> is null");
                 return null;
             }
             Image image = downloadImage(chartStatusSaver, pairDataRequest, dataPointDtos);
@@ -85,11 +91,15 @@ public class ChartImageGetter {
         CurrencyOverviewDto currencyOverviewDto = null;
         try {
             currencyOverviewDto = new CurrencyOverviewDto(pairDataRequest.getCurrencyName(), LocalDateTime.now(), dataPointDtos);
-        } catch (Exception e){}
+        } catch (Exception e){
+            logger.log(Level.WARNING, e.toString());
+        }
         if(currencyOverviewDto != null){
             try {
                 return new ChartDataDto(currencyOverviewDto, chartStatusSaver.getViewTimeFrame(), new ChartConfig());
-            } catch (Exception e){}
+            } catch (Exception e){
+                logger.log(Level.WARNING, e.toString());
+            }
         }
         return null;
     }

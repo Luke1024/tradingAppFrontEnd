@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="frontend.chartDrawer.chartGenerator.ChartGeneratorTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2020-06-04T16:39:42" hostname="DESKTOP-JP0A0PE" time="0.046">
+<testsuite name="frontend.chartDrawer.chartGenerator.ChartGeneratorTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2020-06-04T18:38:14" hostname="DESKTOP-JP0A0PE" time="0.041">
   <properties/>
-  <testcase name="generateChartPartiallyNull" classname="frontend.chartDrawer.chartGenerator.ChartGeneratorTest" time="0.046">
+  <testcase name="generateChartPartiallyNull" classname="frontend.chartDrawer.chartGenerator.ChartGeneratorTest" time="0.041">
     <failure message="java.lang.NullPointerException" type="java.lang.NullPointerException">java.lang.NullPointerException
 	at frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.IncomingObjectTester.dataPointNotOk(IncomingObjectTester.java:46)
 	at frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.IncomingObjectTester.dataPointsIsOk(IncomingObjectTester.java:40)
@@ -58,45 +58,45 @@
 	at java.base/java.lang.Thread.run(Thread.java:832)
 </failure>
   </testcase>
-  <system-out><![CDATA[frontend.config.ChartConfig@1ae8c7d8
+  <system-out><![CDATA[frontend.config.ChartConfig@48094faf
 ]]></system-out>
-  <system-err><![CDATA[Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+  <system-err><![CDATA[Jun 04, 2020 8:38:14 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: chartBoxLineThicknessInPix
-Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+Jun 04, 2020 8:38:14 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: chartBoxLeftBottomCornerY
-Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+Jun 04, 2020 8:38:14 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: chartBoxLeftBottomCornerX
-Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+Jun 04, 2020 8:38:14 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: textElementHeight
-Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+Jun 04, 2020 8:38:14 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: descriptionFontSize
-Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+Jun 04, 2020 8:38:14 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: chartBoxHeight
-Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+Jun 04, 2020 8:38:14 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: gridThicknessInPix
-Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+Jun 04, 2020 8:38:14 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: lineThicknessInPix
-Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+Jun 04, 2020 8:38:14 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: chartHeight
-Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+Jun 04, 2020 8:38:14 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: chartBoxWidth
-Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+Jun 04, 2020 8:38:14 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: textColorRGB
-Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+Jun 04, 2020 8:38:14 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: chartWidth
-Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+Jun 04, 2020 8:38:14 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: lineColorRGB
-Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+Jun 04, 2020 8:38:14 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: backGroundColor
-Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+Jun 04, 2020 8:38:14 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: lineChartBoxHeightRangeInPercentage
-Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+Jun 04, 2020 8:38:14 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: gridColorRGB
-Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+Jun 04, 2020 8:38:14 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: chartBoxLineColorRGB
-Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+Jun 04, 2020 8:38:14 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: chartBoxBackGroundColor
-Jun 04, 2020 6:39:42 PM frontend.config.ChartConfigReader retrieveAndSetValue
+Jun 04, 2020 8:38:14 PM frontend.config.ChartConfigReader retrieveAndSetValue
 WARNING: Chart configuration file missing fields. Missed field: textElementWidth
 ]]></system-err>
 </testsuite>
