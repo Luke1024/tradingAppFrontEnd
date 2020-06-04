@@ -38,8 +38,8 @@ public class ChartImageGetter {
             }
             Image image = downloadImage(chartStatusSaver, pairDataRequest, dataPointDtos);
             chartStatusSaver.setImage(image);
+            return chartStatusSaver;
         }
-        return null;
     }
 
     private PairDataRequest generatePairDataRequest(ChartStatusSaver chartStatusSaver){

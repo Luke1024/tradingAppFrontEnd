@@ -6,15 +6,16 @@ import frontend.client.BackEndClient;
 import frontend.client.dto.PointTimeFrame;
 
 import java.time.LocalDateTime;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ChartImageController {
 
     private Logger logger = Logger.getLogger(ChartImageController.class.getName());
     private ChartStatusSaver chartStatusSaver = null;
-    private ChartGenerator chartGenerator;
-    private BackEndClient backEndClient;
-    private AvailableViews availableViews;
+    private ChartGenerator chartGenerator = new ChartGenerator();
+    private BackEndClient backEndClient = new BackEndClient();
+    private AvailableViews availableViews = new AvailableViews();
     private ChartImageGetter chartImageGetter = new ChartImageGetter(chartGenerator, backEndClient);
     private double moveLevel = 0.3;
     private double moveMoreLevel = 1.0;
@@ -37,7 +38,11 @@ public class ChartImageController {
         if(this.availableViews != null){
             if(this.availableViews.getDefaultView() != null){
                 return this.availableViews.getDefaultView();
+            } else {
+                logger.log(Level.WARNING, "DefaultView is null.");
             }
+        } else {
+            logger.log(Level.WARNING, "AvailableViews is null.");
         }
         return null;
     }
@@ -47,11 +52,15 @@ public class ChartImageController {
             if (view != null) {
                 this.chartStatusSaver.setPointCount(view.getRequiredPointNumber());
                 this.chartStatusSaver.setStop(null);
+            } else {
+                logger.log(Level.WARNING, "View is null.");
+                return updateImage();
             }
-            return updateImage();
         } else {
+            logger.log(Level.WARNING, "ChartStatusSaver is null.");
             return null;
         }
+        return null;
     }
 
     public Image resetView(){

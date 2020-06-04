@@ -37,7 +37,9 @@ public class MainView extends VerticalLayout {
         add(toolbar);
         add(chartConsole);
         Image image = chartImageController.setCurrencyPair(availableCurrencyPairs.get(0));
-        add(image);
+        if(image != null) {
+            add(image);
+        }
     }
 
     private List<String> getAvailableCurrencyPairs(){
