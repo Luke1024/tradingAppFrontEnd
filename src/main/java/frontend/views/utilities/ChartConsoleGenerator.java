@@ -44,21 +44,12 @@ public class ChartConsoleGenerator {
             chartControlButtons.add(button);
         }
 
-        Button buttonZoomPlus = new Button("+");
-        Button buttonZoomMinus = new Button("-");
         Button moveLeft = new Button("<-");
         Button moveRight = new Button("->");
         Button moveMoreLeft = new Button("<<");
         Button moveMoreRight = new Button(">>");
         Button resetView = new Button("RESET");
 
-
-        buttonZoomPlus.addClickListener(e -> {
-            this.mainView.zoomPlus();
-        });
-        buttonZoomMinus.addClickListener(e -> {
-            this.mainView.zoomMinus();
-        });
         moveLeft.addClickListener(e -> {
             System.out.println("<-");
         });
@@ -75,8 +66,6 @@ public class ChartConsoleGenerator {
             System.out.println("RESET");
         });
 
-        chartControlButtons.add(buttonZoomPlus);
-        chartControlButtons.add(buttonZoomMinus);
         chartControlButtons.add(moveLeft);
         chartControlButtons.add(moveRight);
         chartControlButtons.add(moveMoreLeft);

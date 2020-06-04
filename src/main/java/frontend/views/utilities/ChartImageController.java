@@ -3,7 +3,9 @@ package frontend.views.utilities;
 import com.vaadin.flow.component.html.Image;
 import frontend.chartDrawer.chartGenerator.ChartGenerator;
 import frontend.client.BackEndClient;
+import frontend.client.dto.PointTimeFrame;
 
+import java.time.LocalDateTime;
 import java.util.logging.Logger;
 
 public class ChartImageController {
@@ -13,9 +15,9 @@ public class ChartImageController {
     private ChartGenerator chartGenerator;
     private BackEndClient backEndClient;
     private AvailableViews availableViews;
-    private ChartScallingSettings chartScallingSettings = new ChartScallingSettings();
-    private ChartPositionCalculator chartPositionCalculator = new ChartPositionCalculator(chartScallingSettings);
     private ChartImageGetter chartImageGetter = new ChartImageGetter(chartGenerator, backEndClient);
+    private double moveLevel = 0.3;
+    private double moveMoreLevel = 1.0;
 
     public ChartImageController(ChartGenerator chartGenerator, BackEndClient backEndClient,
                                 AvailableViews availableViews) {
@@ -28,7 +30,7 @@ public class ChartImageController {
         View view = getDefaultView();
         this.chartStatusSaver = new ChartStatusSaver(currencyPair, view.getRequiredPointTimeFrame(),
                 view.getTimeFrameInfoForChartGenerator(), view.getRequiredPointNumber(),null);
-        return updateImage(this.chartStatusSaver);
+        return updateImage();
     }
 
     private View getDefaultView(){
@@ -46,7 +48,7 @@ public class ChartImageController {
                 this.chartStatusSaver.setPointCount(view.getRequiredPointNumber());
                 this.chartStatusSaver.setStop(null);
             }
-            return updateImage(this.chartStatusSaver);
+            return updateImage();
         } else {
             return null;
         }
@@ -56,43 +58,82 @@ public class ChartImageController {
         View defaultView = getDefaultView();
         this.chartStatusSaver.setPointCount(defaultView.getRequiredPointNumber());
         this.chartStatusSaver.setStop(null);
-        return updateImage(this.chartStatusSaver);
-    }
-
-
-    public Image zoomPlus(){
-        return updateImage(chartPositionCalculator.zoomPlus(this.chartStatusSaver));
-    }
-
-    public Image zoomMinus(){
-        return updateImage(chartPositionCalculator.zoomMinus(this.chartStatusSaver));
+        return updateImage();
     }
 
     public Image moveLeft(){
-        return updateImage(chartPositionCalculator.zoomLeft(this.chartStatusSaver));
+        LocalDateTime lastPoint = this.chartStatusSaver.getStop();
+        PointTimeFrame pointTimeFrame = this.chartStatusSaver.getPointTimeFrame();
+
+        int pointCountMoved = (int) (this.chartStatusSaver.getPointCount() * moveLevel);
+        int hoursMoved = pointCountMoved * pointTimeFrameToHourMultiplier(pointTimeFrame);
+
+        LocalDateTime lastPointMoved = lastPoint.minusHours(hoursMoved);
+
+        this.chartStatusSaver.setStop(lastPointMoved);
+
+        return updateImage();
     }
 
     public Image moveRight(){
-        return updateImage(chartPositionCalculator.zoomRight(this.chartStatusSaver));
+        LocalDateTime lastPoint = this.chartStatusSaver.getStop();
+        PointTimeFrame pointTimeFrame = this.chartStatusSaver.getPointTimeFrame();
+
+        int pointCountMoved = (int) (this.chartStatusSaver.getPointCount() * moveLevel);
+        int hoursMoved = pointCountMoved * pointTimeFrameToHourMultiplier(pointTimeFrame);
+
+        LocalDateTime lastPointMoved = lastPoint.plusHours(hoursMoved);
+
+        this.chartStatusSaver.setStop(lastPointMoved);
+
+        return updateImage();
     }
 
     public Image moveMoreLeft(){
-        return updateImage(chartPositionCalculator.zoomMoreLeft(this.chartStatusSaver));
+        LocalDateTime lastPoint = this.chartStatusSaver.getStop();
+        PointTimeFrame pointTimeFrame = this.chartStatusSaver.getPointTimeFrame();
+
+        int pointCountMoved = (int) (this.chartStatusSaver.getPointCount() * moveMoreLevel);
+        int hoursMoved = pointCountMoved * pointTimeFrameToHourMultiplier(pointTimeFrame);
+
+        LocalDateTime lastPointMoved = lastPoint.minusHours(hoursMoved);
+
+        this.chartStatusSaver.setStop(lastPointMoved);
+
+        return updateImage();
     }
 
     public Image moveMoreRight(){
-        return updateImage(chartPositionCalculator.zoomMoreRight(this.chartStatusSaver));
+        LocalDateTime lastPoint = this.chartStatusSaver.getStop();
+        PointTimeFrame pointTimeFrame = this.chartStatusSaver.getPointTimeFrame();
+
+        int pointCountMoved = (int) (this.chartStatusSaver.getPointCount() * moveMoreLevel);
+        int hoursMoved = pointCountMoved * pointTimeFrameToHourMultiplier(pointTimeFrame);
+
+        LocalDateTime lastPointMoved = lastPoint.plusHours(hoursMoved);
+
+        this.chartStatusSaver.setStop(lastPointMoved);
+
+        return updateImage();
     }
 
-    private Image updateImage(ChartStatusSaver chartStatusSaver){
-        if(chartStatusSaver != null) {
-            this.chartStatusSaver = chartStatusSaver;
-        }
-        ChartStatusSaver modifiedChartStatusSaver = chartImageGetter.getImage(this.chartStatusSaver);
-        if(modifiedChartStatusSaver != null){
-            if(modifiedChartStatusSaver.getImage() != null){
-                return modifiedChartStatusSaver.getImage();
+    private Image updateImage() {
+        if (chartStatusSaver != null) {
+            ChartStatusSaver modifiedChartStatusSaver = chartImageGetter.getImage(this.chartStatusSaver);
+            if (modifiedChartStatusSaver != null) {
+                if (modifiedChartStatusSaver.getImage() != null) {
+                    return modifiedChartStatusSaver.getImage();
+                } else return null;
             } else return null;
         } else return null;
+    }
+
+    private int pointTimeFrameToHourMultiplier(PointTimeFrame pointTimeFrame){
+        if(pointTimeFrame == PointTimeFrame.H1) return 1;
+        if(pointTimeFrame == PointTimeFrame.H5) return 5;
+        if(pointTimeFrame == PointTimeFrame.D1) return 24;
+        if(pointTimeFrame == PointTimeFrame.W1) return 168;
+        if(pointTimeFrame == PointTimeFrame.M1) return 720;
+        return 1;
     }
 }

@@ -61,14 +61,6 @@ public class MainView extends VerticalLayout {
         return chartImageController.setTimeFrame(view);
     }
 
-    public Image zoomPlus(){
-        return chartImageController.zoomPlus();
-    }
-
-    public Image zoomMinus(){
-        return chartImageController.zoomMinus();
-    }
-
     public Image moveLeft(){
         return chartImageController.moveLeft();
     }
