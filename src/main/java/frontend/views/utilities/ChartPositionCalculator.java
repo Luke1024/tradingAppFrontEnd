@@ -3,6 +3,7 @@ package frontend.views.utilities;
 import frontend.client.dto.PointTimeFrame;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,13 +19,22 @@ public class ChartPositionCalculator {
     }
 
     public ChartStatusSaver zoomPlus(ChartStatusSaver chartStatusSaver) {
-        if( ! statusSaverCheck(chartStatusSaver)) return chartStatusSaver;
+        if( ! settingsOk(chartStatusSaver)) return chartStatusSaver;
 
         PointTimeFrame pointTimeFrame = chartStatusSaver.getPointTimeFrame();
         int numberOfDataPoints = chartStatusSaver.getPointCount();
         LocalDateTime lastPoint = chartStatusSaver.getStop();
 
+        double zoomScalling = chartScallingSettings.getZoomScalling();
 
+        int zoomedPointCount = (int) (numberOfDataPoints * (1 - zoomScalling));
+        int lastPointMoverCount = (numberOfDataPoints - zoomedPointCount)/2;
+
+        int hourMultiplier = pointTimeFrameToHourMultiplier(pointTimeFrame);
+
+        LocalDateTime movedLastPoint = lastPoint.minusHours(lastPointMoverCount*hourMultiplier);
+
+        chartStatusSaver.
     }
 
     private boolean settingsOk(ChartStatusSaver chartStatusSaver){
@@ -40,8 +50,6 @@ public class ChartPositionCalculator {
         return false;
     }
 
-
-
     private boolean statusSaverCheck(ChartStatusSaver chartStatusSaver){
         if(chartStatusSaver == null) return false;
         if(chartStatusSaver.getCurrencyPair() == null) return false;
@@ -49,5 +57,14 @@ public class ChartPositionCalculator {
         if(chartStatusSaver.getViewTimeFrame() == null) return false;
         if(chartStatusSaver.getStop() == null) return false;
         return true;
+    }
+
+    private int pointTimeFrameToHourMultiplier(PointTimeFrame pointTimeFrame){
+        if(pointTimeFrame == PointTimeFrame.H1) return 1;
+        if(pointTimeFrame == PointTimeFrame.H5) return 5;
+        if(pointTimeFrame == PointTimeFrame.D1) return 24;
+        if(pointTimeFrame == PointTimeFrame.W1) return 168;
+        if(pointTimeFrame == PointTimeFrame.M1) return 720;
+        return 1;
     }
 }
