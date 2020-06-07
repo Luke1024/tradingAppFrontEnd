@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public class ChartImageController {
 
     private Logger logger = Logger.getLogger(ChartImageController.class.getName());
-    private ChartStatusSaver chartStatusSaver = null;
+    private ChartStatusSaver chartStatusSaver;
     private ChartGenerator chartGenerator = new ChartGenerator();
     private BackEndClient backEndClient = new BackEndClient();
     private AvailableViews availableViews = new AvailableViews();
@@ -72,15 +72,15 @@ public class ChartImageController {
 
     public Image moveLeft(){
         LocalDateTime lastPoint = this.chartStatusSaver.getStop();
-        PointTimeFrame pointTimeFrame = this.chartStatusSaver.getPointTimeFrame();
-
-        int pointCountMoved = (int) (this.chartStatusSaver.getPointCount() * moveLevel);
-        int hoursMoved = pointCountMoved * pointTimeFrameToHourMultiplier(pointTimeFrame);
-
-        LocalDateTime lastPointMoved = lastPoint.minusHours(hoursMoved);
-
-        this.chartStatusSaver.setStop(lastPointMoved);
-
+        if(lastPoint != null) {
+            PointTimeFrame pointTimeFrame = this.chartStatusSaver.getPointTimeFrame();
+            int pointCountMoved = (int) (this.chartStatusSaver.getPointCount() * moveLevel);
+            int hoursMoved = pointCountMoved * pointTimeFrameToHourMultiplier(pointTimeFrame);
+            LocalDateTime lastPointMoved = lastPoint.minusHours(hoursMoved);
+            this.chartStatusSaver.setStop(lastPointMoved);
+        } else {
+            logger.log(Level.WARNING, "LastPoint is null.");
+        }
         return updateImage();
     }
 
@@ -130,6 +130,7 @@ public class ChartImageController {
         if (chartStatusSaver != null) {
             ChartStatusSaver modifiedChartStatusSaver = chartImageGetter.getImage(this.chartStatusSaver);
             if (modifiedChartStatusSaver != null) {
+                this.chartStatusSaver = modifiedChartStatusSaver;
                 if (modifiedChartStatusSaver.getImage() != null) {
                     return modifiedChartStatusSaver.getImage();
                 } else return null;

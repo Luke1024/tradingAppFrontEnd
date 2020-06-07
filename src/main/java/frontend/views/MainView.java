@@ -24,6 +24,7 @@ public class MainView extends VerticalLayout {
     private ChartGenerator chartGenerator = new ChartGenerator();
     private ChartImageController chartImageController =
             new ChartImageController(chartGenerator, backEndClient, availableViews);
+    private HorizontalLayout imageHolder = new HorizontalLayout();
 
     public MainView() throws IOException {
         Button logIn = new Button("Log In");
@@ -32,13 +33,15 @@ public class MainView extends VerticalLayout {
         HorizontalLayout toolbar = new HorizontalLayout(logIn, signIn);
 
         List<String> availableCurrencyPairs = getAvailableCurrencyPairs();
-        HorizontalLayout chartConsole = chartConsoleGenerator.generateConsole(this,availableCurrencyPairs);
+        HorizontalLayout chartConsole = chartConsoleGenerator.generateConsole(this, availableCurrencyPairs);
+
 
         add(toolbar);
         add(chartConsole);
+        add(imageHolder);
         Image image = chartImageController.setCurrencyPair(availableCurrencyPairs.get(0));
         if(image != null) {
-            add(image);
+            imageHolder.add(image);
         }
     }
 
@@ -55,32 +58,60 @@ public class MainView extends VerticalLayout {
         return availableCurrencyPairs;
     }
 
-    public Image switchCurrencyPair(String currencyPair){
-        return chartImageController.setCurrencyPair(currencyPair);
+    public void switchCurrencyPair(String currencyPair){
+        imageHolder.removeAll();
+        Image image =chartImageController.setCurrencyPair(currencyPair);
+        if(image != null) {
+            imageHolder.add();
+        }
     }
 
-    public Image switchTimeFrame(View view){
-        return chartImageController.setTimeFrame(view);
+    public void switchTimeFrame(View view) {
+        imageHolder.removeAll();
+        Image image = chartImageController.setTimeFrame(view);
+        if(image != null){
+            imageHolder.add(image);
+        }
     }
 
-    public Image moveLeft(){
-        return chartImageController.moveLeft();
+    public void moveLeft(){
+        imageHolder.removeAll();
+        Image image = chartImageController.moveLeft();
+        if(image != null){
+            imageHolder.add(image);
+        }
     }
 
-    public Image moveRight(){
-        return chartImageController.moveRight();
+    public void moveRight(){
+        imageHolder.removeAll();
+        Image image = chartImageController.moveRight();
+        if(image != null){
+            imageHolder.add(image);
+        }
     }
 
-    public Image moveMoreLeft(){
-        return chartImageController.moveMoreLeft();
+    public void moveMoreLeft(){
+        imageHolder.removeAll();
+        Image image = chartImageController.moveMoreLeft();
+        if(image != null){
+            imageHolder.add(image);
+        }
     }
 
-    public Image moveMoreRight(){
-        return chartImageController.moveMoreRight();
+    public void moveMoreRight(){
+        imageHolder.removeAll();
+        Image image = chartImageController.moveMoreRight();
+        if(image != null){
+            imageHolder.add(image);
+        }
     }
 
-    public Image resetView(){
-        return chartImageController.resetView();
+    public void resetView(){
+        imageHolder.removeAll();
+        Image image = chartImageController.resetView();
+        if(image != null){
+            imageHolder.add(image);
+        }
     }
 
         //HorizontalLayout imageHolder = new HorizontalLayout();
