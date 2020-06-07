@@ -3,9 +3,6 @@ package frontend.views.utilities;
 import com.vaadin.flow.component.html.Image;
 import frontend.chartDrawer.chartGenerator.ChartGenerator;
 import frontend.client.BackEndClient;
-import frontend.client.dto.PointTimeFrame;
-
-import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,7 +27,7 @@ public class ChartImageController {
     public Image setCurrencyPair(String currencyPair){
         View view = getDefaultView();
         this.chartStatusSaver = new ChartStatusSaver(currencyPair, view.getRequiredPointTimeFrame(),
-                view.getTimeFrameInfoForChartGenerator(), view.getRequiredPointNumber(),null);
+                view.getTimeFrameInfoForChartGenerator(), view.getRequiredPointNumber(), 0, null);
         return updateImage();
     }
 
@@ -51,7 +48,7 @@ public class ChartImageController {
         if (this.chartStatusSaver != null) {
             if (view != null) {
                 this.chartStatusSaver.setPointCount(view.getRequiredPointNumber());
-                this.chartStatusSaver.setStop(null);
+                this.chartStatusSaver.setPointsBeforeLast(0);
             } else {
                 logger.log(Level.WARNING, "View is null.");
                 return updateImage();
@@ -66,62 +63,46 @@ public class ChartImageController {
     public Image resetView(){
         View defaultView = getDefaultView();
         this.chartStatusSaver.setPointCount(defaultView.getRequiredPointNumber());
-        this.chartStatusSaver.setStop(null);
+        this.chartStatusSaver.setPointsBeforeLast(0);
         return updateImage();
     }
 
     public Image moveLeft(){
-        LocalDateTime lastPoint = this.chartStatusSaver.getStop();
-        if(lastPoint != null) {
-            PointTimeFrame pointTimeFrame = this.chartStatusSaver.getPointTimeFrame();
-            int pointCountMoved = (int) (this.chartStatusSaver.getPointCount() * moveLevel);
-            int hoursMoved = pointCountMoved * pointTimeFrameToHourMultiplier(pointTimeFrame);
-            LocalDateTime lastPointMoved = lastPoint.minusHours(hoursMoved);
-            this.chartStatusSaver.setStop(lastPointMoved);
-        } else {
-            logger.log(Level.WARNING, "LastPoint is null.");
-        }
+        int pointsBeforeLastPoint = this.chartStatusSaver.getPointsBeforeLast();
+        int pointCountMoved = (int) (pointsBeforeLastPoint + this.chartStatusSaver.getPointCount() * moveLevel);
+        this.chartStatusSaver.setPointsBeforeLast(pointCountMoved);
+
         return updateImage();
     }
 
     public Image moveRight(){
-        LocalDateTime lastPoint = this.chartStatusSaver.getStop();
-        PointTimeFrame pointTimeFrame = this.chartStatusSaver.getPointTimeFrame();
+        int pointsBeforeLastPoint = this.chartStatusSaver.getPointsBeforeLast();
+        int pointCountMoved = -((int) (pointsBeforeLastPoint + this.chartStatusSaver.getPointCount() * moveLevel));
 
-        int pointCountMoved = (int) (this.chartStatusSaver.getPointCount() * moveLevel);
-        int hoursMoved = pointCountMoved * pointTimeFrameToHourMultiplier(pointTimeFrame);
-
-        LocalDateTime lastPointMoved = lastPoint.plusHours(hoursMoved);
-
-        this.chartStatusSaver.setStop(lastPointMoved);
+        if(pointCountMoved<0){
+            pointCountMoved = 0;
+        }
+        this.chartStatusSaver.setPointsBeforeLast(pointCountMoved);
 
         return updateImage();
     }
 
     public Image moveMoreLeft(){
-        LocalDateTime lastPoint = this.chartStatusSaver.getStop();
-        PointTimeFrame pointTimeFrame = this.chartStatusSaver.getPointTimeFrame();
-
-        int pointCountMoved = (int) (this.chartStatusSaver.getPointCount() * moveMoreLevel);
-        int hoursMoved = pointCountMoved * pointTimeFrameToHourMultiplier(pointTimeFrame);
-
-        LocalDateTime lastPointMoved = lastPoint.minusHours(hoursMoved);
-
-        this.chartStatusSaver.setStop(lastPointMoved);
+        int pointsBeforeLastPoint = this.chartStatusSaver.getPointsBeforeLast();
+        int pointCountMoved = (int) (pointsBeforeLastPoint + this.chartStatusSaver.getPointCount() * moveMoreLevel);
+        this.chartStatusSaver.setPointsBeforeLast(pointCountMoved);
 
         return updateImage();
     }
 
     public Image moveMoreRight(){
-        LocalDateTime lastPoint = this.chartStatusSaver.getStop();
-        PointTimeFrame pointTimeFrame = this.chartStatusSaver.getPointTimeFrame();
+        int pointsBeforeLastPoint = this.chartStatusSaver.getPointsBeforeLast();
+        int pointCountMoved = -((int) (pointsBeforeLastPoint + this.chartStatusSaver.getPointCount() * moveMoreLevel));
 
-        int pointCountMoved = (int) (this.chartStatusSaver.getPointCount() * moveMoreLevel);
-        int hoursMoved = pointCountMoved * pointTimeFrameToHourMultiplier(pointTimeFrame);
-
-        LocalDateTime lastPointMoved = lastPoint.plusHours(hoursMoved);
-
-        this.chartStatusSaver.setStop(lastPointMoved);
+        if(pointCountMoved<0){
+            pointCountMoved = 0;
+        }
+        this.chartStatusSaver.setPointsBeforeLast(pointCountMoved);
 
         return updateImage();
     }
@@ -136,14 +117,5 @@ public class ChartImageController {
                 } else return null;
             } else return null;
         } else return null;
-    }
-
-    private int pointTimeFrameToHourMultiplier(PointTimeFrame pointTimeFrame){
-        if(pointTimeFrame == PointTimeFrame.H1) return 1;
-        if(pointTimeFrame == PointTimeFrame.H5) return 5;
-        if(pointTimeFrame == PointTimeFrame.D1) return 24;
-        if(pointTimeFrame == PointTimeFrame.W1) return 168;
-        if(pointTimeFrame == PointTimeFrame.M1) return 720;
-        return 1;
     }
 }

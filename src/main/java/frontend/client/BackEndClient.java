@@ -53,18 +53,13 @@ public class BackEndClient {
         }
     }
 
-    private String serialize(PairDataRequest pairDataRequest){
-         return pairDataRequest.toString();
-    }
-
     private PairDataRequestDto mapToPairDataRequestDto(PairDataRequest pairDataRequest){
-        try {
-            String adoptedLastPoint = pairDataRequest.getAdoptedlastPoint().toString();
+        if(pairDataRequest != null){
             return new PairDataRequestDto(pairDataRequest.getCurrencyName(),
                     pairDataRequest.getNumberOfDataPoints(),
                     pairDataRequest.getPointTimeFrame().name(),
-                    adoptedLastPoint);
-        } catch (Exception e){
+                    pairDataRequest.getPointsBeforeLast());
+        } else {
             return null;
         }
     }

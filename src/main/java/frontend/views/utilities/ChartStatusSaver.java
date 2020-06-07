@@ -13,60 +13,61 @@ public class ChartStatusSaver {
     private PointTimeFrame pointTimeFrame;
     private ViewTimeFrame viewTimeFrame;
     private int pointCount;
-    private LocalDateTime stop;
+    private int pointsBeforeLast;
     private Image image;
 
     public ChartStatusSaver(String currencyPair, PointTimeFrame pointTimeFrame, ViewTimeFrame viewTimeFrame,
-                            int pointCount, LocalDateTime stop) {
+                            int pointCount, int pointsBeforeLast, Image image) {
         this.currencyPair = currencyPair;
         this.pointTimeFrame = pointTimeFrame;
         this.viewTimeFrame = viewTimeFrame;
         this.pointCount = pointCount;
-        this.stop = stop;
+        this.pointsBeforeLast = pointsBeforeLast;
+        this.image = image;
     }
 
     public String getCurrencyPair() {
         return currencyPair;
     }
 
-    public void setCurrencyPair(String currencyPair) {
-        this.currencyPair = currencyPair;
-    }
-
     public PointTimeFrame getPointTimeFrame() {
         return pointTimeFrame;
-    }
-
-    public void setPointTimeFrame(PointTimeFrame pointTimeFrame) {
-        this.pointTimeFrame = pointTimeFrame;
     }
 
     public ViewTimeFrame getViewTimeFrame() {
         return viewTimeFrame;
     }
 
-    public void setViewTimeFrame(ViewTimeFrame viewTimeFrame) {
-        this.viewTimeFrame = viewTimeFrame;
-    }
-
     public int getPointCount() {
         return pointCount;
+    }
+
+    public int getPointsBeforeLast() {
+        return pointsBeforeLast;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setCurrencyPair(String currencyPair) {
+        this.currencyPair = currencyPair;
+    }
+
+    public void setPointTimeFrame(PointTimeFrame pointTimeFrame) {
+        this.pointTimeFrame = pointTimeFrame;
+    }
+
+    public void setViewTimeFrame(ViewTimeFrame viewTimeFrame) {
+        this.viewTimeFrame = viewTimeFrame;
     }
 
     public void setPointCount(int pointCount) {
         this.pointCount = pointCount;
     }
 
-    public LocalDateTime getStop() {
-        return stop;
-    }
-
-    public void setStop(LocalDateTime stop) {
-        this.stop = stop;
-    }
-
-    public Image getImage() {
-        return image;
+    public void setPointsBeforeLast(int pointsBeforeLast) {
+        this.pointsBeforeLast = pointsBeforeLast;
     }
 
     public void setImage(Image image) {

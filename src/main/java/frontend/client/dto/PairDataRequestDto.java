@@ -4,13 +4,13 @@ public class PairDataRequestDto {
     private String currencyName;
     private int numberOfDataPoints;
     private String pointTimeFrame;
-    private String adoptedLastPoint;
+    private int pointsBeforeLast;
 
-    public PairDataRequestDto(String currencyName, int numberOfDataPoints, String pointTimeFrame, String adoptedLastPoint) {
+    public PairDataRequestDto(String currencyName, int numberOfDataPoints, String pointTimeFrame, int pointsBeforeLast) {
         this.currencyName = currencyName;
         this.numberOfDataPoints = numberOfDataPoints;
         this.pointTimeFrame = pointTimeFrame;
-        this.adoptedLastPoint = adoptedLastPoint;
+        this.pointsBeforeLast = pointsBeforeLast;
     }
 
     public String getCurrencyName() {
@@ -25,7 +25,7 @@ public class PairDataRequestDto {
         return pointTimeFrame;
     }
 
-    public String getAdoptedLastPoint() {
-        return adoptedLastPoint;
+    public int getPointsBeforeLast() {
+        return pointsBeforeLast;
     }
 }

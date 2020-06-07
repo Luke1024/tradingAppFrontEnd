@@ -44,23 +44,22 @@ public class ChartImageGetter {
             }
             Image image = downloadImage(chartStatusSaver, pairDataRequest, dataPointDtos);
             chartStatusSaver.setImage(image);
-            chartStatusSaver.setStop(dataPointDtos.get(dataPointDtos.size()-1).getTimeStamp());
             return chartStatusSaver;
         }
     }
 
     private PairDataRequest generatePairDataRequest(ChartStatusSaver chartStatusSaver){
 
-        if(chartStatusSaver.getCurrencyPair() == null) return null;
+        if (chartStatusSaver.getCurrencyPair() == null) return null;
         String currencyPair = chartStatusSaver.getCurrencyPair();
 
-        if(chartStatusSaver.getPointCount() == 0) return null;
+        if (chartStatusSaver.getPointCount() == 0) return null;
         int pointCount = chartStatusSaver.getPointCount();
 
-        if(chartStatusSaver.getPointTimeFrame() == null) return null;
+        if (chartStatusSaver.getPointTimeFrame() == null) return null;
         PointTimeFrame pointTimeFrame = chartStatusSaver.getPointTimeFrame();
 
-        return new PairDataRequest(currencyPair, pointCount, pointTimeFrame, chartStatusSaver.getStop());
+        return new PairDataRequest(currencyPair, pointCount, pointTimeFrame, chartStatusSaver.getPointCount());
     }
 
     private List<DataPointDto> getDataPointDtos(PairDataRequest pairDataRequest) {
