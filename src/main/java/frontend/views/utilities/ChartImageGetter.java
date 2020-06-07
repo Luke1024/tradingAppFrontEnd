@@ -60,11 +60,7 @@ public class ChartImageGetter {
         if(chartStatusSaver.getPointTimeFrame() == null) return null;
         PointTimeFrame pointTimeFrame = chartStatusSaver.getPointTimeFrame();
 
-        if(chartStatusSaver.getStop() == null){
-            return new PairDataRequest(currencyPair, pointCount, pointTimeFrame);
-        } else {
-            return new PairDataRequest(currencyPair, pointCount, pointTimeFrame, chartStatusSaver.getStop());
-        }
+        return new PairDataRequest(currencyPair, pointCount, pointTimeFrame, chartStatusSaver.getStop());
     }
 
     private List<DataPointDto> getDataPointDtos(PairDataRequest pairDataRequest) {

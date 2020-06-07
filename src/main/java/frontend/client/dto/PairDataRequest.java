@@ -6,7 +6,6 @@ public class PairDataRequest {
     private String currencyName;
     private int numberOfDataPoints;
     private PointTimeFrame pointTimeFrame;
-    private boolean fromLastPoint;
     private LocalDateTime adoptedlastPoint;
 
     public PairDataRequest() {
@@ -16,14 +15,12 @@ public class PairDataRequest {
         this.currencyName = currencyName;
         this.numberOfDataPoints = numberOfDataPoints;
         this.pointTimeFrame = pointTimeFrame;
-        this.fromLastPoint = true;
     }
 
     public PairDataRequest(String currencyName, int numberOfDataPoints, PointTimeFrame pointTimeFrame, LocalDateTime adoptedlastPoint) {
         this.currencyName = currencyName;
         this.numberOfDataPoints = numberOfDataPoints;
         this.pointTimeFrame = pointTimeFrame;
-        this.fromLastPoint = false;
         this.adoptedlastPoint = adoptedlastPoint;
     }
 
@@ -39,10 +36,6 @@ public class PairDataRequest {
         return pointTimeFrame;
     }
 
-    public boolean isFromLastPoint() {
-        return fromLastPoint;
-    }
-
     public LocalDateTime getAdoptedlastPoint() {
         return adoptedlastPoint;
     }
@@ -52,7 +45,6 @@ public class PairDataRequest {
         return "currencyName=" + currencyName +
                 "&numberOfDataPoints=" + numberOfDataPoints +
                 "&pointTimeFrame=" + pointTimeFrame +
-                "&fromLastPoint=" + fromLastPoint +
                 "&adoptedlastPoint=" + adoptedlastPoint;
     }
 }

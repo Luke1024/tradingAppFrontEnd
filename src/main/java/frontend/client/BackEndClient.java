@@ -59,16 +59,10 @@ public class BackEndClient {
 
     private PairDataRequestDto mapToPairDataRequestDto(PairDataRequest pairDataRequest){
         try {
-            String adoptedLastPoint = "";;
-            if(pairDataRequest.isFromLastPoint() == false ){
-                if(pairDataRequest.getAdoptedlastPoint() != null){
-                    adoptedLastPoint = pairDataRequest.getAdoptedlastPoint().toString();
-                }
-            }
+            String adoptedLastPoint = pairDataRequest.getAdoptedlastPoint().toString();
             return new PairDataRequestDto(pairDataRequest.getCurrencyName(),
                     pairDataRequest.getNumberOfDataPoints(),
                     pairDataRequest.getPointTimeFrame().name(),
-                    pairDataRequest.isFromLastPoint(),
                     adoptedLastPoint);
         } catch (Exception e){
             return null;
