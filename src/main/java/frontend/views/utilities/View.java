@@ -32,4 +32,14 @@ public class View {
     public ViewTimeFrame getTimeFrameInfoForChartGenerator() {
         return timeFrameInfoForChartGenerator;
     }
+
+    @Override
+    public String toString() {
+        return "View{" +
+                "buttonName='" + buttonName + '\'' +
+                ", requiredPointNumber=" + requiredPointNumber +
+                ", requiredPointTimeFrame=" + requiredPointTimeFrame +
+                ", timeFrameInfoForChartGenerator=" + timeFrameInfoForChartGenerator +
+                '}';
+    }
 }

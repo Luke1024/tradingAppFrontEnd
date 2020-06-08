@@ -11,8 +11,6 @@ public class LineCoordinatesPositioner {
     public List<LineDto> process(List<Integer> valuesScaledToPixels, ChartDataDto chartDataDto) {
         double step = computeStepSize(chartDataDto, valuesScaledToPixels);
 
-        System.out.println("Step size " + step + ", " + valuesScaledToPixels.size());
-
         List<LineDto> connectPointsWithLineDtos = connectLines(valuesScaledToPixels, step);
         return moveLinesToMatchChartBoxPositioning(connectPointsWithLineDtos, chartDataDto);
     }
@@ -33,8 +31,6 @@ public class LineCoordinatesPositioner {
             int x2 = (int) (step * (i + 1));
             int y2 = valuesScaledToPixels.get(i + 1);
             lineDtos.add(new LineDto(x1,y1,x2,y2));
-
-            System.out.println("Iteration" + i + ", x1 :" + x1 + ", x2 : " + x2);
         }
         return lineDtos;
     }

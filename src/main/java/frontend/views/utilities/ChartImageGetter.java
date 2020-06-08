@@ -41,6 +41,8 @@ public class ChartImageGetter {
             if(dataPointDtos == null) {
                 logger.log(Level.WARNING, "List<DataPointDto> is null");
                 return null;
+            } else {
+                logger.log(Level.INFO, "Received " + dataPointDtos.size() + " data points.");
             }
             Image image = downloadImage(chartStatusSaver, pairDataRequest, dataPointDtos);
             chartStatusSaver.setImage(image);
@@ -50,16 +52,26 @@ public class ChartImageGetter {
 
     private PairDataRequest generatePairDataRequest(ChartStatusSaver chartStatusSaver){
 
-        if (chartStatusSaver.getCurrencyPair() == null) return null;
+        if(chartStatusSaver.getCurrencyPair() == null) {
+            logger.log(Level.WARNING, "CurrencyPair in ChartStatusSaver is null.");
+            return null;
+        }
+
         String currencyPair = chartStatusSaver.getCurrencyPair();
 
-        if (chartStatusSaver.getPointCount() == 0) return null;
+        if (chartStatusSaver.getPointCount() == 0){
+            logger.log(Level.WARNING, "Requsted point number is 0.");
+            return null;
+        }
         int pointCount = chartStatusSaver.getPointCount();
 
-        if (chartStatusSaver.getPointTimeFrame() == null) return null;
+        if (chartStatusSaver.getPointTimeFrame() == null){
+            logger.log(Level.WARNING, "PointTimeFrame in ChartStatusSaver is null.");
+            return null;
+        }
         PointTimeFrame pointTimeFrame = chartStatusSaver.getPointTimeFrame();
 
-        return new PairDataRequest(currencyPair, pointCount, pointTimeFrame, chartStatusSaver.getPointCount());
+        return new PairDataRequest(currencyPair, pointCount, pointTimeFrame, chartStatusSaver.getPointsBeforeLast());
     }
 
     private List<DataPointDto> getDataPointDtos(PairDataRequest pairDataRequest) {
@@ -87,13 +99,13 @@ public class ChartImageGetter {
         try {
             currencyOverviewDto = new CurrencyOverviewDto(pairDataRequest.getCurrencyName(), LocalDateTime.now(), dataPointDtos);
         } catch (Exception e){
-            logger.log(Level.WARNING, e.toString());
+            logger.log(Level.WARNING, "Can't build Currency overviewDto, " + e.toString());
         }
         if(currencyOverviewDto != null){
             try {
                 return new ChartDataDto(currencyOverviewDto, chartStatusSaver.getViewTimeFrame(), new ChartConfig());
             } catch (Exception e){
-                logger.log(Level.WARNING, e.toString());
+                logger.log(Level.WARNING, "Can't build CharDataDto, " + e.toString());
             }
         }
         return null;

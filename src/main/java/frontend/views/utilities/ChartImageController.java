@@ -28,6 +28,7 @@ public class ChartImageController {
         View view = getDefaultView();
         this.chartStatusSaver = new ChartStatusSaver(currencyPair, view.getRequiredPointTimeFrame(),
                 view.getTimeFrameInfoForChartGenerator(), view.getRequiredPointNumber(), 0, null);
+        logger.log(Level.INFO, "CurrencyPair " + currencyPair + " set, " + this.chartStatusSaver.toString());
         return updateImage();
     }
 
@@ -47,23 +48,28 @@ public class ChartImageController {
     public Image setTimeFrame(View view) {
         if (this.chartStatusSaver != null) {
             if (view != null) {
+                logger.log(Level.INFO, "View loaded " + view.toString());
                 this.chartStatusSaver.setPointCount(view.getRequiredPointNumber());
                 this.chartStatusSaver.setPointsBeforeLast(0);
+                this.chartStatusSaver.setViewTimeFrame(view.getTimeFrameInfoForChartGenerator());
+                this.chartStatusSaver.setPointTimeFrame(view.getRequiredPointTimeFrame());
+                return updateImage();
             } else {
                 logger.log(Level.WARNING, "View is null.");
-                return updateImage();
+                return null;
             }
         } else {
             logger.log(Level.WARNING, "ChartStatusSaver is null.");
             return null;
         }
-        return null;
     }
 
     public Image resetView(){
         View defaultView = getDefaultView();
         this.chartStatusSaver.setPointCount(defaultView.getRequiredPointNumber());
         this.chartStatusSaver.setPointsBeforeLast(0);
+        this.chartStatusSaver.setViewTimeFrame(defaultView.getTimeFrameInfoForChartGenerator());
+        this.chartStatusSaver.setPointTimeFrame(defaultView.getRequiredPointTimeFrame());
         return updateImage();
     }
 
@@ -71,18 +77,19 @@ public class ChartImageController {
         int pointsBeforeLastPoint = this.chartStatusSaver.getPointsBeforeLast();
         int pointCountMoved = (int) (pointsBeforeLastPoint + this.chartStatusSaver.getPointCount() * moveLevel);
         this.chartStatusSaver.setPointsBeforeLast(pointCountMoved);
-
+        logger.log(Level.INFO, "Points moved left " + pointCountMoved);
         return updateImage();
     }
 
     public Image moveRight(){
         int pointsBeforeLastPoint = this.chartStatusSaver.getPointsBeforeLast();
-        int pointCountMoved = -((int) (pointsBeforeLastPoint + this.chartStatusSaver.getPointCount() * moveLevel));
+        int pointCountMoved = pointsBeforeLastPoint -((int) (this.chartStatusSaver.getPointCount() * moveLevel));
 
         if(pointCountMoved<0){
             pointCountMoved = 0;
         }
         this.chartStatusSaver.setPointsBeforeLast(pointCountMoved);
+        logger.log(Level.INFO, "Points moved right " + pointCountMoved);
 
         return updateImage();
     }
@@ -91,18 +98,19 @@ public class ChartImageController {
         int pointsBeforeLastPoint = this.chartStatusSaver.getPointsBeforeLast();
         int pointCountMoved = (int) (pointsBeforeLastPoint + this.chartStatusSaver.getPointCount() * moveMoreLevel);
         this.chartStatusSaver.setPointsBeforeLast(pointCountMoved);
-
+        logger.log(Level.INFO, "Points moved left " + pointCountMoved);
         return updateImage();
     }
 
     public Image moveMoreRight(){
         int pointsBeforeLastPoint = this.chartStatusSaver.getPointsBeforeLast();
-        int pointCountMoved = -((int) (pointsBeforeLastPoint + this.chartStatusSaver.getPointCount() * moveMoreLevel));
+        int pointCountMoved = pointsBeforeLastPoint - ((int) (this.chartStatusSaver.getPointCount() * moveMoreLevel));
 
         if(pointCountMoved<0){
             pointCountMoved = 0;
         }
         this.chartStatusSaver.setPointsBeforeLast(pointCountMoved);
+        logger.log(Level.INFO, "Points moved right " + pointCountMoved);
 
         return updateImage();
     }

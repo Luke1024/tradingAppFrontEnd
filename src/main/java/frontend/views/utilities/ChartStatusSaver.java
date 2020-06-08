@@ -73,4 +73,16 @@ public class ChartStatusSaver {
     public void setImage(Image image) {
         this.image = image;
     }
+
+    @Override
+    public String toString() {
+        return "ChartStatusSaver{" +
+                "currencyPair='" + currencyPair + '\'' +
+                ", pointTimeFrame=" + pointTimeFrame +
+                ", viewTimeFrame=" + viewTimeFrame +
+                ", pointCount=" + pointCount +
+                ", pointsBeforeLast=" + pointsBeforeLast +
+                ", image=" + image +
+                '}';
+    }
 }

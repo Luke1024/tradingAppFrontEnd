@@ -35,13 +35,14 @@ public class MainView extends VerticalLayout {
         List<String> availableCurrencyPairs = getAvailableCurrencyPairs();
         HorizontalLayout chartConsole = chartConsoleGenerator.generateConsole(this, availableCurrencyPairs);
 
-
         add(toolbar);
         add(chartConsole);
         add(imageHolder);
         Image image = chartImageController.setCurrencyPair(availableCurrencyPairs.get(0));
         if(image != null) {
             imageHolder.add(image);
+        } else {
+            logger.log(Level.WARNING, "Image is null.");
         }
     }
 
@@ -62,7 +63,9 @@ public class MainView extends VerticalLayout {
         imageHolder.removeAll();
         Image image =chartImageController.setCurrencyPair(currencyPair);
         if(image != null) {
-            imageHolder.add();
+            imageHolder.add(image);
+        } else {
+            logger.log(Level.WARNING, "Image is null.");
         }
     }
 
@@ -71,6 +74,8 @@ public class MainView extends VerticalLayout {
         Image image = chartImageController.setTimeFrame(view);
         if(image != null){
             imageHolder.add(image);
+        }else {
+            logger.log(Level.WARNING, "Image is null.");
         }
     }
 
@@ -79,6 +84,8 @@ public class MainView extends VerticalLayout {
         Image image = chartImageController.moveLeft();
         if(image != null){
             imageHolder.add(image);
+        } else {
+            logger.log(Level.WARNING, "Image is null.");
         }
     }
 
@@ -87,6 +94,8 @@ public class MainView extends VerticalLayout {
         Image image = chartImageController.moveRight();
         if(image != null){
             imageHolder.add(image);
+        } else {
+            logger.log(Level.WARNING, "Image is null.");
         }
     }
 
@@ -95,6 +104,8 @@ public class MainView extends VerticalLayout {
         Image image = chartImageController.moveMoreLeft();
         if(image != null){
             imageHolder.add(image);
+        } else {
+            logger.log(Level.WARNING, "Image is null.");
         }
     }
 
@@ -103,6 +114,8 @@ public class MainView extends VerticalLayout {
         Image image = chartImageController.moveMoreRight();
         if(image != null){
             imageHolder.add(image);
+        } else {
+            logger.log(Level.WARNING, "Image is null.");
         }
     }
 
@@ -111,82 +124,8 @@ public class MainView extends VerticalLayout {
         Image image = chartImageController.resetView();
         if(image != null){
             imageHolder.add(image);
+        } else {
+            logger.log(Level.WARNING, "Image is null.");
         }
     }
-
-        //HorizontalLayout imageHolder = new HorizontalLayout();
-        //HorizontalLayout horizontalLayout = new HorizontalLayout(text, imageHolder);
-
-        //solve requesting currencyPair one by one with CurrencyOverviewDto, control zoom with number of dataPoints
-        //for(CurrencyOverviewDto currencyOverviewDto : overviewDtoPack.getOverviews()){
-          //  backEndClient.getCurrenciesOverview();
-        //}
-        //Image image = chartGenerator.drawBasicChart(zoom ,overviewDtoPack.getOverviews().get(0));
-        //imageHolder.add(image);
-
-        //HorizontalLayout buttons = new HorizontalLayout(logIn, signIn);
-        //add(buttons);
-
-        /*
-        Image image = universalChartDrawer.getBlank();
-        imageHolder.add(image);
-        add(imageHolder,toolbar);
-        left.addClickListener(event -> {
-            try {
-                imageHolder.removeAll();
-                imageHolder.add(sendLeftSignal());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        right.addClickListener(event -> {
-            try {
-                imageHolder.removeAll();
-                imageHolder.add(sendRightSignal());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        up.addClickListener(event -> {
-            try {
-                imageHolder.removeAll();
-                imageHolder.add(sendUpSignal());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        down.addClickListener(event -> {
-            try {
-                imageHolder.removeAll();
-                imageHolder.add(sendDownSignal());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    private Image sendLeftSignal() throws IOException {
-        return sendAndReceive(new ActuationDto(true, false, false, false));
-    }
-
-    private Image sendRightSignal() throws IOException {
-        return sendAndReceive(new ActuationDto(false,true,false,false));
-    }
-
-    private Image sendUpSignal() throws IOException {
-        return sendAndReceive(new ActuationDto(false, false, true, false));
-    }
-
-    private Image sendDownSignal() throws IOException {
-        return sendAndReceive(new ActuationDto(false,false,false,true));
-    }
-
-    private Image sendAndReceive(ActuationDto actuationDto) throws IOException {
-        RestTemplate restTemplate = new RestTemplate();
-        URI url = UriComponentsBuilder.fromHttpUrl("https://backtest2131431.herokuapp.com/joystick/actuate").build().encode().toUri();
-        SceneDto sceneDto = restTemplate.postForObject(url, actuationDto, SceneDto.class);
-
-        return universalChartDrawer.getStream(sceneDto);
-
-    */
 }
