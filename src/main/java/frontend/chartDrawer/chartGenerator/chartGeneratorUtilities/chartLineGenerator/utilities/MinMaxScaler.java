@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class MinMaxScaler {
+
     public List<Double> scale(List<Double> pointPriceValues) {
         double max = getHighestValueInDataPoints(pointPriceValues);
         double min = getLowestValueInDataPoints(pointPriceValues);
@@ -22,7 +23,11 @@ public class MinMaxScaler {
     private List<Double> scale(List<Double> pointPriceValues, double max, double min) {
         List<Double> scaledValues = new ArrayList<>();
         for(Double value : pointPriceValues) {
-            scaledValues.add((value - min)/(max - min));
+            if(value == null){
+                scaledValues.add(null);
+            } else {
+                scaledValues.add((value - min) / (max - min));
+            }
         }
         return scaledValues;
     }

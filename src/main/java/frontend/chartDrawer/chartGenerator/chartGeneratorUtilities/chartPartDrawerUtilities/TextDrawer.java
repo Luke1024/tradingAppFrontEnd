@@ -26,7 +26,6 @@ public class TextDrawer {
 
         scene.setPaint(textColor);
         scene.setFont(new Font("", Font.PLAIN, fontSize));
-        scene.getFontMetrics().stringWidth(content);
 
         Position textPosition = calculateTextPosition(scene, content, fontSize, xCenter, yCenter);
 

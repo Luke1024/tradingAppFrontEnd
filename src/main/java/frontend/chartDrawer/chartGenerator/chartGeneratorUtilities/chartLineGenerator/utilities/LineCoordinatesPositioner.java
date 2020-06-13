@@ -2,7 +2,6 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartLineGen
 
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.chartDrawer.chartGenerator.chartParts.LineDto;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,13 +25,24 @@ public class LineCoordinatesPositioner {
         List<LineDto> lineDtos = new ArrayList<>();
 
         for(int i=0; i<valuesScaledToPixels.size()-1; i++){
-            int x1 = (int) (step * i);
-            int y1 = valuesScaledToPixels.get(i);
-            int x2 = (int) (step * (i + 1));
-            int y2 = valuesScaledToPixels.get(i + 1);
-            lineDtos.add(new LineDto(x1,y1,x2,y2));
+            Integer firstValue = valuesScaledToPixels.get(i);
+            Integer secondValue = valuesScaledToPixels.get(i+1);
+
+            if(firstValue == null || secondValue == null) {
+                lineDtos.add(null);
+            } else {
+                lineDtos.add(connectSingleLine(firstValue, secondValue, step, i));
+            }
         }
         return lineDtos;
+    }
+
+    private LineDto connectSingleLine(int firstValue, int secondValue, double step, int i){
+        int x1 = (int) (step * i);
+        int y1 = firstValue;
+        int x2 = (int) (step * (i + 1));
+        int y2 = secondValue;
+        return new LineDto(x1,y1,x2,y2);
     }
 
     private List<LineDto> moveLinesToMatchChartBoxPositioning(List<LineDto> lineDtos, ChartDataDto chartDataDto){

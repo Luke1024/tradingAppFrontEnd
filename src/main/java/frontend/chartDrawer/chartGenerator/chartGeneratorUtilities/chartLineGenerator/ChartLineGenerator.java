@@ -8,8 +8,8 @@ import frontend.chartDrawer.chartGenerator.chartParts.Color;
 import frontend.chartDrawer.chartGenerator.chartParts.LineDto;
 import frontend.client.dto.DataPointDto;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ChartLineGenerator {
 
@@ -27,10 +27,15 @@ public class ChartLineGenerator {
 
     private List<Double> minMaxScalling(ChartDataDto chartDataDto) {
         List<DataPointDto> dataPointDtos = chartDataDto.getCurrencyOverviewDto().getDataPoints();
-        List<Double> pointPriceValues = dataPointDtos.stream()
-                .map(dataPointDto -> dataPointDto.getValue())
-                .collect(Collectors.toList());
 
+        List<Double> pointPriceValues = new ArrayList<>();
+        for(DataPointDto dataPointDto : dataPointDtos){
+            if(dataPointDto == null) {
+                pointPriceValues.add(null);
+            } else {
+                pointPriceValues.add(dataPointDto.getValue());
+            }
+        }
         return minMaxScaler.scale(pointPriceValues);
     }
 

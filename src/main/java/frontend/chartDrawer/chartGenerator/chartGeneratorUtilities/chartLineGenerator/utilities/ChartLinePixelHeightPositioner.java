@@ -39,7 +39,11 @@ public class ChartLinePixelHeightPositioner {
         List<Integer> chartLinePixelHeights = new ArrayList<>();
 
         for(Double value : scaledValuesInDataPoints) {
-            chartLinePixelHeights.add((int) (value * chartLineRangeInPix + bottomMargin));
+            if(value == null){
+                chartLinePixelHeights.add(null);
+            } else {
+                chartLinePixelHeights.add((int) (value * chartLineRangeInPix + bottomMargin));
+            }
         }
         return chartLinePixelHeights;
     }
