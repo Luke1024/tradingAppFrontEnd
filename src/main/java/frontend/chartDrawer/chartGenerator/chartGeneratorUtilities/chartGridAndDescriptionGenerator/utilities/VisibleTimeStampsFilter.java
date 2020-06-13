@@ -1,9 +1,13 @@
 package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities;
 
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
+import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
 import frontend.client.dto.DataPointDto;
+import frontend.client.dto.PointTimeFrame;
 
+import javax.xml.crypto.Data;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +17,9 @@ public class VisibleTimeStampsFilter {
 
         int textElementWidth = chartDataDto.getChartConfig().getTextElementWidth();
         int chartBoxWidth = chartDataDto.getChartConfig().getChartBoxWidth();
-        List<DataPointDto> dataPointDtoList = chartDataDto.getCurrencyOverviewDto().getDataPoints();
+
+        List<DataPointDto> dataPointDtoList = chartDataDto.getCurrencyOverviewDto()
+                .getDataPoints();
         int stepCount = dataPointDtoList.size()-1;
 
         double step = chartBoxWidth / stepCount;
@@ -30,6 +36,8 @@ public class VisibleTimeStampsFilter {
         }
         return availableTimeStamps;
     }
+
+    //timestamp autofill
 
     private boolean isThereSpaceToPlaceElement(int cursor, int x, int textElementWidth) {
         return cursor + textElementWidth/2 < x;

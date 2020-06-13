@@ -29,10 +29,10 @@ public class TimeStampTextEditorEngine {
         if(viewTimeFrame == ViewTimeFrame.D1) {
             contentFiltered = hoursOnly(timeStampCoord);
         }
-        if(viewTimeFrame == ViewTimeFrame.W1) {
+        if(viewTimeFrame == ViewTimeFrame.W1 || viewTimeFrame == ViewTimeFrame.M1) {
             contentFiltered = monthAndDayNumber(timeStampCoord);
         }
-        if(viewTimeFrame == ViewTimeFrame.M1) {
+        if(viewTimeFrame == ViewTimeFrame.Y1) {
             contentFiltered = yearNumberAndMonth(timeStampCoord);
         }
         if(viewTimeFrame == ViewTimeFrame.MAX) {

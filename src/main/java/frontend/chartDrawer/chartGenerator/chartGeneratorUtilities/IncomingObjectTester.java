@@ -3,6 +3,7 @@ package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities;
 import frontend.chartDrawer.chartGenerator.chartParts.ChartDataDto;
 import frontend.chartDrawer.chartGenerator.chartParts.CurrencyOverviewDto;
 import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
+import frontend.client.dto.DataPointDto;
 import frontend.config.ChartConfig;
 
 import java.lang.reflect.Field;
@@ -28,9 +29,24 @@ public class IncomingObjectTester {
             if(currencyOverviewDto.getCurrencyName() == null) return false;
             if(currencyOverviewDto.getLastRetrieved() == null) return false;
             if(currencyOverviewDto.getDataPoints() == null) return false;
+            if(dataPointsIsOk(currencyOverviewDto.getDataPoints())) return true;
             else return false;
         }
     }
+
+    private boolean dataPointsIsOk(List<DataPointDto> dataPointDtoList) {
+        boolean ok = true;
+        for(DataPointDto dataPointDto : dataPointDtoList){
+            if(dataPointNotOk(dataPointDto)) ok = false;
+        }
+        return ok;
+    }
+
+    private boolean dataPointNotOk(DataPointDto dataPointDto) {
+        if(dataPointDto.getTimeStamp() == null) return true;
+        return false;
+    }
+
 
     private boolean viewTimeFrameIsCorrect(ViewTimeFrame viewTimeFrame){
         if(viewTimeFrame == null) return false;

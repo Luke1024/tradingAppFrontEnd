@@ -27,8 +27,6 @@ public class ValueDescriptionGenerator {
         return String.format("%.4f",valueCoord.getValue());
     }
 
-
-
     private List<TextFieldDto> positionTextFields(List<ValueCoord> valueCoords, ChartDataDto chartDataDto) {
         List<TextFieldDto> textFieldDtos = new ArrayList<>();
         int x = computeXPosition(chartDataDto);
