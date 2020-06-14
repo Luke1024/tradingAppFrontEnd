@@ -1,6 +1,6 @@
 package frontend.chartDrawer.chartGenerator.chartParts;
 
-public class LineDto extends ChartPart {
+public class LineDto implements ChartPart {
     private Color color = new Color();
     private int thickness;
     private int x1;

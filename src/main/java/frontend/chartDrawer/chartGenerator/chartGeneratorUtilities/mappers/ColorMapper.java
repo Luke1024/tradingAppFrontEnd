@@ -1,7 +1,5 @@
 package frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.mappers;
 
-import org.springframework.stereotype.Component;
-
 import java.awt.*;
 
 public class ColorMapper {

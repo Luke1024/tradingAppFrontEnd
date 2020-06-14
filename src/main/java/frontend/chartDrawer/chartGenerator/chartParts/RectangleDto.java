@@ -1,6 +1,6 @@
 package frontend.chartDrawer.chartGenerator.chartParts;
 
-public class RectangleDto extends ChartPart {
+public class RectangleDto implements ChartPart {
     private Color color;
     private double thickness;
     private Color fillColor;

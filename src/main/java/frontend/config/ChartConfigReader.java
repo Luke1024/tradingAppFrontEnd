@@ -9,9 +9,9 @@ import java.util.logging.Logger;
 
 public class ChartConfigReader {
 
-    private Logger LOGGER = Logger.getLogger(ChartConfig.class.getName());
+    private Logger logger = Logger.getLogger(ChartConfigReader.class.getName());
 
-    public ChartConfig readConfigFile(String path) throws IOException {
+    public ChartConfig readConfigFile(String path) {
 
         Properties properties = readFile(path);
         List<Field> fieldsInChartConfig = Arrays.asList(ChartConfig.class.getDeclaredFields());
@@ -42,7 +42,6 @@ public class ChartConfigReader {
         for(Map.Entry entry : fieldsAsString.entrySet()) {
             parseField(entry, chartConfig, properties);
         }
-        System.out.println(chartConfig.toString());
         return chartConfig;
     }
 
@@ -60,7 +59,7 @@ public class ChartConfigReader {
                 return setValue(chartConfig, fieldName, retrievedProperty, fieldType);
             }
         }
-        LOGGER.log(Level.WARNING, "Chart configuration file missing fields. Missed field: " + fieldName);
+        logger.log(Level.WARNING, "Chart configuration file missing fields. Missed field: " + fieldName);
         return chartConfig;
     }
 
@@ -71,7 +70,7 @@ public class ChartConfigReader {
             pd = new PropertyDescriptor(fieldName, chartConfig.getClass());
             pd.getWriteMethod().invoke(chartConfig, filterType(fieldValue, fieldType));
         } catch (Exception e){
-            e.printStackTrace();
+            logger.log(Level.WARNING, e.toString());
         }
         return chartConfig;
     }

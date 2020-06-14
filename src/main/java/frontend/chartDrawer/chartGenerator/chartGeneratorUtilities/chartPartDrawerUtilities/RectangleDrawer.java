@@ -13,7 +13,7 @@ public class RectangleDrawer {
 
     public Graphics2D draw(Graphics2D scene, List<RectangleDto> rectangleDtos) {
         for(RectangleDto rectangleDto : rectangleDtos) {
-            scene = drawRectangle(rectangleDto, scene);
+            drawRectangle(rectangleDto, scene);
         }
         return scene;
     }

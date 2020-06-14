@@ -59,7 +59,6 @@ public class ChartGenerator {
         chartParts.add(generateChartBoxBorder(chartDataDto.getChartConfig()));
         chartParts.addAll(chartLineGenerator.generate(chartDataDto));
         chartParts.addAll(gridAndDescriptionGenerator.generate(chartDataDto));
-        //chartParts.addAll(addRetrievedTimestamp());
 
         //reverse y coordinates
         return coordinateReverser.reverse(chartParts, chartDataDto);

@@ -16,8 +16,6 @@ import java.util.List;
 
 public class ChartPartsDrawer {
     private ByteArrayOutputStream imagebuffer = null;
-
-    private ColorMapper colorMapper = new ColorMapper();
     private ScenePreparator scenePreparator = new ScenePreparator();
     private ObjectSorter objectSorter = new ObjectSorter();
     private RectangleDrawer rectangleDrawer = new RectangleDrawer();
@@ -34,7 +32,7 @@ public class ChartPartsDrawer {
 
         scene = rectangleDrawer.draw(scene, partsListsDto.getRectangleDtos());
         scene = lineDrawer.draw(scene, partsListsDto.getLineDtos());
-        scene = textDrawer.draw(scene, partsListsDto.getTextFieldDtos());
+        textDrawer.draw(scene, partsListsDto.getTextFieldDtos());
 
         try{
             imagebuffer = new ByteArrayOutputStream();
@@ -44,9 +42,6 @@ public class ChartPartsDrawer {
         }
 
         StreamResource resource = new StreamResource("image",() -> new ByteArrayInputStream(imagebuffer.toByteArray()));
-        Image retrievedImage = new Image(resource,"chart");
-
-        return retrievedImage;
+        return new Image(resource,"chart");
     }
-
 }

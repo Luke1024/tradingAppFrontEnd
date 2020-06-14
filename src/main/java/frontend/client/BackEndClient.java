@@ -11,6 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.logging.Level;
@@ -36,7 +37,7 @@ public class BackEndClient {
         PairDataRequestDto pairDataRequestDto = mapToPairDataRequestDto(pairDataRequest);
         if(pairDataRequestDto == null){
             logger.log(Level.WARNING, "Problem with mapping PairDataRequest to Dto.");
-            return null;
+            return Collections.emptyList();
         }
         URI url = UriComponentsBuilder.fromHttpUrl(clientConfig.getServerAdress() + clientConfig.getCurrencyPairDataPoints()).build().encode().toUri();
         DataPointDtoPack dataPointDtoPack = null;
@@ -49,7 +50,7 @@ public class BackEndClient {
             return dataPointDtoPack.getDataPointDtoList();
         } else {
             logger.log(Level.WARNING, "DataPointDto list is null.");
-            return null;
+            return Collections.emptyList();
         }
     }
 

@@ -23,7 +23,7 @@ public class ChartConsoleGenerator {
             currencyPairBox.setPlaceholder(currencyPairs.get(0));
         }
 
-        currencyPairBox.addValueChangeListener(e -> {this.mainView.switchCurrencyPair(e.getValue());});
+        currencyPairBox.addValueChangeListener(e -> this.mainView.switchCurrencyPair(e.getValue()));
         chartConsole.add(currencyPairBox);
 
         List<Button> buttons = generateChartControlButtons();
@@ -38,9 +38,7 @@ public class ChartConsoleGenerator {
 
         for(View view : availableViews.getViews()){
             Button button = new Button(view.getButtonName());
-            button.addClickListener(e -> {
-                this.mainView.switchTimeFrame(view);
-            });
+            button.addClickListener(e -> this.mainView.switchTimeFrame(view));
             chartControlButtons.add(button);
         }
 
@@ -50,21 +48,11 @@ public class ChartConsoleGenerator {
         Button moveMoreRight = new Button(">>");
         Button resetView = new Button("RESET");
 
-        moveLeft.addClickListener(e -> {
-            this.mainView.moveLeft();
-        });
-        moveRight.addClickListener(e -> {
-            this.mainView.moveRight();
-        });
-        moveMoreLeft.addClickListener(e -> {
-            this.mainView.moveMoreLeft();
-        });
-        moveMoreRight.addClickListener(e -> {
-            this.mainView.moveMoreRight();
-        });
-        resetView.addClickListener(e -> {
-            this.mainView.resetView();
-        });
+        moveLeft.addClickListener(e -> this.mainView.moveLeft());
+        moveRight.addClickListener(e -> this.mainView.moveRight());
+        moveMoreLeft.addClickListener(e -> this.mainView.moveMoreLeft());
+        moveMoreRight.addClickListener(e -> this.mainView.moveMoreRight());
+        resetView.addClickListener(e -> this.mainView.resetView());
 
         chartControlButtons.add(moveLeft);
         chartControlButtons.add(moveRight);

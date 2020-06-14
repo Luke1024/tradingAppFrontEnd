@@ -35,9 +35,6 @@ public class Color {
     public Color(String stringColor) {
         List<String> colors = Arrays.asList(stringColor.split(","));
         if(colors.size()==3){
-            int red;
-            int green;
-            int blue;
             try {
                 red = Integer.parseInt(colors.get(0));
                 green = Integer.parseInt(colors.get(1));
@@ -46,13 +43,11 @@ public class Color {
                 red = 0;
                 green = 0;
                 blue = 0;
-                System.out.println(e);
             }
             this.red = red;
             this.green = green;
             this.blue = blue;
         } else {
-            System.out.println("Wrong color format, check application.propertes");
             this.red = 0;
             this.green = 0;
             this.blue = 0;

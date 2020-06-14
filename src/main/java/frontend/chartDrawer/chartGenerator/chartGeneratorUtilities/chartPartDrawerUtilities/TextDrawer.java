@@ -12,7 +12,7 @@ public class TextDrawer {
 
     public Graphics2D draw(Graphics2D scene, List<TextFieldDto> textFieldDtoList){
         for(TextFieldDto text : textFieldDtoList){
-            scene = drawText(scene, text);
+            drawText(scene, text);
         }
         return scene;
     }

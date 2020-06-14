@@ -16,8 +16,8 @@ import java.util.logging.Logger;
 
 @Route
 public class MainView extends VerticalLayout {
-    private Logger logger = Logger.getLogger(MainView.class.getName());
-    private AvailableViews availableViews = new AvailableViews();
+    private static final Logger logger = Logger.getLogger(MainView.class.getName());
+    private static final AvailableViews availableViews = new AvailableViews();
 
     private BackEndClient backEndClient = new BackEndClient();
     private ChartConsoleGenerator chartConsoleGenerator = new ChartConsoleGenerator();
@@ -50,7 +50,7 @@ public class MainView extends VerticalLayout {
         List<String> availableCurrencyPairs = null;
         try {
             availableCurrencyPairs = backEndClient.getAvailableCurrencyPairs();
-            if (availableCurrencyPairs.size() == 0) {
+            if (availableCurrencyPairs.isEmpty()) {
                 logger.log(Level.WARNING, "There is no Currency Pairs available.");
             }
         } catch (Exception e) {

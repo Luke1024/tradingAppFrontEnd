@@ -1,6 +1,6 @@
 package frontend.chartDrawer.chartGenerator.chartParts;
 
-public class TextFieldDto extends ChartPart {
+public class TextFieldDto implements ChartPart {
     private Color color;
     private int centerX;
     private int centerY;

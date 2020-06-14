@@ -19,12 +19,12 @@ public class TimeStampDescriptionPositioner {
 
         List<TextFieldDto> textsData = new ArrayList<>();
         for(int i=0; i<timeStampCoords.size(); i++) {
-            textsData.add(positionText(timeStampCoords.get(i), i));
+            textsData.add(positionText(timeStampCoords.get(i)));
         }
         return textsData;
     }
 
-    private TextFieldDto positionText(TimeStampCoord timeStampCoord, int i) {
+    private TextFieldDto positionText(TimeStampCoord timeStampCoord) {
         int x = timeStampCoord.getX() + chartBoxX;
         int y = chartBoxY - textElementHeight/2;
         return new TextFieldDto(x,y);

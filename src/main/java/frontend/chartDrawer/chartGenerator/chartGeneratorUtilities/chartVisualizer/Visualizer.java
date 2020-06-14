@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class Visualizer {
-    private ColorMapper colorMapper = new ColorMapper();
     private List<ChartPart> chartParts = null;
 
     private ScenePreparator scenePreparator = new ScenePreparator();
@@ -20,8 +19,6 @@ public class Visualizer {
     private RectangleDrawer rectangleDrawer = new RectangleDrawer();
     private LineDrawer lineDrawer = new LineDrawer();
     private TextDrawer textDrawer = new TextDrawer();
-
-    private ByteArrayOutputStream imageBuffer = null;
 
     public void visualize(List<ChartPart> chartPartsList, ChartDataDto chartDataDto) {
         ScenePreparator.Prepared prepared = scenePreparator.prepare(chartDataDto);
@@ -32,7 +29,7 @@ public class Visualizer {
 
         scene = rectangleDrawer.draw(scene, partsListsDto.getRectangleDtos());
         scene = lineDrawer.draw(scene, partsListsDto.getLineDtos());
-        scene = textDrawer.draw(scene, partsListsDto.getTextFieldDtos());
+        textDrawer.draw(scene, partsListsDto.getTextFieldDtos());
 
         try{
             File outputFile = new File("image.png");

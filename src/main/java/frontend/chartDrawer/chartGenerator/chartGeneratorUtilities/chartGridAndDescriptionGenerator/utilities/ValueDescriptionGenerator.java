@@ -11,7 +11,7 @@ public class ValueDescriptionGenerator {
     public List<TextFieldDto> process(List<ValueCoord> valueCoords, ChartDataDto chartDataDto) {
         List<String> valueInStringRestrictedToPip = convertToStringRestrictedByPip(valueCoords);
         List<TextFieldDto> textFieldDtos = positionTextFields(valueCoords, chartDataDto);
-        textFieldDtos = addContent(valueInStringRestrictedToPip, textFieldDtos);
+        addContent(valueInStringRestrictedToPip, textFieldDtos);
         return setColorAndFont(textFieldDtos, chartDataDto);
     }
 

@@ -2,11 +2,7 @@ package frontend.views.utilities;
 
 import com.vaadin.flow.component.html.Image;
 import frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame;
-import frontend.client.dto.DataPointDto;
 import frontend.client.dto.PointTimeFrame;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 public class ChartStatusSaver {
     private String currencyPair;

@@ -12,7 +12,7 @@ public class LineDrawer {
     private ColorMapper colorMapper = new ColorMapper();
 
     public Graphics2D draw(Graphics2D scene, List<LineDto> lines){
-        for(LineDto lineDto : lines) scene = drawLine(lineDto, scene);
+        for(LineDto lineDto : lines) drawLine(lineDto, scene);
         return scene;
     }
 
