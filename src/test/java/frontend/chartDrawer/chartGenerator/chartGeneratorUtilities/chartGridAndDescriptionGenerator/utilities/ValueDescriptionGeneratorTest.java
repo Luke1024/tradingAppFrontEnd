@@ -37,9 +37,9 @@ public class ValueDescriptionGeneratorTest {
 
         List<TextFieldDto> expectedTextFieldDtos = new ArrayList<>();
         expectedTextFieldDtos.addAll(Arrays.asList(
-                new TextFieldDto(new Color("50,50,50"),230,50,20,"0,1232"),
-                new TextFieldDto(new Color("50,50,50"),230,75,20,"1,2134"),
-                new TextFieldDto(new Color("50,50,50"),230,100,20,"21,1242")
+                new TextFieldDto(new Color("50,50,50"),230,50,20,"0.1232"),
+                new TextFieldDto(new Color("50,50,50"),230,75,20,"1.2134"),
+                new TextFieldDto(new Color("50,50,50"),230,100,20,"21.1242")
         ));
 
 

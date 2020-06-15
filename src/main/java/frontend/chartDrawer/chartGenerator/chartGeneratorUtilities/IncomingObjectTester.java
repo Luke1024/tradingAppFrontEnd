@@ -43,6 +43,7 @@ public class IncomingObjectTester {
     }
 
     private boolean dataPointNotOk(DataPointDto dataPointDto) {
+        if(dataPointDto == null) return true;
         if(dataPointDto.getTimeStamp() == null) return true;
         return false;
     }

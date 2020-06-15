@@ -78,9 +78,9 @@ public class TimeStampTextFieldDtoEditorEngineTest {
         when(chartDataDto.getViewTimeFrame()).thenReturn(ViewTimeFrame.M1);
 
         TextFieldDto finalTextFieldDto0 = new TextFieldDto(100,135);
-        finalTextFieldDto0.setContent("Jan 2019");
+        finalTextFieldDto0.setContent("Jan 1");
         TextFieldDto finalTextFieldDto1 = new TextFieldDto(200,135);
-        finalTextFieldDto1.setContent("Feb 2020");
+        finalTextFieldDto1.setContent("Feb 25");
 
         Assert.assertEquals(finalTextFieldDto0.toString(),
                 timeStampTextEditorEngine.process(timeStampDescriptionsPositioned,

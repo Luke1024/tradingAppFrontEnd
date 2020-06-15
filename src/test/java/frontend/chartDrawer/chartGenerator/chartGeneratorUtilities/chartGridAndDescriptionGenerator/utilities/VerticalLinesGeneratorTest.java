@@ -38,9 +38,9 @@ public class VerticalLinesGeneratorTest {
         when(chartDataDto.getChartConfig().getGridThicknessInPix()).thenReturn(3);
         when(chartDataDto.getChartConfig().getGridColorRGB()).thenReturn("0,0,0");
 
-        LineDto lineDto0 = new LineDto(new Color("0,0,0"),3,100,150,100,30);
-        LineDto lineDto1 = new LineDto(new Color("0,0,0"),3,150,150,150,30);
-        LineDto lineDto2 = new LineDto(new Color("0,0,0"),3,220,150,220,30);
+        LineDto lineDto0 = new LineDto(new Color("0,0,0"),3,100,150,100,270);
+        LineDto lineDto1 = new LineDto(new Color("0,0,0"),3,150,150,150,270);
+        LineDto lineDto2 = new LineDto(new Color("0,0,0"),3,220,150,220,270);
 
         Assert.assertEquals(lineDto0.toString(),verticalLinesGenerator.process(chartDataDto, timeStampCoords).get(0).toString());
         Assert.assertEquals(lineDto1.toString(),verticalLinesGenerator.process(chartDataDto, timeStampCoords).get(1).toString());

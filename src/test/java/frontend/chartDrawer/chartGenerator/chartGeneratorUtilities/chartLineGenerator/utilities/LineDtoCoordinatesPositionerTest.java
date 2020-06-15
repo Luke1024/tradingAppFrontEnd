@@ -30,8 +30,8 @@ public class LineDtoCoordinatesPositionerTest {
         List<LineDto> positionedLineDtos = new ArrayList<>();
 
         positionedLineDtos.addAll(Arrays.asList(
-                new LineDto(10,40,43,80),
-                new LineDto(43,80,76,170)
+                new LineDto(10,40,60,80),
+                new LineDto(60,80,110,170)
         ));
 
         Assert.assertEquals(positionedLineDtos.toString(),lineCoordinatesPositioner.process(valuesInPixelHeights, chartDataDto).toString());
