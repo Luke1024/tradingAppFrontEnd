@@ -12,8 +12,21 @@ public class ChartConfigReader {
     private Logger logger = Logger.getLogger(ChartConfigReader.class.getName());
 
     public ChartConfig readConfigFile(String path) {
+        if(path == null){
+            logger.log(Level.INFO, "chart config path is null");
+            return new ChartConfig();
+        }
+        ClassLoader classLoader = new ChartConfigReader().getClass().getClassLoader();
 
-        Properties properties = readFile(path);
+        String pathString = classLoader.getResource(path).getFile();
+        if(pathString == null){
+            return new ChartConfig();
+        }
+
+        File file = new File(pathString);
+
+
+        Properties properties = readFile(file.getPath());
         List<Field> fieldsInChartConfig = Arrays.asList(ChartConfig.class.getDeclaredFields());
         Map<String, String> fieldsAsString = convertFieldsToString(fieldsInChartConfig);
 

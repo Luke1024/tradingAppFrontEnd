@@ -1,12 +1,16 @@
 package frontend.views;
 
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import frontend.chartDrawer.chartGenerator.ChartGenerator;
 import frontend.client.BackEndClient;
+import frontend.config.ChartConfig;
+import frontend.config.ChartConfigReader;
 import frontend.views.utilities.*;
 
 import java.io.IOException;
@@ -19,6 +23,8 @@ public class MainView extends VerticalLayout {
     private static final Logger logger = Logger.getLogger(MainView.class.getName());
     private static final AvailableViews availableViews = new AvailableViews();
 
+    private ChartConfigReader chartConfigReader = new ChartConfigReader();
+
     private BackEndClient backEndClient = new BackEndClient();
     private ChartConsoleGenerator chartConsoleGenerator = new ChartConsoleGenerator();
     private ChartGenerator chartGenerator = new ChartGenerator();
@@ -27,8 +33,19 @@ public class MainView extends VerticalLayout {
     private HorizontalLayout imageHolder = new HorizontalLayout();
 
     public MainView() throws IOException {
+        //fix config reader
+        ChartConfig chartConfig = new ChartConfig();
+        chartImageController.setChartConfig(chartConfig);
+
+        Notification workInProgress = new Notification();
+        workInProgress.setText("Work in progress.");
+        workInProgress.setDuration(2000);
+        workInProgress.setPosition(Notification.Position.TOP_START);
+
         Button logIn = new Button("Log In");
         Button signIn = new Button("Sign In");
+        logIn.addClickListener(e -> workInProgress.open());
+        signIn.addClickListener(e -> workInProgress.open());
 
         HorizontalLayout toolbar = new HorizontalLayout(logIn, signIn);
 

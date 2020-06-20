@@ -1,0 +1,29 @@
+
+w
+java:S2629"\Invoke method(s) only conditionally. Use the built-in formatting to construct this argument.(Ë±´¶ÿÿÿÿÿ
+R
+java:S2629e"7Use the built-in formatting to construct this argument.(Ð Ä¥øÿÿÿÿ
+f
+java:S3457"KFormat specifiers or lambda should be used instead of string concatenation.(Ë±´¶ÿÿÿÿÿ
+a
+java:S3457q"KFormat specifiers or lambda should be used instead of string concatenation.(ïÒ¥ß
+M
+java:S2629\"7Use the built-in formatting to construct this argument.(ïÒ¥ß
+f
+java:S3457e"KFormat specifiers or lambda should be used instead of string concatenation.(Ð Ä¥øÿÿÿÿ
+M
+java:S2629q"7Use the built-in formatting to construct this argument.(ïÒ¥ß
+r
+java:S26293"\Invoke method(s) only conditionally. Use the built-in formatting to construct this argument.(˜¶—š
+^
+java:S2259E"IA "NullPointerException" could be thrown; "defaultView" is nullable here.(ü®Ù~
+a
+java:S34573"KFormat specifiers or lambda should be used instead of string concatenation.(˜¶—š
+]
+java:S2259"BA "NullPointerException" could be thrown; "view" is nullable here.(Î½„ûûÿÿÿÿ
+R
+java:S2629P"7Use the built-in formatting to construct this argument.(Ð Ä¥øÿÿÿÿ
+f
+java:S3457P"KFormat specifiers or lambda should be used instead of string concatenation.(Ð Ä¥øÿÿÿÿ
+a
+java:S3457\"KFormat specifiers or lambda should be used instead of string concatenation.(ïÒ¥ß

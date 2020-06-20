@@ -1,0 +1,13 @@
+
+M
+java:S1948"7Make "chartConsoleGenerator" transient or serializable.(ëåéø
+Q
+java:S1948"6Make "chartImageController" transient or serializable.(Ú°èàùÿÿÿÿ
+J
+java:S1948"/Make "backEndClient" transient or serializable.(¼Ïàµúÿÿÿÿ
+j
+java:S1192-"ODefine a constant instead of duplicating this literal "Image is null." 8 times.(‡çØ‰ıÿÿÿÿ
+j
+java:S2259)"TA "NullPointerException" could be thrown; "availableCurrencyPairs" is nullable here.(Œô‹˜
+K
+java:S1948"0Make "chartGenerator" transient or serializable.(½›Åÿûÿÿÿÿ

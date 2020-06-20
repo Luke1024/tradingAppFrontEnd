@@ -1,0 +1,13 @@
+
+U
+java:S1128"?Remove this unused import 'frontend.client.dto.PointTimeFrame'.(â‹óë
+P
+java:S1128
+":Remove this unused import 'java.time.temporal.ChronoUnit'.(Á…§
+]
+java:S2184"BCast one of the operands of this division operation to a "double".(Ò åüüÿÿÿÿ
+M
+java:S1128"2Remove this unused import 'javax.xml.crypto.Data'.(¦¿çˆıÿÿÿÿ
+o
+java:S1128"YRemove this unused import 'frontend.chartDrawer.chartGenerator.chartParts.ViewTimeFrame'.(ï˜ÿµ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(†â·®øÿÿÿÿ

@@ -12,12 +12,12 @@ public class ChartConfig {
     private int textElementHeight = 40;
 
     //image size
-    private int chartWidth = 1000;
-    private int chartHeight = 200;
+    private int chartWidth = 1080;
+    private int chartHeight = 400;
 
     //chartbox size
-    private int chartBoxWidth = 700;
-    private int chartBoxHeight = 150;
+    private int chartBoxWidth = 900;
+    private int chartBoxHeight = 350;
 
     //chartbox position
     private int chartBoxLeftBottomCornerX = 10;

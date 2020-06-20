@@ -1,0 +1,10 @@
+
+~
+java:S41651"bRemove this useless assignment; "blue" already holds the assigned value along all execution paths.(ŸĞ“8°‹î«.
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ğİœŠşÿÿÿÿ
+k
+java:S1206:"PThis class overrides "equals()" and should therefore also override "hashCode()".(İ¢êÍıÿÿÿÿ
+…
+java:S41650"cRemove this useless assignment; "green" already holds the assigned value along all execution paths.(—Ÿ´‰ûÿÿÿÿ8°‹î«.
+~
+java:S4165/"aRemove this useless assignment; "red" already holds the assigned value along all execution paths.(Â“Ì„8°‹î«.

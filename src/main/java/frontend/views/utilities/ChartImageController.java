@@ -3,12 +3,15 @@ package frontend.views.utilities;
 import com.vaadin.flow.component.html.Image;
 import frontend.chartDrawer.chartGenerator.ChartGenerator;
 import frontend.client.BackEndClient;
+import frontend.config.ChartConfig;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ChartImageController {
 
     private Logger logger = Logger.getLogger(ChartImageController.class.getName());
+    private ChartConfig chartConfig;
     private ChartStatusSaver chartStatusSaver;
     private ChartGenerator chartGenerator = new ChartGenerator();
     private BackEndClient backEndClient = new BackEndClient();
@@ -117,7 +120,7 @@ public class ChartImageController {
 
     private Image updateImage() {
         if (chartStatusSaver != null) {
-            ChartStatusSaver modifiedChartStatusSaver = chartImageGetter.getImage(this.chartStatusSaver);
+            ChartStatusSaver modifiedChartStatusSaver = chartImageGetter.getImage(this.chartStatusSaver, chartConfig);
             if (modifiedChartStatusSaver != null) {
                 this.chartStatusSaver = modifiedChartStatusSaver;
                 if (modifiedChartStatusSaver.getImage() != null) {
@@ -125,5 +128,9 @@ public class ChartImageController {
                 } else return null;
             } else return null;
         } else return null;
+    }
+
+    public void setChartConfig(ChartConfig chartConfig) {
+        this.chartConfig = chartConfig;
     }
 }

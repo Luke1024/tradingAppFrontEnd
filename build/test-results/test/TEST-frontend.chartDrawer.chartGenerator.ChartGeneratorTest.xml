@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="frontend.chartDrawer.chartGenerator.ChartGeneratorTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2020-06-20T11:45:51" hostname="DESKTOP-JP0A0PE" time="0.416">
+  <properties/>
+  <testcase name="generateChartPartiallyNull" classname="frontend.chartDrawer.chartGenerator.ChartGeneratorTest" time="0.019"/>
+  <testcase name="generateChart" classname="frontend.chartDrawer.chartGenerator.ChartGeneratorTest" time="0.324"/>
+  <testcase name="testWhenChartDataDtoNull" classname="frontend.chartDrawer.chartGenerator.ChartGeneratorTest" time="0.073"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Jun 20, 2020 1:45:51 PM frontend.chartDrawer.chartGenerator.ChartGenerator visualizeChart
+WARNING: Objects are not properly initialized.
+Jun 20, 2020 1:45:52 PM frontend.chartDrawer.chartGenerator.ChartGenerator generateChart
+WARNING: Objects are not properly initialized.
+]]></system-err>
+</testsuite>

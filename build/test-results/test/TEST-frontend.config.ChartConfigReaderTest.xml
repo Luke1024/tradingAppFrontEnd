@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="frontend.config.ChartConfigReaderTest" tests="2" skipped="2" failures="0" errors="0" timestamp="2020-06-15T10:12:46" hostname="DESKTOP-JP0A0PE" time="0.0">
+<testsuite name="frontend.config.ChartConfigReaderTest" tests="2" skipped="2" failures="0" errors="0" timestamp="2020-06-20T11:45:52" hostname="DESKTOP-JP0A0PE" time="0.0">
   <properties/>
   <testcase name="readConfigFileTest" classname="frontend.config.ChartConfigReaderTest" time="0.0">
     <skipped/>

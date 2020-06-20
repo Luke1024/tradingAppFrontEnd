@@ -12,9 +12,9 @@ public class AvailableViews {
 
     private List<View> views = new ArrayList<>(Arrays.asList(
             new View("Day",24,PointTimeFrame.H1, ViewTimeFrame.D1),
-            new View("Week",168, PointTimeFrame.H1, ViewTimeFrame.W1),
-            new View("Month",144, PointTimeFrame.H5, ViewTimeFrame.M1),
-            new View("Year", 365, PointTimeFrame.D1, ViewTimeFrame.Y1),
+            new View("Week",31, PointTimeFrame.H5, ViewTimeFrame.W1),
+            new View("Month",30, PointTimeFrame.D1, ViewTimeFrame.M1),
+            new View("Year", 52, PointTimeFrame.W1, ViewTimeFrame.Y1),
             new View("All", 500, PointTimeFrame.M1, ViewTimeFrame.MAX)));
 
     public View getDefaultView() {

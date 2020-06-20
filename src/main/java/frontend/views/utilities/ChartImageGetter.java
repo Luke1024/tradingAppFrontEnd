@@ -20,13 +20,20 @@ public class ChartImageGetter {
     private ChartGenerator chartGenerator;
     private BackEndClient backEndClient;
     private Logger logger = Logger.getLogger(ChartImageGetter.class.getName());
+    private ChartConfig chartConfig;
 
     public ChartImageGetter(ChartGenerator chartGenerator, BackEndClient backEndClient) {
         this.chartGenerator = chartGenerator;
         this.backEndClient = backEndClient;
     }
 
-    public ChartStatusSaver getImage(ChartStatusSaver chartStatusSaver){
+    public ChartStatusSaver getImage(ChartStatusSaver chartStatusSaver, ChartConfig chartConfig){
+        if(chartConfig == null){
+            chartConfig = new ChartConfig();
+        } else {
+            chartConfig = chartConfig;
+        }
+
 
         if(chartStatusSaver == null){
             logger.log(Level.WARNING, "ChartStatusSaver is null.");
@@ -44,7 +51,7 @@ public class ChartImageGetter {
             } else {
                 logger.log(Level.INFO, "Received " + dataPointDtos.size() + " data points.");
             }
-            Image image = downloadImage(chartStatusSaver, pairDataRequest, dataPointDtos);
+            Image image = downloadImage(chartStatusSaver, pairDataRequest, dataPointDtos, chartConfig);
             chartStatusSaver.setImage(image);
             return chartStatusSaver;
         }
@@ -83,17 +90,17 @@ public class ChartImageGetter {
     }
 
     private Image downloadImage(ChartStatusSaver chartStatusSaver, PairDataRequest pairDataRequest,
-                                List<DataPointDto> dataPointDtos) {
+                                List<DataPointDto> dataPointDtos, ChartConfig chartConfig) {
         Image chartImage = null;
         if(dataPointDtos != null){
-            ChartDataDto chartDataDto = buildChartDataDto(dataPointDtos, pairDataRequest, chartStatusSaver);
+            ChartDataDto chartDataDto = buildChartDataDto(dataPointDtos, pairDataRequest, chartStatusSaver, chartConfig);
             return chartGenerator.generateChart(chartDataDto);
         }
         return chartImage;
     }
 
     private ChartDataDto buildChartDataDto(List<DataPointDto> dataPointDtos, PairDataRequest pairDataRequest,
-                                           ChartStatusSaver chartStatusSaver){
+                                           ChartStatusSaver chartStatusSaver, ChartConfig chartConfig){
 
         CurrencyOverviewDto currencyOverviewDto = null;
         try {
@@ -103,7 +110,7 @@ public class ChartImageGetter {
         }
         if(currencyOverviewDto != null){
             try {
-                return new ChartDataDto(currencyOverviewDto, chartStatusSaver.getViewTimeFrame(), new ChartConfig());
+                return new ChartDataDto(currencyOverviewDto, chartStatusSaver.getViewTimeFrame(), chartConfig);
             } catch (Exception e){
                 logger.log(Level.WARNING, "Can't build CharDataDto, " + e.toString());
             }

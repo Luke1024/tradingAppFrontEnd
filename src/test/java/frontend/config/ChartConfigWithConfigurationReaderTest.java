@@ -9,6 +9,6 @@ public class ChartConfigWithConfigurationReaderTest {
 
     @Test
     public void readConfigFile() throws Exception {
-        chartConfigReader.readConfigFile("/home/luke/test_vaadin_project/vaadin_experimenting/src/main/resources/chart_config.properties");
+        chartConfigReader.readConfigFile("chart_config.properties");
     }
 }

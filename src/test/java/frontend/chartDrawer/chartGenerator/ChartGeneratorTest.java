@@ -9,6 +9,7 @@ import frontend.config.ChartConfig;
 import frontend.config.ChartConfigReader;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -23,8 +24,6 @@ public class ChartGeneratorTest {
     private DataPointDto dataPointDtoCorrect = new DataPointDto(LocalDateTime.now(), 0.23);
 
     private List<DataPointDto> dataPointDtoListCorrect = Arrays.asList(dataPointDtoCorrect, dataPointDtoCorrect);
-
-    private ChartConfigReader chartConfigReader = new ChartConfigReader();
 
     private CurrencyOverviewDto currencyOverviewDtoCorrect =
             new CurrencyOverviewDto("EURUSD", LocalDateTime.now(), dataPointDtoListCorrect);
@@ -49,9 +48,10 @@ public class ChartGeneratorTest {
         }
         CurrencyOverviewDto currencyOverviewDto = new CurrencyOverviewDto("EURUSD", now.plusDays(120), pointValues);
 
-        ChartConfig chartConfig = chartConfigReader.readConfigFile("/home/luke/test_vaadin_project/vaadin_experimenting/src/test/resources/chart_config.properties");
 
-        ChartDataDto chartDataDto = new ChartDataDto(currencyOverviewDto, ViewTimeFrame.W1, chartConfig);
+        //ChartConfig chartConfig = chartConfigReader.readConfigFile("chart_config.properties");
+
+        ChartDataDto chartDataDto = new ChartDataDto(currencyOverviewDto, ViewTimeFrame.W1, new ChartConfig());
 
         chartGenerator.visualizeChart(chartDataDto);
     }
@@ -73,9 +73,9 @@ public class ChartGeneratorTest {
         }
         CurrencyOverviewDto currencyOverviewDto = new CurrencyOverviewDto("EURUSD", now.plusDays(120), pointValues);
 
-        ChartConfig chartConfig = chartConfigReader.readConfigFile("/home/luke/test_vaadin_project/vaadin_experimenting/src/test/resources/chart_config.properties");
+        //ChartConfig chartConfig = chartConfigReader.readConfigFile("chart_config.properties");
 
-        ChartDataDto chartDataDto = new ChartDataDto(currencyOverviewDto, ViewTimeFrame.W1, chartConfig);
+        ChartDataDto chartDataDto = new ChartDataDto(currencyOverviewDto, ViewTimeFrame.W1, new ChartConfig());
 
         chartGenerator.visualizeChart(chartDataDto);
     }
