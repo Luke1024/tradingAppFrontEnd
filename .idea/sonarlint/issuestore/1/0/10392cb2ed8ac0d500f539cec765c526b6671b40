@@ -1,7 +1,7 @@
 
 >	java:S108%")Either remove or fill this block of code.(ï­£Ä
-V
-java:S1128	":Remove this unused import 'java.io.ByteArrayOutputStream'.(Î‡È8ôÎˆ«.
-o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÿ‹Íö
 
 java:S1128"lRemove this unused import 'frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.mappers.ColorMapper'.(¸Ë¾ıÿÿÿÿ8šé‡«.
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÿ‹Íö
+V
+java:S1128	":Remove this unused import 'java.io.ByteArrayOutputStream'.(Î‡È8ôÎˆ«.

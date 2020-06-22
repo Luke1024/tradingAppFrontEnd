@@ -1,9 +1,11 @@
 
-E
-java:S3740*"/Provide the parametrized type for this generic.(Ò¸« 
-J
-java:S1066:"/Merge this if statement with the enclosing one.(ãÄ•÷üÿÿÿÿ
-R
-java:S2629>"7Use the built-in formatting to construct this argument.(¬öÛ¿úÿÿÿÿ
 f
-java:S3457>"KFormat specifiers or lambda should be used instead of string concatenation.(¬öÛ¿úÿÿÿÿ
+java:S3457K"KFormat specifiers or lambda should be used instead of string concatenation.(¬öÛ¿úÿÿÿÿ
+E
+java:S37407"/Provide the parametrized type for this generic.(Ò¸« 
+R
+java:S2629K"7Use the built-in formatting to construct this argument.(¬öÛ¿úÿÿÿÿ
+J
+java:S1066G"/Merge this if statement with the enclosing one.(ãÄ•÷üÿÿÿÿ
+g
+java:S2133"KRemove this object instantiation and use "ChartConfigReader.class" instead.(¶ÈÍ78Éëì‰­.

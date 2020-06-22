@@ -1,9 +1,15 @@
 
 f
-java:S3457-"KFormat specifiers or lambda should be used instead of string concatenation.(¨‹Ç÷øÿÿÿÿ
-w
-java:S2629-"\Invoke method(s) only conditionally. Use the built-in formatting to construct this argument.(¨‹Ç÷øÿÿÿÿ
+java:S3457m"KFormat specifiers or lambda should be used instead of string concatenation.(˜êÕÿÿÿÿÿ
 a
-java:S3457l"KFormat specifiers or lambda should be used instead of string concatenation.(‡¸Ÿ¬
+java:S3457s"KFormat specifiers or lambda should be used instead of string concatenation.(‡¸Ÿ¬
 f
-java:S3457f"KFormat specifiers or lambda should be used instead of string concatenation.(˜êÕÿÿÿÿÿ
+java:S34574"KFormat specifiers or lambda should be used instead of string concatenation.(¨‹Ç÷øÿÿÿÿ
+L
+java:S1656""/Remove or correct this useless self-assignment.(³Èíì8•ã‡Š­.
+w
+java:S26294"\Invoke method(s) only conditionally. Use the built-in formatting to construct this argument.(¨‹Ç÷øÿÿÿÿ
+Q
+java:S1068"/Remove this unused "chartConfig" private field.(¼şŞûÿÿÿÿ8‹¬‡Š­.
+†
+java:S4165""iRemove this useless assignment; "chartConfig" already holds the assigned value along all execution paths.(³Èíì8•ã‡Š­.

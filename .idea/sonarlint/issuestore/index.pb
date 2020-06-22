@@ -133,3 +133,11 @@ h
 —src/main/java/frontend/chartDrawer/chartGenerator/chartGeneratorUtilities/chartGridAndDescriptionGenerator/utilities/TimeStampDescriptionGenerator.java,d\4\d4090e59a1c7b1f9a8f7a8b52a95a843a3bed96d
 ë
 ºsrc/main/java/frontend/chartDrawer/chartGenerator/chartGeneratorUtilities/chartGridAndDescriptionGenerator/utilities/timeStampDescriptionGeneratorUtilities/TimeStampTextEditorEngine.java,2\9\29886ced62756d4b40e6880461094be87a70b54f
+;
+gradlew.bat,2\a\2a45a911a8f1836b0b6c5b758962572012d8f8c3
+7
+gradlew,5\b\5bbfa66edb4db3c7c33c5181f43510990d3307f9
+y
+Isrc/test/java/frontend/config/ChartConfigWithConfigurationReaderTest.java,c\f\cff27c6b3797c7bfceb86c6973ec987dd9e57efe
+à
+¯src/test/java/frontend/chartDrawer/chartGenerator/chartGeneratorUtilities/chartGridAndDescriptionGenerator/utilities/timeStampDescriptionGeneratorUtilities/PositionerTest.java,2\f\2f26c5cf5424b3499efe6f5a2923f72da78fdfc3

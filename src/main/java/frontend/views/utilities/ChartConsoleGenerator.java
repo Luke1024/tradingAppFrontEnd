@@ -42,22 +42,22 @@ public class ChartConsoleGenerator {
             chartControlButtons.add(button);
         }
 
-        Button moveLeft = new Button("<-");
-        Button moveRight = new Button("->");
-        Button moveMoreLeft = new Button("<<");
-        Button moveMoreRight = new Button(">>");
+        //Button moveLeft = new Button("<-");
+        //Button moveRight = new Button("->");
+        //Button moveMoreLeft = new Button("<<");
+        //Button moveMoreRight = new Button(">>");
         Button resetView = new Button("RESET");
 
-        moveLeft.addClickListener(e -> this.mainView.moveLeft());
-        moveRight.addClickListener(e -> this.mainView.moveRight());
-        moveMoreLeft.addClickListener(e -> this.mainView.moveMoreLeft());
-        moveMoreRight.addClickListener(e -> this.mainView.moveMoreRight());
+        //moveLeft.addClickListener(e -> this.mainView.moveLeft());
+        //moveRight.addClickListener(e -> this.mainView.moveRight());
+        //moveMoreLeft.addClickListener(e -> this.mainView.moveMoreLeft());
+        //moveMoreRight.addClickListener(e -> this.mainView.moveMoreRight());
         resetView.addClickListener(e -> this.mainView.resetView());
 
-        chartControlButtons.add(moveLeft);
-        chartControlButtons.add(moveRight);
-        chartControlButtons.add(moveMoreLeft);
-        chartControlButtons.add(moveMoreRight);
+        //chartControlButtons.add(moveLeft);
+        //chartControlButtons.add(moveRight);
+        //chartControlButtons.add(moveMoreLeft);
+        //chartControlButtons.add(moveMoreRight);
         chartControlButtons.add(resetView);
 
         return chartControlButtons;
