@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.timeStampDescriptionGeneratorUtilities.TimeStampTextFieldDtoEditorEngineTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2020-06-20T11:45:52" hostname="DESKTOP-JP0A0PE" time="0.002">
+<testsuite name="frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.timeStampDescriptionGeneratorUtilities.TimeStampTextFieldDtoEditorEngineTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2020-06-22T09:30:35" hostname="DESKTOP-JP0A0PE" time="0.003">
   <properties/>
   <testcase name="testMAX" classname="frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.timeStampDescriptionGeneratorUtilities.TimeStampTextFieldDtoEditorEngineTest" time="0.001"/>
   <testcase name="testD1" classname="frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.timeStampDescriptionGeneratorUtilities.TimeStampTextFieldDtoEditorEngineTest" time="0.0"/>

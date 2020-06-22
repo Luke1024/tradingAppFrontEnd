@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.HorizontalLinesGeneratorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-06-20T11:45:52" hostname="DESKTOP-JP0A0PE" time="0.469">
+<testsuite name="frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.HorizontalLinesGeneratorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-06-22T09:30:34" hostname="DESKTOP-JP0A0PE" time="0.555">
   <properties/>
-  <testcase name="testGeneratingLines" classname="frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.HorizontalLinesGeneratorTest" time="0.469"/>
+  <testcase name="testGeneratingLines" classname="frontend.chartDrawer.chartGenerator.chartGeneratorUtilities.chartGridAndDescriptionGenerator.utilities.HorizontalLinesGeneratorTest" time="0.555"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
